@@ -5,8 +5,8 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/frameworks/bootstrap.min.css">
     <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/frameworks/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <title>Вход</title>
@@ -35,6 +35,4 @@
     </div>
 </div>
 </body>
-
-
 </html>
