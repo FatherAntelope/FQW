@@ -62,10 +62,12 @@
 
     @media (max-width: 574px) {
         .dropdown-menu {
-            position: fixed;
             top: 3.5rem;
             width: 100vw;
             min-width: 0 !important;
+        }
+        .dropdown-offset-right-110 {
+            right: -110%;
         }
     }
 
