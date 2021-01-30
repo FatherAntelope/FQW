@@ -14,9 +14,15 @@
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
+    :root{
+        --dark-cyan-color: #007060;
+        --cyan-color: #00AC94;
+        --yellow-color: #ffa400;
+    }
+
     body {
         font-family: 'Poppins', sans-serif;
-        background-color: #007060;
+        background-color: var(--dark-cyan-color);
     }
 
     .content {
@@ -84,7 +90,7 @@
                     <input type="text" name="user_login" class="form-control" placeholder="Ваш логин">
                 </div>
                 <div class="form-group">
-                    <label style="color: #ffa400">Пароль</label>
+                    <label style="color: var(--yellow-color)">Пароль</label>
                     <input type="password" name="user_password" class="form-control" placeholder="Ваш пароль" required>
                     <small id="password-help" class="form-text text-muted">
                         <a href="#"  data-toggle="modal" data-target="#openModalRecoveryPersonAccount">Забыли пароль?</a>
@@ -100,7 +106,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <button type="button" class="btn btn-warning btn-block" style="color: #fff; background-color: #ffa400">Войти</button>
+                <button type="button" class="btn btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Войти</button>
             </form>
         </div>
     </div>
@@ -111,7 +117,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title" style="color: #00AC94">Восстановление пароля</h3>
+                <h3 class="modal-title" style="color: var(--cyan-color)">Восстановление пароля</h3>
             </div>
             <div class="modal-body">
                 <div class="alert alert-info" role="alert" style="font-size: 12px">
@@ -119,7 +125,7 @@
                 </div>
                 <form>
                     <div class="form-group">
-                        <label style="color: #ffa400">Почта</label>
+                        <label style="color: var(--yellow-color)">Почта</label>
                         <input type="email" name="user_mail" class="form-control" placeholder="Введите адрес электронной почты" required>
                     </div>
                 </form>
@@ -134,7 +140,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-warning btn-block" style="color: #fff; background-color: #ffa400">Отправить</button>
+                <button type="button" class="btn btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Отправить</button>
             </div>
         </div>
     </div>

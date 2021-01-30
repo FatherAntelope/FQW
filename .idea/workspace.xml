@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="dd690a98-02d7-475c-ab21-dec0f2dd0976" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/login.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/login.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -50,6 +50,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\OpenServer\domains\fqw\images" />
       <recent name="D:\OpenServer\domains\vkr\images" />
     </key>
   </component>
@@ -69,7 +70,13 @@
       <workItem from="1611582517348" duration="17587000" />
       <workItem from="1611600647961" duration="2357000" />
       <workItem from="1611603169703" duration="92000" />
-      <workItem from="1611666346829" duration="7281000" />
+      <workItem from="1611666346829" duration="7866000" />
+      <workItem from="1611777306741" duration="129000" />
+      <workItem from="1611777489100" duration="756000" />
+      <workItem from="1611838075578" duration="72000" />
+      <workItem from="1611838177028" duration="12636000" />
+      <workItem from="1612002305664" duration="45000" />
+      <workItem from="1612002677560" duration="23944000" />
     </task>
     <task id="LOCAL-00001" summary="Начал делать шапку">
       <created>1611600872960</created>
@@ -85,7 +92,14 @@
       <option name="project" value="LOCAL" />
       <updated>1611603219374</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Добавлено модальное окно &quot;восстановление пароля&quot; вместе с заметками об ошибках и прочей информации">
+      <created>1611675599200</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1611675599200</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -108,6 +122,7 @@
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
     <MESSAGE value="Начал делать шапку" />
-    <option name="LAST_COMMIT_MESSAGE" value="Начал делать шапку" />
+    <MESSAGE value="Добавлено модальное окно &quot;восстановление пароля&quot; вместе с заметками об ошибках и прочей информации" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавлено модальное окно &quot;восстановление пароля&quot; вместе с заметками об ошибках и прочей информации" />
   </component>
 </project>
