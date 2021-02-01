@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/css/login.css">
     <link rel="stylesheet" href="/frameworks/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <title>Вход</title>
@@ -29,7 +31,6 @@
         margin: 8%;
         background-color: #fff;
         padding: 4rem 1rem 4rem 1rem;
-        box-shadow: 0 0 5px 5px rgba(0,0,0,.05);
     }
 
     .animate {
@@ -42,9 +43,6 @@
     .slideIn {
         -webkit-animation-name: slideIn;
         animation-name: slideIn;
-    }
-    .notification-list {
-        margin-left: 0;
     }
 
     @keyframes slideIn {
@@ -75,10 +73,77 @@
             -webkit-opacity: 0;
         }
     }
+
+    @media (max-width: 992px) {
+        #logo-big {
+            display: none;
+        }
+    }
+    @media (min-width: 992px) {
+        #logo-small{
+            display: none;
+        }
+    }
+
+    .notify-icon {
+        padding: 7px 10px 13px 10px
+    }
+
+    .notify-icon i {
+        font-size: 1.65rem;
+        color: var(--yellow-color)
+    }
+
+    .notify-icon:hover {
+        background-color: var(--dark-cyan-color)
+    }
+
+    .list-unstyled.link-none>li>a {
+        text-decoration: none;
+        color: #fff;
+        font-weight: 100;
+    }
+
+    .list-unstyled.link-none>li>a:hover{
+        color: #b8b8b8;
+    }
 </style>
 <body>
-<div class="container">
-    <div class="row content">
+<nav class="navbar shadow-sm fixed-top navbar-expand-sm navbar-light" style="background: var(--cyan-color); padding: 0">
+    <div class="container">
+        <!--Кнопка/иконка бренда (мини) в мобильном формате экрана-->
+        <a class="navbar-brand" id="logo-small" href="#">
+            <img src="/images/logo-mini.png" alt="" width="46" height="40" >
+        </a>
+        <!--То, что находится в широкоформатном расширении и скрывается в мобильном формате (видимость)-->
+        <a class="navbar-brand" id="logo-big" href="#">
+            <img src="/images/logo.png" alt="" width="152" height="40" >
+        </a>
+
+        <ul class="nav">
+            <li style="margin: 0.6rem 1rem">
+                <form class="form-inline">
+                    <div class="input-group">
+                        <input type="text" class="form-control">
+                        <span class="bi bi-search" style="position: absolute; left: 0.6rem; font-size: 20px; line-height: 34px; color: var(--yellow-color)"></span>
+                        <div class="input-group-append">
+                            <button class="btn btn-warning text-white" type="submit" style="background: var(--yellow-color)">Поиск</button>
+                        </div>
+                    </div>
+                </form>
+            </li>
+            <li>
+                <a class="nav-link arrow-none notify-icon" href="#">
+                    <i class="bi bi-newspaper"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+<div class="container" style="min-height: 100vh">
+    <div class="row content shadow-lg">
         <div class="col-md-6 mb-3">
             <img src="images/login.svg" class="img-fluid" alt="image">
         </div>
@@ -149,6 +214,19 @@
 
 
 
+<footer style="background-color: var(--cyan-color)">
+    <div class="container pt-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="row justify-content-center align-items-center">
+                    <div class="text-white">
+                        <p>©2021 HeartBlaze. Все права защищены</p>
+                    </div>
+                </div>
+            </div>
 
+        </div>
+    </div>
+</footer>
 </body>
 </html>

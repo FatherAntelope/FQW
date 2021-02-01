@@ -76,7 +76,8 @@
       <workItem from="1611838075578" duration="72000" />
       <workItem from="1611838177028" duration="12636000" />
       <workItem from="1612002305664" duration="45000" />
-      <workItem from="1612002677560" duration="23944000" />
+      <workItem from="1612002677560" duration="24208000" />
+      <workItem from="1612189503629" duration="6716000" />
     </task>
     <task id="LOCAL-00001" summary="Начал делать шапку">
       <created>1611600872960</created>
@@ -99,7 +100,21 @@
       <option name="project" value="LOCAL" />
       <updated>1611675599200</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Добавлен footer и панель уведомлений">
+      <created>1612026959444</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1612026959445</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Добавлен footer и панель уведомлений">
+      <created>1612027181462</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1612027181462</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -123,6 +138,7 @@
     </ignored-roots>
     <MESSAGE value="Начал делать шапку" />
     <MESSAGE value="Добавлено модальное окно &quot;восстановление пароля&quot; вместе с заметками об ошибках и прочей информации" />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавлено модальное окно &quot;восстановление пароля&quot; вместе с заметками об ошибках и прочей информации" />
+    <MESSAGE value="Добавлен footer и панель уведомлений" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавлен footer и панель уведомлений" />
   </component>
 </project>

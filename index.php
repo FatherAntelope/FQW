@@ -62,12 +62,14 @@
 
     @media (max-width: 574px) {
         .dropdown-menu {
+            position: fixed;
             top: 3.5rem;
             width: 100vw;
             min-width: 0 !important;
         }
-        .dropdown-offset-right-110 {
-            right: -110%;
+        .notifications {
+            margin-left: 2rem !important;
+            margin-right: 2rem !important;
         }
     }
 
@@ -115,9 +117,6 @@
         animation-name: slideIn;
     }
 
-    .notification-list {
-        margin-left: 0;
-    }
 
     @keyframes slideIn {
         0% {
@@ -283,37 +282,47 @@
 
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-light" style="background: var(--cyan-color); padding: 0">
+<!--Блок навигации-->
+<nav class="navbar shadow-sm fixed-top navbar-expand-sm navbar-light" style="background: var(--cyan-color); padding: 0">
     <div class="container">
+<!--Кнопка навигации в мобильном формате экрана-->
         <button class="navbar-toggler" data-toggle="collapse" style="background: var(--yellow-color)" data-target="#navbar">
             <i class="bi bi-list" style="color: #fff"></i>
         </button>
-
+<!--Кнопка/иконка бренда (мини) в мобильном формате экрана-->
         <a class="navbar-brand" id="logo-small" href="#">
             <img src="/images/logo-mini.png" alt="" width="46" height="40" >
         </a>
-
-        <div class="collapse navbar-collapse" id="navbar">
-            <a class="navbar-brand" id="logo-big" href="#">
-                <img src="/images/logo.png" alt="" width="152" height="40" >
-            </a>
-            <form class="form-inline">
-                <input class="form-control mr-sm-2" placeholder="Поиск...">
-                <button class="btn btn-warning my-2 my-sm-0" style="background: var(--yellow-color)" type="submit">
-                    <i class="bi bi-search" style="color: #fff"></i>
-                </button>
-            </form>
-        </div>
+<!--То, что находится в широкоформатном расширении и скрывается в мобильном формате (видимость)-->
+        <a class="navbar-brand" id="logo-big" href="#">
+            <img src="/images/logo.png" alt="" width="152" height="40" >
+        </a>
 
         <ul class="nav">
-            <li class="dropdown notification-list">
+            <li style="margin: 0.6rem 1rem">
+                    <form class="form-inline">
+                        <div class="input-group">
+                            <input type="text" class="form-control">
+                            <span class="bi bi-search" style="position: absolute; left: 0.6rem; font-size: 20px; line-height: 34px; color: var(--yellow-color)"></span>
+                            <div class="input-group-append">
+                                <button class="btn btn-warning text-white" type="submit" style="background: var(--yellow-color)">Поиск</button>
+                            </div>
+                        </div>
+                    </form>
+            </li>
+            <li>
+                <a class="nav-link arrow-none notify-icon" href="#">
+                    <i class="bi bi-newspaper"></i>
+                </a>
+            </li>
+            <li class="dropdown">
                 <a class="nav-link arrow-none notify-icon" href="#" id="dropdown-notify" data-toggle="dropdown" >
                     <i class="bi bi-bell-fill"></i>
                     <span class="notify-icon-dot">
                         <i class="bi bi-circle-fill" style="color: var(--red--color)"></i>
                     </span>
                 </a>
-                <div class="dropdown-menu dropdown-menu-right animate slideIn dropdown-offset-right-110"
+                <div class="dropdown-menu dropdown-menu-right animate slideIn"
                      style="min-width: 500px; padding-bottom: 0;" aria-labelledby="dropdown-notify">
                     <div class="dropdown-header">
                         <h6 style="position: relative">
@@ -334,56 +343,19 @@
                                         <i class="bi bi-credit-card-2-back-fill" style="color: #fff; background-color: var(--dark-cyan-color)"></i>
                                     </div>
                                     <div class="content">
-                                        <a class="header">"Тип уведомления"</a>
+                                        <a class="header stretched-link" href="#">"Тип уведомления"</a>
                                         <div class="text">"Описание уведомления"</div>
                                         <div class="actions">
                                             <p>"10.10.2000"</p>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="notification">
-                                    <div class="notification-icon">
-                                        <i class="bi bi-credit-card-2-back-fill" style="color: #fff; background-color: var(--dark-cyan-color)"></i>
-                                    </div>
-                                    <div class="content">
-                                        <a class="header">"Тип уведомления"</a>
-                                        <div class="text">"Описание уведомления"</div>
-                                        <div class="actions">
-                                            <p>"10.10.2000"</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="notification">
-                                    <div class="notification-icon">
-                                        <i class="bi bi-credit-card-2-back-fill" style="color: #fff; background-color: var(--dark-cyan-color)"></i>
-                                    </div>
-                                    <div class="content">
-                                        <a class="header">"Тип уведомления"</a>
-                                        <div class="text">"Описание уведомления"</div>
-                                        <div class="actions">
-                                            <p>"10.10.2000"</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="notification">
-                                    <div class="notification-icon">
-                                        <i class="bi bi-credit-card-2-back-fill" style="color: #fff; background-color: var(--dark-cyan-color)"></i>
-                                    </div>
-                                    <div class="content">
-                                        <a class="header">"Тип уведомления"</a>
-                                        <div class="text">"Описание уведомления"</div>
-                                        <div class="actions">
-                                            <p>"10.10.2000"</p>
-                                        </div>
-                                    </div>
-                                </div>
-
                             </div>
                         </div>
                     </div>
                 </div>
             </li>
-            <li class="dropdown notification-list">
+            <li class="dropdown">
                 <a class="nav-link arrow-none nav-user" href="#" id="dropdown-menu-user" data-toggle="dropdown">
                     <span class="account-user-avatar">
                         <img src="/images/vladlen.jpg" alt="user-image" class="rounded-circle" width="40" height="40">
@@ -402,6 +374,53 @@
         </ul>
     </div>
 </nav>
+
+<nav class="navbar shadow-sm fixed-top navbar-expand-sm navbar-light" style="background: var(--cyan-color); padding: 0; margin-top: 70px">
+    <div class="container">
+        <!--Кнопка/иконка бренда (мини) в мобильном формате экрана-->
+        <a class="navbar-brand" id="logo-small" href="#">
+            <img src="/images/logo-mini.png" alt="" width="46" height="40" >
+        </a>
+        <!--То, что находится в широкоформатном расширении и скрывается в мобильном формате (видимость)-->
+        <a class="navbar-brand" id="logo-big" href="#">
+            <img src="/images/logo.png" alt="" width="152" height="40" >
+        </a>
+
+        <ul class="nav">
+            <li style="margin: 0.6rem 1rem">
+                <form class="form-inline">
+                    <div class="input-group">
+                        <input type="text" class="form-control">
+                        <span class="bi bi-search" style="position: absolute; left: 0.6rem; font-size: 20px; line-height: 34px; color: var(--yellow-color)"></span>
+                        <div class="input-group-append">
+                            <button class="btn btn-warning text-white" type="submit" style="background: var(--yellow-color)">Поиск</button>
+                        </div>
+                    </div>
+                </form>
+            </li>
+            <li>
+                <a class="nav-link arrow-none notify-icon" href="#">
+                    <i class="bi bi-newspaper"></i>
+                </a>
+            </li>
+            <li>
+                <a href="/login.php" class="btn btn-warning text-white" style="background: var(--yellow-color); margin: 0.6rem 1rem">Авторизация</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+
+
+<div class="collapse navbar-collapse" id="navbar" style="margin-top: 4rem">
+    <form class="form-inline">
+        <input class="form-control mr-sm-2" placeholder="Поиск...">
+        <button class="btn btn-warning my-2 my-sm-0" style="background: var(--yellow-color)" type="submit">
+            <i class="bi bi-search" style="color: #fff"></i>
+        </button>
+    </form>
+</div>
 
 <div style="min-height: 100vh">
 
@@ -487,9 +506,5 @@
         </div>
     </div>
 </footer>
-
-
-
-
 </body>
 </html>
