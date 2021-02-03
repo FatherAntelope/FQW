@@ -6,66 +6,13 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/frameworks/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <title>Авторизация</title>
 </head>
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-
-    :root{
-        --dark-cyan-color: #007060;
-        --cyan-color: #00AC94;
-        --yellow-color: #ffa400;
-    }
-
-    body {
-        font-family: 'Poppins', sans-serif;
-    }
-
-    .animate {
-        animation-duration: 0.3s;
-        -webkit-animation-duration: 0.3s;
-        animation-fill-mode: both;
-        -webkit-animation-fill-mode: both;
-    }
-
-    .slideIn {
-        -webkit-animation-name: slideIn;
-        animation-name: slideIn;
-    }
-
-    @keyframes slideIn {
-        0% {
-            transform: translateY(1rem);
-            opacity: 0;
-        }
-        100% {
-            transform:translateY(0rem);
-            opacity: 1;
-        }
-        0% {
-            transform: translateY(1rem);
-            opacity: 0;
-        }
-    }
-
-    @-webkit-keyframes slideIn {
-        0% {
-            -webkit-opacity: 0;
-        }
-        100% {
-            -webkit-transform: translateY(0);
-            -webkit-opacity: 1;
-        }
-        0% {
-            -webkit-transform: translateY(1rem);
-            -webkit-opacity: 0;
-        }
-    }
-</style>
 <body>
 <div class="container">
     <div class="row justify-content-center" style="padding: 2rem 1rem 2rem 1rem;">
