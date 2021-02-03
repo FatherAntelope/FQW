@@ -14,6 +14,11 @@
 </head>
 
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+    body {
+        font-family: 'Poppins', sans-serif;
+    }
 
     :root{
         --dark-cyan-color: #007060;
@@ -438,7 +443,7 @@
                             Быстрый запуск
                         </h3>
                         <p class="lead mb-0 text-white opacity-8">
-                            Отслеживать и управлять своими данными стало как никогда просто
+                            Отслеживать и управлять личными данными стало как никогда просто
                         </p>
                     </div>
                     <div class="col-lg-3 text-lg-right mt-4 mt-lg-0">

@@ -5,13 +5,12 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/css/login.css">
     <link rel="stylesheet" href="/frameworks/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
-    <title>Вход</title>
+    <title>Авторизация</title>
 </head>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
@@ -24,13 +23,6 @@
 
     body {
         font-family: 'Poppins', sans-serif;
-        background-color: var(--dark-cyan-color);
-    }
-
-    .content {
-        margin: 8%;
-        background-color: #fff;
-        padding: 4rem 1rem 4rem 1rem;
     }
 
     .animate {
@@ -73,110 +65,62 @@
             -webkit-opacity: 0;
         }
     }
-
-    @media (max-width: 992px) {
-        #logo-big {
-            display: none;
-        }
-    }
-    @media (min-width: 992px) {
-        #logo-small{
-            display: none;
-        }
-    }
-
-    .notify-icon {
-        padding: 7px 10px 13px 10px
-    }
-
-    .notify-icon i {
-        font-size: 1.65rem;
-        color: var(--yellow-color)
-    }
-
-    .notify-icon:hover {
-        background-color: var(--dark-cyan-color)
-    }
-
-    .list-unstyled.link-none>li>a {
-        text-decoration: none;
-        color: #fff;
-        font-weight: 100;
-    }
-
-    .list-unstyled.link-none>li>a:hover{
-        color: #b8b8b8;
-    }
 </style>
 <body>
-<nav class="navbar shadow-sm fixed-top navbar-expand-sm navbar-light" style="background: var(--cyan-color); padding: 0">
-    <div class="container">
-        <!--Кнопка/иконка бренда (мини) в мобильном формате экрана-->
-        <a class="navbar-brand" id="logo-small" href="#">
-            <img src="/images/logo-mini.png" alt="" width="46" height="40" >
-        </a>
-        <!--То, что находится в широкоформатном расширении и скрывается в мобильном формате (видимость)-->
-        <a class="navbar-brand" id="logo-big" href="#">
-            <img src="/images/logo.png" alt="" width="152" height="40" >
-        </a>
-
-        <ul class="nav">
-            <li style="margin: 0.6rem 1rem">
-                <form class="form-inline">
-                    <div class="input-group">
-                        <input type="text" class="form-control">
-                        <span class="bi bi-search" style="position: absolute; left: 0.6rem; font-size: 20px; line-height: 34px; color: var(--yellow-color)"></span>
-                        <div class="input-group-append">
-                            <button class="btn btn-warning text-white" type="submit" style="background: var(--yellow-color)">Поиск</button>
+<div class="container">
+    <div class="row justify-content-center" style="padding: 2rem 1rem 2rem 1rem;">
+        <div class="col-lg-10">
+            <div class="card shadow-lg">
+                <div class="card-header text-center pt-4 pb-4" style="background-color: var(--cyan-color)">
+                    <a href="/">
+                        <img src="/images/logo.png" alt="" height="40">
+                    </a>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <img src="images/login.svg" class="img-fluid" alt="image">
+                        </div>
+                        <div class="col-md-6">
+                            <h3 style="color: var(--cyan-color)">Авторизация</h3>
+                            <form>
+                                <div class="form-group">
+                                    <label style="color: #ffa400">Логин</label>
+                                    <input type="text" name="user_login" class="form-control" placeholder="Ваш логин">
+                                </div>
+                                <div class="form-group">
+                                    <label style="color: var(--yellow-color)">Пароль</label>
+                                    <a href="#" class="float-right text-muted" data-toggle="modal" data-target="#openModalRecoveryPersonAccount">
+                                        <small> Забыли пароль? </small>
+                                    </a>
+                                    <input type="password" name="user_password" class="form-control" placeholder="Ваш пароль" required>
+                                </div>
+                                <div class="alert alert-danger alert-dismissible animate slideIn" role="alert" style="font-size: 12px">
+                                    <strong>Ошибка авторизации.</strong>
+                                    <hr style="margin: 5px">
+                                    Пожалуйста, убедитесь что логин и пароль указаны верно.
+                                    <br>
+                                    Если вы не еще зарегистрированы, то обратитесь в регистратуру вашего санатория для выдачи вам данных к личному кабинету.
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <button type="button" class="btn btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Войти</button>
+                            </form>
                         </div>
                     </div>
-                </form>
-            </li>
-            <li>
-                <a class="nav-link arrow-none notify-icon" href="#">
-                    <i class="bi bi-newspaper"></i>
-                </a>
-            </li>
-        </ul>
-    </div>
-</nav>
-
-
-<div class="container" style="min-height: 100vh">
-    <div class="row content shadow-lg">
-        <div class="col-md-6 mb-3">
-            <img src="images/login.svg" class="img-fluid" alt="image">
-        </div>
-        <div class="col-md-6">
-            <h3 style="color: #00AC94">Авторизация</h3>
-            <form>
-                <div class="form-group">
-                    <label style="color: #ffa400">Логин</label>
-                    <input type="text" name="user_login" class="form-control" placeholder="Ваш логин">
                 </div>
-                <div class="form-group">
-                    <label style="color: var(--yellow-color)">Пароль</label>
-                    <input type="password" name="user_password" class="form-control" placeholder="Ваш пароль" required>
-                    <small id="password-help" class="form-text text-muted">
-                        <a href="#"  data-toggle="modal" data-target="#openModalRecoveryPersonAccount">Забыли пароль?</a>
-                    </small>
+                <div class="card-footer" style="background-color: var(--cyan-color)">
+                    <div class="row justify-content-center align-items-center">
+                        <div class="text-white pt-2 text-center">
+                            <p class="mb-1">©2021 HeartBlaze. Все права защищены</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="alert alert-danger alert-dismissible fade show animate slideIn" role="alert" style="font-size: 12px">
-                    <strong>Ошибка авторизации.</strong>
-                    <hr style="margin: 5px">
-                    Пожалуйста, убедитесь что логин и пароль написаны верно.
-                    <br>
-                    Если вы не еще зарегистрированы, то обратитесь в регистратуру вашего санатория для выдачи вам данных к личному кабинету.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <button type="button" class="btn btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Войти</button>
-            </form>
+            </div>
         </div>
     </div>
 </div>
-
 
 <div class="modal fade" id="openModalRecoveryPersonAccount" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -211,22 +155,5 @@
     </div>
 </div>
 
-
-
-
-<footer style="background-color: var(--cyan-color)">
-    <div class="container pt-4">
-        <div class="row justify-content-center">
-            <div class="col-lg-12">
-                <div class="row justify-content-center align-items-center">
-                    <div class="text-white">
-                        <p>©2021 HeartBlaze. Все права защищены</p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</footer>
 </body>
 </html>
