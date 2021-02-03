@@ -32,7 +32,8 @@
                     <img src="/images/vladlen.jpg" class="rounded-circle avatar img-thumbnail">
                     <h4 class="mb-0 mt-2 text-white"">"Имя Фамилия"</h4>
                     <p class="mb-2" style="color: var(--yellow-color)">"Роль"</p>
-                    <button data-toggle="modal" data-target="#openModalReplaceAvatar" class="btn btn-warning btn-sm text-white" style="background-color: var(--yellow-color)">Сменить фото
+                    <button data-toggle="modal" data-target="#openModalReplaceAvatar" class="btn btn-warning btn-sm text-white" style="background-color: var(--yellow-color)">
+                        Изменить фото
                     </button>
                     <button type="submit" class="btn btn-danger btn-sm text-white" style="background-color: var(--red--color)">Выйти</button>
                 </div>
@@ -97,7 +98,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label style="color: var(--yellow-color)">Почта</label>
-                                    <input type="text" class="form-control" placeholder="Ваша электронная почта">
+                                    <input type="email" class="form-control" placeholder="Ваша электронная почта">
                                 </div>
                             </div>
 
@@ -270,7 +271,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Сменить</button>
+                <button type="button" class="btn btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Изменить</button>
             </div>
         </div>
     </div>
