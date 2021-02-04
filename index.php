@@ -11,36 +11,101 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script defer src="/js/all.js"></script>
     <title>Document</title>
 </head>
+
+<style>
+    @media (max-width: 992px) {
+        .navbar-toggler {
+            display: block !important;
+        }
+    }
+
+    .span-search {
+        position: absolute;
+        left: 0.6rem;
+        font-size: 20px;
+        line-height: 34px;
+        color: var(--yellow-color)
+    }
+
+    .topnav {
+        z-index: 998 !important;
+        background: #fff;
+    }
+
+    .topnav .topnav-menu {
+        margin: 0;
+        padding: 0;
+    }
+
+    .link-navbar {
+        color: var(--dark-cyan-color);
+    }
+
+    .dropdown-item:hover {
+        color: var(--yellow-color) !important;
+        background-color: #fff !important;
+    }
+
+    .link-navbar:hover {
+        color: var(--yellow-color);
+    }
+</style>
+
 <body>
 <!--Блок навигации-->
 <nav class="navbar shadow-sm fixed-top navbar-expand-sm navbar-light" style="background: var(--cyan-color); padding: 0">
     <div class="container">
 <!--Кнопка навигации в мобильном формате экрана-->
-        <button class="navbar-toggler" data-toggle="collapse" style="background: var(--yellow-color)" data-target="#navbar">
-            <i class="bi bi-list" style="color: #fff"></i>
+        <button class="navbar-toggler ml-1" data-toggle="collapse" data-target="#offcanvas" style="background: var(--yellow-color)">
+            <i class="fas fa-bars" style="color: #fff"></i>
         </button>
+
 <!--Кнопка/иконка бренда (мини) в мобильном формате экрана-->
         <a class="navbar-brand" id="logo-small" href="#">
-            <img src="/images/logo-mini.png" alt="" width="46" height="40" >
+            <img src="/images/logo-mini.png" alt="" height="40">
         </a>
 <!--То, что находится в широкоформатном расширении и скрывается в мобильном формате (видимость)-->
         <a class="navbar-brand" id="logo-big" href="#">
-            <img src="/images/logo.png" alt="" width="152" height="40" >
+            <img src="/images/logo.png" alt="" height="40">
         </a>
 
         <ul class="nav">
-            <li style="margin: 0.6rem 1rem">
+            <li style="margin: 0.6rem 1rem" id="list-search-big">
                     <form class="form-inline">
                         <div class="input-group">
                             <input type="text" class="form-control">
-                            <span class="bi bi-search" style="position: absolute; left: 0.6rem; font-size: 20px; line-height: 34px; color: var(--yellow-color)"></span>
+                            <span class="bi bi-search span-search"></span>
                             <div class="input-group-append">
-                                <button class="btn btn-warning text-white" type="submit" style="background: var(--yellow-color)">Поиск</button>
+                                <button class="btn btn-warning text-white"
+                                        type="submit" style="background: var(--yellow-color)">
+                                    Поиск
+                                </button>
                             </div>
                         </div>
                     </form>
+            </li>
+            <li class="dropdown" id="list-search-small">
+                <a class="nav-link arrow-none notify-icon" href="#" id="dropdown-search" data-toggle="dropdown">
+                    <i class="bi bi-search"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right animate slideIn"
+                      aria-labelledby="dropdown-notify" style="min-width: 20rem">
+                    <form class="form-inline pl-2">
+                        <div class="input-group">
+                            <input type="text" class="form-control">
+                            <span class="bi bi-search span-search"></span>
+                            <div class="input-group-append">
+                                <button class="btn btn-warning text-white"
+                                        type="submit" style="background: var(--yellow-color)">
+                                    Поиск
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </li>
             <li>
                 <a class="nav-link arrow-none notify-icon" href="#">
@@ -55,7 +120,7 @@
                     </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right animate slideIn"
-                     style="min-width: 500px; padding-bottom: 0;" aria-labelledby="dropdown-notify">
+                     style="min-width: 30rem; padding-bottom: 0;" aria-labelledby="dropdown-notify">
                     <div class="dropdown-header">
                         <h6 style="position: relative">
                             <span class="float-right">
@@ -90,7 +155,7 @@
             <li class="dropdown">
                 <a class="nav-link arrow-none nav-user" href="#" id="dropdown-menu-user" data-toggle="dropdown">
                     <span class="account-user-avatar">
-                        <img src="/images/vladlen.jpg" alt="user-image" class="rounded-circle" width="40" height="40">
+                        <img src="/images/vladlen.jpg" alt="user-image" class="rounded-circle" height="40">
                     </span>
                     <span>
                         <span class="account-user-name">"Имя Фамилия"</span>
@@ -98,28 +163,37 @@
                     </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right animate slideIn" aria-labelledby="dropdown-menu-user">
-                    <a class="dropdown-item" href="#"><i class="bi bi-person-lines-fill mr-2"></i><span>Личный кабинет</span></a>
-                    <a class="dropdown-item" href="#"><i class="bi bi-gear-fill mr-2"></i>Настройки</a>
-                    <a class="dropdown-item" href="#"><i class="bi bi-door-open-fill mr-2"></i>Выйти</a>
+                    <a class="dropdown-item" href="#" style="color: var(--dark-cyan-color)">
+                        <i class="fas fa-user-circle mr-2" ></i>
+                        Личный кабинет
+                    </a>
+                    <a class="dropdown-item" href="#" style="color: var(--dark-cyan-color)">
+                        <i class="fas fa-cog mr-2"></i>
+                        Настройки
+                    </a>
+                    <a class="dropdown-item" href="#" style="color: var(--dark-cyan-color)">
+                        <i class="fas fa-door-open mr-2"></i>
+                        Выйти
+                    </a>
                 </div>
             </li>
         </ul>
     </div>
 </nav>
 
-<nav class="navbar shadow-sm fixed-top navbar-expand-sm navbar-light" style="background: var(--cyan-color); padding: 0; margin-top: 70px">
+<nav class="navbar shadow-sm fixed-top navbar-expand-sm navbar-light" style="background: var(--cyan-color); padding: 0; margin-top: 70px; visibility: hidden">
     <div class="container">
         <!--Кнопка/иконка бренда (мини) в мобильном формате экрана-->
         <a class="navbar-brand" id="logo-small" href="#">
-            <img src="/images/logo-mini.png" alt="" width="46" height="40" >
+            <img src="/images/logo-mini.png" alt="" height="40">
         </a>
         <!--То, что находится в широкоформатном расширении и скрывается в мобильном формате (видимость)-->
         <a class="navbar-brand" id="logo-big" href="#">
-            <img src="/images/logo.png" alt="" width="152" height="40" >
+            <img src="/images/logo.png" alt="" height="40">
         </a>
 
         <ul class="nav">
-            <li style="margin: 0.6rem 1rem">
+            <li style="margin: 0.6rem 1rem" id="list-search-big">
                 <form class="form-inline">
                     <div class="input-group">
                         <input type="text" class="form-control">
@@ -129,6 +203,23 @@
                         </div>
                     </div>
                 </form>
+            </li>
+            <li class="dropdown" id="list-search-small">
+                <a class="nav-link arrow-none notify-icon" href="#" id="dropdown-search" data-toggle="dropdown">
+                    <i class="bi bi-search"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right animate slideIn"
+                     aria-labelledby="dropdown-notify" style="min-width: 20rem">
+                    <form class="form-inline" style="margin: 0.5rem 1rem 0.5rem 1rem">
+                        <div class="input-group">
+                            <input type="text" class="form-control">
+                            <span class="bi bi-search" style="position: absolute; left: 0.6rem; font-size: 20px; line-height: 34px; color: var(--yellow-color)"></span>
+                            <div class="input-group-append">
+                                <button class="btn btn-warning text-white" type="submit" style="background: var(--yellow-color)">Поиск</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </li>
             <li>
                 <a class="nav-link arrow-none notify-icon" href="#">
@@ -142,17 +233,29 @@
     </div>
 </nav>
 
-
-
-
-<div class="collapse navbar-collapse" id="navbar" style="margin-top: 4rem">
-    <form class="form-inline">
-        <input class="form-control mr-sm-2" placeholder="Поиск...">
-        <button class="btn btn-warning my-2 my-sm-0" style="background: var(--yellow-color)" type="submit">
-            <i class="bi bi-search" style="color: #fff"></i>
-        </button>
-    </form>
+<div class="topnav shadow-sm fixed-top" style="top: 3.7rem">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg topnav-menu">
+            <div class="collapse navbar-collapse justify-content-center" id="offcanvas">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link link-navbar" aria-haspopup="true">
+                            <i class="fas fa-id-card mr-1"></i>
+                            Профиль
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link link-navbar" aria-haspopup="true">
+                            <i class="fas fa-calendar-alt mr-1"></i>
+                            Мои задачи
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
 </div>
+
 
 <div style="min-height: 100vh">
 

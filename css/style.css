@@ -4,11 +4,11 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
-
 :root{
     --dark-cyan-color: #007060;
     --cyan-color: #00AC94;
     --yellow-color: #ffa400;
+    --dark-yellow-color: #A66B00;
     --red--color: #f80018;
 }
 
@@ -16,12 +16,22 @@ body {
     #logo-big {
         display: none;
     }
+
+    #list-search-big {
+        display: none;
+    }
 }
+
 @media (min-width: 992px) {
     #logo-small{
         display: none;
     }
+
+    #list-search-small {
+        display: none;
+    }
 }
+
 @media (max-width: 767px) {
     .nav-user {
         padding: 1.85rem 1.55rem 1.85rem 1.55rem !important;
@@ -136,12 +146,9 @@ body {
         -webkit-opacity: 0;
     }
 }
+
 .dropdown-item:active {
     background-color: var(--cyan-color);
-}
-
-.dropdown-item i {
-    color: var(--dark-cyan-color)
 }
 
 .notify-icon {
@@ -219,6 +226,10 @@ body {
     width: 100%;
     height: 100%;
     border-radius: 50%;
+}
+
+.notifications .notification .notification-icon i, .notification .notification i.notification-icon:hover {
+    background-color: #1c7430;
 }
 
 .notifications .notification>.notification-icon~.content {

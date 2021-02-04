@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -15,12 +15,10 @@
     <title>Настройки</title>
 </head>
 <style>
-
     .avatar {
         height: 12rem;
         width: 12rem;
     }
-
 </style>
 <body>
 
