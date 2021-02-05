@@ -14,14 +14,6 @@
     <script defer src="/js/all.js"></script>
     <title>Профиль</title>
 </head>
-<style>
-    .progress.progress-xs {
-        height: .5rem;
-    }
-    .w-150px {
-        width: 150px!important;
-    }
-</style>
 <body>
     <div class="container">
         <div class="row">

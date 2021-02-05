@@ -228,10 +228,6 @@ body {
     border-radius: 50%;
 }
 
-.notifications .notification .notification-icon i, .notification .notification i.notification-icon:hover {
-    background-color: #1c7430;
-}
-
 .notifications .notification>.notification-icon~.content {
     margin-left: 3.5em;
 }
@@ -276,6 +272,6 @@ body {
 }
 
 .list-unstyled.link-none>li>a:hover{
-    color: #b8b8b8;
+    color: #eeeeee;
 }
 

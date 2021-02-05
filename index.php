@@ -257,10 +257,26 @@
 </div>
 
 
-<div style="min-height: 100vh">
+<div style="min-height: 100vh; margin-top: 100px">
 
 </div>
 
+<div class="position-fixed p-3" style="z-index: 5; right: 0; bottom: 0;">
+    <div id="notificationToast" class="toast show" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
+        <div class="toast-header">
+            <strong class="mr-auto" style="color: var(--cyan-color)">
+                <i class="fas fa-bell mr-2"></i> "Название уведомления"
+            </strong>
+            <small>"Время"</small>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="toast-body">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad at atque cumque delectus dolore ea enim nam porro, qui repellat.
+        </div>
+    </div>
+</div>
 
 
 <footer style="background-color: var(--cyan-color)">
@@ -342,4 +358,7 @@
     </div>
 </footer>
 </body>
+<script>
+    $("#toast").toast("show");
+</script>
 </html>
