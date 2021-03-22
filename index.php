@@ -5,8 +5,8 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/frameworks/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="frameworks/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -59,7 +59,7 @@
 <nav class="navbar shadow-sm fixed-top navbar-expand-sm navbar-light" style="background: var(--cyan-color); padding: 0">
     <div class="container">
 <!--Кнопка навигации в мобильном формате экрана-->
-        <button class="navbar-toggler ml-1" data-toggle="collapse" data-target="#offcanvas" style="background: var(--yellow-color)">
+        <button class="navbar-toggler ml-3" data-toggle="collapse" data-target="#offcanvas" style="background: var(--yellow-color)">
             <i class="fas fa-bars" style="color: #fff"></i>
         </button>
 
@@ -74,18 +74,18 @@
 
         <ul class="nav">
             <li style="margin: 0.6rem 1rem" id="list-search-big">
-                    <form class="form-inline">
-                        <div class="input-group">
-                            <input type="text" class="form-control">
-                            <span class="bi bi-search span-search"></span>
-                            <div class="input-group-append">
-                                <button class="btn btn-warning text-white"
-                                        type="submit" style="background: var(--yellow-color)">
-                                    Поиск
-                                </button>
-                            </div>
+                <form class="form-inline">
+                    <div class="input-group">
+                        <input type="text" class="form-control">
+                        <span class="bi bi-search span-search"></span>
+                        <div class="input-group-append">
+                            <button class="btn btn-warning text-white"
+                                    type="submit" style="background: var(--yellow-color)">
+                                Поиск
+                            </button>
                         </div>
-                    </form>
+                    </div>
+                </form>
             </li>
             <li class="dropdown" id="list-search-small">
                 <a class="nav-link arrow-none notify-icon" href="#" id="dropdown-search" data-toggle="dropdown">
@@ -245,9 +245,33 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="#" class="nav-link link-navbar disabled" aria-haspopup="true">
+                            <i class="fas fa-comments mr-1"></i>
+                            Чат
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link link-navbar" aria-haspopup="true">
+                            <i class="fas fa-book-medical mr-1"></i>
+                            Медицинская карта
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link link-navbar" aria-haspopup="true">
+                            <i class="fas fa-heartbeat mr-1"></i>
+                            Дневник самонаблюдения
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link link-navbar" aria-haspopup="true">
+                            <i class="fas fa-procedures mr-1"></i>
+                            Медицинские услуги
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="#" class="nav-link link-navbar" aria-haspopup="true">
                             <i class="fas fa-calendar-alt mr-1"></i>
-                            Мои задачи
+                            Органайзер
                         </a>
                     </li>
                 </ul>
@@ -257,12 +281,12 @@
 </div>
 
 
-<div style="min-height: 100vh; margin-top: 100px">
+<div style="min-height: 90vh; margin-top: 6.3rem">
 
 </div>
 
 <div class="position-fixed p-3" style="z-index: 5; right: 0; bottom: 0;">
-    <div id="notificationToast" class="toast show" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
+    <div id="notificationToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
         <div class="toast-header">
             <strong class="mr-auto" style="color: var(--cyan-color)">
                 <i class="fas fa-bell mr-2"></i> "Название уведомления"
@@ -359,6 +383,6 @@
 </footer>
 </body>
 <script>
-    $("#toast").toast("show");
+$('#notificationToast').toast('show');
 </script>
 </html>

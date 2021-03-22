@@ -13,12 +13,19 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <title>Авторизация</title>
 </head>
+<style>
+    @media (max-width: 769px) {
+        #card {
+            padding: 0 !important;
+        }
+    }
+</style>
 <body>
-<div class="container">
-    <div class="row justify-content-center" style="padding: 2rem 1rem 2rem 1rem;">
+<div class="container align-items-center">
+    <div class="row justify-content-center pt-5" id="card">
         <div class="col-lg-10">
             <div class="card shadow-lg">
-                <div class="card-header text-center pt-4 pb-4" style="background-color: var(--cyan-color)">
+                <div class="card-header text-center pt-3 pb-3" style="background-color: var(--cyan-color)">
                     <a href="/">
                         <img src="/images/logo.png" alt="" height="40">
                     </a>
@@ -74,6 +81,9 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title" style="color: var(--cyan-color)">Восстановление пароля</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
                 <div class="alert alert-info" role="alert" style="font-size: 12px">
