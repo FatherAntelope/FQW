@@ -417,7 +417,6 @@
                                 <i class="fas fa-user-cog mr-2"></i>Зарегистрировать
                             </button>
                         </div>
-
                     </form>
                 </div>
             </div>

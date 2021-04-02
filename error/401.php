@@ -62,7 +62,7 @@
                     <i class="fas fa-home mr-2"></i>
                     На главную
                 </a>
-                <a href="/login.php" class="btn text-white btn-go-auth m-1">
+                <a href="/auth.php" class="btn text-white btn-go-auth m-1">
                     <i class="fas fa-user-lock mr-2"></i>
                     Авторизоваться
                 </a>
