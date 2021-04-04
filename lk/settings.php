@@ -227,8 +227,12 @@
                         <p class="mt-2 text-white opacity-8 pr-lg-4">
                             Система для повышения эффективности процесса рекреации в санатории, а также повышения мобильности и оперативности информационной поддержки
                         </p>
-                        <h2 class="text-white">+7 (999) 999-99-99</h2>
                         <ul class="list-unstyled link-none">
+                            <li>
+                                <a href="tel:+7 (999) 999-99-99" aria-haspopup="true">
+                                    <h4> <i class="fas fa-phone mr-1"></i> +7 (999) 999-99-99</h4>
+                                </a>
+                            </li>
                             <li>
                                 <a href="mailto:mail@mail.ru" aria-haspopup="true">
                                     <i class="fas fa-envelope-open-text mr-1"></i>

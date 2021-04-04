@@ -17,7 +17,7 @@
 
 <body>
 <!--Меню для авторизованного пользователя-->
-<nav class="navbar fixed-top navbar-expand-sm navbar-light p-0 shadow-lg" style="background: var(--cyan-color);">
+<nav class="navbar fixed-top navbar-expand-sm navbar-light p-0" style="background: var(--cyan-color);">
     <div class="container">
 <!--Бургер-кнопка для развертывания панели навигации в мобильном формате-->
         <button class="navbar-toggler ml-3" data-toggle="collapse" data-target="#offcanvas" style="background: var(--yellow-color)">
@@ -129,7 +129,7 @@
 </nav>
 
 <!--Панель навигации по модулям пользователя-->
-<div class="topnav shadow-sm fixed-top" style="top: 3.7rem">
+<div class="topnav shadow-lg fixed-top" style="top: 3.7rem">
     <div class="container">
         <nav class="navbar navbar-expand-lg topnav-menu">
             <div class="collapse navbar-collapse justify-content-center" id="offcanvas">
@@ -161,7 +161,7 @@
                     <li class="nav-item">
                         <a href="#" class="nav-link link-navbar" aria-haspopup="true">
                             <i class="fas fa-procedures mr-1"></i>
-                            Медицинские услуги
+                            Услуги
                         </a>
                     </li>
                     <li class="nav-item">
@@ -255,8 +255,12 @@
                         <p class="mt-2 text-white opacity-8 pr-lg-4">
                             Система для повышения эффективности процесса рекреации в санатории, а также повышения мобильности и оперативности информационной поддержки
                         </p>
-                        <h2 class="text-white">+7 (999) 999-99-99</h2>
                         <ul class="list-unstyled link-none">
+                            <li>
+                                <a href="tel:+7 (999) 999-99-99" aria-haspopup="true">
+                                    <h4> <i class="fas fa-phone mr-1"></i> +7 (999) 999-99-99</h4>
+                                </a>
+                            </li>
                             <li>
                                 <a href="mailto:mail@mail.ru" aria-haspopup="true">
                                     <i class="fas fa-envelope-open-text mr-1"></i>
@@ -275,26 +279,9 @@
                         <h6 class="heading mb-3" style="font-weight: 700 ;color: var(--yellow-color)">Аккаунт</h6>
                         <ul class="list-unstyled link-none">
                             <li>
-                                <a href="#">Профиль</a>
+                                <a href="#">Авторизация</a>
                             </li>
                             <li>
-                                <a href="#">Чат</a>
-                            </li>
-                            <li>
-                                <a href="#">Медицинская карта</a>
-                            </li>
-                            <li>
-                                <a href="#">Дневник самонаблюдения</a>
-                            </li>
-                            <li>
-                                <a href="#">Услуги</a>
-                            </li>
-                            <li>
-                                <a href="#">Органайзер</a>
-                            </li>
-                            <li>
-                                <a href="#">Настройки</a>
-                            </li>
                         </ul>
                     </div>
                     <div class="col-lg-2 col-6 col-sm-4 mb-5 mb-lg-0">
