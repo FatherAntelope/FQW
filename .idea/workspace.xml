@@ -2,12 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dd690a98-02d7-475c-ab21-dec0f2dd0976" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/css/chosen.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/chosen.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lk/index_p.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/news.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/chosen.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/chosen.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/bootstrap.min.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lk/add_user.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/add_user.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/settings.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/settings.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +32,14 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
   <component name="ProjectId" id="1nN2JaNuQPvBOp790VBW9QPwVZR" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -41,7 +50,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/images" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lk" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -55,10 +64,13 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\OpenServer\domains\fqw\lk" />
+      <recent name="D:\OpenServer\domains\fqw" />
       <recent name="D:\OpenServer\domains\fqw\images" />
       <recent name="D:\OpenServer\domains\fqw\error" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\OpenServer\domains\fqw" />
       <recent name="D:\OpenServer\domains\fqw\images" />
       <recent name="D:\OpenServer\domains\vkr\images" />
     </key>
@@ -99,7 +111,9 @@
       <workItem from="1617373688584" duration="359000" />
       <workItem from="1617374109955" duration="16067000" />
       <workItem from="1617448075537" duration="896000" />
-      <workItem from="1617551104124" duration="8164000" />
+      <workItem from="1617551104124" duration="8336000" />
+      <workItem from="1617628010381" duration="62000" />
+      <workItem from="1617793302907" duration="16783000" />
     </task>
     <task id="LOCAL-00001" summary="Начал делать шапку">
       <created>1611600872960</created>
@@ -199,7 +213,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617392365187</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Изменена бренд-иконка, панель регистрации пользователей">
+      <created>1617560948210</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1617560948210</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -232,6 +253,7 @@
     <MESSAGE value="Добавлены формы регистрации всех типов пользователей. Изменена форма регистрации пациента." />
     <MESSAGE value="Выровнены элементы меню. Добавлено содержимое панели личного кабинета." />
     <MESSAGE value="Изменена бренд-иконка, футер и убран поиск в шапке" />
-    <option name="LAST_COMMIT_MESSAGE" value="Изменена бренд-иконка, футер и убран поиск в шапке" />
+    <MESSAGE value="Изменена бренд-иконка, панель регистрации пользователей" />
+    <option name="LAST_COMMIT_MESSAGE" value="Изменена бренд-иконка, панель регистрации пользователей" />
   </component>
 </project>
