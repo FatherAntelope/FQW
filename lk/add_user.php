@@ -18,26 +18,6 @@
     <title>Регистрация пользователя</title>
 </head>
 
-<style>
-    .tab-bg-active {
-        color: var(--dark-cyan-color);
-    }
-
-    .tab-bg-active:hover {
-        color: var(--yellow-color);
-    }
-
-    .nav-pills .nav-link.active, .nav-pills .show>.nav-link.tab-bg-active {
-        background-color: var(--cyan-color) !important;
-        color: #fff !important;
-    }
-
-    .custom-radio .custom-control-input:checked~.custom-control-label::after {
-        background-color: var(--dark-cyan-color);
-        border-radius: 50%;
-    }
-
-</style>
 <body>
 <!--Меню для авторизованного пользователя-->
 <nav class="navbar fixed-top navbar-expand-sm navbar-light p-0" style="background: var(--cyan-color);">
@@ -124,7 +104,7 @@
                 <!--Кнопка развертывания выпадающего меню со списком управления пользовательской панелью-->
                 <a class="nav-link arrow-none nav-user" href="#" id="dropdown-menu-user" data-toggle="dropdown">
                     <span class="account-user-avatar">
-                        <img src="/images/vladlen.jpg" alt="user-image" class="rounded-circle" height="40">
+                        <img src="/images/user.png" alt="user-image" class="rounded-circle" height="40">
                     </span>
                     <span>
                         <span class="account-user-name">"Имя Фамилия"</span>
@@ -210,7 +190,7 @@
     </div>
 </div>
 
-<div style="margin-top: 6.3rem">
+<div class="page-content">
     <div class="container pt-3 pb-3">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -825,30 +805,9 @@
 </footer>
 </body>
 <script>
-    function selectPostMed() {
-        // let index = document.getElementById("chosen_required_post").options.selectedIndex;
-        // if(index === 1) {
-        //     document.getElementById("div_chosen_profession").hidden = false;
-        //     document.getElementById("div_chosen_procedure").hidden = true;
-        //     document.getElementById("div_chosen_examination").hidden = true;
-        // }
-        // if(index === 2) {
-        //     document.getElementById("div_chosen_profession").hidden = true;
-        //     document.getElementById("div_chosen_procedure").hidden = false;
-        //     document.getElementById("div_chosen_examination").hidden = true;
-        // }
-        // if(index === 3) {
-        //     document.getElementById("div_chosen_profession").hidden = true;
-        //     document.getElementById("div_chosen_procedure").hidden = true;
-        //     document.getElementById("div_chosen_examination").hidden = false;
-        // }
-    }
-</script>
-<script>
     $('#chosen_required_region').chosen();
     $('#chosen_required_post').chosen();
     $('#chosen_required_post_adm').chosen();
-
     $('#chosen_required_category').chosen();
 
     $(document).on('change', '#chosen_required_post', function () {

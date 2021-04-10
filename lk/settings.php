@@ -27,7 +27,7 @@
         <div class="col-xl-4 col-lg-5">
             <div class="card">
                 <div class="card-header text-center" style="background-color: var(--cyan-color">
-                    <img src="/images/vladlen.jpg" class="rounded-circle avatar img-thumbnail">
+                    <img src="/images/user.png" class="rounded-circle avatar img-thumbnail">
                     <h4 class="mb-0 mt-2 text-white"">"Имя Фамилия"</h4>
                     <p class="mb-2" style="color: var(--yellow-color)">"Роль"</p>
                     <button data-toggle="modal" data-target="#openModalReplaceAvatar" class="btn btn-warning btn-sm text-white" style="background-color: var(--yellow-color)">

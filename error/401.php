@@ -15,13 +15,6 @@
     <title>401</title>
 </head>
 <style>
-    .text-error {
-        color: var(--red--color);
-        text-shadow: rgb(54 136 252/30%) 5px 1px, rgb(54 136 252/20%) 10px 3px;
-        font-size: 5.25rem;
-        line-height: 5.625rem;
-    }
-
     .btn-go-home {
         background-color: var(--cyan-color)
     }
@@ -38,16 +31,8 @@
         background-color: #A66B00
     }
 
-    .error-content-center {
-        position: absolute;
-        top: 25%;
-    }
 
-    @media (max-width: 992px) {
-        .error-content-center {
-            top: 5% !important;
-        }
-    }
+
 </style>
 <body>
 <div class="container" style="min-height: 100vh; position: relative">

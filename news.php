@@ -101,7 +101,7 @@
 <!--Кнопка развертывания выпадающего меню со списком управления пользовательской панелью-->
                 <a class="nav-link arrow-none nav-user" href="#" id="dropdown-menu-user" data-toggle="dropdown">
                     <span class="account-user-avatar">
-                        <img src="/images/vladlen.jpg" alt="user-image" class="rounded-circle" height="40">
+                        <img src="/images/user.jpg" alt="user-image" class="rounded-circle" height="40">
                     </span>
                     <span>
                         <span class="account-user-name">"Имя Фамилия"</span>

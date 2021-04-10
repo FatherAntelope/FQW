@@ -19,6 +19,15 @@ body {
     .navbar-toggler {
         display: block !important;
     }
+
+    .error-content-center {
+        top: 5% !important;
+    }
+
+    .page-content {
+        margin-top: 3.3rem !important;
+    }
+
 }
 
 @media (min-width: 992px) {
@@ -290,7 +299,41 @@ body {
     font-weight: 100;
 }
 
+.text-error {
+    color: var(--red--color);
+    text-shadow: rgb(54 136 252/30%) 5px 1px, rgb(54 136 252/20%) 10px 3px;
+    font-size: 5.25rem;
+    line-height: 5.625rem;
+}
+
+.error-content-center {
+    position: absolute;
+    top: 25%;
+}
+
 .list-unstyled.link-none>li>a:hover{
     color: var(--yellow-color);
+}
+
+.tab-bg-active {
+    color: var(--dark-cyan-color);
+}
+
+.tab-bg-active:hover {
+    color: var(--yellow-color);
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link.tab-bg-active {
+    background-color: var(--cyan-color) !important;
+    color: #fff !important;
+}
+
+.custom-radio .custom-control-input:checked~.custom-control-label::after {
+    background-color: var(--dark-cyan-color);
+    border-radius: 50%;
+}
+
+.page-content {
+    margin-top: 6.3rem;
 }
 

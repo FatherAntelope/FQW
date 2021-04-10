@@ -25,7 +25,7 @@
                         </a>
                         <div class="row">
                             <div class="col-lg-2 text-center">
-                                <img src="/images/vladlen.jpg" class="img-thumbnail rounded-circle" width="153" alt="">
+                                <img src="/images/user.png" class="img-thumbnail rounded-circle" width="153" alt="">
                             </div>
                             <div class="col-lg-7">
                                 <h4 class="font-weight-bold my-1" style="color: var(--cyan-color)">
