@@ -1,3 +1,9 @@
+<?
+if(!isset($_GET['appointment'])) {
+    header("Location: /lk/services/control.php");
+    exit;
+}
+?>
 <!doctype html>
 <html lang="ru">
 <head>
@@ -176,33 +182,58 @@
     </div>
 </div>
 
-<!--Меню для неавторизованного пользователя-->
-<nav class="navbar shadow-lg fixed-top navbar-expand-sm navbar-light" style="background: var(--cyan-color); padding: 0; margin-top: 150px; visibility: hidden">
-    <div class="container">
-<!--Иконка бренда (мини) в мобильном формате-->
-        <a class="navbar-brand ml-3" id="logo-small" href="#">
-            <img src="/images/logo-mini.png" alt="" height="40">
-        </a>
-=<!--Иконка бренда (мини) в широком формате-->
-        <a class="navbar-brand" id="logo-big" href="#">
-            <img src="/images/logo.png" alt="" height="40">
-        </a>
-        <ul class="nav">
-            <li>
-                <a class="nav-link arrow-none notify-icon" href="#">
-                    <i class="bi bi-newspaper"></i>
+
+<div class="page-content">
+    <div class="container pt-3 pb-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#" style="color: var(--dark-cyan-color)">Услуги</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Запись на услуги</li>
+            </ol>
+        </nav>
+        <ul class="nav nav-pills flex-column flex-sm-row mb-2" role="tablist">
+            <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
+                <a class="nav-link tab-bg-active font-weight-bold <? if($_GET['appointment'] == 'doctors') echo "active";?>" data-toggle="tab" href="#tab-doctors" role="tab">
+                    <i class="fas fa-user-md mr-2"></i>Врачи
                 </a>
             </li>
-            <li>
-                <a href="/auth.php" class="btn btn-warning text-white" style="background: var(--yellow-color); margin: 0.6rem 1rem">Авторизация</a>
+            <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
+                <a class="nav-link tab-bg-active font-weight-bold <? if($_GET['appointment'] == 'procedures') echo "active";?>" data-toggle="tab" href="#tab-procedures" role="tab">
+                    <i class="fas fa-diagnoses mr-2"></i>Процедуры
+                </a>
+            </li>
+            <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
+                <a class="nav-link tab-bg-active font-weight-bold <? if($_GET['appointment'] == 'examinations') echo "active";?>" data-toggle="tab" href="#tab-examinations" role="tab">
+                    <i class="fas fa-microscope mr-1"></i>Обследования
+                </a>
+            </li>
+            <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
+                <a class="nav-link tab-bg-active font-weight-bold <? if($_GET['appointment'] == 'events') echo "active";?>" data-toggle="tab" href="#tab-events" role="tab">
+                    <i class="fas fa-walking mr-1"></i>Мероприятия
+                </a>
             </li>
         </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane fade show <? if($_GET['appointment'] == 'doctors') echo "active";?>" id="tab-doctors" role="tabpanel">
+                <div class="card">
+                    <div class="card-body"></div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade show <? if($_GET['appointment'] == 'procedures') echo "active";?>" id="tab-procedures" role="tabpanel">
+                2
+            </div>
+
+            <div class="tab-pane fade show <? if($_GET['appointment'] == 'examinations') echo "active";?>" id="tab-examinations" role="tabpanel">
+                3
+            </div>
+
+            <div class="tab-pane fade show <? if($_GET['appointment'] == 'events') echo "active";?>" id="tab-events" role="tabpanel">
+                4
+            </div>
+        </div>
     </div>
-</nav>
-
-
-<div style="min-height: 90vh; margin-top: 6.3rem">
-
 </div>
 
 <!--Список всплывающих уведомлений-->
@@ -229,23 +260,6 @@
     <div class="container pt-4">
         <div class="row justify-content-center">
             <div class="col-lg-12">
-                <div class="row align-items-center">
-                    <div class="col-lg-9">
-                        <h3 class="mb-2" style="color: var(--yellow-color)">
-                            Быстрый запуск
-                        </h3>
-                        <p class="lead mb-0 text-white opacity-8">
-                            Записываться на услуги и отслеживать результаты процесса лечения стало просто
-                        </p>
-                    </div>
-                    <div class="col-lg-3 text-lg-right mt-4 mt-lg-0">
-                        <a href="/auth.php" class="btn btn-warning btn-icon my-2" style="background-color: var(--yellow-color)">
-                            <span class="text-white">Приступить</span>
-                        </a>
-                    </div>
-                </div>
-
-                <hr style="border-top: 3px solid var(--yellow-color);">
 
                 <div class="row">
                     <div class="col-lg-4 mb-5 mb-lg-0">
@@ -279,9 +293,26 @@
                         <h6 class="heading mb-3" style="font-weight: 700 ;color: var(--yellow-color)">Аккаунт</h6>
                         <ul class="list-unstyled link-none">
                             <li>
-                                <a href="/auth.php">Авторизация</a>
+                                <a href="#">Профиль</a>
                             </li>
                             <li>
+                                <a href="#">Чат</a>
+                            </li>
+                            <li>
+                                <a href="#">Медицинская карта</a>
+                            </li>
+                            <li>
+                                <a href="#">Дневник самонаблюдения</a>
+                            </li>
+                            <li>
+                                <a href="#">Услуги</a>
+                            </li>
+                            <li>
+                                <a href="#">Органайзер</a>
+                            </li>
+                            <li>
+                                <a href="#">Настройки</a>
+                            </li>
                         </ul>
                     </div>
                     <div class="col-lg-2 col-6 col-sm-4 mb-5 mb-lg-0">

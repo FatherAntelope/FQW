@@ -337,3 +337,18 @@ body {
     margin-top: 6.3rem;
 }
 
+.maintenance-icon {
+    font-size: 1.7rem;
+    box-shadow: 0 0 5px 0 var(--dark-cyan-color);
+    background-color: var(--dark-cyan-color);
+    min-width: 3.5rem;
+    display: inline-block;
+    min-height: 3.5rem;
+    line-height: 58px;
+    border-radius: 50%;
+}
+
+.icon-link:hover {
+    color: var(--yellow-color) !important;
+}
+

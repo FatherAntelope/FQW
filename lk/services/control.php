@@ -15,21 +15,6 @@
     <title>HeartBlaze</title>
 </head>
 <style>
-    .maintenance-icon {
-        font-size: 1.7rem;
-        box-shadow: 0 0 5px 0 var(--dark-cyan-color);
-        background-color: var(--dark-cyan-color);
-        min-width: 3.5rem;
-        display: inline-block;
-        min-height: 3.5rem;
-        line-height: 58px;
-        border-radius: 50%;
-    }
-
-    .icon-link:hover {
-        color: var(--yellow-color) !important;
-    }
-
 </style>
 <body>
 <!--Меню для авторизованного пользователя-->
@@ -233,7 +218,7 @@
                         <div class="col-md-3">
                             <div class="text-center mt-3 pl-1 pr-1">
                                 <div class="maintenance-icon mb-2">
-                                    <a href="" class="text-white icon-link"><i class="fas fa-user-md"></i></a>
+                                    <a href="/lk/services/appointment.php?appointment=doctors" class="text-white icon-link"><i class="fas fa-user-md"></i></a>
                                 </div>
                                 <h5 class="text-uppercase" style="color: var(--dark-cyan-color)"><b>Врачи</b></h5>
                                 <p class="text-muted">Высококвалифицированные специалисты, предоставляющие услуги своей специальности</p>
@@ -242,7 +227,7 @@
                         <div class="col-md-3">
                             <div class="text-center mt-3 pl-1 pr-1">
                                 <div class="maintenance-icon mb-2">
-                                    <a href="" class="text-white icon-link"><i class="fas fa-diagnoses"></i></a>
+                                    <a href="/lk/services/appointment.php?appointment=procedures" class="text-white icon-link"><i class="fas fa-diagnoses"></i></a>
                                 </div>
                                 <h5 class="text-uppercase" style="color: var(--dark-cyan-color)"><b>Процедуры</b></h5>
                                 <p class="text-muted">Методы лечения, направленные на восстановление и укрепление вашего здоровья</p>
@@ -251,7 +236,7 @@
                         <div class="col-md-3">
                             <div class="text-center mt-3 pl-1 pr-1">
                                 <div class="maintenance-icon mb-2">
-                                    <a href="" class="text-white icon-link"><i class="fas fa-microscope"></i></a>
+                                    <a href="/lk/services/appointment.php?appointment=examinations" class="text-white icon-link"><i class="fas fa-microscope"></i></a>
                                 </div>
                                 <h5 class="text-uppercase" style="color: var(--dark-cyan-color)"><b>Обследования</b></h5>
                                 <p class="text-muted">Медицинские осмотры с целью выявления новых заболеваний и факторов риска их развития</p>
@@ -260,7 +245,7 @@
                         <div class="col-md-3">
                             <div class="text-center mt-3 pl-1 pr-1">
                                 <div class="maintenance-icon mb-2">
-                                    <a href="" class="text-white icon-link"><i class="fas fa-walking"></i></a>
+                                    <a href="/lk/services/appointment.php?appointment=events" class="text-white icon-link"><i class="fas fa-walking"></i></a>
                                 </div>
                                 <h5 class="text-uppercase" style="color: var(--dark-cyan-color)"><b>Мероприятия</b></h5>
                                 <p class="text-muted">Культурно массовые события, например, походы, экскурсии, эстафеты и так далее</p>
@@ -269,14 +254,13 @@
                     </div>
                 </div>
             </div>
-
             <div class="tab-pane fade" id="tab-my-services" role="tabpanel">
                 <div class="card mt-3">
                     <div class="row justify-content-center">
                         <div class="col-md-12">
                             <div class="text-center mt-2">
                                 <img src="/images/no_data.svg" alt="" height="170">
-                                <h3 class="mt-4 text-danger"><b>Нет записей</b></h3>
+                                <h3 class="mt-4 text-danger"><b>Нет записей на услуги</b></h3>
                                 <p class="text-muted">Вы только заселились в санаторий, дождитесь, пока врач не запишет вас к себе на первый прием.</p>
                                 <p class="text-muted">На данный момент у вас отсутствуют записи на медицинские услуги санатория. Запишитесь на новую услугу.</p>
                             </div>
@@ -286,7 +270,7 @@
                         <div class="col-md-3">
                             <div class="text-center mt-3 pl-1 pr-1">
                                 <div class="maintenance-icon mb-2">
-                                    <a href="" class="text-white icon-link"><i class="fas fa-user-md"></i></a>
+                                    <a href="/lk/services/appointment.php?appointment=doctors" class="text-white icon-link"><i class="fas fa-user-md"></i></a>
                                 </div>
                                 <h5 class="text-uppercase" style="color: var(--dark-cyan-color)"><b>Врачи</b></h5>
                                 <p class="text-muted">Высококвалифицированные специалисты, предоставляющие услуги своей специальности</p>
@@ -295,7 +279,7 @@
                         <div class="col-md-3">
                             <div class="text-center mt-3 pl-1 pr-1">
                                 <div class="maintenance-icon mb-2">
-                                    <a href="" class="text-white icon-link"><i class="fas fa-diagnoses"></i></a>
+                                    <a href="/lk/services/appointment.php?appointment=procedures" class="text-white icon-link"><i class="fas fa-diagnoses"></i></a>
                                 </div>
                                 <h5 class="text-uppercase" style="color: var(--dark-cyan-color)"><b>Процедуры</b></h5>
                                 <p class="text-muted">Методы лечения, направленные на восстановление и укрепление вашего здоровья</p>
@@ -304,7 +288,7 @@
                         <div class="col-md-3">
                             <div class="text-center mt-3 pl-1 pr-1">
                                 <div class="maintenance-icon mb-2">
-                                    <a href="" class="text-white icon-link"><i class="fas fa-microscope"></i></a>
+                                    <a href="/lk/services/appointment.php?appointment=examinations" class="text-white icon-link"><i class="fas fa-microscope"></i></a>
                                 </div>
                                 <h5 class="text-uppercase" style="color: var(--dark-cyan-color)"><b>Обследования</b></h5>
                                 <p class="text-muted">Медицинские осмотры с целью выявления новых заболеваний и факторов риска их развития</p>
@@ -313,7 +297,7 @@
                         <div class="col-md-3">
                             <div class="text-center mt-3 pl-1 pr-1">
                                 <div class="maintenance-icon mb-2">
-                                    <a href="" class="text-white icon-link"><i class="fas fa-walking"></i></a>
+                                    <a href="/lk/services/appointment.php?appointment=events" class="text-white icon-link"><i class="fas fa-walking"></i></a>
                                 </div>
                                 <h5 class="text-uppercase" style="color: var(--dark-cyan-color)"><b>Мероприятия</b></h5>
                                 <p class="text-muted">Культурно массовые события, например, походы, экскурсии, эстафеты и так далее</p>
@@ -360,9 +344,9 @@
                             <h5 class="card-text text-white mb-0">
                                 Врач
                             </h5>
-                            <a href="#" class="btn btn-sm btn-danger mt-3 mb-2">
+                            <button class="btn btn-sm btn-danger mt-3 mb-2">
                                 <i class="fas fa-trash"></i> Отменить
-                            </a>
+                            </button>
                         </div>
                         <div class="col-md-10">
                             <div class="card-body">
@@ -370,6 +354,7 @@
                                 <p class="card-text"> <i class="fas fa-user-md mr-1"></i> "Фамилия И.О" </p>
                                 <p class="card-text"> <i class="fas fa-map-marker-alt mr-1"></i> "Расположение" </p>
                                 <p class="card-text"> <i class="fas fa-calendar-day mr-2"></i>"Дата|Время" </p>
+                                <a href="#" class="stretched-link"></a>
                             </div>
                         </div>
                     </div>
@@ -383,9 +368,9 @@
                             <h5 class="card-text text-white mb-0">
                                 Процедура
                             </h5>
-                            <a href="#" class="btn btn-sm btn-danger mt-3 mb-2">
+                            <button href="#" class="btn btn-sm btn-danger mt-3 mb-2">
                                 <i class="fas fa-trash"></i> Отменить
-                            </a>
+                            </button>
                         </div>
                         <div class="col-md-10">
                             <div class="card-body">
@@ -393,6 +378,7 @@
                                 <p class="card-text"> <i class="fas fa-user-md mr-1"></i> "Фамилия И.О" </p>
                                 <p class="card-text"> <i class="fas fa-map-marker-alt mr-1"></i> "Расположение" </p>
                                 <p class="card-text"> <i class="fas fa-calendar-day mr-2"></i>"Дата|Время" </p>
+                                <a href="#" class="stretched-link"></a>
                             </div>
                         </div>
                     </div>
@@ -406,9 +392,9 @@
                             <h5 class="card-text text-white mb-0">
                                 Обследование
                             </h5>
-                            <a href="#" class="btn btn-sm btn-danger mt-3 mb-2">
+                            <button href="#" class="btn btn-sm btn-danger mt-3 mb-2">
                                 <i class="fas fa-trash"></i> Отменить
-                            </a>
+                            </button>
                         </div>
                         <div class="col-md-10">
                             <div class="card-body">
@@ -416,6 +402,7 @@
                                 <p class="card-text"> <i class="fas fa-user-md mr-1"></i> "Фамилия И.О" </p>
                                 <p class="card-text"> <i class="fas fa-map-marker-alt mr-1"></i> "Расположение" </p>
                                 <p class="card-text"> <i class="fas fa-calendar-day mr-2"></i>"Дата|Время" </p>
+                                <a href="#" class="stretched-link"></a>
                             </div>
                         </div>
                     </div>
@@ -429,15 +416,16 @@
                             <h5 class="card-text text-white mb-0">
                                 Мероприятие
                             </h5>
-                            <a href="#" class="btn btn-sm btn-danger mt-3 mb-2">
+                            <button href="#" class="btn btn-sm btn-danger mt-3 mb-2">
                                 <i class="fas fa-trash"></i> Отменить
-                            </a>
+                            </button>
                         </div>
                         <div class="col-md-10">
                             <div class="card-body">
                                 <h5 class="card-title font-weight-bold" style="color: var(--dark-cyan-color)">"Название"</h5>
                                 <p class="card-text"> <i class="fas fa-map-marker-alt mr-1"></i> "Расположение" </p>
                                 <p class="card-text"> <i class="fas fa-calendar-day mr-2"></i>"Дата|Время" </p>
+                                <a href="#" class="stretched-link"></a>
                             </div>
                         </div>
                     </div>
@@ -460,7 +448,7 @@
                         <div class="col-md-3">
                             <div class="text-center mt-3 pl-1 pr-1">
                                 <div class="maintenance-icon mb-2">
-                                    <a href="" class="text-white icon-link"><i class="fas fa-user-md"></i></a>
+                                    <a href="/lk/services/appointment.php?appointment=doctors" class="text-white icon-link"><i class="fas fa-user-md"></i></a>
                                 </div>
                                 <h5 class="text-uppercase" style="color: var(--dark-cyan-color)"><b>Врачи</b></h5>
                                 <p class="text-muted">Высококвалифицированные специалисты, предоставляющие услуги своей специальности</p>
@@ -469,7 +457,7 @@
                         <div class="col-md-3">
                             <div class="text-center mt-3 pl-1 pr-1">
                                 <div class="maintenance-icon mb-2">
-                                    <a href="" class="text-white icon-link"><i class="fas fa-diagnoses"></i></a>
+                                    <a href="/lk/services/appointment.php?appointment=procedures" class="text-white icon-link"><i class="fas fa-diagnoses"></i></a>
                                 </div>
                                 <h5 class="text-uppercase" style="color: var(--dark-cyan-color)"><b>Процедуры</b></h5>
                                 <p class="text-muted">Методы лечения, направленные на восстановление и укрепление вашего здоровья</p>
@@ -478,7 +466,7 @@
                         <div class="col-md-3">
                             <div class="text-center mt-3 pl-1 pr-1">
                                 <div class="maintenance-icon mb-2">
-                                    <a href="" class="text-white icon-link"><i class="fas fa-microscope"></i></a>
+                                    <a href="/lk/services/appointment.php?appointment=examinations" class="text-white icon-link"><i class="fas fa-microscope"></i></a>
                                 </div>
                                 <h5 class="text-uppercase" style="color: var(--dark-cyan-color)"><b>Обследования</b></h5>
                                 <p class="text-muted">Медицинские осмотры с целью выявления новых заболеваний и факторов риска их развития</p>
@@ -487,7 +475,7 @@
                         <div class="col-md-3">
                             <div class="text-center mt-3 pl-1 pr-1">
                                 <div class="maintenance-icon mb-2">
-                                    <a href="" class="text-white icon-link"><i class="fas fa-walking"></i></a>
+                                    <a href="/lk/services/appointment.php?appointment=events" class="text-white icon-link"><i class="fas fa-walking"></i></a>
                                 </div>
                                 <h5 class="text-uppercase" style="color: var(--dark-cyan-color)"><b>Мероприятия</b></h5>
                                 <p class="text-muted">Культурно массовые события, например, походы, экскурсии, эстафеты и так далее</p>
@@ -541,6 +529,7 @@
                                 <p class="card-text"> <i class="fas fa-user-md mr-1"></i> "Фамилия И.О" </p>
                                 <p class="card-text"> <i class="fas fa-map-marker-alt mr-1"></i> "Расположение" </p>
                                 <p class="card-text"> <i class="fas fa-calendar-day mr-2"></i>"Дата|Время" </p>
+                                <a href="#" class="stretched-link"></a>
                             </div>
                         </div>
                     </div>
@@ -561,6 +550,7 @@
                                 <p class="card-text"> <i class="fas fa-user-md mr-1"></i> "Фамилия И.О" </p>
                                 <p class="card-text"> <i class="fas fa-map-marker-alt mr-1"></i> "Расположение" </p>
                                 <p class="card-text"> <i class="fas fa-calendar-day mr-2"></i>"Дата|Время" </p>
+                                <a href="#" class="stretched-link"></a>
                             </div>
                         </div>
                     </div>
@@ -581,6 +571,7 @@
                                 <p class="card-text"> <i class="fas fa-user-md mr-1"></i> "Фамилия И.О" </p>
                                 <p class="card-text"> <i class="fas fa-map-marker-alt mr-1"></i> "Расположение" </p>
                                 <p class="card-text"> <i class="fas fa-calendar-day mr-2"></i>"Дата|Время" </p>
+                                <a href="#" class="stretched-link"></a>
                             </div>
                         </div>
                     </div>
@@ -600,6 +591,7 @@
                                 <h5 class="card-title font-weight-bold" style="color: var(--dark-cyan-color)">"Название"</h5>
                                 <p class="card-text"> <i class="fas fa-map-marker-alt mr-1"></i> "Расположение" </p>
                                 <p class="card-text"> <i class="fas fa-calendar-day mr-2"></i>"Дата|Время" </p>
+                                <a href="#" class="stretched-link"></a>
                             </div>
                         </div>
                     </div>
