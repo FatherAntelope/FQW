@@ -1,5 +1,9 @@
 <?
-if(!isset($_GET['appointment'])) {
+$getAppointment = $_GET['appointment'];
+if($getAppointment != "doctors" &&
+    $getAppointment != "procedures" &&
+    $getAppointment != "examinations" &&
+    $getAppointment != "events") {
     header("Location: /lk/services/control.php");
     exit;
 }
@@ -11,16 +15,25 @@ if(!isset($_GET['appointment'])) {
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/frameworks/bootstrap.min.css">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/jquery.dataTables.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
+
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script type="text/javascript" charset="utf8" src="/js/datatables.js"></script>
     <script defer src="/js/all.js"></script>
     <title>HeartBlaze</title>
 </head>
+<style>
 
+</style>
 <body>
 <!--Меню для авторизованного пользователя-->
 <nav class="navbar fixed-top navbar-expand-sm navbar-light p-0" style="background: var(--cyan-color);">
@@ -187,7 +200,8 @@ if(!isset($_GET['appointment'])) {
     <div class="container pt-3 pb-3">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#" style="color: var(--dark-cyan-color)">Услуги</a></li>
+                <li class="breadcrumb-item"><a href="#" style="color: var(--dark-cyan-color)">Профиль</a></li>
+                <li class="breadcrumb-item"><a href="/lk/services/control.php" style="color: var(--dark-cyan-color)">Услуги</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Запись на услуги</li>
             </ol>
         </nav>
@@ -217,12 +231,100 @@ if(!isset($_GET['appointment'])) {
         <div class="tab-content">
             <div class="tab-pane fade show <? if($_GET['appointment'] == 'doctors') echo "active";?>" id="tab-doctors" role="tabpanel">
                 <div class="card">
-                    <div class="card-body"></div>
+                    <div class="card-body">
+                        <table id="table_doctors" class="table table-striped table-hover">
+                            <thead class="text-white" style="background-color: var(--cyan-color);">
+                            <tr>
+                                <th>Врач</th>
+                                <th>Специальность</th>
+                                <th>Расположение</th>
+                                <th>Разрешение</th>
+                                <th>Цена, руб.</th>
+                                <th>Действие</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="text-muted" data-label="Врач:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
+                                <td class="text-muted" data-label="Спец.-ть:">Терапевт</td>
+                                <td class="text-muted" data-label="Расп.-ие:">505 каб.</td>
+                                <td class="text-muted" data-label="Раз.-ие:"><span class="badge badge-success">Дополнительно</span></td>
+                                <td class="text-muted" data-label="Цена, р.:">500</td>
+                                <td><button type="button" class="btn btn-sm btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Запись</button></td>
+                            </tr>
+                            <tr>
+                                <td class="text-muted" data-label="Врач:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Николаев И. И.</td>
+                                <td class="text-muted" data-label="Спец.-ть:">Офтальмолог</td>
+                                <td class="text-muted" data-label="Расп.-ие:">302 каб.</td>
+                                <td class="text-muted" data-label="Раз.-ие:"><span class="badge badge-danger">Обязательно</span></td>
+                                <td class="text-muted" data-label="Цена, р.:">300</td>
+                                <td><button type="button" class="btn btn-sm btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Запись</button></td>
+                            </tr>
+                            </tbody>
+                            <tfoot class="text-white" style="background-color: var(--cyan-color);">
+                            <tr>
+                                <th>Врач</th>
+                                <th>Специальность</th>
+                                <th>Расположение</th>
+                                <th>Разрешение</th>
+                                <th>Цена, руб.</th>
+                                <th>Действие</th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
                 </div>
             </div>
 
             <div class="tab-pane fade show <? if($_GET['appointment'] == 'procedures') echo "active";?>" id="tab-procedures" role="tabpanel">
-                2
+                <div class="card">
+                    <div class="card-body">
+                        <table id="table_procedures" class="table table-striped table-hover">
+                            <thead class="text-white" style="background-color: var(--cyan-color);">
+                            <tr>
+                                <th>Специалист</th>
+                                <th>Процедура</th>
+                                <th>Расположение</th>
+                                <th>Разрешение</th>
+                                <th>Цена, руб.</th>
+                                <th>Повторов</th>
+                                <th>Действие</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="text-muted" data-label="Сп.-ист:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
+                                <td class="text-muted" data-label="Спец.-ть:">Бассейн</td>
+                                <td class="text-muted" data-label="Расп.-ие:">105 каб.</td>
+                                <td class="text-muted" data-label="Раз.-ие:"><span class="badge badge-success">Дополнительно</span></td>
+                                <td class="text-muted" data-label="Цена, р.:">550</td>
+                                <td class="text-muted" data-label="Повторов:">–</td>
+                                <td><a href="#" type="button" class="btn btn-sm btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Запись</a></td>
+                            </tr>
+                            <tr>
+                                <td class="text-muted" data-label="Сп.-ист:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Николаев И. И.</td>
+                                <td class="text-muted" data-label="Спец.-ть:">Мануальная терапия</td>
+                                <td class="text-muted" data-label="Расп.-ие:">108 каб.</td>
+                                <td class="text-muted" data-label="Раз.-ие:"><span class="badge badge-danger">Обязательно</span></td>
+                                <td class="text-muted" data-label="Цена, р.:">750</td>
+                                <td class="text-muted" data-label="Повторов:">10</td>
+                                <td><a href="#" type="button" class="btn btn-sm btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Запись</a></td>
+                            </tr>
+                            </tbody>
+                            <tfoot class="text-white" style="background-color: var(--cyan-color);">
+                            <tr>
+                                <th>Врач</th>
+                                <th>Процедура</th>
+                                <th>Расположение</th>
+                                <th>Разрешение</th>
+                                <th>Цена, руб.</th>
+                                <th>Повторов</th>
+                                <th>Специалист</th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
             </div>
 
             <div class="tab-pane fade show <? if($_GET['appointment'] == 'examinations') echo "active";?>" id="tab-examinations" role="tabpanel">
@@ -354,5 +456,29 @@ if(!isset($_GET['appointment'])) {
 </body>
 <script>
 $('#notificationToast').toast('show');
+$('#table_doctors, #table_procedures').DataTable({
+    "language": {
+        "zeroRecords": "<span class='text-muted'>Совпадения отсутствуют</span>",
+        "search": "<span class='text-muted' style='margin-right: 0.5rem; font-size: 1.3rem'>Поиск:</span>",
+        "info": "<span class='text-muted'>Показан диапазон от _START_ до _END_ элементов</span>",
+        "infoEmpty": "<span class='text-muted'>Совпадения отсутствуют</span>",
+        "infoFiltered": "<span class='text-muted'>(отфильтровано общих элементов - _MAX_)</span>",
+        "lengthMenu": '<span class="text-muted" style="margin-right: 0.5rem; font-size: 1rem">Отобразить элементов: <\span>' +
+            '<select class="form-control-sm">'+
+            '<option value="5">5</option>'+
+            '<option value="10">20</option>'+
+            '<option value="20">20</option>'+
+            '<option value="30">30</option>'+
+            '<option value="-1">Все</option>'+
+            '</select>',
+        "loadingRecords": "Загрузка...",
+        "processing": "Выполнение...",
+        "paginate": {
+            "next": "Вперед",
+            "previous": "Назад"
+        }
+    },
+
+});
 </script>
 </html>

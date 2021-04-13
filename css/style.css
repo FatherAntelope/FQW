@@ -42,7 +42,6 @@ body {
         padding: 1.85rem 1.55rem 1.85rem 1.55rem !important;
     }
 
-
     .nav-user:hover {
         background-color: var(--dark-cyan-color) !important;
     }
@@ -64,6 +63,35 @@ body {
     .nav-user {
         background-color: transparent !important;
     }
+
+    .table thead, .table tfoot {
+        display: none !important;
+    }
+
+    .table, .table tbody, .table tr, .table td {
+        display: block !important;
+        width: 100% !important;
+    }
+
+    .table tr {
+        margin-bottom: 15px;
+    }
+
+    .table td {
+        text-align: right;
+        padding-left: 35%;
+        position: relative;
+    }
+
+    .table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 65%;
+        padding-left: 15px;
+        font-size: 15px;
+        text-align: left;
+    }
 }
 
 @media (max-width: 574px) {
@@ -77,6 +105,7 @@ body {
         border-radius: 0;
     }
 }
+
 
 .nav-user {
     padding: 0.75rem 0.7rem 0.40rem 3.6rem;
