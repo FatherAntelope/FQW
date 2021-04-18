@@ -228,13 +228,13 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Фамилия <strong style="color: var(--red--color)">*</strong></label>
-                                        <input type="text" class="form-control" required>
+                                        <input type="text" class="form-control" name="user_name" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Имя <strong style="color: var(--red--color)">*</strong></label>
-                                        <input type="text" class="form-control" required>
+                                        <input type="text" class="form-control" name="user_surname" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
@@ -571,7 +571,7 @@
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Должность <strong style="color: var(--red--color)">*</strong></label>
-                                        <select id="chosen_required_post" name="user_med_post" class="form-control form-control-chosen-required" onchange="selectPostMed()" data-placeholder="Выберите должность" required>
+                                        <select id="chosen_required_post" name="user_med_post" class="form-control form-control-chosen-required" data-placeholder="Выберите должность" required>
                                             <option></option>
                                             <option value="doctor"> Врач</option>
                                             <option value="nurse"> Медсестра (процедура)</option>
@@ -579,7 +579,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-lg-3" id="chosen_med">
+                                <div class="col-lg-5" id="chosen_med">
                                     <!--Тег для элемента выбора направления работы медперсонала-->
                                 </div>
 
@@ -812,10 +812,12 @@
     $(document).on('change', '#chosen_required_post', function () {
         let index = this.options.selectedIndex;
         if(index === 1) {
+
+            console.log("13123");
             $('#chosen_med').append(
                 '<div class="form-group" id="div_chosen_profession">' +
                     '<label style="color: var(--yellow-color)">Специальность <strong style="color: var(--red--color)">*</strong></label>' +
-                    '<select id="chosen_required_profession" name="user_med_profession" class="form-control form-control-chosen-required" data-placeholder="Выберите специальность" required>' +
+                    '<select multiple  id="chosen_required_profession" name="user_med_profession" class="form-control form-control-chosen-required" data-placeholder="Выберите специальность" required>' +
                         '<option></option>' +
                         '<option value="profession1"> Специальность 1</option>' +
                         '<option value="profession2"> Специальность 2</option>' +
@@ -830,7 +832,7 @@
             $('#chosen_med').append(
                 '<div class="form-group" id="div_chosen_procedure">' +
                     '<label style="color: var(--yellow-color)">Процедура <strong style="color: var(--red--color)">*</strong></label>' +
-                    '<select id="chosen_required_procedure" name="user_med_procedure" class="form-control form-control-chosen-required" data-placeholder="Выберите процедуру" required>' +
+                    '<select multiple id="chosen_required_procedure" name="user_med_procedure" class="form-control form-control-chosen-required" data-placeholder="Выберите процедуру" required>' +
                         '<option></option>' +
                         '<option value="procedure1"> Процедура 1</option>' +
                         '<option value="procedure2"> Процедура 2</option>' +
@@ -845,7 +847,7 @@
             $('#chosen_med').append(
                 '<div class="form-group" id="div_chosen_examination">' +
                     '<label style="color: var(--yellow-color)">Обследование <strong style="color: var(--red--color)">*</strong></label>' +
-                    '<select id="chosen_required_examination" name="user_med_examination" class="form-control form-control-chosen-required" data-placeholder="Выберите обследование" required>' +
+                    '<select multiple id="chosen_required_examination" name="user_med_examination" class="form-control form-control-chosen-required" data-placeholder="Выберите обследование" required>' +
                         '<option></option>' +
                         '<option value="examination1"> Обследование 1</option>' +
                         '<option value="examination2"> Обследование 2</option>' +
@@ -880,5 +882,6 @@
     $('input[name="user_phone"]').mask("+7 (999) 99-99-999");
     $('input[name="user_passport_id"]').mask("99 99 999999");
     $('input[name="user_passport_code"]').mask("999-999");
+
 </script>
 </html>

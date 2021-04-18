@@ -1,24 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="dd690a98-02d7-475c-ab21-dec0f2dd0976" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/css/jquery.dataTables.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/datatables.js" afterDir="false" />
+    <list default="true" id="dd690a98-02d7-475c-ab21-dec0f2dd0976" name="Default Changelist" comment="Добавлены динамические таблицы списка услуг с использованием готовой библиотеки datatables.js">
+      <change afterPath="$PROJECT_DIR$/footer.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth.php" beforeDir="false" afterPath="$PROJECT_DIR$/auth.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/error/401.php" beforeDir="false" afterPath="$PROJECT_DIR$/error/401.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/error/403.php" beforeDir="false" afterPath="$PROJECT_DIR$/error/403.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/error/404.php" beforeDir="false" afterPath="$PROJECT_DIR$/error/404.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frameworks/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/bootstrap.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frameworks/mdb.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/mdb.min.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lk/add_user.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/add_user.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/profile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lk/index_p.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/index_p.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lk/profile.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/lk/services/appointment.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/services/appointment.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lk/services/control.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/services/control.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lk/settings.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/settings.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/news.php" beforeDir="false" afterPath="$PROJECT_DIR$/news.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,7 +125,10 @@
       <workItem from="1618052695828" duration="21238000" />
       <workItem from="1618131765392" duration="14421000" />
       <workItem from="1618231595174" duration="2482000" />
-      <workItem from="1618326675780" duration="18257000" />
+      <workItem from="1618326675780" duration="19114000" />
+      <workItem from="1618500654526" duration="1902000" />
+      <workItem from="1618687913965" duration="5398000" />
+      <workItem from="1618743922527" duration="2549000" />
     </task>
     <task id="LOCAL-00001" summary="Начал делать шапку">
       <created>1611600872960</created>
@@ -261,7 +256,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618147982597</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Добавлены динамические таблицы списка услуг с использованием готовой библиотеки datatables.js">
+      <created>1618351994947</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1618351994947</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -298,6 +300,7 @@
     <MESSAGE value="Доделан фронтенд страницы регистрации пользователей. Добавлена страница новостей (без контента)" />
     <MESSAGE value="Добавлена страница управления услугами у пациента" />
     <MESSAGE value="Сделала заготовка страницы услуг для записи" />
-    <option name="LAST_COMMIT_MESSAGE" value="Сделала заготовка страницы услуг для записи" />
+    <MESSAGE value="Добавлены динамические таблицы списка услуг с использованием готовой библиотеки datatables.js" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавлены динамические таблицы списка услуг с использованием готовой библиотеки datatables.js" />
   </component>
 </project>

@@ -34,7 +34,7 @@
                 </a>
             </li>
             <li>
-                <a href="/auth.php" class="btn btn-warning text-white" style="background: var(--yellow-color); margin: 0.6rem 0 0.6rem 1rem;">Авторизация</a>
+                <a href="/auth.php" class="btn btn-warning text-white mr-sm-0 mr-2 ml-2" style="background: var(--yellow-color); margin-top: 0.6rem; margin-bottom: 0.6rem">Авторизация</a>
             </li>
         </ul>
     </div>
@@ -121,7 +121,6 @@
                             <li>
                                 <a href="/auth.php">Авторизация</a>
                             </li>
-                            <li>
                         </ul>
                     </div>
                     <div class="col-lg-2 col-6 col-sm-4 mb-5 mb-lg-0">

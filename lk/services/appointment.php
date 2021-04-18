@@ -32,7 +32,9 @@ if($getAppointment != "doctors" &&
     <title>HeartBlaze</title>
 </head>
 <style>
-
+ .form-control-sm option:link {
+     background-color: var(--cyan-color) !important;
+ }
 </style>
 <body>
 <!--Меню для авторизованного пользователя-->
@@ -207,22 +209,22 @@ if($getAppointment != "doctors" &&
         </nav>
         <ul class="nav nav-pills flex-column flex-sm-row mb-2" role="tablist">
             <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
-                <a class="nav-link tab-bg-active font-weight-bold <? if($_GET['appointment'] == 'doctors') echo "active";?>" data-toggle="tab" href="#tab-doctors" role="tab">
+                <a class="nav-link tab-bg-active font-weight-bold <? if($_GET['appointment'] == 'doctors') echo "active";?>" onclick="window.history.pushState('', '', '/lk/services/appointment.php?appointment=doctors');" data-toggle="tab" href="#tab-doctors" role="tab">
                     <i class="fas fa-user-md mr-2"></i>Врачи
                 </a>
             </li>
             <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
-                <a class="nav-link tab-bg-active font-weight-bold <? if($_GET['appointment'] == 'procedures') echo "active";?>" data-toggle="tab" href="#tab-procedures" role="tab">
+                <a class="nav-link tab-bg-active font-weight-bold <? if($_GET['appointment'] == 'procedures') echo "active";?>" onclick="window.history.pushState('', '', '/lk/services/appointment.php?appointment=procedures');" data-toggle="tab" href="#tab-procedures" role="tab">
                     <i class="fas fa-diagnoses mr-2"></i>Процедуры
                 </a>
             </li>
             <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
-                <a class="nav-link tab-bg-active font-weight-bold <? if($_GET['appointment'] == 'examinations') echo "active";?>" data-toggle="tab" href="#tab-examinations" role="tab">
+                <a class="nav-link tab-bg-active font-weight-bold <? if($_GET['appointment'] == 'examinations') echo "active";?>" onclick="window.history.pushState('', '', '/lk/services/appointment.php?appointment=examinations');" data-toggle="tab" href="#tab-examinations" role="tab">
                     <i class="fas fa-microscope mr-1"></i>Обследования
                 </a>
             </li>
             <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
-                <a class="nav-link tab-bg-active font-weight-bold <? if($_GET['appointment'] == 'events') echo "active";?>" data-toggle="tab" href="#tab-events" role="tab">
+                <a class="nav-link tab-bg-active font-weight-bold <? if($_GET['appointment'] == 'events') echo "active";?>" onclick="window.history.pushState('', '', '/lk/services/appointment.php?appointment=events');" data-toggle="tab" href="#tab-events" role="tab">
                     <i class="fas fa-walking mr-1"></i>Мероприятия
                 </a>
             </li>
@@ -246,17 +248,24 @@ if($getAppointment != "doctors" &&
                             <tbody>
                             <tr>
                                 <td class="text-muted" data-label="Врач:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
-                                <td class="text-muted" data-label="Спец.-ть:">Терапевт</td>
+                                <td class="text-muted" data-label="Спец.-ть:">
+                                    <span class="badge badge-pill badge-secondary">Терапевт</span>
+                                    <span class="badge badge-pill badge-secondary">Онколог</span>
+                                </td>
                                 <td class="text-muted" data-label="Расп.-ие:">505 каб.</td>
-                                <td class="text-muted" data-label="Раз.-ие:"><span class="badge badge-success">Дополнительно</span></td>
+                                <td class="text-muted" data-label="Раз.-ие:"><span class="badge badge-pill badge-success">Дополнительно</span></td>
                                 <td class="text-muted" data-label="Цена, р.:">500</td>
                                 <td><button type="button" class="btn btn-sm btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Запись</button></td>
                             </tr>
                             <tr>
                                 <td class="text-muted" data-label="Врач:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Николаев И. И.</td>
-                                <td class="text-muted" data-label="Спец.-ть:">Офтальмолог</td>
+                                <td class="text-muted" data-label="Спец.-ть:">
+                                    <span class="badge badge-pill badge-secondary">Терапевт</span>
+                                    <span class="badge badge-pill badge-secondary">Сурдолог</span>
+                                    <span class="badge badge-pill badge-secondary">Оториноларинголог</span>
+                                </td>
                                 <td class="text-muted" data-label="Расп.-ие:">302 каб.</td>
-                                <td class="text-muted" data-label="Раз.-ие:"><span class="badge badge-danger">Обязательно</span></td>
+                                <td class="text-muted" data-label="Раз.-ие:"><span class="badge badge-pill badge-danger">Обязательно</span></td>
                                 <td class="text-muted" data-label="Цена, р.:">300</td>
                                 <td><button type="button" class="btn btn-sm btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Запись</button></td>
                             </tr>
@@ -296,7 +305,7 @@ if($getAppointment != "doctors" &&
                                 <td class="text-muted" data-label="Сп.-ист:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
                                 <td class="text-muted" data-label="Спец.-ть:">Бассейн</td>
                                 <td class="text-muted" data-label="Расп.-ие:">105 каб.</td>
-                                <td class="text-muted" data-label="Раз.-ие:"><span class="badge badge-success">Дополнительно</span></td>
+                                <td class="text-muted" data-label="Раз.-ие:"><span class="badge badge-pill badge-success">Дополнительно</span></td>
                                 <td class="text-muted" data-label="Цена, р.:">550</td>
                                 <td class="text-muted" data-label="Повторов:">–</td>
                                 <td><a href="#" type="button" class="btn btn-sm btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Запись</a></td>
@@ -305,7 +314,7 @@ if($getAppointment != "doctors" &&
                                 <td class="text-muted" data-label="Сп.-ист:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Николаев И. И.</td>
                                 <td class="text-muted" data-label="Спец.-ть:">Мануальная терапия</td>
                                 <td class="text-muted" data-label="Расп.-ие:">108 каб.</td>
-                                <td class="text-muted" data-label="Раз.-ие:"><span class="badge badge-danger">Обязательно</span></td>
+                                <td class="text-muted" data-label="Раз.-ие:"><span class="badge badge-pill badge-danger">Обязательно</span></td>
                                 <td class="text-muted" data-label="Цена, р.:">750</td>
                                 <td class="text-muted" data-label="Повторов:">10</td>
                                 <td><a href="#" type="button" class="btn btn-sm btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Запись</a></td>
@@ -313,13 +322,13 @@ if($getAppointment != "doctors" &&
                             </tbody>
                             <tfoot class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
-                                <th>Врач</th>
+                                <th>Специалист</th>
                                 <th>Процедура</th>
                                 <th>Расположение</th>
                                 <th>Разрешение</th>
                                 <th>Цена, руб.</th>
                                 <th>Повторов</th>
-                                <th>Специалист</th>
+                                <th>Действие</th>
                             </tr>
                             </tfoot>
                         </table>
@@ -328,7 +337,46 @@ if($getAppointment != "doctors" &&
             </div>
 
             <div class="tab-pane fade show <? if($_GET['appointment'] == 'examinations') echo "active";?>" id="tab-examinations" role="tabpanel">
-                3
+                <div class="card">
+                    <div class="card-body">
+                        <table id="table_examinations" class="table table-striped table-hover">
+                            <thead class="text-white" style="background-color: var(--cyan-color);">
+                            <tr>
+                                <th>Специалист</th>
+                                <th>Обследование</th>
+                                <th>Расположение</th>
+                                <th>Цена, руб.</th>
+                                <th>Действие</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="text-muted" data-label="Сп.-ист:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
+                                <td class="text-muted" data-label="Спец.-ть:">ОАК</td>
+                                <td class="text-muted" data-label="Расп.-ие:">105 каб.</td>
+                                <td class="text-muted" data-label="Цена, р.:">550</td>
+                                <td><a href="#" type="button" class="btn btn-sm btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Запись</a></td>
+                            </tr>
+                            <tr>
+                                <td class="text-muted" data-label="Сп.-ист:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Николаев И. И.</td>
+                                <td class="text-muted" data-label="Спец.-ть:">ОАМ</td>
+                                <td class="text-muted" data-label="Расп.-ие:">108 каб.</td>
+                                <td class="text-muted" data-label="Цена, р.:">750</td>
+                                <td><a href="#" type="button" class="btn btn-sm btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Запись</a></td>
+                            </tr>
+                            </tbody>
+                            <tfoot class="text-white" style="background-color: var(--cyan-color);">
+                            <tr>
+                                <th>Специалист</th>
+                                <th>Обследование</th>
+                                <th>Расположение</th>
+                                <th>Цена, руб.</th>
+                                <th>Действие</th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
             </div>
 
             <div class="tab-pane fade show <? if($_GET['appointment'] == 'events') echo "active";?>" id="tab-events" role="tabpanel">
@@ -358,105 +406,11 @@ if($getAppointment != "doctors" &&
 </div>
 
 <!--Футер (нижний блок)-->
-<footer style="background-color: var(--cyan-color)">
-    <div class="container pt-4">
-        <div class="row justify-content-center">
-            <div class="col-lg-12">
-
-                <div class="row">
-                    <div class="col-lg-4 mb-5 mb-lg-0">
-                        <a href="/">
-                            <img src="/images/logo.png" height="40">
-                        </a>
-                        <p class="mt-2 text-white opacity-8 pr-lg-4">
-                            Система для повышения эффективности процесса рекреации в санатории, а также повышения мобильности и оперативности информационной поддержки
-                        </p>
-                        <ul class="list-unstyled link-none">
-                            <li>
-                                <a href="tel:+7 (999) 999-99-99" aria-haspopup="true">
-                                    <h4> <i class="fas fa-phone mr-1"></i> +7 (999) 999-99-99</h4>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="mailto:mail@mail.ru" aria-haspopup="true">
-                                    <i class="fas fa-envelope-open-text mr-1"></i>
-                                    mail@mail.ru
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://yandex.ru/maps/org/raduga/1249162221/?display-text=%D0%A1%D0%B0%D0%BD%D0%B0%D1%82%D0%BE%D1%80%D0%B8%D0%B9%20%D0%A0%D0%B0%D0%B4%D1%83%D0%B3%D0%B0&ll=56.012919%2C54.703989&mode=search&sll=55.943574%2C54.768878&sspn=0.134043%2C0.045012&text=%D0%A1%D0%B0%D0%BD%D0%B0%D1%82%D0%BE%D1%80%D0%B8%D0%B9%20%D0%A0%D0%B0%D0%B4%D1%83%D0%B3%D0%B0&z=16.43" aria-haspopup="true">
-                                    <i class="fas fa-map-marked-alt mr-1"></i>
-                                    Уфа, Санаторий Радуга, ул. Авроры, 14/1
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-2 col-6 col-sm-4 ml-lg-auto mb-5 mb-lg-0">
-                        <h6 class="heading mb-3" style="font-weight: 700 ;color: var(--yellow-color)">Аккаунт</h6>
-                        <ul class="list-unstyled link-none">
-                            <li>
-                                <a href="#">Профиль</a>
-                            </li>
-                            <li>
-                                <a href="#">Чат</a>
-                            </li>
-                            <li>
-                                <a href="#">Медицинская карта</a>
-                            </li>
-                            <li>
-                                <a href="#">Дневник самонаблюдения</a>
-                            </li>
-                            <li>
-                                <a href="#">Услуги</a>
-                            </li>
-                            <li>
-                                <a href="#">Органайзер</a>
-                            </li>
-                            <li>
-                                <a href="#">Настройки</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-2 col-6 col-sm-4 mb-5 mb-lg-0">
-                        <h6 class="heading mb-3" style="font-weight: 700 ;color: var(--yellow-color)">Санаторий</h6>
-                        <ul class="list-unstyled link-none">
-                            <li>
-                                <a href="#">Новости</a>
-                            </li>
-                            <li>
-                                <a href="#">Галерея</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-2 col-6 col-sm-4 mb-5 mb-lg-0">
-                        <h6 class="heading mb-3" style="font-weight: 700 ;color: var(--yellow-color)">Помощь</h6>
-                        <ul class="list-unstyled link-none">
-                            <li>
-                                <a href="#">FAQ</a>
-                            </li>
-                            <li>
-                                <a href="#">Поддержка</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <hr style="border-top: 3px solid var(--yellow-color);">
-
-                <div class="row justify-content-center align-items-center">
-                    <div class="text-white">
-                        <p>©2021 HeartBlaze. Все права защищены</p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</footer>
+<?php require $_SERVER['DOCUMENT_ROOT']."/footer.php"; ?>
 </body>
 <script>
 $('#notificationToast').toast('show');
-$('#table_doctors, #table_procedures').DataTable({
+$('#table_doctors, #table_procedures, #table_examinations').DataTable({
     "language": {
         "zeroRecords": "<span class='text-muted'>Совпадения отсутствуют</span>",
         "search": "<span class='text-muted' style='margin-right: 0.5rem; font-size: 1.3rem'>Поиск:</span>",
