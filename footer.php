@@ -85,7 +85,7 @@
 
                 <div class="row justify-content-center align-items-center">
                     <div class="text-white">
-                        <p>©2021 HeartBlaze. Все права защищены</p>
+                        <p>©2021 СанКонтроль. Все права защищены</p>
                     </div>
                 </div>
             </div>

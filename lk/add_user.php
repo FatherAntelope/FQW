@@ -5,6 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="/images/logo-mini.png" type="image/x-icon">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/chosen.min.css">
     <link rel="stylesheet" href="/css/style.css">
@@ -713,7 +714,7 @@
                             <img src="/images/logo.png" height="40">
                         </a>
                         <p class="mt-2 text-white opacity-8 pr-lg-4">
-                            Система для повышения эффективности процесса рекреации в санатории, а также повышения мобильности и оперативности информационной поддержки
+                            Медицинская информационная система для повышения эффективности процесса рекреации в санатории, мобильности и оперативности информационной поддержки
                         </p>
                         <ul class="list-unstyled link-none">
                             <li>

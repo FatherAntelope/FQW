@@ -15,18 +15,14 @@ if($getAppointment != "doctors" &&
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
+    <link rel="shortcut icon" href="/images/logo-mini.png" type="image/x-icon">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
-
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" type="text/css" href="/css/jquery.dataTables.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-
-
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
-
     <script type="text/javascript" charset="utf8" src="/js/datatables.js"></script>
     <script defer src="/js/all.js"></script>
     <title>HeartBlaze</title>
@@ -412,10 +408,10 @@ if($getAppointment != "doctors" &&
 $('#notificationToast').toast('show');
 $('#table_doctors, #table_procedures, #table_examinations').DataTable({
     "language": {
-        "zeroRecords": "<span class='text-muted'>Совпадения отсутствуют</span>",
+        "zeroRecords": "<span class='text-muted'>Услуги отсутствуют</span>",
         "search": "<span class='text-muted' style='margin-right: 0.5rem; font-size: 1.3rem'>Поиск:</span>",
         "info": "<span class='text-muted'>Показан диапазон от _START_ до _END_ элементов</span>",
-        "infoEmpty": "<span class='text-muted'>Совпадения отсутствуют</span>",
+        "infoEmpty": "<span class='text-muted'>Услуги отсутствуют</span>",
         "infoFiltered": "<span class='text-muted'>(отфильтровано общих элементов - _MAX_)</span>",
         "lengthMenu": '<span class="text-muted" style="margin-right: 0.5rem; font-size: 1rem">Отобразить элементов: <\span>' +
             '<select class="form-control-sm">'+
