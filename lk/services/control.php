@@ -8,12 +8,14 @@
     <link rel="shortcut icon" href="/images/logo-mini.png" type="image/x-icon">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/jquery.dataTables.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="/js/datatables.js"></script>
     <script defer src="/js/all.js"></script>
-    <title>HeartBlaze</title>
+    <title>СанКонтроль</title>
 </head>
 <style>
 </style>
@@ -307,128 +309,125 @@
                     </div>
                 </div>
 
-                <div class="card mt-3">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-12 text-center">
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="my_services_all" name="my_services" class="custom-control-input" checked>
-                                    <label class="custom-control-label" for="my_services_all">Все записи</label>
-                                </div>
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="my_services_doctors" name="my_services" class="custom-control-input">
-                                    <label class="custom-control-label" for="my_services_doctors">Врачи</label>
-                                </div>
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="my_services_procedures" name="my_services" value="woman" class="custom-control-input">
-                                    <label class="custom-control-label" for="my_services_procedures">Процедуры</label>
-                                </div>
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="my_services_examinations" name="my_services" class="custom-control-input">
-                                    <label class="custom-control-label" for="my_services_examinations">Обследования</label>
-                                </div>
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="my_services_events" name="my_services" class="custom-control-input">
-                                    <label class="custom-control-label" for="my_services_events">Мероприятия</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
                 <div class="card mt-3">
-                    <div class="row no-gutters">
-                        <div class="col-md-2 d-flex align-items-center flex-column justify-content-center" style="background-color: var(--dark-cyan-color)">
-                            <h1 class="card-text text-white mt-2">
-                                <i class="fas fa-user-md"></i>
-                            </h1>
-                            <h5 class="card-text text-white mb-0">
-                                Врач
-                            </h5>
-                            <button class="btn btn-sm btn-danger mt-3 mb-2">
-                                <i class="fas fa-trash"></i> Отменить
-                            </button>
-                        </div>
-                        <div class="col-md-10">
-                            <div class="card-body">
-                                <h5 class="card-title font-weight-bold" style="color: var(--dark-cyan-color)">"Специальность"</h5>
-                                <p class="card-text"> <i class="fas fa-user-md mr-1"></i> "Фамилия И.О" </p>
-                                <p class="card-text"> <i class="fas fa-map-marker-alt mr-1"></i> "Расположение" </p>
-                                <p class="card-text"> <i class="fas fa-calendar-day mr-2"></i>"Дата|Время" </p>
-                                <a href="#" class="stretched-link"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card mt-3">
-                    <div class="row no-gutters">
-                        <div class="col-md-2 d-flex align-items-center flex-column justify-content-center" style="background-color: var(--dark-cyan-color)">
-                            <h1 class="card-text text-white mt-2">
-                                <i class="fas fa-diagnoses"></i>
-                            </h1>
-                            <h5 class="card-text text-white mb-0">
-                                Процедура
-                            </h5>
-                            <button class="btn btn-sm btn-danger mt-3 mb-2">
-                                <i class="fas fa-trash"></i> Отменить
-                            </button>
-                        </div>
-                        <div class="col-md-10">
-                            <div class="card-body">
-                                <h5 class="card-title font-weight-bold" style="color: var(--dark-cyan-color)">"Название"</h5>
-                                <p class="card-text"> <i class="fas fa-user-md mr-1"></i> "Фамилия И.О" </p>
-                                <p class="card-text"> <i class="fas fa-map-marker-alt mr-1"></i> "Расположение" </p>
-                                <p class="card-text"> <i class="fas fa-calendar-day mr-2"></i>"Дата|Время" </p>
-                                <a href="#" class="stretched-link"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card mt-3">
-                    <div class="row no-gutters">
-                        <div class="col-md-2 d-flex align-items-center flex-column justify-content-center" style="background-color: var(--dark-cyan-color)">
-                            <h1 class="card-text text-white mt-2">
-                                <i class="fas fa-microscope"></i>
-                            </h1>
-                            <h5 class="card-text text-white mb-0">
-                                Обследование
-                            </h5>
-                            <button class="btn btn-sm btn-danger mt-3 mb-2">
-                                <i class="fas fa-trash"></i> Отменить
-                            </button>
-                        </div>
-                        <div class="col-md-10">
-                            <div class="card-body">
-                                <h5 class="card-title font-weight-bold" style="color: var(--dark-cyan-color)">"Название"</h5>
-                                <p class="card-text"> <i class="fas fa-user-md mr-1"></i> "Фамилия И.О" </p>
-                                <p class="card-text"> <i class="fas fa-map-marker-alt mr-1"></i> "Расположение" </p>
-                                <p class="card-text"> <i class="fas fa-calendar-day mr-2"></i>"Дата|Время" </p>
-                                <a href="#" class="stretched-link"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card mt-3">
-                    <div class="row no-gutters">
-                        <div class="col-md-2 d-flex align-items-center flex-column justify-content-center" style="background-color: var(--dark-cyan-color)">
-                            <h1 class="card-text text-white mt-2">
-                                <i class="fas fa-walking"></i>
-                            </h1>
-                            <h5 class="card-text text-white mb-0">
-                                Мероприятие
-                            </h5>
-                            <button class="btn btn-sm btn-danger mt-3 mb-2">
-                                <i class="fas fa-trash"></i> Отменить
-                            </button>
-                        </div>
-                        <div class="col-md-10">
-                            <div class="card-body">
-                                <h5 class="card-title font-weight-bold" style="color: var(--dark-cyan-color)">"Название"</h5>
-                                <p class="card-text"> <i class="fas fa-map-marker-alt mr-1"></i> "Расположение" </p>
-                                <p class="card-text"> <i class="fas fa-calendar-day mr-2"></i>"Дата|Время" </p>
-                                <a href="#" class="stretched-link"></a>
-                            </div>
-                        </div>
+                    <div class="card-body">
+                        <table id="table_appointment" class="table table-striped table-hover">
+                            <thead class="text-white" style="background-color: var(--cyan-color);">
+                            <tr>
+                                <th>Тип услуги</th>
+                                <th>Название услуги</th>
+                                <th>Специалист</th>
+                                <th>Расположение</th>
+                                <th>Дата</th>
+                                <th>Действие</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="text-muted" data-label="Тип усл.:">
+                                    <h5>
+                                        <span class="badge text-white" style="background-color: var(--dark-cyan-color)">
+                                            <i class="fas fa-user-md mr-2"></i>Врач
+                                        </span>
+                                    </h5>
+                                </td>
+                                <td class="text-muted" data-label="Наз.-е усл.:">
+                                    Терапевт
+                                </td>
+                                <td class="text-muted" data-label="Спец.-ст:">
+                                    <img src="/images/user.png" height="30" class="rounded-circle" alt="...">Николаев И. И.
+                                </td>
+                                <td class="text-muted" data-label="Распо-ие:">500 каб.</td>
+                                <td class="text-muted" data-label="Распо-ие:">10.12.21 13:10</td>
+                                <td>
+                                    <ul class="list-unstyled">
+                                        <li><button type="button" class="btn btn-sm text-white btn-block" style="background-color: var(--yellow-color)">Просмотр</button></li>
+                                        <li><button type="button" class="btn mt-1 btn-sm btn-danger btn-block">Отмена</button></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-muted" data-label="Тип усл.:">
+                                    <h5>
+                                        <span class="badge text-white" style="background-color: var(--dark-cyan-color)">
+                                            <i class="fas fa-diagnoses mr-2"></i>Процедура
+                                        </span>
+                                    </h5>
+                                </td>
+                                <td class="text-muted" data-label="Наз.-е усл.:">
+                                    Бассейн
+                                </td>
+                                <td class="text-muted" data-label="Спец.-ст:">
+                                    <img src="/images/user.png" height="30" class="rounded-circle" alt="...">Иванов И. И.
+                                </td>
+                                <td class="text-muted" data-label="Распо-ие:">Зал 2</td>
+                                <td class="text-muted" data-label="Распо-ие:">11.12.21 12:10</td>
+                                <td>
+                                    <ul class="list-unstyled">
+                                        <li><button type="button" class="btn btn-sm text-white btn-block" style="background-color: var(--yellow-color)">Просмотр</button></li>
+                                        <li><button type="button" class="btn mt-1 btn-sm btn-danger btn-block">Отмена</button></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-muted" data-label="Тип усл.:">
+                                    <h5>
+                                        <span class="badge text-white" style="background-color: var(--dark-cyan-color)">
+                                            <i class="fas fa-microscope mr-2"></i>Обследование
+                                        </span>
+                                    </h5>
+                                </td>
+                                <td class="text-muted" data-label="Наз.-е усл.:">
+                                    ОАК
+                                </td>
+                                <td class="text-muted" data-label="Спец.-ст:">
+                                    <img src="/images/user.png" height="30" class="rounded-circle" alt="...">Кузнецова И. И.
+                                </td>
+                                <td class="text-muted" data-label="Распо-ие:">101 каб.</td>
+                                <td class="text-muted" data-label="Распо-ие:">11.12.21 12:10</td>
+                                <td>
+                                    <ul class="list-unstyled">
+                                        <li><button type="button" class="btn btn-sm text-white btn-block" style="background-color: var(--yellow-color)">Просмотр</button></li>
+                                        <li><button type="button" class="btn mt-1 btn-sm btn-danger btn-block">Отмена</button></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-muted" data-label="Тип усл.:">
+                                    <h5>
+                                        <span class="badge text-white" style="background-color: var(--dark-cyan-color)">
+                                            <i class="fas fa-procedures mr-2"></i>Мероприятие
+                                        </span>
+                                    </h5>
+                                </td>
+                                <td class="text-muted" data-label="Наз.-е усл.:">
+                                    Экскурсия по зоопарку
+                                </td>
+                                <td class="text-muted" data-label="Спец.-ст:">
+                                    -
+                                </td>
+                                <td class="text-muted" data-label="Распо-ие:">Главный вход</td>
+                                <td class="text-muted" data-label="Распо-ие:">11.12.21 12:10</td>
+                                <td>
+                                    <ul class="list-unstyled">
+                                        <li><button type="button" class="btn btn-sm text-white btn-block" style="background-color: var(--yellow-color)">Просмотр</button></li>
+                                        <li><button type="button" class="btn mt-1 btn-sm btn-danger btn-block">Отмена</button></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <tfoot class="text-white" style="background-color: var(--cyan-color);">
+                            <tr>
+                                <th>Тип услуги</th>
+                                <th>Название услуги</th>
+                                <th>Специалист</th>
+                                <th>Расположение</th>
+                                <th>Дата</th>
+                                <th>Действие</th>
+                            </tr>
+                            </tfoot>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -487,120 +486,142 @@
 
                 <div class="card mt-3">
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-12 text-center">
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="history_services_all" name="history_services" class="custom-control-input" checked>
-                                    <label class="custom-control-label" for="history_services_all">Все записи</label>
-                                </div>
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="history_services_doctors" name="history_services" class="custom-control-input">
-                                    <label class="custom-control-label" for="history_services_doctors">Врачи</label>
-                                </div>
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="history_services_procedures" name="history_services" value="woman" class="custom-control-input">
-                                    <label class="custom-control-label" for="history_services_procedures">Процедуры</label>
-                                </div>
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="history_services_examinations" name="history_services" class="custom-control-input">
-                                    <label class="custom-control-label" for="history_services_examinations">Обследования</label>
-                                </div>
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="history_services_events" name="history_services" class="custom-control-input">
-                                    <label class="custom-control-label" for="history_services_events">Мероприятия</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card mt-3">
-                    <div class="row no-gutters">
-                        <div class="col-md-2 d-flex align-items-center flex-column justify-content-center" style="background-color: var(--dark-cyan-color)">
-                            <h1 class="card-text text-white mt-2">
-                                <i class="fas fa-user-md"></i>
-                            </h1>
-                            <h5 class="card-text text-white mb-0">
-                                Врач
-                            </h5>
-                        </div>
-                        <div class="col-md-10">
-                            <div class="card-body">
-                                <h5 class="card-title font-weight-bold" style="color: var(--dark-cyan-color)">"Специальность"</h5>
-                                <p class="card-text"> <i class="fas fa-user-md mr-1"></i> "Фамилия И.О" </p>
-                                <p class="card-text"> <i class="fas fa-map-marker-alt mr-1"></i> "Расположение" </p>
-                                <p class="card-text"> <i class="fas fa-calendar-day mr-2"></i>"Дата|Время" </p>
-                                <a href="#" class="stretched-link"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card mt-3">
-                    <div class="row no-gutters">
-                        <div class="col-md-2 d-flex align-items-center flex-column justify-content-center" style="background-color: var(--dark-cyan-color)">
-                            <h1 class="card-text text-white mt-2">
-                                <i class="fas fa-diagnoses"></i>
-                            </h1>
-                            <h5 class="card-text text-white mb-0">
-                                Процедура
-                            </h5>
-                        </div>
-                        <div class="col-md-10">
-                            <div class="card-body">
-                                <h5 class="card-title font-weight-bold" style="color: var(--dark-cyan-color)">"Название"</h5>
-                                <p class="card-text"> <i class="fas fa-user-md mr-1"></i> "Фамилия И.О" </p>
-                                <p class="card-text"> <i class="fas fa-map-marker-alt mr-1"></i> "Расположение" </p>
-                                <p class="card-text"> <i class="fas fa-calendar-day mr-2"></i>"Дата|Время" </p>
-                                <a href="#" class="stretched-link"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card mt-3">
-                    <div class="row no-gutters">
-                        <div class="col-md-2 d-flex align-items-center flex-column justify-content-center" style="background-color: var(--dark-cyan-color)">
-                            <h1 class="card-text text-white mt-2">
-                                <i class="fas fa-microscope"></i>
-                            </h1>
-                            <h5 class="card-text text-white mb-0">
-                                Обследование
-                            </h5>
-                        </div>
-                        <div class="col-md-10">
-                            <div class="card-body">
-                                <h5 class="card-title font-weight-bold" style="color: var(--dark-cyan-color)">"Название"</h5>
-                                <p class="card-text"> <i class="fas fa-user-md mr-1"></i> "Фамилия И.О" </p>
-                                <p class="card-text"> <i class="fas fa-map-marker-alt mr-1"></i> "Расположение" </p>
-                                <p class="card-text"> <i class="fas fa-calendar-day mr-2"></i>"Дата|Время" </p>
-                                <a href="#" class="stretched-link"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card mt-3">
-                    <div class="row no-gutters">
-                        <div class="col-md-2 d-flex align-items-center flex-column justify-content-center" style="background-color: var(--dark-cyan-color)">
-                            <h1 class="card-text text-white mt-2">
-                                <i class="fas fa-walking"></i>
-                            </h1>
-                            <h5 class="card-text text-white mb-0">
-                                Мероприятие
-                            </h5>
-                        </div>
-                        <div class="col-md-10">
-                            <div class="card-body">
-                                <h5 class="card-title font-weight-bold" style="color: var(--dark-cyan-color)">"Название"</h5>
-                                <p class="card-text"> <i class="fas fa-map-marker-alt mr-1"></i> "Расположение" </p>
-                                <p class="card-text"> <i class="fas fa-calendar-day mr-2"></i>"Дата|Время" </p>
-                                <a href="#" class="stretched-link"></a>
-                            </div>
-                        </div>
+                        <table id="table_appointment_history" class="table table-striped table-hover">
+                            <thead class="text-white" style="background-color: var(--cyan-color);">
+                            <tr>
+                                <th>Тип услуги</th>
+                                <th>Название услуги</th>
+                                <th>Специалист</th>
+                                <th>Расположение</th>
+                                <th>Дата</th>
+                                <th>Действие</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="text-muted" data-label="Тип усл.:">
+                                    <h5>
+                                        <span class="badge text-white" style="background-color: var(--dark-cyan-color)">
+                                            <i class="fas fa-user-md mr-2"></i>Врач
+                                        </span>
+                                    </h5>
+                                </td>
+                                <td class="text-muted" data-label="Наз.-е усл.:">
+                                    Терапевт
+                                </td>
+                                <td class="text-muted" data-label="Спец.-ст:">
+                                    <img src="/images/user.png" height="30" class="rounded-circle" alt="...">Николаев И. И.
+                                </td>
+                                <td class="text-muted" data-label="Распо-ие:">500 каб.</td>
+                                <td class="text-muted" data-label="Распо-ие:">10.12.21 13:10</td>
+                                <td>
+                                    <ul class="list-unstyled">
+                                        <li><button type="button" class="btn btn-sm text-white btn-block" style="background-color: var(--yellow-color)">Просмотр</button></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-muted" data-label="Тип усл.:">
+                                    <h5>
+                                        <span class="badge text-white" style="background-color: var(--dark-cyan-color)">
+                                            <i class="fas fa-diagnoses mr-2"></i>Процедура
+                                        </span>
+                                    </h5>
+                                </td>
+                                <td class="text-muted" data-label="Наз.-е усл.:">
+                                    Бассейн
+                                </td>
+                                <td class="text-muted" data-label="Спец.-ст:">
+                                    <img src="/images/user.png" height="30" class="rounded-circle" alt="...">Иванов И. И.
+                                </td>
+                                <td class="text-muted" data-label="Распо-ие:">Зал 2</td>
+                                <td class="text-muted" data-label="Распо-ие:">11.12.21 12:10</td>
+                                <td>
+                                    <ul class="list-unstyled">
+                                        <li><button type="button" class="btn btn-sm text-white btn-block" style="background-color: var(--yellow-color)">Просмотр</button></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-muted" data-label="Тип усл.:">
+                                    <h5>
+                                        <span class="badge text-white" style="background-color: var(--dark-cyan-color)">
+                                            <i class="fas fa-microscope mr-2"></i>Обследование
+                                        </span>
+                                    </h5>
+                                </td>
+                                <td class="text-muted" data-label="Наз.-е усл.:">
+                                    ОАК
+                                </td>
+                                <td class="text-muted" data-label="Спец.-ст:">
+                                    <img src="/images/user.png" height="30" class="rounded-circle" alt="...">Кузнецова И. И.
+                                </td>
+                                <td class="text-muted" data-label="Распо-ие:">101 каб.</td>
+                                <td class="text-muted" data-label="Распо-ие:">11.12.21 12:10</td>
+                                <td>
+                                    <ul class="list-unstyled">
+                                        <li><button type="button" class="btn btn-sm text-white btn-block" style="background-color: var(--yellow-color)">Просмотр</button></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-muted" data-label="Тип усл.:">
+                                    <h5>
+                                        <span class="badge text-white" style="background-color: var(--dark-cyan-color)">
+                                            <i class="fas fa-procedures mr-2"></i>Мероприятие
+                                        </span>
+                                    </h5>
+                                </td>
+                                <td class="text-muted" data-label="Наз.-е усл.:">
+                                    Экскурсия по зоопарку
+                                </td>
+                                <td class="text-muted" data-label="Спец.-ст:">
+                                    -
+                                </td>
+                                <td class="text-muted" data-label="Распо-ие:">Главный вход</td>
+                                <td class="text-muted" data-label="Распо-ие:">11.12.21 12:10</td>
+                                <td>
+                                    <ul class="list-unstyled">
+                                        <li><button type="button" class="btn btn-sm text-white btn-block" style="background-color: var(--yellow-color)">Просмотр</button></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <tfoot class="text-white" style="background-color: var(--cyan-color);">
+                            <tr>
+                                <th>Тип услуги</th>
+                                <th>Название услуги</th>
+                                <th>Специалист</th>
+                                <th>Расположение</th>
+                                <th>Дата</th>
+                                <th>Действие</th>
+                            </tr>
+                            </tfoot>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<!--Модальное окно отмены записи-->
+<div class="modal fade" tabindex="-1" id="openModalRemoveAppointment" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="alert alert-danger" role="alert">
+                    Вы уверены, что хотите отменить запись к врачу/на процедуру/обследование/мероприятие?
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Нет</button>
+                <button type="button" class="btn btn-success">Да</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <!--Список всплывающих уведомлений-->
 <div class="position-fixed p-3" style="z-index: 5; right: 0; bottom: 0;">
@@ -625,6 +646,30 @@
 <?php require $_SERVER['DOCUMENT_ROOT']."/footer.php"; ?>
 </body>
 <script>
+    $('#table_appointment, #table_appointment_history').DataTable({
+        "language": {
+            "zeroRecords": "<span class='text-muted'>Совпадения отсутствуют</span>",
+            "search": "<span class='text-muted' style='margin-right: 0.5rem; font-size: 1.3rem'>Поиск:</span>",
+            "info": "<span class='text-muted'>Показан диапазон от _START_ до _END_ элементов</span>",
+            "infoEmpty": "<span class='text-muted'>Услуги отсутствуют</span>",
+            "infoFiltered": "<span class='text-muted'>(отфильтровано общих элементов - _MAX_)</span>",
+            "lengthMenu": '<span class="text-muted" style="margin-right: 0.5rem; font-size: 1rem">Отобразить элементов: <\span>' +
+                '<select class="form-control-sm">'+
+                '<option value="5">5</option>'+
+                '<option value="10">20</option>'+
+                '<option value="20">20</option>'+
+                '<option value="30">30</option>'+
+                '<option value="-1">Все</option>'+
+                '</select>',
+            "loadingRecords": "Загрузка...",
+            "processing": "Выполнение...",
+            "paginate": {
+                "next": "Вперед",
+                "previous": "Назад"
+            }
+        },
+
+    });
 $('#notificationToast').toast('show');
 </script>
 </html>
