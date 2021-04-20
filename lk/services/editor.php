@@ -201,7 +201,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#" style="color: var(--dark-cyan-color)">Профиль</a></li>
-                <li class="breadcrumb-item"><a href="/lk/services/control.php" style="color: var(--dark-cyan-color)">Услуги</a></li>
+                <li class="breadcrumb-item"><a href="/lk/services/index.php" style="color: var(--dark-cyan-color)">Услуги</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Запись на услуги</li>
             </ol>
         </nav>
@@ -247,14 +247,14 @@
                                 <td class="text-muted" data-label="Название:">Терапевт</td>
                                 <td>
                                     <button type="button" class="btn mt-1 btn-sm btn-warning text-white" style="background-color: var(--yellow-color)">Редактирование</button>
-                                    <button type="button" class="btn mt-1 btn-sm btn-danger">Удаление</button>
+                                    <button type="button" class="btn mt-1 btn-sm btn-danger" data-toggle="modal" data-target="#openModalRemoveServices">Удаление</button>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="text-muted" data-label="Название:">Сурдолог</td>
                                 <td>
                                         <button type="button" class="btn mt-1 btn-sm btn-warning text-white" style="background-color: var(--yellow-color)">Редактирование</button>
-                                        <button type="button" class="btn mt-1 btn-sm btn-danger">Удаление</button>
+                                        <button type="button" class="btn mt-1 btn-sm btn-danger" data-toggle="modal" data-target="#openModalRemoveServices">Удаление</button>
                                 </td>
                             </tr>
                             </tbody>
@@ -279,6 +279,7 @@
                             <thead class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
                                 <th>Название</th>
+                                <th>Описание</th>
                                 <th>Противопоказания</th>
                                 <th>Назначения</th>
                                 <th>Цена, руб.</th>
@@ -288,6 +289,9 @@
                             <tbody>
                             <tr>
                                 <td class="text-muted" data-label="Название:">Карбокситерапия</td>
+                                <td class="text-muted" data-label="Описание:">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, saepe...
+                                </td>
                                 <td class="text-muted" data-label="Прот.-ия:">
                                     <ul class="list-unstyled">
                                         <li><span class="badge badge-pill badge-danger">Эпилепсия</span></li>
@@ -308,7 +312,7 @@
                                     <ul class="list-unstyled">
                                         <li><button type="button" class="btn btn-sm text-white btn-block" style="background-color: var(--cyan-color)">Просмотр</button></li>
                                         <li><button type="button" class="btn mt-1 btn-sm btn-warning text-white btn-block" style="background-color: var(--yellow-color)">Редактирование</button></li>
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-danger btn-block">Удаление</button></li>
+                                        <li><button type="button" class="btn mt-1 btn-sm btn-danger btn-block" data-toggle="modal" data-target="#openModalRemoveServices">Удаление</button></li>
                                     </ul>
                                 </td>
                             </tr>
@@ -316,6 +320,7 @@
                             <tfoot class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
                                 <th>Название</th>
+                                <th>Описание</th>
                                 <th>Противопоказания</th>
                                 <th>Назначения</th>
                                 <th>Цена, руб.</th>
@@ -330,37 +335,46 @@
             <div class="tab-pane fade show" id="tab-examinations" role="tabpanel">
                 <div class="card">
                     <div class="card-body">
+                        <button type="submit" class="btn btn-sm btn-success float-right text-white mb-2" data-toggle="modal" data-target="#openModalCreateExamination">
+                            <i class="fas fa-plus-circle mr-2"></i>Создать обследование
+                        </button>
                         <table id="table_examinations" class="table table-striped table-hover">
                             <thead class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
-                                <th>Специалист</th>
-                                <th>Обследование</th>
-                                <th>Расположение</th>
+                                <th>Название</th>
+                                <th>Описание</th>
+                                <th>Назначения</th>
                                 <th>Цена, руб.</th>
                                 <th>Действие</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
-                                <td class="text-muted" data-label="Сп.-ист:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
-                                <td class="text-muted" data-label="Спец.-ть:">ОАК</td>
-                                <td class="text-muted" data-label="Расп.-ие:">105 каб.</td>
-                                <td class="text-muted" data-label="Цена, р.:">550</td>
-                                <td><a href="#" type="button" class="btn btn-sm btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Запись</a></td>
-                            </tr>
-                            <tr>
-                                <td class="text-muted" data-label="Сп.-ист:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Николаев И. И.</td>
-                                <td class="text-muted" data-label="Спец.-ть:">ОАМ</td>
-                                <td class="text-muted" data-label="Расп.-ие:">108 каб.</td>
-                                <td class="text-muted" data-label="Цена, р.:">750</td>
-                                <td><a href="#" type="button" class="btn btn-sm btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Запись</a></td>
+                                <td class="text-muted" data-label="Название:">ОАК</td>
+                                <td class="text-muted" data-label="Описание:">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, saepe...
+                                </td>
+                                <td class="text-muted" data-label="Назн.-ия:">
+                                    <ul class="list-unstyled">
+                                        <li><span class="badge badge-pill badge-success">...</span></li>
+                                        <li><span class="badge badge-pill badge-success">...</span></li>
+                                    </ul>
+                                </td>
+                                <td class="text-muted" data-label="Цена, р.:">500</td>
+                                <td>
+                                    <ul class="list-unstyled">
+                                        <li><button type="button" class="btn btn-sm text-white btn-block" style="background-color: var(--cyan-color)">Просмотр</button></li>
+                                        <li><button type="button" class="btn mt-1 btn-sm btn-warning text-white btn-block" style="background-color: var(--yellow-color)">Редактирование</button></li>
+                                        <li><button type="button" class="btn mt-1 btn-sm btn-danger btn-block" data-toggle="modal" data-target="#openModalRemoveServices">Удаление</button></li>
+                                    </ul>
+                                </td>
                             </tr>
                             </tbody>
                             <tfoot class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
-                                <th>Специалист</th>
-                                <th>Обследование</th>
-                                <th>Расположение</th>
+                                <th>Название</th>
+                                <th>Противопоказания</th>
+                                <th>Назначения</th>
                                 <th>Цена, руб.</th>
                                 <th>Действие</th>
                             </tr>
@@ -432,18 +446,18 @@
             </div>
             <div class="modal-body">
                 <div class="alert alert-info" role="alert" style="font-size: 12px">
-                    Внимательно создавайте процедуры. Проверяйте заполненные поля перед созданием специальности.
+                    Внимательно создавайте процедуры. Проверяйте заполненные поля перед созданием процедуры.
                 </div>
                 <form>
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md-5">
                                 <label style="color: var(--yellow-color)">Название процедуры <strong style="color: var(--red--color)">*</strong></label>
-                                <input type="text" name="specialization_name" class="form-control" placeholder="На русском" required>
+                                <input type="text" name="procedure_name" class="form-control" placeholder="На русском" required>
                             </div>
                             <div class="col-md-3">
                                 <label style="color: var(--yellow-color)">Цена услуги (руб.) <strong style="color: var(--red--color)">*</strong></label>
-                                <input type="number" min="0" name="specialization_cost" class="form-control" placeholder="Введите цену" required>
+                                <input type="number" min="0" name="procedure_cost" class="form-control" placeholder="Введите цену" required>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
@@ -503,6 +517,89 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Отмена</button>
                 <button type="button" class="btn btn-success">Создать</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Модальное окно создания обследования-->
+<div class="modal fade" tabindex="-1" id="openModalCreateExamination" data-backdrop="static">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" style="color: var(--cyan-color)">Создание медицинского обследования</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-info" role="alert" style="font-size: 12px">
+                    Внимательно создавайте обследования. Проверяйте заполненные поля перед созданием обследования.
+                </div>
+                <form>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <label style="color: var(--yellow-color)">Название обследования <strong style="color: var(--red--color)">*</strong></label>
+                                <input type="text" name="examination_name" class="form-control" placeholder="На русском" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label style="color: var(--yellow-color)">Цена услуги (руб.) <strong style="color: var(--red--color)">*</strong></label>
+                                <input type="number" min="0" name="examination_cost" class="form-control" placeholder="Введите цену" required>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label style="color: var(--yellow-color)">Описание обследования <strong style="color: var(--red--color)">*</strong></label>
+                                    <textarea class="form-control" placeholder="Назначение обследование, ее описание и т.п."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6" id="list_destinations"> <!------ЕСЛИ БУДЕТ ОШИБКА ПРИ СОЗДАНИИ ПРОЦЕДУРЫ, ТО СМЕНИТЬ ID---->
+                                <label style="color: var(--yellow-color)">Назначения</label>
+                                <table class="table table-sm table-borderless information_json">
+                                    <tr class="information_json_plus">
+                                        <td class="pl-0">
+                                                <span class="btn btn-sm btn-success rounded-circle plus-destinations">
+                                                    <i class="fas fa-plus"></i>
+                                                </span>
+                                        </td>
+                                        <td class="pl-0"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="alert alert-danger alert-dismissible fade show animate slideIn" role="alert" style="font-size: 12px">
+                    Процедура с указанным названием уже существует!
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Отмена</button>
+                <button type="button" class="btn btn-success">Создать</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Модальное окно отмены записи-->
+<div class="modal fade" tabindex="-1" id="openModalRemoveServices" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="alert alert-danger" role="alert">
+                    Вы уверены, что хотите удалить специальность/процедуру/обследование/мероприятие?
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Нет</button>
+                <button type="button" class="btn btn-success">Да</button>
             </div>
         </div>
     </div>

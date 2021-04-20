@@ -343,7 +343,7 @@
                                 <td>
                                     <ul class="list-unstyled">
                                         <li><button type="button" class="btn btn-sm text-white btn-block" style="background-color: var(--yellow-color)">Просмотр</button></li>
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-danger btn-block">Отмена</button></li>
+                                        <li><button type="button" class="btn mt-1 btn-sm btn-danger btn-block" data-toggle="modal" data-target="#openModalRemoveAppointment">Отмена</button></li>
                                     </ul>
                                 </td>
                             </tr>
@@ -366,7 +366,7 @@
                                 <td>
                                     <ul class="list-unstyled">
                                         <li><button type="button" class="btn btn-sm text-white btn-block" style="background-color: var(--yellow-color)">Просмотр</button></li>
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-danger btn-block">Отмена</button></li>
+                                        <li><button type="button" class="btn mt-1 btn-sm btn-danger btn-block" data-toggle="modal" data-target="#openModalRemoveAppointment">Отмена</button></li>
                                     </ul>
                                 </td>
                             </tr>
@@ -389,7 +389,7 @@
                                 <td>
                                     <ul class="list-unstyled">
                                         <li><button type="button" class="btn btn-sm text-white btn-block" style="background-color: var(--yellow-color)">Просмотр</button></li>
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-danger btn-block">Отмена</button></li>
+                                        <li><button type="button" class="btn mt-1 btn-sm btn-danger btn-block" data-toggle="modal" data-target="#openModalRemoveAppointment">Отмена</button></li>
                                     </ul>
                                 </td>
                             </tr>
@@ -412,7 +412,7 @@
                                 <td>
                                     <ul class="list-unstyled">
                                         <li><button type="button" class="btn btn-sm text-white btn-block" style="background-color: var(--yellow-color)">Просмотр</button></li>
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-danger btn-block">Отмена</button></li>
+                                        <li><button type="button" class="btn mt-1 btn-sm btn-danger btn-block" data-toggle="modal" data-target="#openModalRemoveAppointment">Отмена</button></li>
                                     </ul>
                                 </td>
                             </tr>

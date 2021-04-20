@@ -195,7 +195,8 @@
     <div class="container pt-3 pb-3">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#" style="color: var(--dark-cyan-color)">Пользователи</a></li>
+                <li class="breadcrumb-item"><a href="#" style="color: var(--dark-cyan-color)">Профиль</a></li>
+                <li class="breadcrumb-item"><a href="/lk/users/" style="color: var(--dark-cyan-color)">Пользователи</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Регистрация нового пользователя</li>
             </ol>
         </nav>
@@ -813,8 +814,6 @@
     $(document).on('change', '#chosen_required_post', function () {
         let index = this.options.selectedIndex;
         if(index === 1) {
-
-            console.log("13123");
             $('#chosen_med').append(
                 '<div class="form-group" id="div_chosen_profession">' +
                     '<label style="color: var(--yellow-color)">Специальность <strong style="color: var(--red--color)">*</strong></label>' +

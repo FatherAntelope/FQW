@@ -4,7 +4,7 @@ if($getAppointment != "doctors" &&
     $getAppointment != "procedures" &&
     $getAppointment != "examinations" &&
     $getAppointment != "events") {
-    header("Location: /lk/services/control.php");
+    header("Location: /lk/services/");
     exit;
 }
 ?>
@@ -199,7 +199,7 @@ if($getAppointment != "doctors" &&
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#" style="color: var(--dark-cyan-color)">Профиль</a></li>
-                <li class="breadcrumb-item"><a href="/lk/services/control.php" style="color: var(--dark-cyan-color)">Услуги</a></li>
+                <li class="breadcrumb-item"><a href="/lk/services/" style="color: var(--dark-cyan-color)">Услуги</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Запись на услуги</li>
             </ol>
         </nav>
@@ -245,8 +245,7 @@ if($getAppointment != "doctors" &&
                             <tr>
                                 <td class="text-muted" data-label="Врач:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
                                 <td class="text-muted" data-label="Спец.-ть:">
-                                    <span class="badge badge-pill badge-secondary">Терапевт</span>
-                                    <span class="badge badge-pill badge-secondary">Онколог</span>
+                                    Терапевт
                                 </td>
                                 <td class="text-muted" data-label="Расп.-ие:">505 каб.</td>
                                 <td class="text-muted" data-label="Раз.-ие:"><span class="badge badge-pill badge-success">Дополнительно</span></td>
@@ -256,13 +255,11 @@ if($getAppointment != "doctors" &&
                             <tr>
                                 <td class="text-muted" data-label="Врач:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Николаев И. И.</td>
                                 <td class="text-muted" data-label="Спец.-ть:">
-                                    <span class="badge badge-pill badge-secondary">Терапевт</span>
-                                    <span class="badge badge-pill badge-secondary">Сурдолог</span>
-                                    <span class="badge badge-pill badge-secondary">Оториноларинголог</span>
+                                    Оториноларинголог
                                 </td>
                                 <td class="text-muted" data-label="Расп.-ие:">302 каб.</td>
                                 <td class="text-muted" data-label="Раз.-ие:"><span class="badge badge-pill badge-danger">Обязательно</span></td>
-                                <td class="text-muted" data-label="Цена, р.:">300</td>
+                                <td class="text-muted" data-label="Цена, р.:">700</td>
                                 <td><button type="button" class="btn btn-sm btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Запись</button></td>
                             </tr>
                             </tbody>
@@ -292,7 +289,7 @@ if($getAppointment != "doctors" &&
                                 <th>Расположение</th>
                                 <th>Разрешение</th>
                                 <th>Цена, руб.</th>
-                                <th>Повторов</th>
+                                <th>Повторы</th>
                                 <th>Действие</th>
                             </tr>
                             </thead>
