@@ -1,3 +1,12 @@
+<?php
+$getSelected = $_GET['selected'];
+if($getSelected != "patient" &&
+    $getSelected != "doctor" &&
+    $getSelected != "administrator") {
+    header("Location: /lk/services/");
+    exit;
+}
+?>
 <!doctype html>
 <html lang="ru">
 <head>
@@ -202,23 +211,23 @@
         </nav>
         <ul class="nav nav-pills flex-column flex-sm-row mb-2" role="tablist">
             <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
-                <a class="nav-link tab-bg-active font-weight-bold active" data-toggle="tab" href="#patient" role="tab">
+                <a class="nav-link tab-bg-active font-weight-bold <? if($getSelected == 'patient') echo "active";?>" onclick="window.history.pushState('', '', '/lk/users/add.php?selected=patient');"  data-toggle="tab" href="#patient" role="tab">
                     <i class="fas fa-user-injured mr-1"></i>Пациент
                 </a>
             </li>
             <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
-                <a class="nav-link tab-bg-active font-weight-bold" data-toggle="tab" href="#doctor" role="tab">
+                <a class="nav-link tab-bg-active font-weight-bold <? if($getSelected == 'doctor') echo "active";?>" onclick="window.history.pushState('', '', '/lk/users/add.php?selected=doctor');" data-toggle="tab" href="#doctor" role="tab">
                     <i class="fas fa-user-md mr-1"></i> Медицинский персонал
                 </a>
             </li>
             <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
-                <a class="nav-link tab-bg-active font-weight-bold" data-toggle="tab" href="#admin" role="tab">
+                <a class="nav-link tab-bg-active font-weight-bold <? if($getSelected == 'administrator') echo "active";?>" onclick="window.history.pushState('', '', '/lk/users/add.php?selected=administrator');" data-toggle="tab" href="#admin" role="tab">
                     <i class="fas fa-user-cog mr-1"></i> Администрация
                 </a>
             </li>
         </ul>
         <div class="tab-content">
-            <div class="tab-pane fade show active" id="patient" role="tabpanel">
+            <div class="tab-pane fade show <? if($getSelected == 'patient') echo "active";?>" id="patient" role="tabpanel">
                 <div class="card">
                     <div class="card-body">
                         <form>
@@ -493,7 +502,7 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane fade" id="doctor" role="tabpanel">
+            <div class="tab-pane fade show <? if($getSelected == 'doctor') echo "active";?>" id="doctor" role="tabpanel">
                 <div class="card">
                     <div class="card-body">
                         <form>
@@ -617,7 +626,7 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane fade" id="admin" role="tabpanel">
+            <div class="tab-pane fade show <? if($getSelected == 'administrator') echo "active";?>" id="admin" role="tabpanel">
                 <div class="card">
                     <div class="card-body">
                         <form>
@@ -748,9 +757,6 @@
                             </li>
                             <li>
                                 <a href="#">Новости</a>
-                            </li>
-                            <li>
-                                <a href="#">Питание</a>
                             </li>
                             <li>
                                 <a href="#">Питание</a>

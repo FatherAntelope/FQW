@@ -1,9 +1,9 @@
-<?
-$getAppointment = $_GET['appointment'];
-if($getAppointment != "doctors" &&
-    $getAppointment != "procedures" &&
-    $getAppointment != "examinations" &&
-    $getAppointment != "events") {
+<?php
+$getSelected = $_GET['selected'];
+if($getSelected != "doctors" &&
+    $getSelected != "procedures" &&
+    $getSelected != "examinations" &&
+    $getSelected != "events") {
     header("Location: /lk/services/");
     exit;
 }
@@ -205,29 +205,29 @@ if($getAppointment != "doctors" &&
         </nav>
         <ul class="nav nav-pills flex-column flex-sm-row mb-2" role="tablist">
             <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
-                <a class="nav-link tab-bg-active font-weight-bold <? if($_GET['appointment'] == 'doctors') echo "active";?>" onclick="window.history.pushState('', '', '/lk/services/appointment.php?appointment=doctors');" data-toggle="tab" href="#tab-doctors" role="tab">
+                <a class="nav-link tab-bg-active font-weight-bold <? if($getSelected == 'doctors') echo "active";?>" onclick="window.history.pushState('', '', '/lk/services/appointment.php?selected=doctors');" data-toggle="tab" href="#tab-doctors" role="tab">
                     <i class="fas fa-user-md mr-2"></i>Врачи
                 </a>
             </li>
             <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
-                <a class="nav-link tab-bg-active font-weight-bold <? if($_GET['appointment'] == 'procedures') echo "active";?>" onclick="window.history.pushState('', '', '/lk/services/appointment.php?appointment=procedures');" data-toggle="tab" href="#tab-procedures" role="tab">
+                <a class="nav-link tab-bg-active font-weight-bold <? if($getSelected == 'procedures') echo "active";?>" onclick="window.history.pushState('', '', '/lk/services/appointment.php?selected=procedures');" data-toggle="tab" href="#tab-procedures" role="tab">
                     <i class="fas fa-diagnoses mr-2"></i>Процедуры
                 </a>
             </li>
             <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
-                <a class="nav-link tab-bg-active font-weight-bold <? if($_GET['appointment'] == 'examinations') echo "active";?>" onclick="window.history.pushState('', '', '/lk/services/appointment.php?appointment=examinations');" data-toggle="tab" href="#tab-examinations" role="tab">
+                <a class="nav-link tab-bg-active font-weight-bold <? if($getSelected == 'examinations') echo "active";?>" onclick="window.history.pushState('', '', '/lk/services/appointment.php?selected=examinations');" data-toggle="tab" href="#tab-examinations" role="tab">
                     <i class="fas fa-microscope mr-1"></i>Обследования
                 </a>
             </li>
             <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
-                <a class="nav-link tab-bg-active font-weight-bold <? if($_GET['appointment'] == 'events') echo "active";?>" onclick="window.history.pushState('', '', '/lk/services/appointment.php?appointment=events');" data-toggle="tab" href="#tab-events" role="tab">
+                <a class="nav-link tab-bg-active font-weight-bold <? if($getSelected == 'events') echo "active";?>" onclick="window.history.pushState('', '', '/lk/services/appointment.php?selected=events');" data-toggle="tab" href="#tab-events" role="tab">
                     <i class="fas fa-walking mr-1"></i>Мероприятия
                 </a>
             </li>
         </ul>
 
         <div class="tab-content">
-            <div class="tab-pane fade show <? if($_GET['appointment'] == 'doctors') echo "active";?>" id="tab-doctors" role="tabpanel">
+            <div class="tab-pane fade show <? if($getSelected == 'doctors') echo "active";?>" id="tab-doctors" role="tabpanel">
                 <div class="card">
                     <div class="card-body">
                         <table id="table_doctors" class="table table-striped table-hover">
@@ -278,7 +278,7 @@ if($getAppointment != "doctors" &&
                 </div>
             </div>
 
-            <div class="tab-pane fade show <? if($_GET['appointment'] == 'procedures') echo "active";?>" id="tab-procedures" role="tabpanel">
+            <div class="tab-pane fade show <? if($getSelected == 'procedures') echo "active";?>" id="tab-procedures" role="tabpanel">
                 <div class="card">
                     <div class="card-body">
                         <table id="table_procedures" class="table table-striped table-hover">
@@ -329,7 +329,7 @@ if($getAppointment != "doctors" &&
                 </div>
             </div>
 
-            <div class="tab-pane fade show <? if($_GET['appointment'] == 'examinations') echo "active";?>" id="tab-examinations" role="tabpanel">
+            <div class="tab-pane fade show <? if($getSelected == 'examinations') echo "active";?>" id="tab-examinations" role="tabpanel">
                 <div class="card">
                     <div class="card-body">
                         <table id="table_examinations" class="table table-striped table-hover">
@@ -372,7 +372,7 @@ if($getAppointment != "doctors" &&
                 </div>
             </div>
 
-            <div class="tab-pane fade show <? if($_GET['appointment'] == 'events') echo "active";?>" id="tab-events" role="tabpanel">
+            <div class="tab-pane fade show <? if($getSelected == 'events') echo "active";?>" id="tab-events" role="tabpanel">
                 4
             </div>
         </div>

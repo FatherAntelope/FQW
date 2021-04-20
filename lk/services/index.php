@@ -221,7 +221,7 @@
                         <div class="col-md-3">
                             <div class="text-center mt-3 pl-1 pr-1">
                                 <div class="maintenance-icon mb-2">
-                                    <a href="/lk/services/appointment.php?appointment=doctors" class="text-white icon-link"><i class="fas fa-user-md"></i></a>
+                                    <a href="/lk/services/appointment.php?selected=doctors" class="text-white icon-link"><i class="fas fa-user-md"></i></a>
                                 </div>
                                 <h5 class="text-uppercase" style="color: var(--dark-cyan-color)"><b>Врачи</b></h5>
                                 <p class="text-muted">Высококвалифицированные специалисты, предоставляющие услуги своей специальности</p>
@@ -230,7 +230,7 @@
                         <div class="col-md-3">
                             <div class="text-center mt-3 pl-1 pr-1">
                                 <div class="maintenance-icon mb-2">
-                                    <a href="/lk/services/appointment.php?appointment=procedures" class="text-white icon-link"><i class="fas fa-diagnoses"></i></a>
+                                    <a href="/lk/services/appointment.php?selected=procedures" class="text-white icon-link"><i class="fas fa-diagnoses"></i></a>
                                 </div>
                                 <h5 class="text-uppercase" style="color: var(--dark-cyan-color)"><b>Процедуры</b></h5>
                                 <p class="text-muted">Методы лечения, направленные на восстановление и укрепление вашего здоровья</p>
@@ -239,7 +239,7 @@
                         <div class="col-md-3">
                             <div class="text-center mt-3 pl-1 pr-1">
                                 <div class="maintenance-icon mb-2">
-                                    <a href="/lk/services/appointment.php?appointment=examinations" class="text-white icon-link"><i class="fas fa-microscope"></i></a>
+                                    <a href="/lk/services/appointment.php?selected=examinations" class="text-white icon-link"><i class="fas fa-microscope"></i></a>
                                 </div>
                                 <h5 class="text-uppercase" style="color: var(--dark-cyan-color)"><b>Обследования</b></h5>
                                 <p class="text-muted">Медицинские осмотры с целью выявления новых заболеваний и факторов риска их развития</p>
@@ -248,7 +248,7 @@
                         <div class="col-md-3">
                             <div class="text-center mt-3 pl-1 pr-1">
                                 <div class="maintenance-icon mb-2">
-                                    <a href="/lk/services/appointment.php?appointment=events" class="text-white icon-link"><i class="fas fa-walking"></i></a>
+                                    <a href="/lk/services/appointment.php?selected=events" class="text-white icon-link"><i class="fas fa-walking"></i></a>
                                 </div>
                                 <h5 class="text-uppercase" style="color: var(--dark-cyan-color)"><b>Мероприятия</b></h5>
                                 <p class="text-muted">Культурно массовые события, например, походы, экскурсии, эстафеты и так далее</p>
@@ -273,7 +273,7 @@
                         <div class="col-md-3">
                             <div class="text-center mt-3 pl-1 pr-1">
                                 <div class="maintenance-icon mb-2">
-                                    <a href="/lk/services/appointment.php?appointment=doctors" class="text-white icon-link"><i class="fas fa-user-md"></i></a>
+                                    <a href="/lk/services/appointment.php?selected=doctors" class="text-white icon-link"><i class="fas fa-user-md"></i></a>
                                 </div>
                                 <h5 class="text-uppercase" style="color: var(--dark-cyan-color)"><b>Врачи</b></h5>
                                 <p class="text-muted">Высококвалифицированные специалисты, предоставляющие услуги своей специальности</p>
@@ -282,7 +282,7 @@
                         <div class="col-md-3">
                             <div class="text-center mt-3 pl-1 pr-1">
                                 <div class="maintenance-icon mb-2">
-                                    <a href="/lk/services/appointment.php?appointment=procedures" class="text-white icon-link"><i class="fas fa-diagnoses"></i></a>
+                                    <a href="/lk/services/appointment.php?selected=procedures" class="text-white icon-link"><i class="fas fa-diagnoses"></i></a>
                                 </div>
                                 <h5 class="text-uppercase" style="color: var(--dark-cyan-color)"><b>Процедуры</b></h5>
                                 <p class="text-muted">Методы лечения, направленные на восстановление и укрепление вашего здоровья</p>
@@ -291,7 +291,7 @@
                         <div class="col-md-3">
                             <div class="text-center mt-3 pl-1 pr-1">
                                 <div class="maintenance-icon mb-2">
-                                    <a href="/lk/services/appointment.php?appointment=examinations" class="text-white icon-link"><i class="fas fa-microscope"></i></a>
+                                    <a href="/lk/services/appointment.php?selected=examinations" class="text-white icon-link"><i class="fas fa-microscope"></i></a>
                                 </div>
                                 <h5 class="text-uppercase" style="color: var(--dark-cyan-color)"><b>Обследования</b></h5>
                                 <p class="text-muted">Медицинские осмотры с целью выявления новых заболеваний и факторов риска их развития</p>
@@ -300,7 +300,7 @@
                         <div class="col-md-3">
                             <div class="text-center mt-3 pl-1 pr-1">
                                 <div class="maintenance-icon mb-2">
-                                    <a href="/lk/services/appointment.php?appointment=events" class="text-white icon-link"><i class="fas fa-walking"></i></a>
+                                    <a href="/lk/services/appointment.php?selected=events" class="text-white icon-link"><i class="fas fa-walking"></i></a>
                                 </div>
                                 <h5 class="text-uppercase" style="color: var(--dark-cyan-color)"><b>Мероприятия</b></h5>
                                 <p class="text-muted">Культурно массовые события, например, походы, экскурсии, эстафеты и так далее</p>

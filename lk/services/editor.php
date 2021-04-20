@@ -17,11 +17,6 @@
     <script defer src="/js/all.js"></script>
     <title>СанКонтроль</title>
 </head>
-<style>
-    .form-control-sm option:link {
-        background-color: var(--cyan-color) !important;
-    }
-</style>
 <body>
 <!--Меню для авторизованного пользователя-->
 <nav class="navbar fixed-top navbar-expand-sm navbar-light p-0" style="background: var(--cyan-color);">
@@ -201,8 +196,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#" style="color: var(--dark-cyan-color)">Профиль</a></li>
-                <li class="breadcrumb-item"><a href="/lk/services/index.php" style="color: var(--dark-cyan-color)">Услуги</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Запись на услуги</li>
+                <li class="breadcrumb-item active" aria-current="page">Управление услугами</li>
             </ol>
         </nav>
         <ul class="nav nav-pills flex-column flex-sm-row mb-2" role="tablist">
@@ -253,8 +247,8 @@
                             <tr>
                                 <td class="text-muted" data-label="Название:">Сурдолог</td>
                                 <td>
-                                        <button type="button" class="btn mt-1 btn-sm btn-warning text-white" style="background-color: var(--yellow-color)">Редактирование</button>
-                                        <button type="button" class="btn mt-1 btn-sm btn-danger" data-toggle="modal" data-target="#openModalRemoveServices">Удаление</button>
+                                    <button type="button" class="btn mt-1 btn-sm btn-warning text-white" style="background-color: var(--yellow-color)">Редактирование</button>
+                                    <button type="button" class="btn mt-1 btn-sm btn-danger" data-toggle="modal" data-target="#openModalRemoveServices">Удаление</button>
                                 </td>
                             </tr>
                             </tbody>
@@ -669,9 +663,6 @@
                             </li>
                             <li>
                                 <a href="#">Новости</a>
-                            </li>
-                            <li>
-                                <a href="#">Питание</a>
                             </li>
                             <li>
                                 <a href="#">Питание</a>
