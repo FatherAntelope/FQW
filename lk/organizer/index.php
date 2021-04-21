@@ -13,8 +13,8 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
 	<script defer src="/js/all.js"></script>
 
-	<link href='../../css/fullcalendar/main.css' rel='stylesheet' />
-	<script src='../../js/fullcalendar/main.js'></script>
+	<link href='/css/fullcalendar/main.css' rel='stylesheet' />
+	<script src='/js/fullcalendar/main.js'></script>
 	<title>HeartBlaze</title>
 </head>
 
@@ -179,61 +179,7 @@
 	</div>
 </div>
 
-<script>
-	document.addEventListener('DOMContentLoaded', function() {
-		var calendarEl = document.getElementById('calendar');
-		var calendar = new FullCalendar.Calendar(calendarEl, {
-			locale: 'ru',
-			themeSystem:'bootstrap',
-			firstDay: 1,
-			navLinks: true,
-			selectable: true,
-			editable: true,
-			weekNumbers: true,
-			weekText: 'Н',
-			weekNumberFormat: { week: 'short' },
-			dateClick: function(info) {
-				alert('Date: ' + info.dateStr);
-			},
 
-			// footerToolbar: true,
-			headerToolbar: {
-				start: 'prevYear,nextYear',
-				center: 'title',
-				end: 'today prev,next dayGridMonth,dayGridWeek,timeGridDay,listWeek',
-			},
-			buttonIcons: {
-				prev: 'left-single-arrow',
-				next: 'right-single-arrow',
-				prevYear: 'left-double-arrow',
-				nextYear: 'right-double-arrow',
-			},
-			buttonText: {
-				today: 'Сегодня',
-				month: 'Месяц',
-				week: 'Неделя',
-				day: 'День',
-				list: 'Список',
-			},
-			events: [
-				{
-					title: "example",
-					start: "2020-04-21",
-					end: "2020-04-21",
-				}
-			],
-			eventDrop: function(info) {
-			alert(info.event.title + " was dropped on " + info.event.start.toISOString());
-				if (!confirm("Are you sure about this change?")) {
-					info.revert();
-				}
-			},
-			noEventsContent: 'Cобытий нет',
-			allDayText: 'На весь день',
-		});
-		calendar.render();
-	});
-</script>
 
 <div class="page-content">
 	<div class="container pt-3 pb-3">
@@ -265,5 +211,60 @@
 </body>
 <script>
 // $('#notificationToast').toast('show');
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            locale: 'ru',
+            themeSystem:'bootstrap',
+            firstDay: 1,
+            navLinks: true,
+            selectable: true,
+            editable: true,
+            weekNumbers: true,
+            weekText: 'Н',
+            weekNumberFormat: { week: 'short' },
+            dateClick: function(info) {
+                alert('Date: ' + info.dateStr);
+            },
+
+            // footerToolbar: true,
+            headerToolbar: {
+                start: 'prevYear,nextYear',
+                center: 'title',
+                end: 'today prev,next dayGridMonth,dayGridWeek,timeGridDay,listWeek',
+            },
+            buttonIcons: {
+                prev: 'left-single-arrow',
+                next: 'right-single-arrow',
+                prevYear: 'left-double-arrow',
+                nextYear: 'right-double-arrow',
+            },
+            buttonText: {
+                today: 'Сегодня',
+                month: 'Месяц',
+                week: 'Неделя',
+                day: 'День',
+                list: 'Список',
+            },
+            events: [
+                {
+                    title: "example",
+                    start: "2020-04-21",
+                    end: "2020-04-21",
+                }
+            ],
+            eventDrop: function(info) {
+                alert(info.event.title + " was dropped on " + info.event.start.toISOString());
+                if (!confirm("Are you sure about this change?")) {
+                    info.revert();
+                }
+            },
+            noEventsContent: 'Cобытий нет',
+            allDayText: 'На весь день',
+        });
+        calendar.render();
+    });
 </script>
 </html>
