@@ -13,8 +13,8 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
 	<script defer src="/js/all.js"></script>
 
-	<link href='../css/fullcalendar/main.css' rel='stylesheet' />
-	<script src='../js/fullcalendar/main.js'></script>
+	<link href='../../css/fullcalendar/main.css' rel='stylesheet' />
+	<script src='../../js/fullcalendar/main.js'></script>
 	<title>HeartBlaze</title>
 </head>
 
