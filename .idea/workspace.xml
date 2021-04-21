@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="dd690a98-02d7-475c-ab21-dec0f2dd0976" name="Default Changelist" comment="У администратора добавлена таблица редактирования обследования. Также добавлены модальные окна на подтверждение отмены записи у пациента и удаление услуг у администратора. &#10;add_user.php переименован в add.php и перемещен в users. &#10;control.php переименован в index.php и перемещен в services.&#10;Создан файл index.php для папки users - просмотр пользователей у администратора">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/services/appointment.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/services/appointment.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/services/editor.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/services/editor.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/services/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/services/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/users/add.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/users/add.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/users/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/users/index.php" afterDir="false" />
-    </list>
+    <list default="true" id="dd690a98-02d7-475c-ab21-dec0f2dd0976" name="Default Changelist" comment="Добавлены таблицы по просмотру по управлению пользователями у администратора" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -134,7 +127,7 @@
       <workItem from="1618839691314" duration="152000" />
       <workItem from="1618839933240" duration="7040000" />
       <workItem from="1618855779875" duration="422000" />
-      <workItem from="1618925913538" duration="14277000" />
+      <workItem from="1618925913538" duration="14352000" />
     </task>
     <task id="LOCAL-00001" summary="Начал делать шапку">
       <created>1611600872960</created>
@@ -297,7 +290,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618934258563</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Добавлены таблицы по просмотру по управлению пользователями у администратора">
+      <created>1618943244750</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1618943244750</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -339,6 +339,7 @@
     <MESSAGE value="Добавлена страница редактирования услуг. Сделан фронтент создания специальности и процедуры" />
     <MESSAGE value="На странице контроля услуг у пациента карточки услуг заменены на таблицы" />
     <MESSAGE value="У администратора добавлена таблица редактирования обследования. Также добавлены модальные окна на подтверждение отмены записи у пациента и удаление услуг у администратора. &#10;add_user.php переименован в add.php и перемещен в users. &#10;control.php переименован в index.php и перемещен в services.&#10;Создан файл index.php для папки users - просмотр пользователей у администратора" />
-    <option name="LAST_COMMIT_MESSAGE" value="У администратора добавлена таблица редактирования обследования. Также добавлены модальные окна на подтверждение отмены записи у пациента и удаление услуг у администратора. &#10;add_user.php переименован в add.php и перемещен в users. &#10;control.php переименован в index.php и перемещен в services.&#10;Создан файл index.php для папки users - просмотр пользователей у администратора" />
+    <MESSAGE value="Добавлены таблицы по просмотру по управлению пользователями у администратора" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавлены таблицы по просмотру по управлению пользователями у администратора" />
   </component>
 </project>
