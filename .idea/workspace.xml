@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="dd690a98-02d7-475c-ab21-dec0f2dd0976" name="Default Changelist" comment="Удалены лишние файлы">
-      <change afterPath="$PROJECT_DIR$/images/add_notes.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/visual_data.svg" afterDir="false" />
+    <list default="true" id="dd690a98-02d7-475c-ab21-dec0f2dd0976" name="Default Changelist" comment="Добавлен фронтенд профиля пациента">
+      <change afterPath="$PROJECT_DIR$/lk/profile_admin.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lk/profile_patient.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/footer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/index_p.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/organizer/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/organizer/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lk/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lk/services/editor.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/services/editor.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lk/users/add.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/users/add.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,7 +137,8 @@
       <workItem from="1618855779875" duration="422000" />
       <workItem from="1618925913538" duration="14352000" />
       <workItem from="1619006839505" duration="6749000" />
-      <workItem from="1619014013013" duration="21713000" />
+      <workItem from="1619014013013" duration="22718000" />
+      <workItem from="1619098375325" duration="5556000" />
     </task>
     <task id="LOCAL-00001" summary="Начал делать шапку">
       <created>1611600872960</created>
@@ -320,7 +322,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619010605056</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Добавлен фронтенд профиля пациента">
+      <created>1619040638750</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1619040638750</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -365,6 +374,7 @@
     <MESSAGE value="Добавлены таблицы по просмотру по управлению пользователями у администратора" />
     <MESSAGE value="Залиты новые недостающиеся файлы" />
     <MESSAGE value="Удалены лишние файлы" />
-    <option name="LAST_COMMIT_MESSAGE" value="Удалены лишние файлы" />
+    <MESSAGE value="Добавлен фронтенд профиля пациента" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавлен фронтенд профиля пациента" />
   </component>
 </project>

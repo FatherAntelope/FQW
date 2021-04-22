@@ -3,7 +3,7 @@ $getSelected = $_GET['selected'];
 if($getSelected != "patient" &&
     $getSelected != "doctor" &&
     $getSelected != "administrator") {
-    header("Location: /lk/services/");
+    header("Location: /lk/users/");
     exit;
 }
 ?>

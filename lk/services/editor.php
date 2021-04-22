@@ -718,6 +718,8 @@
 </footer>
 </body>
 <script>
+    $('#notificationToast').toast('show');
+
     $('.custom-file-input').on('change', function() {
         let fileName = $(this).val().split('\\').pop();
         $(this).next('.custom-file-label').addClass("selected").html(fileName);
@@ -743,12 +745,10 @@
     });
 
 
-
     $(document).on('click', '.minus', function(){
         $(this).closest('tr').remove();
     });
 
-    $('#notificationToast').toast('show');
     $('#table_doctors, #table_procedures, #table_examinations').DataTable({
         "language": {
             "zeroRecords": "<span class='text-muted'>Совпадения отсутствуют</span>",
