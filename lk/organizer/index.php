@@ -209,62 +209,180 @@
 <!--Футер (нижний блок)-->
 <?php require $_SERVER['DOCUMENT_ROOT']."/footer.php"; ?>
 </body>
+
+
+<!-- Добавление события -->
+<div class="modal fade" id="addEventModal" tabindex="-1" role="dialog" aria-labelledby="addEventModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="addEventModalLabel"></h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<!-- ... -->
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+				<button type="button" id="addEventButton" class="btn btn-primary">Добавить событие</button>
+			</div>
+ 		</div>
+	</div>
+</div>
+
+<!-- Редактирование события -->
+<div class="modal fade" id="editEventModal" tabindex="-1" role="dialog" aria-labelledby="editEventModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="editEventModalLabel"></h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<!-- ... -->
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+				<button type="button" id="addEventButton" class="btn btn-primary">Добавить событие</button>
+			</div>
+ 		</div>
+	</div>
+</div>
+
 <script>
-// $('#notificationToast').toast('show');
+$('#notificationToast').toast('show');
 </script>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            locale: 'ru',
-            themeSystem:'bootstrap',
-            firstDay: 1,
-            navLinks: true,
-            selectable: true,
-            editable: true,
-            weekNumbers: true,
-            weekText: 'Н',
-            weekNumberFormat: { week: 'short' },
-            dateClick: function(info) {
-                alert('Date: ' + info.dateStr);
-            },
+function addLeadingZero(number) {
+	if (number < 10) {
+		return '0' + number;
+	}
+	return number;
+}
 
-            // footerToolbar: true,
-            headerToolbar: {
-                start: 'prevYear,nextYear',
-                center: 'title',
-                end: 'today prev,next dayGridMonth,dayGridWeek,timeGridDay,listWeek',
-            },
-            buttonIcons: {
-                prev: 'left-single-arrow',
-                next: 'right-single-arrow',
-                prevYear: 'left-double-arrow',
-                nextYear: 'right-double-arrow',
-            },
-            buttonText: {
-                today: 'Сегодня',
-                month: 'Месяц',
-                week: 'Неделя',
-                day: 'День',
-                list: 'Список',
-            },
-            events: [
-                {
-                    title: "example",
-                    start: "2020-04-21",
-                    end: "2020-04-21",
-                }
-            ],
-            eventDrop: function(info) {
-                alert(info.event.title + " was dropped on " + info.event.start.toISOString());
-                if (!confirm("Are you sure about this change?")) {
-                    info.revert();
-                }
-            },
-            noEventsContent: 'Cобытий нет',
-            allDayText: 'На весь день',
-        });
-        calendar.render();
-    });
+function makeDateStr(dateObj) {
+	// dd/mm/yyyy
+	var day, month, year;
+	day = addLeadingZero(dateObj.getDate());
+	month = addLeadingZero(dateObj.getMonth());
+	year = dateObj.getFullYear();
+	return day + '/' + month + '/' + year;
+}
+
+function makeTimeStr(dateObj) {
+	var hours, minutes;
+	if (dateObj.getHours() < 10) {
+		hours = '0';
+	}
+	hours += dateObj.getHours().toString();
+
+	if (dateObj.getMinutes() < 10) {
+		minutes = '0';
+	}
+	minutes += dateObj.getMinutes().toString();
+	return hours + ':' + minutes
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+	var calendarEl = document.getElementById('calendar');
+	var calendar = new FullCalendar.Calendar(calendarEl, {
+		locale: 'ru',
+		// themeSystem:'bootstrap',
+		firstDay: 1,
+		navLinks: true,
+		// navLinkDayClick: function(date, jsEvent) {
+		// 	console.log('day', date.toISOString());
+		// 	console.log('coords', jsEvent.pageX, jsEvent.pageY);
+		// },
+		selectable: true,
+		editable: true,
+		weekNumbers: true,
+		displayEventTime: true,
+		weekText: 'Н',
+		weekNumberFormat: { week: 'short' },
+		dateClick: function(info) {
+			var modal = $('#addEventModal');
+			modal.find('#addEventModalLabel').text('Добавление события на ' + info.dateStr);
+			modal.modal('show');
+		},
+
+		footerToolbar: true,
+		headerToolbar: {
+			start: 'prevYear,nextYear',
+			center: 'title',
+			end: 'today prev,next dayGridMonth,timeGridWeek,timeGridDay,listWeek',
+		},
+		slotLabelFormat:
+		{
+			hour: 'numeric',
+			minute: '2-digit',
+			omitZeroMinute: false,
+		},
+		views: {
+			timeGridWeek: {
+				type: 'timeGrid',
+				duration: { days: 7 },
+				buttonText: 'Неделя',
+			}
+		},
+		buttonText: {
+			today: 'Сегодня',
+			month: 'Месяц',
+			week: 'Неделя',
+			day: 'День',
+			list: 'Список',
+		},
+		events: [
+			{
+				title: "example",
+				description: "Описание события",
+				start: "2021-04-21",
+				end: "2021-04-21",
+			},
+		],
+		eventClick: function(info) {
+			var modal = $('#editEventModal');
+			
+			var start = info.event.start;
+			var end = info.event.end;
+
+			var eventDateDurationStr = makeDateStr(start) + ' (' + makeTimeStr(start) +')';
+			if (end != null) {
+				eventDateDurationStr += ' - ' + makeDateStr(end);
+			};
+
+			modal.find('#editEventModalLabel').text('Редактирование события ' + eventDateDurationStr);
+			modal.modal('show');
+		},
+		eventMouseEnter: function(info) {
+			info.el.style.borderColor = 'red';
+		},
+		eventMouseLeave: function(info) {
+			info.el.style.borderColor = 'blue';
+		},
+
+		eventDidMount: function(info) {
+			$(info.el).tooltip({
+				title: info.event.extendedProps.description,
+				placement: "top",
+				trigger: "hover",
+				container: "body"
+			});
+		},
+		eventDrop: function(info) {
+			// alert(info.event.title + " was dropped on " + info.event.start.toISOString());
+			// if (!confirm("Are you sure about this change?")) {
+			// 	info.revert();
+			// }
+		},
+		noEventsContent: 'Cобытий нет',
+		allDayText: 'На весь день',
+	});
+	calendar.render();
+});
 </script>
 </html>
