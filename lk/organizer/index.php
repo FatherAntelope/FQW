@@ -314,7 +314,6 @@
 
 <script>
 $('#notificationToast').toast('show');
-<<<<<<< HEAD
 </script>
 <script>
 function addLeadingZero(number) {
@@ -444,7 +443,5 @@ document.addEventListener('DOMContentLoaded', function() {
 	});
 	calendar.render();
 });
-=======
->>>>>>> 6e06e73387035958e073e472239fcbd15eee4943
 </script>
 </html>
