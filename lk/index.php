@@ -1,5 +1,5 @@
 <?php
-$whoseProfile = 1;
+$whoseProfile = 3;
 if($whoseProfile === 1)
     require $_SERVER['DOCUMENT_ROOT'] . "/lk/profile_admin.php";
 elseif ($whoseProfile === 2)

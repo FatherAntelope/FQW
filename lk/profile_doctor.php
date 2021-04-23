@@ -137,8 +137,8 @@
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a href="#" class="nav-link link-navbar" aria-haspopup="true">
-                            <i class="fas fa-chart-bar mr-1"></i>
-                            Статистика
+                            <i class="fas fa-id-card mr-1"></i>
+                            Профиль
                         </a>
                     </li>
                     <li class="nav-item">
@@ -149,38 +149,14 @@
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link link-navbar" aria-haspopup="true">
-                            <i class="fas fa-newspaper mr-1"></i>
-                            Новости
+                            <i class="fas fa-user-injured mr-1"></i>
+                            Пациенты
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link link-navbar" aria-haspopup="true">
-                            <i class="fas fa-utensils mr-1"></i>
-                            Питание
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link link-navbar" aria-haspopup="true">
-                            <i class="fas fa-procedures mr-1"></i>
-                            Услуги
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link link-navbar" aria-haspopup="true">
-                            <i class="fas fa-users mr-1"></i>
-                            Пользователи
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link link-navbar disabled" aria-haspopup="true">
-                            <i class="fas fa-comment-medical mr-1"></i>
-                            Анкетирование
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link link-navbar" aria-haspopup="true">
-                            <i class="fas fa-question-circle mr-1"></i>
-                            FAQ's
+                            <i class="fas fa-calendar-alt mr-1"></i>
+                            Органайзер
                         </a>
                     </li>
                 </ul>
@@ -200,14 +176,43 @@
                     <div class="col-lg-10">
                         <div class="row">
                             <div class="col">
-                                <h4 class="font-weight-bold" style="color: var(--dark-cyan-color)">Иванов Иван Иванович</h4>
+                                <h4 class="font-weight-bold" style="color: var(--dark-cyan-color)">Иванова Екатерина Ивановна</h4>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-5">
-                                <h5 class="text-muted">Должность: главный администратор</h5>
+                            <div class="col-lg-6">
+                                <h5 class="text-muted">Возраст: 45</h5>
+                                <h5 class="text-muted">Должность: Врач / Специалист по процедурам / Специалист по обследованиям </h5>
+                                <h5 class="text-muted">Квалификационная категория: Без категории / Первая / Вторая / Высшая</h5>
+                            </div>
+                            <div class="col-lg-6">
+                                <h5 class="text-muted">Стаж: 14 лет</h5>
+                                <h5 class="text-muted">Специальность:</h5>
+                                <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">Стоматолог</span>
+                                <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">Терапевт</span>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <hr style="border-top: 3px solid var(--yellow-color);">
+                <div class="row">
+                    <div class="col">
+                        <h5 class="text-muted">Биография:</h5>
+                        <h6 class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda natus nemo quis sequi. Aut debitis deleniti id in possimus quidem, quo tempore tenetur! A cupiditate dicta dolore doloremque eius ex impedit laborum, libero, mollitia nam nemo optio praesentium qui quo reprehenderit similique totam. Ab delectus labore nihil. Deserunt, enim, vel!</h6>
+                    </div>
+                    <div class="col">
+                        <h5 class="text-muted">Образование:</h5>
+                        <ul class="text-muted">
+                            <li>
+                                1998 г. Медицинский колледж при БГМУ по специальности зубной врач
+                            </li>
+                            <li>
+                                2003-2008 гг. Башкирский государственный медицинский университет
+                            </li>
+                            <li>
+                                2008-2009 гг. Прохождение интернатуры по специальности «Терапевтическая стоматология»
+                            </li>
+                        </ul>
                     </div>
                 </div>
                 <hr style="border-top: 3px solid var(--yellow-color);">
@@ -224,97 +229,167 @@
                 </div>
             </div>
         </div>
+        <!--Карточки мониторинга-->
         <div class="row">
-            <div class="col-xl-6">
-                <div class="row">
-                    <div class="col-xl-6 col-md-6 mt-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="float-right text-white widget-icon" style="background-color: var(--dark-cyan-color)">
-                                    <i class="fas fa-user-injured"></i>
+            <!--Карточка с информацией о своих пациентах-->
+            <div class="col-xl-3 col-md-6 mt-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="float-right text-white widget-icon" style="background-color: var(--dark-cyan-color)">
+                            <i class="fas fa-user-injured"></i>
+                        </div>
+                        <h5 class="text-muted mt-0">Мои пациенты</h5>
+                        <h3 class="mt-3 mb-3" style="color: var(--dark-cyan-color)">15</h3>
+                    </div>
+                </div>
+            </div>
+            <!--Карточка с информацией дневниках самонаблюдения-->
+            <div class="col-xl col-md-6 mt-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="float-right bg-danger text-white widget-icon">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <h5 class="text-muted mt-0">Дневники самонаблюдения</h5>
+                        <h3 class="mt-3 mb-3" style="color: var(--dark-cyan-color)">7</h3>
+                        <p class="mb-0 text-danger">
+                            <i class="fas fa-arrow-alt-circle-down"></i> 10.08%
+                        </p>
+                        <p class="mb-0 text-muted">Вам нужно проверить все дневники самонаблюдения своих пациентов за текущий день</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xl-8">
+                <!--Карточка с таблицей пациентов на сегодня-->
+                <div class="card mt-3">
+                    <div class="card-header-tab card-header">
+                        <div class="card-header-title font-weight-bold" style="color: var(--dark-cyan-color)"><i class="fa fa-notes-medical mr-2"></i>Прием пациентов на сегодня</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12">
+                                <div class="text-center mt-2">
+                                    <img src="/images/no_data.svg" alt="" height="170">
+                                    <h5 class="mt-4 text-danger"><b>Пациенты отсутствуют</b></h5>
+                                    <p class="text-muted mb-0">К вам не записан ни один пациент на текущий день. Пригласите пациентов к себе на прием, если это необходимо</p>
+                                    <a href="#" class="btn text-white btn-sm" style="background-color: var(--cyan-color)">Пациенты</a>
                                 </div>
-                                <h5 class="text-muted mt-0">Лечащиеся</h5>
-                                <h3 class="mt-3 mb-3" style="color: var(--dark-cyan-color)">50</h3>
-                                <p class="mb-0 text-danger">
-                                    <i class="fas fa-arrow-alt-circle-down"></i> 20%
-                                </p>
-                                <p class="mb-0 text-muted">Ниже прошлого месяца</span></p>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xl-6 col-md-6 mt-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="float-right text-white widget-icon" style="background-color: var(--yellow-color)">
-                                    <i class="fas fa-user-injured"></i>
-                                </div>
-                                <h5 class="text-muted mt-0">Отдыхающие</h5>
-                                <h3 class="mt-3 mb-3" style="color: var(--dark-cyan-color)">90</h3>
-                                <p class="mb-0 text-success">
-                                    <i class="fas fa-arrow-alt-circle-up"></i> 10%
-                                </p>
-                                <p class="mb-0 text-muted">Выше прошлого месяца</span></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-6 col-md-6 mt-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="float-right bg-secondary text-white widget-icon">
-                                    <i class="fas fa-user-md"></i>
-                                </div>
-                                <h5 class="text-muted mt-0">Медперсонал</h5>
-                                <h6 class="mt-1" style="color: var(--dark-cyan-color)">Врач: 10</h6>
-                                <h6 class="mt-1" style="color: var(--dark-cyan-color)">Спец. по процедурам: 15</h6>
-                                <h6 class="mt-1" style="color: var(--dark-cyan-color)">Спец. по обследованиям: 5</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-6 col-md-6 mt-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="float-right bg-secondary text-white widget-icon">
-                                    <i class="fas fa-user-cog"></i>
-                                </div>
-                                <h5 class="text-muted mt-0">Администраторы</h5>
-                                <h6 class="mt-1" style="color: var(--dark-cyan-color)">Главный: 2</h6>
-                                <h6 class="mt-1" style="color: var(--dark-cyan-color)">Регистратор: 7</h6>
-                                <h6 class="mt-1" style="color: var(--dark-cyan-color)">Управляющий: 5</h6>
-                            </div>
+                        <div class="table-responsive">
+                            <table class="table table-centered table-hover mb-0">
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <h5 class="my-1" style="color: var(--dark-cyan-color)">Лечащийся</h5>
+                                        <span class="text-muted">Иванов И.И.</span>
+                                    </td>
+                                    <td>
+                                        <span class="text-muted">Статус</span> <br>
+                                        <span class="badge badge-pill text-white" style="background-color: var(--cyan-color)">Ожидание</span>
+                                    </td>
+                                    <td>
+                                        <span class="text-muted">ID карты</span>
+                                        <h5>123456789</h5>
+                                    </td>
+                                    <td>
+                                        <span class="text-muted">Участковый</span>
+                                        <h5>Иванов И.И.</h5>
+                                    </td>
+
+                                    <td>
+                                        <span class="text-muted">До приема</span>
+                                        <h5>3ч 20мин</h5>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h5 class="my-1" style="color: var(--dark-cyan-color)">Отдыхающий</h5>
+                                        <span class="text-muted">Иванов И.И.</span>
+                                    </td>
+                                    <td>
+                                        <span class="text-muted">Статус</span> <br>
+                                        <span class="badge badge-pill bg-success text-white">Посетил</span>
+                                    </td>
+                                    <td>
+                                        <span class="text-muted">ID карты</span>
+                                        <h5>123456789</h5>
+                                    </td>
+                                    <td>
+                                        <span class="text-muted">Участковый</span>
+                                        <h5>Иванов И.И.</h5>
+                                    </td>
+
+                                    <td>
+                                        <span class="text-muted">До приема</span>
+                                        <h5>-</h5>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h5 class="my-1" style="color: var(--dark-cyan-color)">Отдыхающий</h5>
+                                        <span class="text-muted">Иванов И.И.</span>
+                                    </td>
+                                    <td>
+                                        <span class="text-muted">Статус</span> <br>
+                                        <span class="badge badge-pill bg-danger text-white">Отсутствовал</span>
+                                    </td>
+                                    <td>
+                                        <span class="text-muted">ID карты</span>
+                                        <h5>123456789</h5>
+                                    </td>
+                                    <td>
+                                        <span class="text-muted">Участковый</span>
+                                        <h5>-</h5>
+                                    </td>
+
+                                    <td>
+                                        <span class="text-muted">До приема</span>
+                                        <h5>-</h5>
+                                    </td>
+                                </tr>
+
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-xl-6">
+            <!--Карточка с заметками из органайзера за текущий день-->
+            <div class="col-xl-4">
                 <div class="card mt-3">
                     <div class="card-header-tab card-header">
-                        <div class="card-header-title font-weight-bold" style="color: var(--dark-cyan-color)"><i class="fa fa-chart-bar mr-2"></i>Количество пациентов в месяц</div>
+                        <div class="card-header-title font-weight-bold" style="color: var(--dark-cyan-color)"><i class="fa fa-tasks mr-2"></i>Заметки на сегодня</div>
                     </div>
                     <div class="card-body">
-                        <canvas id="chart_patients" height="157"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="card mt-3">
-                    <div class="card-header-tab card-header">
-                        <div class="card-header-title font-weight-bold" style="color: var(--dark-cyan-color)"><i class="fa fa-chart-pie mr-2"></i>Мониторинг услуг санатория</div>
-                    </div>
-                    <div class="card-body">
-                        <canvas id="chart_services"></canvas>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-8">
-                <div class="card mt-3">
-                    <div class="card-header-tab card-header">
-                        <div class="card-header-title font-weight-bold" style="color: var(--dark-cyan-color)"><i class="fa fa-chart-line mr-2"></i>Доход за текущий месяц</div>
-                    </div>
-                    <div class="card-body">
-                        <canvas id="chart_profit" height="134"></canvas>
+                        <div class="row justify-content-center">
+                            <div class="col-md-12">
+                                <div class="text-center mt-2">
+                                    <img src="/images/add_notes.svg" alt="" height="170">
+                                    <h5 class="mt-4 text-danger"><b>Заметки отсутствуют</b></h5>
+                                    <p class="text-muted mb-1">Добавьте новые заметки в органайзере</p>
+                                    <a href="#" class="btn text-white btn-sm" style="background-color: var(--cyan-color)">Добавить</a>
+                                </div>
+                            </div>
+                        </div>
+                        <form>
+                            <div class="custom-checkbox custom-control">
+                                <input class="custom-control-input" id="task_1" type="checkbox">
+                                <label class="custom-control-label text-muted" for="task_1">Lorem ipsum dolor sit amet.</label>
+                            </div>
+                            <div class="custom-checkbox custom-control mt-2">
+                                <input class="custom-control-input" id="task_2" type="checkbox">
+                                <label class="custom-control-label text-muted" for="task_2">Lorem ipsum dolor sit.</label>
+                            </div>
+                            <div class="custom-checkbox custom-control mt-2">
+                                <input class="custom-control-input" id="task_3" type="checkbox">
+                                <label class="custom-control-label text-muted" for="task_3">Lorem ipsum dolor sit amet, consectetur adipisicing.</label>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -379,28 +454,16 @@
                         <h6 class="heading mb-3" style="font-weight: 700 ;color: var(--yellow-color)">Аккаунт</h6>
                         <ul class="list-unstyled link-none">
                             <li>
-                                <a href="#">Статистика</a>
+                                <a href="#">Профиль</a>
                             </li>
                             <li>
                                 <a href="#">Чат</a>
                             </li>
                             <li>
-                                <a href="#">Новости</a>
+                                <a href="#">Пациенты</a>
                             </li>
                             <li>
-                                <a href="#">Питание</a>
-                            </li>
-                            <li>
-                                <a href="#">Услуги</a>
-                            </li>
-                            <li>
-                                <a href="#">Пользователи</a>
-                            </li>
-                            <li>
-                                <a href="#">Анкетирование</a>
-                            </li>
-                            <li>
-                                <a href="#">FAQ's</a>
+                                <a href="#">Органайзер</a>
                             </li>
                         </ul>
                     </div>
@@ -443,106 +506,5 @@
 </body>
 <script>
     $('#notificationToast').toast('show');
-    $(document).ready(function() {
-        $('input[type=checkbox]').change(function() {
-
-            if (this.checked) {
-                $(this).next().css("text-decoration-line", "line-through");
-            } else {
-                $(this).next().css("text-decoration-line", "none");
-            }
-
-        });
-    });
-
-
-</script>
-<script>
-
-    const footer = (tooltipItems) => {
-        let sum = 0;
-
-        tooltipItems.forEach(function(tooltipItem) {
-            sum += tooltipItem.parsed.y;
-        });
-        return 'Всего: ' + sum;
-    };
-
-    let chart_patients = new Chart(document.getElementById('chart_patients').getContext('2d'), {
-        type: 'bar',
-        data: {
-            labels: ['Январь', 'Февраль', 'Март'],
-            datasets: [
-                {
-                    label: 'Лечащиеся',
-                    data: [40, 70, 50],
-                    backgroundColor: 'rgb(0,112,96)',
-                    borderColor: 'rgb(0, 112, 96)',
-                    borderWidth: 1
-                },
-                {
-                    label: 'Отдыхающие',
-                    data: [70, 80, 90],
-                    backgroundColor: 'rgb(255, 164, 0)',
-                    borderColor: 'rgb(255, 164, 0)',
-                    borderWidth: 1
-                },
-            ]
-        },
-        options: {
-            scales: {
-                x: {
-                    stacked: true,
-                },
-                y: {
-                    stacked: true
-                }
-            },
-            plugins: {
-                tooltip: {
-                    callbacks: {
-                        footer: footer,
-                    }
-                }
-            }
-        }
-    });
-
-    let chart_services = new Chart(document.getElementById('chart_services').getContext('2d'), {
-        type: 'doughnut',
-        data: {
-            labels: ['Специальности', 'Процедуры', 'Обследования', 'Мероприятия'],
-            datasets: [{
-                data: [15, 15, 10, 5],
-                backgroundColor: [
-                    'rgb(92,129,238)',
-                    'rgb(226,37,81)',
-                    'rgb(0,247,255)',
-                    'rgb(46,168,96)',
-                ],
-            }]
-        },
-        options: {
-            cutout: '60%'
-        },
-    });
-
-    let chart_profit = new Chart(document.getElementById('chart_profit').getContext('2d'), {
-        type: 'line',
-        data: {
-            labels: ['21.04', '22.04', '23.04', '24.04'],
-            datasets: [{
-                data: [32000, 33000, 38000, 36000],
-                backgroundColor: 'rgb(0,112,96)',
-                borderColor: 'rgb(255, 164, 0)',
-            }]
-        },
-        options: {
-            plugins: {
-                legend: false
-            }
-
-        },
-    });
 </script>
 </html>

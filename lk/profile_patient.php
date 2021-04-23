@@ -177,8 +177,10 @@
     </div>
 </div>
 
+<!--Основной контент страницы-->
 <div class="page-content">
     <div class="container pt-3 pb-3">
+        <!--Карточка с основной информацией пользователя-->
         <div class="card">
             <div class="card-body">
                 <div class="row">
@@ -239,8 +241,9 @@
                 </div>
             </div>
         </div>
-
+        <!--Карточки с информацией из дневника самонаблюдения-->
         <div class="row">
+            <!--Карточка с информацией о шагах за текущий день-->
             <div class="col-xl col-md-6 mt-3">
                 <div class="card">
                     <div class="card-body">
@@ -256,6 +259,7 @@
                     </div>
                 </div>
             </div>
+            <!--Карточка с информацией о весе (последняя запись)-->
             <div class="col-xl col-md-6 mt-3">
                 <div class="card">
                     <div class="card-body">
@@ -271,7 +275,7 @@
                     </div>
                 </div>
             </div>
-
+            <!--Карточка с информацией о пульсе (последняя запись)-->
             <div class="col-xl col-md-6 mt-3">
                 <div class="card">
                     <div class="card-body">
@@ -287,6 +291,7 @@
                     </div>
                 </div>
             </div>
+            <!--Карточка с информацией о АД (последняя запись)-->
             <div class="col-xl col-md-6 mt-3">
                 <div class="card">
                     <div class="card-body">
@@ -304,6 +309,7 @@
             </div>
         </div>
 
+        <!--Карточки с информацией из дневника самонаблюдения, как и выше, если данные отсутствуют-->
         <div class="row">
             <div class="col-xl col-md-6 mt-3">
                 <div class="card">
@@ -366,6 +372,7 @@
 
         <div class="row">
             <div class="col-xl-8">
+                <!--Карточка с таблицей задач на текущий день-->
                 <div class="card mt-3">
                     <div class="card-header-tab card-header">
                         <div class="card-header-title font-weight-bold" style="color: var(--dark-cyan-color)"><i class="fa fa-notes-medical mr-2"></i>Задачи на сегодня</div>
@@ -376,7 +383,8 @@
                                 <div class="text-center mt-2">
                                     <img src="/images/no_data.svg" alt="" height="170">
                                     <h5 class="mt-4 text-danger"><b>Задачи отсутствуют</b></h5>
-                                    <p class="text-muted">Запишитесь на услугу или посетите терапевта</p>
+                                    <p class="text-muted mb-0">Запишитесь на услугу или посетите терапевта</p>
+                                    <a href="#" class="btn text-white btn-sm" style="background-color: var(--cyan-color)">Услуги</a>
                                 </div>
                             </div>
                         </div>
@@ -455,14 +463,14 @@
                                         <h5>5ч 8мин</h5>
                                     </td>
                                 </tr>
-
                                 </tbody>
                             </table>
-                        </div> <!-- end table-responsive-->
-
-                    </div> <!-- end card body-->
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <!--Карточка с заметками из органайзера за текущий день-->
             <div class="col-xl-4">
                 <div class="card mt-3">
                     <div class="card-header-tab card-header">
@@ -541,7 +549,7 @@
     /**
     Временный скрипт отображения графика "пончик" для шагов пациента
      */
-    var ctx = document.getElementById('myChart').getContext('2d');
+    var ctx = document.getElementById('myChart');
     var myChart = new Chart(ctx, {
         type: 'doughnut',
         data: {
@@ -558,8 +566,8 @@
             cutout: '80%',
             radius: '50%',
             plugins: {
-                legend: false
-            }
+                legend: false,
+            },
         }
     });
 </script>
