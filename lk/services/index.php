@@ -327,7 +327,7 @@
                             <tr>
                                 <td class="text-muted" data-label="Тип усл.:">
                                     <h5>
-                                        <span class="badge text-white" style="background-color: var(--dark-cyan-color)">
+                                        <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">
                                             <i class="fas fa-user-md mr-2"></i>Врач
                                         </span>
                                     </h5>
@@ -342,7 +342,7 @@
                                 <td class="text-muted" data-label="Распо-ие:">10.12.21 13:10</td>
                                 <td>
                                     <ul class="list-unstyled">
-                                        <li><button type="button" class="btn btn-sm text-white btn-block" style="background-color: var(--yellow-color)">Просмотр</button></li>
+                                        <li><button type="button" class="btn btn-sm text-secondary btn-block" style="background-color: var(--yellow-color)">Просмотр</button></li>
                                         <li><button type="button" class="btn mt-1 btn-sm btn-danger btn-block" data-toggle="modal" data-target="#openModalRemoveAppointment">Отмена</button></li>
                                     </ul>
                                 </td>
@@ -350,7 +350,7 @@
                             <tr>
                                 <td class="text-muted" data-label="Тип усл.:">
                                     <h5>
-                                        <span class="badge text-white" style="background-color: var(--dark-cyan-color)">
+                                        <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">
                                             <i class="fas fa-diagnoses mr-2"></i>Процедура
                                         </span>
                                     </h5>
@@ -365,7 +365,7 @@
                                 <td class="text-muted" data-label="Распо-ие:">11.12.21 12:10</td>
                                 <td>
                                     <ul class="list-unstyled">
-                                        <li><button type="button" class="btn btn-sm text-white btn-block" style="background-color: var(--yellow-color)">Просмотр</button></li>
+                                        <li><button type="button" class="btn btn-sm text-secondary btn-block" style="background-color: var(--yellow-color)">Просмотр</button></li>
                                         <li><button type="button" class="btn mt-1 btn-sm btn-danger btn-block" data-toggle="modal" data-target="#openModalRemoveAppointment">Отмена</button></li>
                                     </ul>
                                 </td>
@@ -373,7 +373,7 @@
                             <tr>
                                 <td class="text-muted" data-label="Тип усл.:">
                                     <h5>
-                                        <span class="badge text-white" style="background-color: var(--dark-cyan-color)">
+                                        <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">
                                             <i class="fas fa-microscope mr-2"></i>Обследование
                                         </span>
                                     </h5>
@@ -388,7 +388,7 @@
                                 <td class="text-muted" data-label="Распо-ие:">11.12.21 12:10</td>
                                 <td>
                                     <ul class="list-unstyled">
-                                        <li><button type="button" class="btn btn-sm text-white btn-block" style="background-color: var(--yellow-color)">Просмотр</button></li>
+                                        <li><button type="button" class="btn btn-sm text-secondary btn-block" style="background-color: var(--yellow-color)">Просмотр</button></li>
                                         <li><button type="button" class="btn mt-1 btn-sm btn-danger btn-block" data-toggle="modal" data-target="#openModalRemoveAppointment">Отмена</button></li>
                                     </ul>
                                 </td>
@@ -396,7 +396,7 @@
                             <tr>
                                 <td class="text-muted" data-label="Тип усл.:">
                                     <h5>
-                                        <span class="badge text-white" style="background-color: var(--dark-cyan-color)">
+                                        <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">
                                             <i class="fas fa-procedures mr-2"></i>Мероприятие
                                         </span>
                                     </h5>
@@ -411,7 +411,7 @@
                                 <td class="text-muted" data-label="Распо-ие:">11.12.21 12:10</td>
                                 <td>
                                     <ul class="list-unstyled">
-                                        <li><button type="button" class="btn btn-sm text-white btn-block" style="background-color: var(--yellow-color)">Просмотр</button></li>
+                                        <li><button type="button" class="btn btn-sm text-secondary btn-block" style="background-color: var(--yellow-color)">Просмотр</button></li>
                                         <li><button type="button" class="btn mt-1 btn-sm btn-danger btn-block" data-toggle="modal" data-target="#openModalRemoveAppointment">Отмена</button></li>
                                     </ul>
                                 </td>
@@ -501,7 +501,7 @@
                             <tr>
                                 <td class="text-muted" data-label="Тип усл.:">
                                     <h5>
-                                        <span class="badge text-white" style="background-color: var(--dark-cyan-color)">
+                                        <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">
                                             <i class="fas fa-user-md mr-2"></i>Врач
                                         </span>
                                     </h5>
@@ -516,14 +516,14 @@
                                 <td class="text-muted" data-label="Распо-ие:">10.12.21 13:10</td>
                                 <td>
                                     <ul class="list-unstyled">
-                                        <li><button type="button" class="btn btn-sm text-white btn-block" style="background-color: var(--yellow-color)">Просмотр</button></li>
+                                        <li><button type="button" class="btn btn-sm text-secondary btn-block" style="background-color: var(--yellow-color)">Просмотр</button></li>
                                     </ul>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="text-muted" data-label="Тип усл.:">
                                     <h5>
-                                        <span class="badge text-white" style="background-color: var(--dark-cyan-color)">
+                                        <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">
                                             <i class="fas fa-diagnoses mr-2"></i>Процедура
                                         </span>
                                     </h5>
@@ -538,14 +538,14 @@
                                 <td class="text-muted" data-label="Распо-ие:">11.12.21 12:10</td>
                                 <td>
                                     <ul class="list-unstyled">
-                                        <li><button type="button" class="btn btn-sm text-white btn-block" style="background-color: var(--yellow-color)">Просмотр</button></li>
+                                        <li><button type="button" class="btn btn-sm text-secondary btn-block" style="background-color: var(--yellow-color)">Просмотр</button></li>
                                     </ul>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="text-muted" data-label="Тип усл.:">
                                     <h5>
-                                        <span class="badge text-white" style="background-color: var(--dark-cyan-color)">
+                                        <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">
                                             <i class="fas fa-microscope mr-2"></i>Обследование
                                         </span>
                                     </h5>
@@ -560,14 +560,14 @@
                                 <td class="text-muted" data-label="Распо-ие:">11.12.21 12:10</td>
                                 <td>
                                     <ul class="list-unstyled">
-                                        <li><button type="button" class="btn btn-sm text-white btn-block" style="background-color: var(--yellow-color)">Просмотр</button></li>
+                                        <li><button type="button" class="btn btn-sm text-secondary btn-block" style="background-color: var(--yellow-color)">Просмотр</button></li>
                                     </ul>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="text-muted" data-label="Тип усл.:">
                                     <h5>
-                                        <span class="badge text-white" style="background-color: var(--dark-cyan-color)">
+                                        <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">
                                             <i class="fas fa-procedures mr-2"></i>Мероприятие
                                         </span>
                                     </h5>
@@ -582,7 +582,7 @@
                                 <td class="text-muted" data-label="Распо-ие:">11.12.21 12:10</td>
                                 <td>
                                     <ul class="list-unstyled">
-                                        <li><button type="button" class="btn btn-sm text-white btn-block" style="background-color: var(--yellow-color)">Просмотр</button></li>
+                                        <li><button type="button" class="btn btn-sm text-secondary btn-block" style="background-color: var(--yellow-color)">Просмотр</button></li>
                                     </ul>
                                 </td>
                             </tr>

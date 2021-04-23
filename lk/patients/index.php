@@ -138,8 +138,8 @@
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a href="#" class="nav-link link-navbar" aria-haspopup="true">
-                            <i class="fas fa-chart-bar mr-1"></i>
-                            Статистика
+                            <i class="fas fa-id-card mr-1"></i>
+                            Профиль
                         </a>
                     </li>
                     <li class="nav-item">
@@ -150,38 +150,14 @@
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link link-navbar" aria-haspopup="true">
-                            <i class="fas fa-newspaper mr-1"></i>
-                            Новости
+                            <i class="fas fa-user-injured mr-1"></i>
+                            Пациенты
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link link-navbar" aria-haspopup="true">
-                            <i class="fas fa-utensils mr-1"></i>
-                            Питание
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link link-navbar" aria-haspopup="true">
-                            <i class="fas fa-procedures mr-1"></i>
-                            Услуги
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link link-navbar" aria-haspopup="true">
-                            <i class="fas fa-users mr-1"></i>
-                            Пользователи
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link link-navbar disabled" aria-haspopup="true">
-                            <i class="fas fa-comment-medical mr-1"></i>
-                            Анкетирование
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link link-navbar" aria-haspopup="true">
-                            <i class="fas fa-question-circle mr-1"></i>
-                            FAQ's
+                            <i class="fas fa-calendar-alt mr-1"></i>
+                            Органайзер
                         </a>
                     </li>
                 </ul>
@@ -196,41 +172,33 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#" style="color: var(--dark-cyan-color)">Профиль</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Пользователи</li>
+                <li class="breadcrumb-item active" aria-current="page">Пациенты</li>
             </ol>
         </nav>
         <ul class="nav nav-pills flex-column flex-sm-row mb-2" role="tablist">
             <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
-                <a class="nav-link tab-bg-active font-weight-bold active" data-toggle="tab" href="#patient" role="tab">
-                    <i class="fas fa-user-injured mr-1"></i>Пациенты
+                <a class="nav-link tab-bg-active font-weight-bold active" data-toggle="tab" href="#tab_my_patients" role="tab">
+                    <i class="fas fa-user-injured mr-1"></i>Мои пациенты
                 </a>
             </li>
             <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
-                <a class="nav-link tab-bg-active font-weight-bold" data-toggle="tab" href="#doctor" role="tab">
-                    <i class="fas fa-user-md mr-1"></i> Медицинский персонал
-                </a>
-            </li>
-            <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
-                <a class="nav-link tab-bg-active font-weight-bold" data-toggle="tab" href="#admin" role="tab">
-                    <i class="fas fa-user-cog mr-1"></i> Администраторы
+                <a class="nav-link tab-bg-active font-weight-bold" data-toggle="tab" href="#tab_all_patients" role="tab">
+                    <i class="fas fa-user-injured mr-1"></i> Все пациенты
                 </a>
             </li>
         </ul>
         <div class="tab-content">
-            <div class="tab-pane fade show active" id="patient" role="tabpanel">
+            <div class="tab-pane fade show active" id="tab_my_patients" role="tabpanel">
                 <div class="card">
                     <div class="card-body">
-                        <a href="/lk/users/add.php?selected=patient" class="btn btn-sm btn-success float-right text-white mb-2">
-                            <i class="fas fa-plus-circle mr-2"></i>Зарегистрировать пациента
-                        </a>
                         <table id="table_patients" class="table table-striped table-hover">
                             <thead class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
                                 <th>Пациент</th>
                                 <th>ID карты</th>
                                 <th>Тип</th>
-                                <th>Почта</th>
-                                <th>Телефон</th>
+                                <th>Категория</th>
+                                <th>Дневник</th>
                                 <th>Действие</th>
                             </tr>
                             </thead>
@@ -238,15 +206,37 @@
                             <tr>
                                 <td class="text-muted" data-label="Пац.-т:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
                                 <td class="text-muted" data-label="ID карты:">123456789</td>
-                                <td class="text-muted" data-label="Тип:">Лечащийся</td>
-                                <td class="text-muted" data-label="Почта:">info@mail.ru</td>
-                                <td class="text-muted" data-label="Телефон:">+7 (999) 999-99-99</td>
+                                <td class="text-muted" data-label="Тип:"><span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">Лечащийся</span></td>
+                                <td class="text-muted" data-label="Категория:">
+                                    <ul class="list-unstyled">
+                                        <li><span class="badge badge-pill text-white bg-secondary">Диабет</span></li>
+                                        <li><span class="badge badge-pill text-white bg-secondary">Ковид</span></li>
+                                    </ul>
+                                </td>
+                                <td class="text-muted" data-label="Дневник:"><span class="badge badge-pill bg-success text-white">Проверен</span></td>
                                 <td>
                                     <ul class="list-unstyled">
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-secondary text-white" data-toggle="modal" data-target="#openModalRecoveryPasswordUser">Восстановить пароль</button></li>
                                         <li><button type="button" class="btn mt-1 btn-sm text-white" style="background-color: var(--cyan-color)">Профиль</button></li>
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)">Редактирование</button></li>
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-danger" data-toggle="modal" data-target="#openModalRemoveUser">Удаление</button></li>
+                                        <li><button type="button" class="btn mt-1 btn-sm btn-secondary text-white">Медкарта</button></li>
+                                        <li><button type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)">Дневник</button></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-muted" data-label="Пац.-т:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
+                                <td class="text-muted" data-label="ID карты:">123456789</td>
+                                <td class="text-muted" data-label="Тип:"><span class="badge badge-pill text-secondary" style="background-color: var(--yellow-color)">Отдыхающий</span></td>
+                                <td class="text-muted" data-label="Категория:">
+                                    <ul class="list-unstyled">
+                                        <li><span class="badge badge-pill text-white bg-secondary">Пенсионер</span></li>
+                                    </ul>
+                                </td>
+                                <td class="text-muted" data-label="Дневник:"><span class="badge badge-pill bg-danger text-white">Не проверен</span></td>
+                                <td>
+                                    <ul class="list-unstyled">
+                                        <li><button type="button" class="btn mt-1 btn-sm text-white" style="background-color: var(--cyan-color)">Профиль</button></li>
+                                        <li><button type="button" class="btn mt-1 btn-sm btn-secondary text-white">Медкарта</button></li>
+                                        <li><button type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)">Дневник</button></li>
                                     </ul>
                                 </td>
                             </tr>
@@ -256,8 +246,8 @@
                                 <th>Пациент</th>
                                 <th>ID карты</th>
                                 <th>Тип</th>
-                                <th>Почта</th>
-                                <th>Телефон</th>
+                                <th>Категория</th>
+                                <th>Дневник</th>
                                 <th>Действие</th>
                             </tr>
                             </tfoot>
@@ -265,61 +255,55 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane fade" id="doctor" role="tabpanel">
+            <div class="tab-pane fade" id="tab_all_patients" role="tabpanel">
                 <div class="card">
                     <div class="card-body">
-                        <a href="/lk/users/add.php?selected=doctor" class="btn btn-sm btn-success float-right text-white mb-2">
-                            <i class="fas fa-plus-circle mr-2"></i>Зарегистрировать медперсонал
-                        </a>
                         <table id="table_doctors" class="table table-striped table-hover">
                             <thead class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
-                                <th>Специалист</th>
-                                <th>Должность</th>
-                                <th>Направление</th>
-                                <th>Почта</th>
-                                <th>Телефон</th>
+                                <th>Пациент</th>
+                                <th>ID карты</th>
+                                <th>Тип</th>
+                                <th>Категория</th>
+                                <th>Участковый</th>
                                 <th>Действие</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
                                 <td class="text-muted" data-label="Пац.-т:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
-                                <td class="text-muted" data-label="Долж.-ть:">Врач</td>
-                                <td class="text-muted" data-label="Напр.-ие:">
+                                <td class="text-muted" data-label="ID карты:">123456789</td>
+                                <td class="text-muted" data-label="Тип:"><span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">Лечащийся</span></td>
+                                <td class="text-muted" data-label="Категория:">
                                     <ul class="list-unstyled">
-                                        <li><span class="badge badge-pill badge-secondary">Терапевт</span></li>
-                                        <li><span class="badge badge-pill badge-secondary">Невролог</span></li>
+                                        <li><span class="badge badge-pill text-white bg-secondary">Диабет</span></li>
+                                        <li><span class="badge badge-pill text-white bg-secondary">Ковид</span></li>
                                     </ul>
                                 </td>
-                                <td class="text-muted" data-label="Почта:">info@mail.ru</td>
-                                <td class="text-muted" data-label="Телефон:">+7 (999) 999-99-99</td>
+                                <td class="text-muted" data-label="Участковый:">Иванов И.И.</td>
                                 <td>
                                     <ul class="list-unstyled">
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-secondary text-white" data-toggle="modal" data-target="#openModalRecoveryPasswordUser">Восстановить пароль</button></li>
                                         <li><button type="button" class="btn mt-1 btn-sm text-white" style="background-color: var(--cyan-color)">Профиль</button></li>
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)">Редактирование</button></li>
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-danger" data-toggle="modal" data-target="#openModalRemoveUser">Удаление</button></li>
+                                        <li><button type="button" class="btn mt-1 btn-sm btn-secondary text-white">Медкарта</button></li>
+                                        <li><button type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)">Дневник</button></li>
                                     </ul>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="text-muted" data-label="Пац.-т:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
-                                <td class="text-muted" data-label="Долж.-ть:">Специалист по процедурам</td>
-                                <td class="text-muted" data-label="Напр.-ие:">
+                                <td class="text-muted" data-label="ID карты:">123456789</td>
+                                <td class="text-muted" data-label="Тип:"><span class="badge badge-pill text-secondary" style="background-color: var(--yellow-color)">Отдыхающий</span></td>
+                                <td class="text-muted" data-label="Категория:">
                                     <ul class="list-unstyled">
-                                        <li><span class="badge badge-pill badge-secondary">Бассейн</span></li>
-                                        <li><span class="badge badge-pill badge-secondary">Йога</span></li>
+                                        <li><span class="badge badge-pill text-white bg-secondary">Пенсионер</span></li>
                                     </ul>
                                 </td>
-                                <td class="text-muted" data-label="Почта:">info@mail.ru</td>
-                                <td class="text-muted" data-label="Телефон:">+7 (999) 999-99-99</td>
+                                <td class="text-muted" data-label="Участковый:">Иванов И.И.</td>
                                 <td>
                                     <ul class="list-unstyled">
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-secondary text-white" data-toggle="modal" data-target="#openModalRecoveryPasswordUser">Восстановить пароль</button></li>
                                         <li><button type="button" class="btn mt-1 btn-sm text-white" style="background-color: var(--cyan-color)">Профиль</button></li>
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)">Редактирование</button></li>
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-danger" data-toggle="modal" data-target="#openModalRemoveUser">Удаление</button></li>
+                                        <li><button type="button" class="btn mt-1 btn-sm btn-secondary text-white">Медкарта</button></li>
+                                        <li><button type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)">Дневник</button></li>
                                     </ul>
                                 </td>
                             </tr>
@@ -329,53 +313,8 @@
                                 <th>Пациент</th>
                                 <th>ID карты</th>
                                 <th>Тип</th>
-                                <th>Почта</th>
-                                <th>Телефон</th>
-                                <th>Действие</th>
-                            </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="tab-pane fade" id="admin" role="tabpanel">
-                <div class="card">
-                    <div class="card-body">
-                        <a href="/lk/users/add.php?selected=administrator" class="btn btn-sm btn-success float-right text-white mb-2">
-                            <i class="fas fa-plus-circle mr-2"></i>Зарегистрировать администратора
-                        </a>
-                        <table id="table_administrators" class="table table-striped table-hover">
-                            <thead class="text-white" style="background-color: var(--cyan-color);">
-                            <tr>
-                                <th>Администратор</th>
-                                <th>Должность</th>
-                                <th>Почта</th>
-                                <th>Телефон</th>
-                                <th>Действие</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td class="text-muted" data-label="Пац.-т:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
-                                <td class="text-muted" data-label="Долж.-ть:">Главный админ</td>
-                                <td class="text-muted" data-label="Почта:">info@mail.ru</td>
-                                <td class="text-muted" data-label="Телефон:">+7 (999) 999-99-99</td>
-                                <td>
-                                    <ul class="list-unstyled">
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-secondary text-white" data-toggle="modal" data-target="#openModalRecoveryPasswordUser">Восстановить пароль</button></li>
-                                        <li><button type="button" class="btn mt-1 btn-sm text-white" style="background-color: var(--cyan-color)">Профиль</button></li>
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)">Редактирование</button></li>
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-danger" data-toggle="modal" data-target="#openModalRemoveUser">Удаление</button></li>
-                                    </ul>
-                                </td>
-                            </tr>
-                            </tbody>
-                            <tfoot class="text-white" style="background-color: var(--cyan-color);">
-                            <tr>
-                                <th>Администратор</th>
-                                <th>Должность</th>
-                                <th>Почта</th>
-                                <th>Телефон</th>
+                                <th>Категория</th>
+                                <th>Участковый</th>
                                 <th>Действие</th>
                             </tr>
                             </tfoot>
@@ -387,40 +326,6 @@
     </div>
 </div>
 
-
-<!--Модальное окно удаления пользователя-->
-<div class="modal fade" tabindex="-1" id="openModalRemoveUser" data-backdrop="static">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="alert alert-danger" role="alert">
-                    Вы уверены, что хотите удалить данного пользователя?
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Нет</button>
-                <button type="button" class="btn btn-success">Да</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!--Модальное окно восстановления пароля пользователя-->
-<div class="modal fade" tabindex="-1" id="openModalRecoveryPasswordUser" data-backdrop="static">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="alert alert-info" role="alert">
-                    Пользователю <b>Иванов И. И.</b> будет отправлена ссылка восстановления пароля на его почту. Вы согласны?
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Нет</button>
-                <button type="button" class="btn btn-success">Да</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!--Список всплывающих уведомлений-->
 <div class="position-fixed p-3" style="z-index: 5; right: 0; bottom: 0;">
@@ -446,6 +351,7 @@
     <div class="container pt-4">
         <div class="row justify-content-center">
             <div class="col-lg-12">
+
                 <div class="row">
                     <div class="col-lg-4 mb-5 mb-lg-0">
                         <a href="/">
@@ -478,28 +384,16 @@
                         <h6 class="heading mb-3" style="font-weight: 700 ;color: var(--yellow-color)">Аккаунт</h6>
                         <ul class="list-unstyled link-none">
                             <li>
-                                <a href="#">Статистика</a>
+                                <a href="#">Профиль</a>
                             </li>
                             <li>
                                 <a href="#">Чат</a>
                             </li>
                             <li>
-                                <a href="#">Новости</a>
+                                <a href="#">Пациенты</a>
                             </li>
                             <li>
-                                <a href="#">Питание</a>
-                            </li>
-                            <li>
-                                <a href="#">Услуги</a>
-                            </li>
-                            <li>
-                                <a href="#">Пользователи</a>
-                            </li>
-                            <li>
-                                <a href="#">Анкетирование</a>
-                            </li>
-                            <li>
-                                <a href="#">FAQ's</a>
+                                <a href="#">Органайзер</a>
                             </li>
                         </ul>
                     </div>
@@ -540,36 +434,6 @@
 </footer>
 </body>
 <script>
-    $('.custom-file-input').on('change', function() {
-        let fileName = $(this).val().split('\\').pop();
-        $(this).next('.custom-file-label').addClass("selected").html(fileName);
-    });
-
-
-    $(document).on('click', '.plus-contraindications', function(){
-        $(this).closest('.information_json_plus').before(
-            '<tr>' +
-            '<td class="pl-0"><input type="text" class="form-control" name=contraindications_json_val[]" placeholder="Противопоказание" required></td>' +
-            '<td class="pl-0"><span class="btn btn-sm btn-danger rounded-circle minus mt-1"><i class="fas fa-minus"></i></span></td>' +
-            '</tr>'
-        );
-    });
-
-    $(document).on('click', '.plus-destinations', function(){
-        $(this).closest('.information_json_plus').before(
-            '<tr>' +
-            '<td class="pl-0"><input type="text" class="form-control" name=destinations_json_val[]" placeholder="Назначение" required></td>' +
-            '<td class="pl-0"><span class="btn btn-sm btn-danger rounded-circle minus mt-1"><i class="fas fa-minus"></i></span></td>' +
-            '</tr>'
-        );
-    });
-
-
-
-    $(document).on('click', '.minus', function(){
-        $(this).closest('tr').remove();
-    });
-
     $('#notificationToast').toast('show');
 
     $('#table_patients, #table_doctors, #table_administrators').DataTable({

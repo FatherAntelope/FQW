@@ -245,7 +245,7 @@
                     <div class="col-xl-6 col-md-6 mt-3">
                         <div class="card">
                             <div class="card-body">
-                                <div class="float-right text-white widget-icon" style="background-color: var(--yellow-color)">
+                                <div class="float-right text-secondary widget-icon" style="background-color: var(--yellow-color)">
                                     <i class="fas fa-user-injured"></i>
                                 </div>
                                 <h5 class="text-muted mt-0">Отдыхающие</h5>

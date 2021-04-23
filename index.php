@@ -13,7 +13,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script defer src="js/all.js"></script>
-    <title>HeartBlaze</title>
+    <title>СанКонтроль</title>
 </head>
 
 <body>
@@ -35,7 +35,7 @@
                 </a>
             </li>
             <li>
-                <a href="/auth.php" class="btn btn-warning text-white mr-sm-0 mr-2 ml-2" style="background: var(--yellow-color); margin-top: 0.6rem; margin-bottom: 0.6rem">Авторизация</a>
+                <a href="/auth.php" class="btn btn-warning text-secondary mr-sm-0 mr-2 ml-2" style="background: var(--yellow-color); margin-top: 0.6rem; margin-bottom: 0.6rem">Авторизация</a>
             </li>
         </ul>
     </div>
@@ -80,8 +80,8 @@
                         </p>
                     </div>
                     <div class="col-lg-3 text-lg-right mt-4 mt-lg-0">
-                        <a href="/auth.php" class="btn btn-warning btn-icon my-2" style="background-color: var(--yellow-color)">
-                            <span class="text-white">Приступить</span>
+                        <a href="/auth.php" class="btn btn-warning text-secondary btn-icon my-2" style="background-color: var(--yellow-color)">
+                            Приступить
                         </a>
                     </div>
                 </div>
@@ -155,7 +155,7 @@
 
                 <div class="row justify-content-center align-items-center">
                     <div class="text-white">
-                        <p>©2021 HeartBlaze. Все права защищены</p>
+                        <p>©2021 СанКонтроль. Все права защищены</p>
                     </div>
                 </div>
             </div>

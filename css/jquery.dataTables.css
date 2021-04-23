@@ -53,7 +53,7 @@
     border-radius: .25rem;
 }
 .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
-    color: #fff;
+    color: #6c757d;
     border: 2px solid var(--yellow-color);
     background-color: var(--yellow-color);
 }
@@ -65,12 +65,12 @@
     box-shadow: none;
 }
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-    color: #fff;
+    color: #6c757d;
     border: 2px solid var(--yellow-color);
     background-color: var(--yellow-color);
 }
 .dataTables_wrapper .dataTables_paginate .paginate_button:active {
-    color: #fff;
+    color: #6c757d;
     border: 2px solid var(--yellow-color);
     background-color: var(--yellow-color);
 }

@@ -60,7 +60,7 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <button type="button" class="btn btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Войти</button>
+                                <button type="button" class="btn btn-warning btn-block text-secondary font-weight-bold" style="background-color: var(--yellow-color)">Войти</button>
                             </form>
                         </div>
                     </div>
