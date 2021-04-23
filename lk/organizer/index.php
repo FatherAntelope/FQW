@@ -179,62 +179,6 @@
 	</div>
 </div>
 
-<script>
-	document.addEventListener('DOMContentLoaded', function() {
-		var calendarEl = document.getElementById('calendar');
-		var calendar = new FullCalendar.Calendar(calendarEl, {
-			locale: 'ru',
-			themeSystem:'bootstrap',
-			firstDay: 1,
-			navLinks: true,
-			selectable: true,
-			editable: true,
-			weekNumbers: true,
-			weekText: 'Н',
-			weekNumberFormat: { week: 'short' },
-			dateClick: function(info) {
-				alert('Date: ' + info.dateStr);
-			},
-
-			// footerToolbar: true,
-			headerToolbar: {
-				start: 'prevYear,nextYear',
-				center: 'title',
-				end: 'today prev,next dayGridMonth,dayGridWeek,timeGridDay,listWeek',
-			},
-			buttonIcons: {
-				prev: 'left-single-arrow',
-				next: 'right-single-arrow',
-				prevYear: 'left-double-arrow',
-				nextYear: 'right-double-arrow',
-			},
-			buttonText: {
-				today: 'Сегодня',
-				month: 'Месяц',
-				week: 'Неделя',
-				day: 'День',
-				list: 'Список',
-			},
-			events: [
-				{
-					title: "example",
-					start: "2020-04-21",
-					end: "2020-04-21",
-				}
-			],
-			eventDrop: function(info) {
-			alert(info.event.title + " was dropped on " + info.event.start.toISOString());
-				if (!confirm("Are you sure about this change?")) {
-					info.revert();
-				}
-			},
-			noEventsContent: 'Cобытий нет',
-			allDayText: 'На весь день',
-		});
-		calendar.render();
-	});
-</script>
-
 <div class="page-content">
 	<div class="container pt-3 pb-3">
         <div class="card">
@@ -265,53 +209,107 @@
 	</div>
 </div>
 
-<!--Футер (нижний блок)-->
-<?php require $_SERVER['DOCUMENT_ROOT']."/footer.php"; ?>
-</body>
-
-
 <!-- Добавление события -->
 <div class="modal fade" id="addEventModal" tabindex="-1" role="dialog" aria-labelledby="addEventModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="addEventModalLabel"></h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				<!-- ... -->
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-				<button type="button" id="addEventButton" class="btn btn-primary">Добавить событие</button>
-			</div>
- 		</div>
-	</div>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addEventModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- ... -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Закрыть</button>
+                <button type="button" id="addEventButton" class="btn btn-success">Добавить событие</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Редактирование события -->
 <div class="modal fade" id="editEventModal" tabindex="-1" role="dialog" aria-labelledby="editEventModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="editEventModalLabel"></h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				<!-- ... -->
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-				<button type="button" id="addEventButton" class="btn btn-primary">Добавить событие</button>
-			</div>
- 		</div>
-	</div>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editEventModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- ... -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Закрыть</button>
+                <button type="button" id="addEventButton" class="btn btn-success">Добавить событие</button>
+            </div>
+        </div>
+    </div>
 </div>
 
+<!--Футер (нижний блок)-->
+<?php require $_SERVER['DOCUMENT_ROOT']."/footer.php"; ?>
+</body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            locale: 'ru',
+            themeSystem:'bootstrap',
+            firstDay: 1,
+            navLinks: true,
+            selectable: true,
+            editable: true,
+            weekNumbers: true,
+            weekText: 'Н',
+            weekNumberFormat: { week: 'short' },
+            dateClick: function(info) {
+                alert('Date: ' + info.dateStr);
+            },
+
+            // footerToolbar: true,
+            headerToolbar: {
+                start: 'prevYear,nextYear',
+                center: 'title',
+                end: 'today prev,next dayGridMonth,dayGridWeek,timeGridDay,listWeek',
+            },
+            buttonIcons: {
+                prev: 'left-single-arrow',
+                next: 'right-single-arrow',
+                prevYear: 'left-double-arrow',
+                nextYear: 'right-double-arrow',
+            },
+            buttonText: {
+                today: 'Сегодня',
+                month: 'Месяц',
+                week: 'Неделя',
+                day: 'День',
+                list: 'Список',
+            },
+            events: [
+                {
+                    title: "example",
+                    start: "2020-04-21",
+                    end: "2020-04-21",
+                }
+            ],
+            eventDrop: function(info) {
+                alert(info.event.title + " was dropped on " + info.event.start.toISOString());
+                if (!confirm("Are you sure about this change?")) {
+                    info.revert();
+                }
+            },
+            noEventsContent: 'Cобытий нет',
+            allDayText: 'На весь день',
+        });
+        calendar.render();
+    });
+</script>
 <script>
 $('#notificationToast').toast('show');
 </script>
