@@ -1,3 +1,4 @@
+<!--Футер (нижний блок)-->
 <footer style="background-color: var(--cyan-color)">
     <div class="container pt-4">
         <div class="row justify-content-center">
@@ -33,29 +34,73 @@
                     </div>
                     <div class="col-lg-2 col-6 col-sm-4 ml-lg-auto mb-5 mb-lg-0">
                         <h6 class="heading mb-3" style="font-weight: 700 ;color: var(--yellow-color)">Аккаунт</h6>
-                        <ul class="list-unstyled link-none">
-                            <li>
-                                <a href="#">Профиль</a>
-                            </li>
-                            <li>
-                                <a href="#">Чат</a>
-                            </li>
-                            <li>
-                                <a href="#">Медицинская карта</a>
-                            </li>
-                            <li>
-                                <a href="#">Дневник самонаблюдения</a>
-                            </li>
-                            <li>
-                                <a href="#">Услуги</a>
-                            </li>
-                            <li>
-                                <a href="#">Органайзер</a>
-                            </li>
-                            <li>
-                                <a href="#">Настройки</a>
-                            </li>
-                        </ul>
+                        <?php if($whose_user === 1) { ?>
+                            <ul class="list-unstyled link-none">
+                                <li>
+                                    <a href="/lk/">Профиль</a>
+                                </li>
+                                <li>
+                                    <a href="#">Чат</a>
+                                </li>
+                                <li>
+                                    <a href="#">Новости</a>
+                                </li>
+                                <li>
+                                    <a href="#">Питание</a>
+                                </li>
+                                <li>
+                                    <a href="/lk/services/">Услуги</a>
+                                </li>
+                                <li>
+                                    <a href="/lk/users/">Пользователи</a>
+                                </li>
+                                <li>
+                                    <a href="#">Анкетирование</a>
+                                </li>
+                                <li>
+                                    <a href="#">FAQ's</a>
+                                </li>
+                            </ul>
+                        <?php } elseif ($whose_user === 2) { ?>
+                            <ul class="list-unstyled link-none">
+                                <li>
+                                    <a href="/lk/">Профиль</a>
+                                </li>
+                                <li>
+                                    <a href="#">Чат</a>
+                                </li>
+                                <li>
+                                    <a href="/lk/medcard/">Медицинская карта</a>
+                                </li>
+                                <li>
+                                    <a href="#">Дневник самонаблюдения</a>
+                                </li>
+                                <li>
+                                    <a href="/lk/services/">Услуги</a>
+                                </li>
+                                <li>
+                                    <a href="#">Органайзер</a>
+                                </li>
+                                <li>
+                                    <a href="#">Настройки</a>
+                                </li>
+                            </ul>
+                        <?php } elseif ($whose_user === 3) { ?>
+                            <ul class="list-unstyled link-none">
+                                <li>
+                                    <a href="/lk/">Профиль</a>
+                                </li>
+                                <li>
+                                    <a href="#">Чат</a>
+                                </li>
+                                <li>
+                                    <a href="/lk/patients/">Пациенты</a>
+                                </li>
+                                <li>
+                                    <a href="#">Органайзер</a>
+                                </li>
+                            </ul>
+                        <?php } ?>
                     </div>
                     <div class="col-lg-2 col-6 col-sm-4 mb-5 mb-lg-0">
                         <h6 class="heading mb-3" style="font-weight: 700 ;color: var(--yellow-color)">Санаторий</h6>

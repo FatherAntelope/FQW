@@ -1,9 +1,9 @@
 <?php
-$whoseProfile = 2;
-if($whoseProfile === 1)
+$whose_user = 3;
+if($whose_user === 1)
     require $_SERVER['DOCUMENT_ROOT'] . "/lk/profile_admin.php";
-elseif ($whoseProfile === 2)
+elseif ($whose_user === 2)
     require $_SERVER['DOCUMENT_ROOT'] . "/lk/profile_patient.php";
-elseif ($whoseProfile === 3)
+elseif ($whose_user === 3)
     require $_SERVER['DOCUMENT_ROOT'] . "/lk/profile_doctor.php";
 ?>
