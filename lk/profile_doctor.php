@@ -281,5 +281,16 @@
 </body>
 <script>
     $('#notificationToast').toast('show');
+    $(document).ready(function() {
+        $('input[type=checkbox]').change(function() {
+
+            if (this.checked) {
+                $(this).next().css("text-decoration-line", "line-through");
+            } else {
+                $(this).next().css("text-decoration-line", "none");
+            }
+
+        });
+    });
 </script>
 </html>

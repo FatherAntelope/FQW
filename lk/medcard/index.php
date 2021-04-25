@@ -48,7 +48,7 @@ $whose_user = 2;
                             <div class="col-xl col-md">
                                 <h3 class="text-muted">Диагнозов</h3>
                                 <h2 style="color: var(--dark-cyan-color)">10</h2>
-                                <button type="button" class="btn btn-sm text-white btn-block" data-toggle="modal" data-target="#openModalDiagnoses" style="background-color: var(--dark-cyan-color)">Посмотреть</button>
+                                <button type="button" class="btn btn-sm text-white btn-block" data-toggle="modal" data-target="#openModalDisease" style="background-color: var(--dark-cyan-color)">Посмотреть</button>
                             </div>
                         </div>
                     </div>
@@ -162,7 +162,7 @@ $whose_user = 2;
                                         <div class="vertical-timeline-element-content bounce-in">
                                             <h4 class="timeline-title" style="color: var(--yellow-color)">Общий анализ крови</h4>
                                             <p class="mb-0">Принимал специалист: <a href="" class="text-decoration-none text-danger">Иванов И. И.</a></p>
-                                            <a class="text-decoration-none text-info" href="#" data-toggle="modal" data-target="#openModalInfoAnalysis">Подробнее...</a>
+                                            <a class="text-decoration-none text-info" href="#" data-toggle="modal" data-target="#openModalInfoExamination">Подробнее...</a>
                                             <span class="vertical-timeline-element-date text-muted">15.04.21</span>
                                         </div>
                                     </div>
@@ -242,7 +242,7 @@ $whose_user = 2;
 </div>
 
 <!--Модальное окно подробной информации об анализе-->
-<div class="modal fade" tabindex="-1" id="openModalInfoAnalysis">
+<div class="modal fade" tabindex="-1" id="openModalInfoExamination">
     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
@@ -265,7 +265,7 @@ $whose_user = 2;
 </div>
 
 <!--Модальное окно диагнозов-->
-<div class="modal fade" tabindex="-1" id="openModalDiagnoses">
+<div class="modal fade" tabindex="-1" id="openModalDisease">
     <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
