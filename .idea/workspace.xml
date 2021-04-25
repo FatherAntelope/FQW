@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="dd690a98-02d7-475c-ab21-dec0f2dd0976" name="Default Changelist" comment="Добавлены переходы между страницами для которых уже есть контент">
-      <change afterPath="$PROJECT_DIR$/lk/patients/diary.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lk/patients/medcard.php" afterDir="false" />
+    <list default="true" id="dd690a98-02d7-475c-ab21-dec0f2dd0976" name="Default Changelist" comment="Добавлена страница просмотра медкарты пациента у медперсонала без добавления записей">
+      <change afterPath="$PROJECT_DIR$/lk/settings/settings_patient.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth.php" beforeDir="false" afterPath="$PROJECT_DIR$/auth.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/footer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/header.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lk/medcard/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/medcard/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lk/patients/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/patients/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lk/patients/medcard.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/patients/medcard.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lk/profile_patient.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/profile_patient.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lk/settings.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/settings/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lk/users/add.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/users/add.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lk/users/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/users/index.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,11 +90,11 @@
       <recent name="D:\OpenServer\domains\fqw\error" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\OpenServer\domains\fqw\lk\settings" />
       <recent name="D:\OpenServer\domains\fqw\images" />
       <recent name="D:\OpenServer\domains\fqw\lk\users" />
       <recent name="D:\OpenServer\domains\fqw\css" />
       <recent name="D:\OpenServer\domains\fqw\frameworks" />
-      <recent name="D:\OpenServer\domains\fqw\lk\services" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -146,7 +155,8 @@
       <workItem from="1619098375325" duration="7430000" />
       <workItem from="1619176139461" duration="17942000" />
       <workItem from="1619260393913" duration="22583000" />
-      <workItem from="1619337340513" duration="8741000" />
+      <workItem from="1619337340513" duration="9784000" />
+      <workItem from="1619358025889" duration="17124000" />
     </task>
     <task id="LOCAL-00001" summary="Начал делать шапку">
       <created>1611600872960</created>
@@ -400,7 +410,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619283622029</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="Добавлена страница просмотра медкарты пациента у медперсонала без добавления записей">
+      <created>1619347957536</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1619347957536</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -422,7 +439,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Добавлены страницы ошибок. Дополнена навигационная панель. Начата реализация профиля" />
     <MESSAGE value="Начата реализация страницы регистрации пользователей. Добавлена форма регистрации пациента." />
     <MESSAGE value="Добавлены формы регистрации всех типов пользователей. Изменена форма регистрации пациента." />
     <MESSAGE value="Выровнены элементы меню. Добавлено содержимое панели личного кабинета." />
@@ -447,6 +463,7 @@
     <MESSAGE value="Изменена цветовая палитра элементов органайзера" />
     <MESSAGE value="Добавлена страница медкарты пациента" />
     <MESSAGE value="Добавлены переходы между страницами для которых уже есть контент" />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавлены переходы между страницами для которых уже есть контент" />
+    <MESSAGE value="Добавлена страница просмотра медкарты пациента у медперсонала без добавления записей" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавлена страница просмотра медкарты пациента у медперсонала без добавления записей" />
   </component>
 </project>

@@ -60,6 +60,9 @@
                                 <li>
                                     <a href="#">FAQ's</a>
                                 </li>
+                                <li>
+                                    <a href="/lk/settings/">Настройки</a>
+                                </li>
                             </ul>
                         <?php } elseif ($whose_user === 2) { ?>
                             <ul class="list-unstyled link-none">
@@ -82,7 +85,7 @@
                                     <a href="#">Органайзер</a>
                                 </li>
                                 <li>
-                                    <a href="#">Настройки</a>
+                                    <a href="/lk/settings/">Настройки</a>
                                 </li>
                             </ul>
                         <?php } elseif ($whose_user === 3) { ?>
@@ -98,6 +101,9 @@
                                 </li>
                                 <li>
                                     <a href="#">Органайзер</a>
+                                </li>
+                                <li>
+                                    <a href="/lk/settings/">Настройки</a>
                                 </li>
                             </ul>
                         <?php } ?>

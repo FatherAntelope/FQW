@@ -12,6 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script defer src="/js/all.js"></script>
     <title>Авторизация</title>
 </head>
 <style>
@@ -48,7 +49,16 @@
                                     <a href="#" class="float-right text-muted" data-toggle="modal" data-target="#openModalRecoveryPersonAccount">
                                         <small> Забыли пароль? </small>
                                     </a>
-                                    <input type="password" name="user_password" class="form-control" placeholder="Ваш пароль" required>
+                                    <div class="input-group" id="show_hide_password">
+                                        <input type="password" name="user_password" class="form-control" placeholder="Ваш пароль">
+                                        <div class="input-group-append" >
+                                                <span class="input-group-text">
+                                                    <a href="javascript://" class="text-muted text-decoration-none">
+                                                        <i id="pass_icon" class="fas fa-eye-slash"></i>
+                                                    </a>
+                                                </span>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="alert alert-danger alert-dismissible animate slideIn" role="alert" style="font-size: 12px">
                                     <strong>Ошибка авторизации.</strong>
@@ -112,6 +122,20 @@
         </div>
     </div>
 </div>
-
+<script>
+    $(document).ready(function() {
+        $("#show_hide_password a").on('click', function() {
+            if($(this).parent().parent().prev().attr('type') == "text"){
+                $(this).parent().parent().prev().attr('type', 'password');
+                $(this).children().removeClass("fa-eye");
+                $(this).children().addClass("fa-eye-slash" );
+            }else if($(this).parent().parent().prev().attr('type') == "password"){
+                $(this).parent().parent().prev().attr('type', 'text');
+                $(this).children().removeClass("fa-eye-slash" );
+                $(this).children().addClass("fa-eye");
+            }
+        });
+    });
+</script>
 </body>
 </html>

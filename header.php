@@ -105,8 +105,8 @@
                         <i class="fas fa-id-card mr-2"></i>
                         Профиль
                     </a>
-                    <a class="dropdown-item" href="#" style="color: var(--dark-cyan-color)">
-                        <i class="fas fa-cog mr-2"></i>
+                    <a class="dropdown-item" href="/lk/settings/" style="color: var(--dark-cyan-color)">
+                        <i class="fas fa-user-cog mr-2"></i>
                         Настройки
                     </a>
                     <a class="dropdown-item" href="#" style="color: var(--dark-cyan-color)">

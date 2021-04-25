@@ -390,3 +390,8 @@ body {
     border-radius: 3px;
     display: inline-block;
 }
+
+.custom-control-input:checked~.custom-control-label::before {
+    border-color: var(--dark-cyan-color) !important;
+    background-color: var(--dark-cyan-color) !important;
+}

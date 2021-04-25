@@ -62,7 +62,7 @@ $whose_user = 1;
                             <tr>
                                 <th>Пациент</th>
                                 <th>ID карты</th>
-                                <th>Тип</th>
+                                <th>Категория</th>
                                 <th>Почта</th>
                                 <th>Телефон</th>
                                 <th>Действие</th>
@@ -70,9 +70,9 @@ $whose_user = 1;
                             </thead>
                             <tbody>
                             <tr>
-                                <td class="text-muted" data-label="Пац.-т:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
+                                <td class="text-muted" data-label="Пац.-т:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Шамсемухаметов И. И.</td>
                                 <td class="text-muted" data-label="ID карты:">123456789</td>
-                                <td class="text-muted" data-label="Тип:">Лечащийся</td>
+                                <td class="text-muted" data-label="Тип:"><span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">Лечащийся</span></td>
                                 <td class="text-muted" data-label="Почта:">info@mail.ru</td>
                                 <td class="text-muted" data-label="Телефон:">+7 (999) 999-99-99</td>
                                 <td>
@@ -84,12 +84,42 @@ $whose_user = 1;
                                     </ul>
                                 </td>
                             </tr>
+                            <tr>
+                                <td class="text-muted" data-label="Пац.-т:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
+                                <td class="text-muted" data-label="ID карты:">123456789</td>
+                                <td class="text-muted" data-label="Тип:"><span class="badge badge-pill text-muted" style="background-color: var(--yellow-color)">Отдыхающий</span></td>
+                                <td class="text-muted" data-label="Почта:">info@mail.ru</td>
+                                <td class="text-muted" data-label="Телефон:">+7 (999) 999-99-99</td>
+                                <td>
+                                    <ul class="list-unstyled">
+                                        <li><button type="button" class="btn mt-1 btn-sm btn-secondary text-white" data-toggle="modal" data-target="#openModalRecoveryPasswordUser">Восстановить пароль</button></li>
+                                        <li><button type="button" class="btn mt-1 btn-sm text-white" style="background-color: var(--cyan-color)">Профиль</button></li>
+                                        <li><button type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)">Редактирование</button></li>
+                                        <li><button type="button" class="btn mt-1 btn-sm btn-danger" data-toggle="modal" data-target="#openModalRemoveUser">Удаление</button></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-muted" data-label="Пац.-т:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
+                                <td class="text-muted" data-label="ID карты:">123456789</td>
+                                <td class="text-muted" data-label="Тип:"><span class="badge badge-pill badge-danger">Выписан</span></td>
+                                <td class="text-muted" data-label="Почта:">info@mail.ru</td>
+                                <td class="text-muted" data-label="Телефон:">+7 (999) 999-99-99</td>
+                                <td>
+                                    <ul class="list-unstyled">
+                                        <li><button type="button" class="btn mt-1 btn-sm btn-secondary text-white" data-toggle="modal" data-target="#openModalRecoveryPatientAccess">Восстановить доступ</button></li>
+                                        <li><button type="button" class="btn mt-1 btn-sm text-white" style="background-color: var(--cyan-color)">Профиль</button></li>
+                                        <li><button type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)">Редактирование</button></li>
+                                        <li><button type="button" class="btn mt-1 btn-sm btn-danger" data-toggle="modal" data-target="#openModalRemoveUser">Удаление</button></li>
+                                    </ul>
+                                </td>
+                            </tr>
                             </tbody>
                             <tfoot class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
                                 <th>Пациент</th>
                                 <th>ID карты</th>
-                                <th>Тип</th>
+                                <th>Категория</th>
                                 <th>Почта</th>
                                 <th>Телефон</th>
                                 <th>Действие</th>
@@ -256,6 +286,44 @@ $whose_user = 1;
     </div>
 </div>
 
+<!--Модальное окно восстановления доступа пользователя после его повторного приезда-->
+<div class="modal fade" tabindex="-1" id="openModalRecoveryPatientAccess" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" style="color: var(--cyan-color)">Восстановление доступа</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-info" role="alert" style="font-size: 12px">
+                    Пользователь <b>Иванов И. И.</b> повторно приехал в санаторий? Выберите его категорию
+                </div>
+                <label style="color: var(--yellow-color)">Категория пациента <strong style="color: var(--red--color)">*</strong></label><br>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="radio_box_healing" name="user_type" value="healing" class="custom-control-input" checked>
+                    <label class="custom-control-label" for="radio_box_healing">Лечащийся</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="radio_box_resting" name="user_type" value="resting" class="custom-control-input">
+                    <label class="custom-control-label" for="radio_box_resting">Отдыхающий</label>
+                </div>
+                <div class="alert alert-info alert-dismissible fade show animate slideIn mt-3" role="alert" style="font-size: 12px">
+                    Пользователю на почту отправлено сообщение с восстановлением пароля к профилю!
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Нет</button>
+                <button type="button" class="btn btn-success">Да</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!--Список всплывающих уведомлений-->
 <div class="position-fixed p-3" style="z-index: 5; right: 0; bottom: 0;">
     <!--Всплывающее уведомление-->
@@ -302,8 +370,6 @@ $whose_user = 1;
             '</tr>'
         );
     });
-
-
 
     $(document).on('click', '.minus', function(){
         $(this).closest('tr').remove();

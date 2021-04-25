@@ -54,8 +54,8 @@ $whose_user = 3;
                             <tr>
                                 <th>Пациент</th>
                                 <th>ID карты</th>
-                                <th>Тип</th>
                                 <th>Категория</th>
+                                <th>Группа</th>
                                 <th>Дневник</th>
                                 <th>Действие</th>
                             </tr>
@@ -64,8 +64,8 @@ $whose_user = 3;
                             <tr>
                                 <td class="text-muted" data-label="Пац.-т:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
                                 <td class="text-muted" data-label="ID карты:">123456789</td>
-                                <td class="text-muted" data-label="Тип:"><span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">Лечащийся</span></td>
-                                <td class="text-muted" data-label="Категория:">
+                                <td class="text-muted" data-label="Категория:"><span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">Лечащийся</span></td>
+                                <td class="text-muted" data-label="Группа:">
                                     <ul class="list-unstyled">
                                         <li><span class="badge badge-pill text-white bg-secondary">Диабет</span></li>
                                         <li><span class="badge badge-pill text-white bg-secondary">Ковид</span></li>
@@ -83,8 +83,8 @@ $whose_user = 3;
                             <tr>
                                 <td class="text-muted" data-label="Пац.-т:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
                                 <td class="text-muted" data-label="ID карты:">123456789</td>
-                                <td class="text-muted" data-label="Тип:"><span class="badge badge-pill text-secondary" style="background-color: var(--yellow-color)">Отдыхающий</span></td>
-                                <td class="text-muted" data-label="Категория:">
+                                <td class="text-muted" data-label="Категория:"><span class="badge badge-pill text-secondary" style="background-color: var(--yellow-color)">Отдыхающий</span></td>
+                                <td class="text-muted" data-label="Группа:">
                                     <ul class="list-unstyled">
                                         <li><span class="badge badge-pill text-white bg-secondary">Пенсионер</span></li>
                                     </ul>
@@ -103,8 +103,8 @@ $whose_user = 3;
                             <tr>
                                 <th>Пациент</th>
                                 <th>ID карты</th>
-                                <th>Тип</th>
                                 <th>Категория</th>
+                                <th>Группа</th>
                                 <th>Дневник</th>
                                 <th>Действие</th>
                             </tr>
@@ -121,8 +121,8 @@ $whose_user = 3;
                             <tr>
                                 <th>Пациент</th>
                                 <th>ID карты</th>
-                                <th>Тип</th>
                                 <th>Категория</th>
+                                <th>Группа</th>
                                 <th>Участковый</th>
                                 <th>Действие</th>
                             </tr>
@@ -131,8 +131,8 @@ $whose_user = 3;
                             <tr>
                                 <td class="text-muted" data-label="Пац.-т:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
                                 <td class="text-muted" data-label="ID карты:">123456789</td>
-                                <td class="text-muted" data-label="Тип:"><span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">Лечащийся</span></td>
-                                <td class="text-muted" data-label="Категория:">
+                                <td class="text-muted" data-label="Категория:"><span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">Лечащийся</span></td>
+                                <td class="text-muted" data-label="Группа:">
                                     <ul class="list-unstyled">
                                         <li><span class="badge badge-pill text-white bg-secondary">Диабет</span></li>
                                         <li><span class="badge badge-pill text-white bg-secondary">Ковид</span></li>
@@ -150,8 +150,8 @@ $whose_user = 3;
                             <tr>
                                 <td class="text-muted" data-label="Пац.-т:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
                                 <td class="text-muted" data-label="ID карты:">123456789</td>
-                                <td class="text-muted" data-label="Тип:"><span class="badge badge-pill text-secondary" style="background-color: var(--yellow-color)">Отдыхающий</span></td>
-                                <td class="text-muted" data-label="Категория:">
+                                <td class="text-muted" data-label="Категория:"><span class="badge badge-pill text-secondary" style="background-color: var(--yellow-color)">Отдыхающий</span></td>
+                                <td class="text-muted" data-label="Группа:">
                                     <ul class="list-unstyled">
                                         <li><span class="badge badge-pill text-white bg-secondary">Пенсионер</span></li>
                                     </ul>
@@ -170,8 +170,8 @@ $whose_user = 3;
                             <tr>
                                 <th>Пациент</th>
                                 <th>ID карты</th>
-                                <th>Тип</th>
                                 <th>Категория</th>
+                                <th>Группа</th>
                                 <th>Участковый</th>
                                 <th>Действие</th>
                             </tr>

@@ -102,7 +102,7 @@ if($getSelected != "patient" &&
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
-                                    <label style="color: var(--yellow-color)">Тип пациента <strong style="color: var(--red--color)">*</strong></label><br>
+                                    <label style="color: var(--yellow-color)">Категория пациента <strong style="color: var(--red--color)">*</strong></label><br>
                                     <div class="custom-control custom-radio custom-control-inline">
                                         <input type="radio" id="radio_box_healing" name="user_type" value="healing" class="custom-control-input" checked>
                                         <label class="custom-control-label" for="radio_box_healing">Лечащийся</label>

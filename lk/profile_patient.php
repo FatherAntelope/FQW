@@ -44,7 +44,7 @@
                                 <h5 class="text-muted">Возраст: 22 (01.01.1999)</h5>
                                 <h5 class="text-muted">Пол: Мужской</h5>
                                 <h5 class="text-muted">Рост: 170 cм. </h5>
-                                <h5 class="text-muted">Тип: Лечащийся </h5>
+                                <h5 class="text-muted">Категория: Лечащийся </h5>
                             </div>
                             <div class="col-lg-7">
                                 <h5 class="text-muted">ID карты: 123456789</h5>
@@ -52,7 +52,7 @@
                                 <h5 class="text-muted">Дата поступления: 01.01.1999</h5>
                                 <div class="row">
                                     <div class="col-lg-3">
-                                        <h5 class="text-muted">Категория:</h5>
+                                        <h5 class="text-muted">Группа пациента:</h5>
                                     </div>
                                     <div class="col">
                                         <ul class="list-unstyled">

@@ -35,6 +35,7 @@ $whose_user = 3;
                 <li class="breadcrumb-item"><a href="#" style="color: var(--dark-cyan-color)">Иванов И. И. (1234)</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Медкарта</li>
             </ol>
+        </nav>
             <ul class="nav nav-pills flex-column flex-sm-row mb-2" role="tablist">
                 <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
                     <a class="nav-link tab-bg-active font-weight-bold active" data-toggle="tab" href="#tab_epicrisis" role="tab">
@@ -66,7 +67,7 @@ $whose_user = 3;
                 <div class="tab-pane fade show active" id="tab_epicrisis" role="tabpanel">
                     <div class="card">
                         <div class="card-body">
-                            <a href="#" class="btn btn-sm btn-success float-right text-white mb-2">
+                            <a href="#" class="btn btn-sm btn-success float-right text-white mb-2" data-toggle="modal" data-target="#openModalAddEpicrisis">
                                 <i class="fas fa-plus-circle mr-2"></i>Добавить эпикриз
                             </a>
                             <table id="table_epicrisis" class="table table-striped table-hover">
@@ -85,7 +86,7 @@ $whose_user = 3;
                                     <td class="text-muted" data-label="ID:">12345</td>
                                     <td class="text-muted" data-label="Анамнез:" style="max-width: 15rem">
                                         <p>
-                                            <?
+                                            <?php
                                             $string = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquam commodi corporis debitis dolor eaque esse eveniet expedita laudantium molestias non optio quia, recusandae tempore tenetur veniam voluptates voluptatum. Accusamus adipisci cum nam quae sunt? Autem fugit necessitatibus totam! Accusamus ad earum modi nisi numquam qui repellat suscipit tempora velit!";
                                             echo mb_strimwidth($string, 0, 100, '...');
                                             ?>
@@ -105,7 +106,7 @@ $whose_user = 3;
                                     <td class="text-muted" data-label="ID:">12345</td>
                                     <td class="text-muted" data-label="Анамнез:" style="max-width: 15rem">
                                         <p>
-                                            <?
+                                            <?php
                                             $string = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquam commodi corporis debitis dolor eaque esse eveniet expedita laudantium molestias non optio quia, recusandae tempore tenetur veniam voluptates voluptatum. Accusamus adipisci cum nam quae sunt? Autem fugit necessitatibus totam! Accusamus ad earum modi nisi numquam qui repellat suscipit tempora velit!";
                                             echo mb_strimwidth($string, 0, 100, '...');
                                             ?>
@@ -251,7 +252,7 @@ $whose_user = 3;
                     <div class="card">
                         <div class="card-body">
                             <a href="#" class="btn btn-sm btn-success float-right text-white mb-2">
-                                <i class="fas fa-plus-circle mr-2"></i>Добавить эпикриз
+                                <i class="fas fa-plus-circle mr-2"></i>Добавить рекомендацию
                             </a>
                             <table id="table_recommendations" class="table table-striped table-hover">
                                 <thead class="text-white" style="background-color: var(--cyan-color);">
@@ -260,7 +261,7 @@ $whose_user = 3;
                                     <th>Название</th>
                                     <th>Тип</th>
                                     <th>Повторы</th>
-                                    <th>Порекомендовал</th>
+                                    <th>Врач</th>
                                     <th>Действие</th>
                                 </tr>
                                 </thead>
@@ -298,7 +299,7 @@ $whose_user = 3;
                                     <th>Название</th>
                                     <th>Тип</th>
                                     <th>Повторы</th>
-                                    <th>Порекомендовал</th>
+                                    <th>Врач</th>
                                     <th>Действие</th>
                                 </tr>
                                 </tfoot>
@@ -319,6 +320,7 @@ $whose_user = 3;
                                     <th>Доза</th>
                                     <th>Правило приема</th>
                                     <th>Повторы</th>
+                                    <th>Срок, д.</th>
                                     <th>Врач</th>
                                     <th>Действие</th>
                                 </tr>
@@ -329,6 +331,7 @@ $whose_user = 3;
                                     <td class="text-muted" data-label="Доза:">1/2 таблетки</td>
                                     <td class="text-muted" data-label="ПП:">Во время еды</td>
                                     <td class="text-muted" data-label="Повторы:">3 раза в день</td>
+                                    <td class="text-muted" data-label="Срок, д.:">10</td>
                                     <td class="text-muted" data-label="Врач:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
                                     <td>
                                         <ul class="list-unstyled">
@@ -342,6 +345,7 @@ $whose_user = 3;
                                     <td class="text-muted" data-label="Доза:">1/2 таблетки</td>
                                     <td class="text-muted" data-label="ПП:">Во время еды</td>
                                     <td class="text-muted" data-label="Повторы:">3 раза в день</td>
+                                    <td class="text-muted" data-label="Срок, д.:">10</td>
                                     <td class="text-muted" data-label="Врач:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
                                     <td>
                                     </td>
@@ -353,6 +357,7 @@ $whose_user = 3;
                                     <th>Доза</th>
                                     <th>Правило приема</th>
                                     <th>Повторы</th>
+                                    <th>Срок, д.</th>
                                     <th>Врач</th>
                                     <th>Действие</th>
                                 </tr>
@@ -453,10 +458,30 @@ $whose_user = 3;
     </div>
 </div>
 
+<!--Модальное окно добавления эпикриза-->
+<div class="modal fade" tabindex="-1" id="openModalAddEpicrisis">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" style="color: var(--cyan-color)">Добавление выписного эпикриза</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!--Модальное окно удаления записи-->
 <div class="modal fade" tabindex="-1" id="openModalRemoveNote" data-backdrop="static">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+        <div class="modal-content" >
             <div class="modal-body">
                 <div class="alert alert-danger" role="alert">
                     Вы уверены, что хотите удалить данную запись?
@@ -517,7 +542,6 @@ $whose_user = 3;
                 "previous": "Назад"
             }
         },
-
     });
 </script>
 </html>

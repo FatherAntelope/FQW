@@ -404,6 +404,7 @@ $whose_user = 2;
                         <th>Доза</th>
                         <th>Правило приема</th>
                         <th>Повторы</th>
+                        <th>Срок, д.</th>
                         <th>Врач</th>
                     </tr>
                     </thead>
@@ -413,6 +414,7 @@ $whose_user = 2;
                         <td class="text-muted" data-label="Доза:">1/2 таблетки</td>
                         <td class="text-muted" data-label="ПП:">Во время еды</td>
                         <td class="text-muted" data-label="Повторы:">3 раза в день</td>
+                        <td class="text-muted" data-label="Срок, д.:">10</td>
                         <td class="text-muted" data-label="Врач:">Иванов И. И.</td>
                     </tr>
                     </tbody>
