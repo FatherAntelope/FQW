@@ -39,7 +39,7 @@
                     <div class="card-header text-center" style="background-color: var(--cyan-color">
                         <img src="/images/user.png" class="rounded-circle img-thumbnail" style="height: 12rem;width: 12rem;">
                         <h4 class="mb-0 mt-2" style="color: var(--yellow-color)">"Имя Фамилия"</h4>
-                        <p class="mb-2 text-white" >Пациент</p>
+                        <p class="mb-2 text-white" >Медперсонал</p>
                         <button data-toggle="modal" data-target="#openModalReplaceAvatar" class="btn btn-warning btn-sm text-white" style="background-color: var(--yellow-color)">
                             Изменить фото
                         </button>
@@ -53,33 +53,21 @@
                                 <span class="ml-2">10 (10.10.1000)</span>
                             </p>
                             <p class="text-muted mb-1">
-                                <strong>Категория:</strong>
-                                <span class="ml-2">Лечащийся</span>
+                                <strong>Должность:</strong>
+                                <span class="ml-2">Врач</span>
                             </p>
                             <p class="text-muted mb-1">
-                                <strong>Регион проживания:</strong>
-                                <span class="ml-2">Республика Башкортостан</span>
+                                <strong>Кв. категория:</strong>
+                                <span class="ml-2">Высшая</span>
                             </p>
                             <p class="text-muted mb-1">
-                                <strong>ID карты:</strong>
-                                <span class="ml-2">123456789</span>
-                            </p>
-                            <h6 class="mt-3 text-muted text-uppercase bg-light p-2"><i class="fas fa-address-book mr-1"></i>Паспортные данные данные</h6>
-                            <p class="text-muted mb-1">
-                                <strong>Серия и номер:</strong>
-                                <span class="ml-2">99 99 999999</span>
+                                <strong>Специальность:</strong>
+                                <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">Терапевт</span>
+                                <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">Хирург</span>
                             </p>
                             <p class="text-muted mb-1">
-                                <strong>Код подразделения:</strong>
-                                <span class="ml-2">111-111</span>
-                            </p>
-                            <p class="text-muted mb-1">
-                                <strong>Дата выдачи:</strong>
-                                <span class="ml-2">01.01.2020</span>
-                            </p>
-                            <p class="text-muted mb-1">
-                                <strong>Кем выдан:</strong>
-                                <span class="ml-2">Отделом МВД по РБ в г.Уфа</span>
+                                <strong>Стаж:</strong>
+                                <span class="ml-2">14 лет</span>
                             </p>
                         </div>
                     </div>
@@ -202,6 +190,36 @@
                                         <button type="submit" class="btn mb-3 text-white" style="background-color: var(--cyan-color)">Изменить<i class="fas fa-key ml-2"></i></button>
                                     </div>
                                 </form>
+                                <form>
+                                    <h5 class="mb-3 text-muted text-uppercase bg-light p-2"><i class="fas fa-graduation-cap mr-1"></i>Достижения</h5>
+                                    <div class="form-group">
+                                        <label style="color: var(--yellow-color)">Биография</label>
+                                        <textarea class="form-control" placeholder="Чем владеете, чем занимаетесь и т.п."></textarea>
+                                        <small class="text-muted form-text">Напишите о себе</small>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col" id="list_education">
+                                            <label style="color: var(--yellow-color)">Образование и повышение квалификации</label>
+                                            <div class="alert alert-info">Сначала укажите даты, затем опишите где вы учились или чего достигли.
+                                                <br> Например: <b>2003-2008 гг. Башкирский государственный медицинский университет </b></div>
+                                            <table class="table table-sm table-borderless information_json">
+                                                <tr class="information_json_plus">
+                                                    <td class="pl-0">
+                                                <span class="btn btn-sm btn-success rounded-circle plus-education">
+                                                    <i class="fas fa-plus"></i>
+                                                </span>
+                                                    </td>
+                                                    <td class="pl-0"></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div class="text-right">
+                                        <button type="submit" class="btn mb-3 text-white" style="background-color: var(--cyan-color)">Изменить<i class="fas fa-graduation-cap ml-2"></i></button>
+                                    </div>
+                                </form>
+
                             </div>
                         </div>
                     </div>
@@ -234,8 +252,8 @@
                                     <div class="alert alert-info">Выберите какие виджеты отображать в профиле?</div>
                                     <div class="ml-3">
                                         <div class="custom-switch custom-control">
-                                            <input class="custom-control-input" id="widget_diary" type="checkbox" checked>
-                                            <label class="custom-control-label text-muted" for="widget_diary">Краткая информация по дневнику самонаблюдения</label>
+                                            <input class="custom-control-input" id="widget_info_patients" type="checkbox" checked>
+                                            <label class="custom-control-label text-muted" for="widget_info_patients">Краткая информация по пациентам</label>
                                         </div>
                                         <div class="custom-switch custom-control mt-2">
                                             <input class="custom-control-input" id="widget_tasks" type="checkbox" checked>
@@ -333,6 +351,19 @@
                 $(this).children().addClass("fa-eye");
             }
         });
+    });
+
+    $(document).on('click', '.plus-education', function(){
+        $(this).closest('.information_json_plus').before(
+            '<tr>' +
+            '<td class="pl-0"><input type="text" class="form-control" name=education_json_val[]" placeholder="Даты. Описание" required></td>' +
+            '<td class="pl-0"><span class="btn btn-sm btn-danger rounded-circle minus mt-1"><i class="fas fa-minus"></i></span></td>' +
+            '</tr>'
+        );
+    });
+
+    $(document).on('click', '.minus', function(){
+        $(this).closest('tr').remove();
     });
 
     $('.custom-file-input').on('change', function() {

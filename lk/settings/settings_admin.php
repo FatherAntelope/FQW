@@ -39,7 +39,9 @@
                     <div class="card-header text-center" style="background-color: var(--cyan-color">
                         <img src="/images/user.png" class="rounded-circle img-thumbnail" style="height: 12rem;width: 12rem;">
                         <h4 class="mb-0 mt-2" style="color: var(--yellow-color)">"Имя Фамилия"</h4>
-                        <p class="mb-2 text-white" >Пациент</p>
+                        <p class="mb-2 text-white" >
+                            Администратор
+                        </p>
                         <button data-toggle="modal" data-target="#openModalReplaceAvatar" class="btn btn-warning btn-sm text-white" style="background-color: var(--yellow-color)">
                             Изменить фото
                         </button>
@@ -49,37 +51,8 @@
                         <div class="text-left mt-1">
                             <h6 class="text-muted text-uppercase bg-light p-2"><i class="fas fa-address-book mr-1"></i>Основные данные</h6>
                             <p class="text-muted mb-1">
-                                <strong>Возраст:</strong>
-                                <span class="ml-2">10 (10.10.1000)</span>
-                            </p>
-                            <p class="text-muted mb-1">
-                                <strong>Категория:</strong>
-                                <span class="ml-2">Лечащийся</span>
-                            </p>
-                            <p class="text-muted mb-1">
-                                <strong>Регион проживания:</strong>
-                                <span class="ml-2">Республика Башкортостан</span>
-                            </p>
-                            <p class="text-muted mb-1">
-                                <strong>ID карты:</strong>
-                                <span class="ml-2">123456789</span>
-                            </p>
-                            <h6 class="mt-3 text-muted text-uppercase bg-light p-2"><i class="fas fa-address-book mr-1"></i>Паспортные данные данные</h6>
-                            <p class="text-muted mb-1">
-                                <strong>Серия и номер:</strong>
-                                <span class="ml-2">99 99 999999</span>
-                            </p>
-                            <p class="text-muted mb-1">
-                                <strong>Код подразделения:</strong>
-                                <span class="ml-2">111-111</span>
-                            </p>
-                            <p class="text-muted mb-1">
-                                <strong>Дата выдачи:</strong>
-                                <span class="ml-2">01.01.2020</span>
-                            </p>
-                            <p class="text-muted mb-1">
-                                <strong>Кем выдан:</strong>
-                                <span class="ml-2">Отделом МВД по РБ в г.Уфа</span>
+                                <strong>Должность:</strong>
+                                <span class="ml-2">Главный администратор</span>
                             </p>
                         </div>
                     </div>
@@ -235,15 +208,11 @@
                                     <div class="ml-3">
                                         <div class="custom-switch custom-control">
                                             <input class="custom-control-input" id="widget_diary" type="checkbox" checked>
-                                            <label class="custom-control-label text-muted" for="widget_diary">Краткая информация по дневнику самонаблюдения</label>
+                                            <label class="custom-control-label text-muted" for="widget_diary">Мониторинг пользователей</label>
                                         </div>
                                         <div class="custom-switch custom-control mt-2">
                                             <input class="custom-control-input" id="widget_tasks" type="checkbox" checked>
-                                            <label class="custom-control-label text-muted" for="widget_tasks">Задачи текущего дня</label>
-                                        </div>
-                                        <div class="custom-switch custom-control mt-2">
-                                            <input class="custom-control-input" id="widget_notes" type="checkbox" checked>
-                                            <label class="custom-control-label text-muted" for="widget_notes">Заметки текущего дня</label>
+                                            <label class="custom-control-label text-muted" for="widget_tasks">Мониторинг системы</label>
                                         </div>
                                     </div>
                                     <div class="text-right">

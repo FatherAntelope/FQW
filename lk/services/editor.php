@@ -483,7 +483,6 @@ $whose_user = 1;
         );
     });
 
-
     $(document).on('click', '.minus', function(){
         $(this).closest('tr').remove();
     });

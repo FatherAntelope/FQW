@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="dd690a98-02d7-475c-ab21-dec0f2dd0976" name="Default Changelist" comment="Добавлена страница просмотра медкарты пациента у медперсонала без добавления записей">
-      <change afterPath="$PROJECT_DIR$/lk/settings/settings_patient.php" afterDir="false" />
+    <list default="true" id="dd690a98-02d7-475c-ab21-dec0f2dd0976" name="Default Changelist" comment="Изменена страница настроек пациента">
+      <change afterPath="$PROJECT_DIR$/lk/settings/settings_admin.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lk/settings/settings_doctor.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth.php" beforeDir="false" afterPath="$PROJECT_DIR$/auth.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/footer.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/medcard/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/medcard/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lk/patients/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/patients/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/patients/medcard.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/patients/medcard.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/profile_patient.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/profile_patient.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/settings.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/settings/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/users/add.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/users/add.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/users/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/users/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lk/services/editor.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/services/editor.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lk/settings/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/settings/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lk/settings/settings_patient.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/settings/settings_patient.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +64,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Open Server 5.3.0/OSPanel/domains/heartblazeV2" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lk/settings" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -83,11 +78,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\OpenServer\domains\fqw\lk\settings" />
       <recent name="D:\OpenServer\domains\fqw\lk\services" />
       <recent name="D:\OpenServer\domains\fqw\lk" />
       <recent name="D:\OpenServer\domains\fqw" />
       <recent name="D:\OpenServer\domains\fqw\images" />
-      <recent name="D:\OpenServer\domains\fqw\error" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\OpenServer\domains\fqw\lk\settings" />
@@ -156,7 +151,8 @@
       <workItem from="1619176139461" duration="17942000" />
       <workItem from="1619260393913" duration="22583000" />
       <workItem from="1619337340513" duration="9784000" />
-      <workItem from="1619358025889" duration="17124000" />
+      <workItem from="1619358025889" duration="17780000" />
+      <workItem from="1619443682784" duration="4604000" />
     </task>
     <task id="LOCAL-00001" summary="Начал делать шапку">
       <created>1611600872960</created>
@@ -417,7 +413,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619347957536</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="Изменена страница настроек пациента">
+      <created>1619376823050</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1619376823050</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -439,7 +442,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Начата реализация страницы регистрации пользователей. Добавлена форма регистрации пациента." />
     <MESSAGE value="Добавлены формы регистрации всех типов пользователей. Изменена форма регистрации пациента." />
     <MESSAGE value="Выровнены элементы меню. Добавлено содержимое панели личного кабинета." />
     <MESSAGE value="Изменена бренд-иконка, футер и убран поиск в шапке" />
@@ -464,6 +466,7 @@
     <MESSAGE value="Добавлена страница медкарты пациента" />
     <MESSAGE value="Добавлены переходы между страницами для которых уже есть контент" />
     <MESSAGE value="Добавлена страница просмотра медкарты пациента у медперсонала без добавления записей" />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавлена страница просмотра медкарты пациента у медперсонала без добавления записей" />
+    <MESSAGE value="Изменена страница настроек пациента" />
+    <option name="LAST_COMMIT_MESSAGE" value="Изменена страница настроек пациента" />
   </component>
 </project>

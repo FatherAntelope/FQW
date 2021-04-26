@@ -7,12 +7,12 @@
         </button>
 
         <!--Иконка бренда (мини) в мобильном формате-->
-        <a class="navbar-brand" id="logo-small" href="#">
+        <a class="navbar-brand" id="logo-small" href="/">
             <img src="/images/logo-mini.png" alt="" height="40">
         </a>
 
         <!--Иконка бренда (мини) в широком формате-->
-        <a class="navbar-brand" id="logo-big" href="#">
+        <a class="navbar-brand" id="logo-big" href="/">
             <img src="/images/logo.png" alt="" height="40">
         </a>
 

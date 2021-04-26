@@ -138,7 +138,7 @@ $whose_user = 3;
                                         <li><span class="badge badge-pill text-white bg-secondary">Ковид</span></li>
                                     </ul>
                                 </td>
-                                <td class="text-muted" data-label="Участковый:">Иванов И.И.</td>
+                                <td class="text-muted" data-label="Участковый:">-</td>
                                 <td>
                                     <ul class="list-unstyled">
                                         <li><button type="button" class="btn mt-1 btn-sm text-white" style="background-color: var(--cyan-color)">Профиль</button></li>
@@ -156,7 +156,7 @@ $whose_user = 3;
                                         <li><span class="badge badge-pill text-white bg-secondary">Пенсионер</span></li>
                                     </ul>
                                 </td>
-                                <td class="text-muted" data-label="Участковый:">Иванов И.И.</td>
+                                <td class="text-muted" data-label="Участковый:">Иванов И. И.</td>
                                 <td>
                                     <ul class="list-unstyled">
                                         <li><button type="button" class="btn mt-1 btn-sm text-white" style="background-color: var(--cyan-color)">Профиль</button></li>
