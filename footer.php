@@ -1,8 +1,74 @@
+<!--Модальное окно поддержки-->
+<div class="modal fade" id="openModalSendMessageSupport">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" style="color: var(--cyan-color)">Задайте вопрос</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label style="color: var(--yellow-color)">Ваше имя <strong style="color: var(--red--color)">*</strong></label>
+                                <input type="text" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label style="color: var(--yellow-color)">Ваша почта <strong style="color: var(--red--color)">*</strong></label>
+                                <input type="email" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label style="color: var(--yellow-color)">Сообщение <strong style="color: var(--red--color)">*</strong></label>
+                                <textarea class="form-control" required></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-info text-white mr-1" style="background-color: var(--cyan-color)">
+                    <i class="fas fa-envelope mr-1"></i> Отправить
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!--Футер (нижний блок)-->
 <footer style="background-color: var(--cyan-color)">
     <div class="container pt-4">
         <div class="row justify-content-center">
             <div class="col-lg-12">
+                <?php if($whose_user === 0) { ?>
+                <div class="row align-items-center">
+                    <div class="col-lg-9">
+                        <h3 class="mb-2" style="color: var(--yellow-color)">
+                            Быстрый запуск
+                        </h3>
+                        <p class="lead mb-0 text-white opacity-8">
+                            Записываться на услуги и отслеживать результаты процесса лечения стало просто
+                        </p>
+                    </div>
+                    <div class="col-lg-3 text-lg-right mt-4 mt-lg-0">
+                        <a href="/auth.php" class="btn btn-warning btn-icon my-2 text-secondary" style="background-color: var(--yellow-color)">
+                            Приступить
+                        </a>
+                    </div>
+                </div>
+
+                <hr style="border-top: 3px solid var(--yellow-color);">
+                <?php } ?>
+
 
                 <div class="row">
                     <div class="col-lg-4 mb-5 mb-lg-0">
@@ -34,7 +100,13 @@
                     </div>
                     <div class="col-lg-2 col-6 col-sm-4 ml-lg-auto mb-5 mb-lg-0">
                         <h6 class="heading mb-3" style="font-weight: 700 ;color: var(--yellow-color)">Аккаунт</h6>
-                        <?php if($whose_user === 1) { ?>
+                        <?php if($whose_user === 0) { ?>
+                            <ul class="list-unstyled link-none">
+                                <li>
+                                    <a href="/auth.php">Авторизация</a>
+                                </li>
+                            </ul>
+                        <?php } elseif ($whose_user === 1) {  ?>
                             <ul class="list-unstyled link-none">
                                 <li>
                                     <a href="/lk/">Профиль</a>
@@ -123,10 +195,10 @@
                         <h6 class="heading mb-3" style="font-weight: 700 ;color: var(--yellow-color)">Помощь</h6>
                         <ul class="list-unstyled link-none">
                             <li>
-                                <a href="#">FAQ</a>
+                                <a href="/FAQ/">FAQ</a>
                             </li>
                             <li>
-                                <a href="#">Поддержка</a>
+                                <a href="#" data-toggle="modal" data-target="#openModalSendMessageSupport">Поддержка</a>
                             </li>
                         </ul>
                     </div>

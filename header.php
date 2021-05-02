@@ -1,3 +1,30 @@
+<?php if($whose_user === 0) { ?>
+<!--Меню для неавторизованного пользователя-->
+<nav class="navbar shadow-lg fixed-top navbar-expand-sm navbar-light" style="background: var(--cyan-color); padding: 0;">
+        <div class="container">
+            <!--Иконка бренда (мини) в мобильном формате-->
+            <a class="navbar-brand ml-3" id="logo-small" href="#">
+                <img src="/images/logo-mini.png" alt="" height="40">
+            </a>
+            <!--Иконка бренда (мини) в широком формате-->
+            <a class="navbar-brand" id="logo-big" href="#">
+                <img src="/images/logo.png" alt="" height="40">
+            </a>
+            <ul class="nav">
+                <li>
+                    <a class="nav-link arrow-none notify-icon" href="#">
+                        <i class="bi bi-newspaper"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="/auth.php" class="btn btn-warning text-secondary" style="background: var(--yellow-color); margin: 0.6rem 1rem">Авторизация</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+<?php } ?>
+
+<?php if($whose_user === 1 || $whose_user === 2 || $whose_user === 3) { ?>
 <!--Меню для авторизованного пользователя-->
 <nav class="navbar fixed-top navbar-expand-sm navbar-light p-0" style="background: var(--cyan-color);">
     <div class="container">
@@ -118,6 +145,7 @@
         </ul>
     </div>
 </nav>
+<?php } ?>
 
 <?php if($whose_user === 1) { ?>
 <!--Панель навигации по модулям администратора-->

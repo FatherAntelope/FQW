@@ -93,9 +93,9 @@
         </div>
         <!--Карточки мониторинга-->
         <div class="row">
-            <!--Карточка с информацией о своих пациентах-->
-            <div class="col-xl-3 col-md-6 mt-3">
-                <div class="card h-100">
+            <div class="col-xl-3 col-md-4 mt-3">
+                <!--Карточка с информацией о своих пациентах-->
+                <div class="card">
                     <div class="card-body">
                         <div class="float-right text-white widget-icon" style="background-color: var(--dark-cyan-color)">
                             <i class="fas fa-user-injured"></i>
@@ -104,20 +104,87 @@
                         <h3 class="mt-3 mb-3" style="color: var(--dark-cyan-color)">15</h3>
                     </div>
                 </div>
-            </div>
-            <!--Карточка с информацией дневниках самонаблюдения-->
-            <div class="col-xl col-md-6 mt-3">
-                <div class="card">
+                <!--Карточка с информацией о дневниках самонаблюдения-->
+                <div class="card mt-3">
                     <div class="card-body">
                         <div class="float-right bg-danger text-white widget-icon">
                             <i class="fas fa-heartbeat"></i>
                         </div>
-                        <h5 class="text-muted mt-0">Дневники самонаблюдения</h5>
+                        <h5 class="text-muted mt-0">Дневники</h5>
                         <h3 class="mt-3 mb-3" style="color: var(--dark-cyan-color)">7</h3>
                         <p class="mb-0 text-danger">
                             <i class="fas fa-arrow-alt-circle-down"></i> 10.08%
                         </p>
                         <p class="mb-0 text-muted">Вам нужно проверить все дневники самонаблюдения своих пациентов за текущий день</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!--Карточка с фиксированием посещения пациентов-->
+            <div class="col-xl col-md-8">
+                <div class="card mt-3">
+                    <div class="card-header-tab card-header">
+                        <div class="card-header-title font-weight-bold" style="color: var(--dark-cyan-color)"><i class="fa fa-user-check mr-2"></i>Фиксирование посещаемости пациентов</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12">
+                                <div class="text-center mt-2">
+                                    <img src="/images/no_data.svg" alt="" height="170">
+                                    <h5 class="mt-4 text-danger"><b>Пациенты отсутствуют</b></h5>
+                                    <p class="text-muted mb-0">К вам не записан ни один пациент на текущий день. Пригласите пациентов к себе на прием, если это необходимо</p>
+                                    <a href="#" class="btn text-white btn-sm" style="background-color: var(--cyan-color)">Пациенты</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="overflow-auto" style="max-height: 307px">
+                            <div class="table-responsive">
+                                <table class="table table-centered table-striped table-hover mb-0">
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <span class="text-muted">Иванов И.И.</span>
+                                        </td>
+                                        <td>
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" id="radio_box_expectation_1" name="user_visited_1" value="0" class="custom-control-input" checked>
+                                                <label class="custom-control-label" for="radio_box_expectation_1">Ожидание</label>
+                                            </div>
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" id="radio_box_visited_1" name="user_visited_1" value="1" class="custom-control-input">
+                                                <label class="custom-control-label" for="radio_box_visited_1">Посетил</label>
+                                            </div>
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" id="radio_box_not_visited_1" name="user_visited_1" value="2" class="custom-control-input">
+                                                <label class="custom-control-label" for="radio_box_not_visited_1">Не посетил</label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="text-muted">Кузнецов И.И.</span>
+                                        </td>
+                                        <td>
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" id="radio_box_expectation_2" name="user_visited_2" value="0" class="custom-control-input" checked>
+                                                <label class="custom-control-label" for="radio_box_expectation_2">Ожидание</label>
+                                            </div>
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" id="radio_box_visited_2" name="user_visited_2" value="1" class="custom-control-input">
+                                                <label class="custom-control-label" for="radio_box_visited_2">Посетил</label>
+                                            </div>
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" id="radio_box_not_visited_2" name="user_visited_2" value="2" class="custom-control-input">
+                                                <label class="custom-control-label" for="radio_box_not_visited_2">Не посетил</label>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -141,6 +208,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="table-responsive">
                             <table class="table table-centered table-striped table-hover mb-0">
                                 <tbody>
