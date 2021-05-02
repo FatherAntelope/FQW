@@ -181,7 +181,7 @@ $whose_user = 1;
                 <hr style="border-top: 3px solid var(--yellow-color);">
 
                 <div class="row">
-                    <div class="col-lg-8 d-flex justify-content-around flex-xl-row flex-md-row flex-sm-column flex-column">
+                    <div class="col-lg-12 d-flex justify-content-around flex-xl-row flex-md-row flex-sm-column flex-column">
                         <a href="tel:+7 (999) 999-99-99" aria-haspopup="true" style="text-decoration: none; color: var(--yellow-color)">
                             <h5 class="font-weight-bold"><i class="fas fa-phone mr-1"></i> +7 (999) 999-99-99</h5>
                         </a>
