@@ -84,7 +84,26 @@ $whose_user = 1;
 
                 <hr style="border-top: 3px solid var(--yellow-color);">
                 <div class="row">
-                    <div class="col">
+                    <div class="col-lg-4">
+                        <h5 class="text-muted">Паспортные данные:</h5>
+                        <p class="text-muted mb-1">
+                            <strong>Серия и номер:</strong>
+                            <span class="ml-2">99 99 999999</span>
+                        </p>
+                        <p class="text-muted mb-1">
+                            <strong>Код подразделения:</strong>
+                            <span class="ml-2">111-111</span>
+                        </p>
+                        <p class="text-muted mb-1">
+                            <strong>Дата выдачи:</strong>
+                            <span class="ml-2">01.01.2020</span>
+                        </p>
+                        <p class="text-muted mb-1">
+                            <strong>Кем выдан:</strong>
+                            <span class="ml-2">Отделом МВД по РБ в г.Уфа</span>
+                        </p>
+                    </div>
+                    <div class="col-lg-8">
                         <h5 class="text-muted">Субъективные жалобы:</h5>
                         <h6 class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda natus nemo quis sequi. Aut debitis deleniti id in possimus quidem, quo tempore tenetur! A cupiditate dicta dolore doloremque eius ex impedit laborum, libero, mollitia nam nemo optio praesentium qui quo reprehenderit similique totam. Ab delectus labore nihil. Deserunt, enim, vel!</h6>
                     </div>
@@ -162,7 +181,7 @@ $whose_user = 1;
                 <hr style="border-top: 3px solid var(--yellow-color);">
 
                 <div class="row">
-                    <div class="col-lg-12 d-flex justify-content-around flex-xl-row flex-md-row flex-sm-column flex-column">
+                    <div class="col-lg-8 d-flex justify-content-around flex-xl-row flex-md-row flex-sm-column flex-column">
                         <a href="tel:+7 (999) 999-99-99" aria-haspopup="true" style="text-decoration: none; color: var(--yellow-color)">
                             <h5 class="font-weight-bold"><i class="fas fa-phone mr-1"></i> +7 (999) 999-99-99</h5>
                         </a>
