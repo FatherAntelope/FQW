@@ -33,7 +33,6 @@ $whose_user = 3;
                 <li class="breadcrumb-item"><a href="#" style="color: var(--dark-cyan-color)">Иванов И. И.</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Дневник самонаблюдения</li>
             </ol>
-
         </nav>
     </div>
 </div>

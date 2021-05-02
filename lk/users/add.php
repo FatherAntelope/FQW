@@ -281,28 +281,8 @@ if($getSelected != "patient" &&
                             </div>
                             <h5 class="mb-3 text-muted text-uppercase bg-light p-2">
                                 <i class="fas fa-file-medical-alt mr-1"></i>
-                                Физические параметры и состояние здоровья
+                                Cостояние здоровья
                             </h5>
-                            <div class="row">
-                                <div class="col-lg-3">
-                                    <div class="form-group">
-                                        <label style="color: var(--yellow-color)">Рост</label>
-                                        <input type="number" min="10" max="300" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="form-group">
-                                        <label style="color: var(--yellow-color)">Вес</label>
-                                        <input type="number" min="10" max="300" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="form-group">
-                                        <label style="color: var(--yellow-color)">Артериальное давление</label>
-                                        <input type="number" min="10" max="300" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
                             <div class="row">
                                 <div class="col">
                                     <div class="form-group">
@@ -310,21 +290,6 @@ if($getSelected != "patient" &&
                                         <textarea class="form-control"></textarea>
                                         <small class="text-muted form-text">Кратко с чем поступил пациент</small>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6" id="list_diagnosis">
-                                    <label style="color: var(--yellow-color)">Диагнозы</label>
-                                    <table class="table table-sm table-borderless information_json">
-                                        <tr class="information_json_plus">
-                                            <td class="pl-0">
-                                                <span class="btn btn-sm btn-success rounded-circle plus">
-                                                    <i class="fas fa-plus"></i>
-                                                </span>
-                                            </td>
-                                            <td class="pl-0"></td>
-                                        </tr>
-                                    </table>
                                 </div>
                             </div>
                             <div class="text-right">
@@ -607,18 +572,6 @@ if($getSelected != "patient" &&
         console.log(index);
     });
 
-    $('.plus').click(function(){
-        $('.information_json_plus').before(
-            '<tr>' +
-            '<td class="pl-0"><input type="text" class="form-control" name="information_json_val[]" placeholder="Название диагноза" required></td>' +
-            '<td class="pl-0"><span class="btn btn-sm btn-danger rounded-circle minus mt-1"><i class="fas fa-minus"></i></span></td>' +
-            '</tr>'
-        );
-    });
-
-    $(document).on('click', '.minus', function(){
-        $(this).closest('tr').remove();
-    });
 
     $('.custom-file-input').on('change', function() {
         let fileName = $(this).val().split('\\').pop();

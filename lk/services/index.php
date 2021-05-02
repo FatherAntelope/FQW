@@ -244,7 +244,7 @@ $whose_user = 2;
                                 <td class="text-muted" data-label="Тип усл.:">
                                     <h5>
                                         <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">
-                                            <i class="fas fa-procedures mr-2"></i>Мероприятие
+                                            <i class="fas fa-walking mr-2"></i>Мероприятие
                                         </span>
                                     </h5>
                                 </td>
@@ -360,7 +360,7 @@ $whose_user = 2;
                                     <img src="/images/user.png" height="30" class="rounded-circle" alt="...">Николаев И. И.
                                 </td>
                                 <td class="text-muted" data-label="Распо-ие:">500 каб.</td>
-                                <td class="text-muted" data-label="Распо-ие:">10.12.21 13:10</td>
+                                <td class="text-muted" data-label="Дата:">10.12.21 13:10</td>
                                 <td>
                                     <ul class="list-unstyled">
                                         <li><button type="button" class="btn btn-sm text-secondary btn-block" style="background-color: var(--yellow-color)">Просмотр</button></li>
@@ -382,7 +382,7 @@ $whose_user = 2;
                                     <img src="/images/user.png" height="30" class="rounded-circle" alt="...">Иванов И. И.
                                 </td>
                                 <td class="text-muted" data-label="Распо-ие:">Зал 2</td>
-                                <td class="text-muted" data-label="Распо-ие:">11.12.21 12:10</td>
+                                <td class="text-muted" data-label="Дата:">11.12.21 12:10</td>
                                 <td>
                                     <ul class="list-unstyled">
                                         <li><button type="button" class="btn btn-sm text-secondary btn-block" style="background-color: var(--yellow-color)">Просмотр</button></li>
@@ -404,7 +404,7 @@ $whose_user = 2;
                                     <img src="/images/user.png" height="30" class="rounded-circle" alt="...">Кузнецова И. И.
                                 </td>
                                 <td class="text-muted" data-label="Распо-ие:">101 каб.</td>
-                                <td class="text-muted" data-label="Распо-ие:">11.12.21 12:10</td>
+                                <td class="text-muted" data-label="Дата:">11.12.21 12:10</td>
                                 <td>
                                     <ul class="list-unstyled">
                                         <li><button type="button" class="btn btn-sm text-secondary btn-block" style="background-color: var(--yellow-color)">Просмотр</button></li>
@@ -415,7 +415,7 @@ $whose_user = 2;
                                 <td class="text-muted" data-label="Тип усл.:">
                                     <h5>
                                         <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">
-                                            <i class="fas fa-procedures mr-2"></i>Мероприятие
+                                            <i class="fas fa-walking mr-2"></i>Мероприятие
                                         </span>
                                     </h5>
                                 </td>
@@ -426,7 +426,7 @@ $whose_user = 2;
                                     -
                                 </td>
                                 <td class="text-muted" data-label="Распо-ие:">Главный вход</td>
-                                <td class="text-muted" data-label="Распо-ие:">11.12.21 12:10</td>
+                                <td class="text-muted" data-label="Дата:">11.12.21 12:10</td>
                                 <td>
                                     <ul class="list-unstyled">
                                         <li><button type="button" class="btn btn-sm text-secondary btn-block" style="background-color: var(--yellow-color)">Просмотр</button></li>

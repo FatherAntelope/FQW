@@ -399,7 +399,6 @@ $whose_user = 1;
                 "previous": "Назад"
             }
         },
-
     });
 </script>
 </html>

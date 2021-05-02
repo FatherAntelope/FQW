@@ -36,338 +36,329 @@ $whose_user = 3;
                 <li class="breadcrumb-item active" aria-current="page">Медкарта</li>
             </ol>
         </nav>
-            <ul class="nav nav-pills flex-column flex-sm-row mb-2" role="tablist">
-                <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
-                    <a class="nav-link tab-bg-active font-weight-bold active" data-toggle="tab" href="#tab_epicrisis" role="tab">
-                        <i class="fas fa-notes-medical mr-1"></i>Эпикризы
-                    </a>
-                </li>
-                <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
-                    <a class="nav-link tab-bg-active font-weight-bold" data-toggle="tab" href="#tab_examinations" role="tab">
-                        <i class="fas fa-microscope mr-1"></i> Обследования
-                    </a>
-                </li>
-                <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
-                    <a class="nav-link tab-bg-active font-weight-bold" data-toggle="tab" href="#tab_disease" role="tab">
-                        <i class="fas fa-disease mr-1"></i> Диагнозы
-                    </a>
-                </li>
-                <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
-                    <a class="nav-link tab-bg-active font-weight-bold" data-toggle="tab" href="#tab_recommendations" role="tab">
-                        <i class="fas fa-clipboard mr-1"></i> Рекомендации
-                    </a>
-                </li>
-                <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
-                    <a class="nav-link tab-bg-active font-weight-bold" data-toggle="tab" href="#tab_pills" role="tab">
-                        <i class="fas fa-pills mr-1"></i> Лекарства
-                    </a>
-                </li>
-            </ul>
-            <div class="tab-content">
-                <div class="tab-pane fade show active" id="tab_epicrisis" role="tabpanel">
-                    <div class="card">
-                        <div class="card-body">
-                            <a href="#" class="btn btn-sm btn-success float-right text-white mb-2" data-toggle="modal" data-target="#openModalAddEpicrisis">
-                                <i class="fas fa-plus-circle mr-2"></i>Добавить эпикриз
-                            </a>
-                            <table id="table_epicrisis" class="table table-striped table-hover">
-                                <thead class="text-white" style="background-color: var(--cyan-color);">
-                                <tr>
-                                    <th>Дата</th>
-                                    <th>ID</th>
-                                    <th>Анамнез</th>
-                                    <th>Врач</th>
-                                    <th>Действие</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td class="text-muted" data-label="Дата:">01.01.2020</td>
-                                    <td class="text-muted" data-label="ID:">12345</td>
-                                    <td class="text-muted" data-label="Анамнез:" style="max-width: 15rem">
-                                        <p>
-                                            <?php
-                                            $string = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquam commodi corporis debitis dolor eaque esse eveniet expedita laudantium molestias non optio quia, recusandae tempore tenetur veniam voluptates voluptatum. Accusamus adipisci cum nam quae sunt? Autem fugit necessitatibus totam! Accusamus ad earum modi nisi numquam qui repellat suscipit tempora velit!";
-                                            echo mb_strimwidth($string, 0, 100, '...');
-                                            ?>
-                                        </p>
-                                    </td>
-                                    <td class="text-muted" data-label="Врач:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
-                                    <td>
-                                        <ul class="list-unstyled">
-                                            <li><button type="button" class="btn mt-1 btn-sm text-white" data-toggle="modal" data-target="#openModalInfoEpicrisis" style="background-color: var(--cyan-color)">Просмотр</button></li>
-                                            <li><button type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)">Редактирование</button></li>
-                                            <li><button type="button" class="btn mt-1 btn-sm btn-danger" data-toggle="modal" data-target="#openModalRemoveNote">Удаление</button></li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-muted" data-label="Дата:">01.01.2020</td>
-                                    <td class="text-muted" data-label="ID:">12345</td>
-                                    <td class="text-muted" data-label="Анамнез:" style="max-width: 15rem">
-                                        <p>
-                                            <?php
-                                            $string = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquam commodi corporis debitis dolor eaque esse eveniet expedita laudantium molestias non optio quia, recusandae tempore tenetur veniam voluptates voluptatum. Accusamus adipisci cum nam quae sunt? Autem fugit necessitatibus totam! Accusamus ad earum modi nisi numquam qui repellat suscipit tempora velit!";
-                                            echo mb_strimwidth($string, 0, 100, '...');
-                                            ?>
-                                        </p>
-                                    </td>
-                                    <td class="text-muted" data-label="Врач:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
-                                    <td>
-                                        <ul class="list-unstyled">
-                                            <li><button type="button" class="btn mt-1 btn-sm text-white" data-toggle="modal" data-target="#openModalInfoEpicrisis" style="background-color: var(--cyan-color)">Просмотр</button></li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                </tbody>
-                                <tfoot class="text-white" style="background-color: var(--cyan-color);">
-                                <tr>
-                                    <th>Дата</th>
-                                    <th>ID</th>
-                                    <th>Анамнез</th>
-                                    <th>Врач</th>
-                                    <th>Действие</th>
-                                </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane fade show" id="tab_examinations" role="tabpanel">
-                    <div class="card">
-                        <div class="card-body">
-                            <a href="#" class="btn btn-sm btn-success float-right text-white mb-2">
-                                <i class="fas fa-plus-circle mr-2"></i>Добавить обследование
-                            </a>
-                            <table id="table_examinations" class="table table-striped table-hover">
-                                <thead class="text-white" style="background-color: var(--cyan-color);">
-                                <tr>
-                                    <th>Дата</th>
-                                    <th>ID</th>
-                                    <th>Название</th>
-                                    <th>Специалист</th>
-                                    <th>Действие</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td class="text-muted" data-label="Дата:">01.01.2020</td>
-                                    <td class="text-muted" data-label="ID:">12345</td>
-                                    <td class="text-muted" data-label="Название:">
-                                        Общий анализ крови
-                                    </td>
-                                    <td class="text-muted" data-label="Врач:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
-                                    <td>
-                                        <ul class="list-unstyled">
-                                            <li><button type="button" class="btn mt-1 btn-sm text-white" data-toggle="modal" data-target="#openModalInfoExamination" style="background-color: var(--cyan-color)">Просмотр</button></li>
-                                            <li><button type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)">Редактирование</button></li>
-                                            <li><button type="button" class="btn mt-1 btn-sm btn-danger" data-toggle="modal" data-target="#openModalRemoveNote">Удаление</button></li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-muted" data-label="Дата:">01.01.2020</td>
-                                    <td class="text-muted" data-label="ID:">12345</td>
-                                    <td class="text-muted" data-label="Название:" style="max-width: 15rem">
-                                        Магнитно-резонансная терапия
-                                    </td>
-                                    <td class="text-muted" data-label="Врач:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
-                                    <td>
-                                        <ul class="list-unstyled">
-                                            <li><button type="button" class="btn mt-1 btn-sm text-white" data-toggle="modal" data-target="#openModalInfoExamination" style="background-color: var(--cyan-color)">Просмотр</button></li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                </tbody>
-                                <tfoot class="text-white" style="background-color: var(--cyan-color);">
-                                <tr>
-                                    <th>Дата</th>
-                                    <th>ID</th>
-                                    <th>Название</th>
-                                    <th>Специалист</th>
-                                    <th>Действие</th>
-                                </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane fade show" id="tab_disease" role="tabpanel">
-                    <div class="card">
-                        <div class="card-body">
-                            <a href="#" class="btn btn-sm btn-success float-right text-white mb-2">
-                                <i class="fas fa-plus-circle mr-2"></i>Добавить диагноз
-                            </a>
-                            <table id="table_disease" class="table table-striped table-hover">
-                                <thead class="text-white" style="background-color: var(--cyan-color);">
-                                <tr>
-                                    <th>Тип</th>
-                                    <th>МКБ</th>
-                                    <th>Описание</th>
-                                    <th>Врач</th>
-                                    <th>Действие</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td class="text-muted" data-label="Тип:">Основной</td>
-                                    <td class="text-muted" data-label="МКБ:">021.3</td>
-                                    <td class="text-muted" data-label="Описание:" style="max-width: 20rem">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis laborum, officiis perspiciatis reiciendis voluptas voluptatum.
-                                    </td>
-                                    <td class="text-muted" data-label="Врач:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
-                                    <td>
-                                        <ul class="list-unstyled">
-                                            <li><button type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)">Редактирование</button></li>
-                                            <li><button type="button" class="btn mt-1 btn-sm btn-danger" data-toggle="modal" data-target="#openModalRemoveNote">Удаление</button></li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-muted" data-label="Тип:">Сопутствующий</td>
-                                    <td class="text-muted" data-label="МКБ:">027</td>
-                                    <td class="text-muted" data-label="Описание:" style="max-width: 20rem">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur error quis sed velit voluptate? Laudantium.
-                                    </td>
-                                    <td class="text-muted" data-label="Врач:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
-                                    <td>
+        <ul class="nav nav-pills flex-column flex-sm-row mb-2" role="tablist">
+            <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
+                <a class="nav-link tab-bg-active font-weight-bold active" data-toggle="tab" href="#tab_epicrisis" role="tab">
+                    <i class="fas fa-notes-medical mr-1"></i>Эпикризы
+                </a>
+            </li>
+            <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
+                <a class="nav-link tab-bg-active font-weight-bold" data-toggle="tab" href="#tab_examinations" role="tab">
+                    <i class="fas fa-microscope mr-1"></i> Обследования
+                </a>
+            </li>
+            <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
+                <a class="nav-link tab-bg-active font-weight-bold" data-toggle="tab" href="#tab_disease" role="tab">
+                    <i class="fas fa-disease mr-1"></i> Диагнозы
+                </a>
+            </li>
+            <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
+                <a class="nav-link tab-bg-active font-weight-bold" data-toggle="tab" href="#tab_pills" role="tab">
+                    <i class="fas fa-pills mr-1"></i> Лекарства
+                </a>
+            </li>
+            <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
+                <a class="nav-link tab-bg-active font-weight-bold" data-toggle="tab" href="#tab_recommendations" role="tab">
+                    <i class="fas fa-clipboard mr-1"></i> Рекомендации
+                </a>
+            </li>
 
-                                    </td>
-                                </tr>
-                                </tbody>
-                                <tfoot class="text-white" style="background-color: var(--cyan-color);">
-                                <tr>
-                                    <th>Тип</th>
-                                    <th>МКБ</th>
-                                    <th>Описание</th>
-                                    <th>Врач</th>
-                                    <th>Действие</th>
-                                </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane fade show" id="tab_recommendations" role="tabpanel">
-                    <div class="card">
-                        <div class="card-body">
-                            <a href="#" class="btn btn-sm btn-success float-right text-white mb-2">
-                                <i class="fas fa-plus-circle mr-2"></i>Добавить рекомендацию
-                            </a>
-                            <table id="table_recommendations" class="table table-striped table-hover">
-                                <thead class="text-white" style="background-color: var(--cyan-color);">
-                                <tr>
-                                    <th>Рекомендация</th>
-                                    <th>Название</th>
-                                    <th>Тип</th>
-                                    <th>Повторы</th>
-                                    <th>Врач</th>
-                                    <th>Действие</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td class="text-muted" data-label="Рек.-ия:">Процедура</td>
-                                    <td class="text-muted" data-label="Наз.-ие:">Бассейн</td>
-                                    <td class="text-muted" data-label="Тип:">
-                                        <span class="badge badge-pill text-white" style="background-color: var(--cyan-color)">Дополнительно</span>
-                                    </td>
-                                    <td class="text-muted" data-label="Повторы:">По желанию</td>
-                                    <td class="text-muted" data-label="Порек.-л:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
-                                    <td>
-                                        <ul class="list-unstyled">
-                                            <li><button type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)">Редактирование</button></li>
-                                            <li><button type="button" class="btn mt-1 btn-sm btn-danger" data-toggle="modal" data-target="#openModalRemoveNote">Удаление</button></li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-muted" data-label="Рек.-ия:">Самоконтроль</td>
-                                    <td class="text-muted" data-label="Наз.-ие:">Пройти 3000 шагов</td>
-                                    <td class="text-muted" data-label="Тип:">
-                                        <span class="badge badge-pill badge-danger text-white">Обязательно</span>
-                                    </td>
-                                    <td class="text-muted" data-label="Повторы:">Ежедневно</td>
-                                    <td class="text-muted" data-label="Порек.-л:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
-                                    <td>
-                                    </td>
-                                </tr>
-                                </tbody>
-                                <tfoot class="text-white" style="background-color: var(--cyan-color);">
-                                <tr>
-                                    <th>Рекомендация</th>
-                                    <th>Название</th>
-                                    <th>Тип</th>
-                                    <th>Повторы</th>
-                                    <th>Врач</th>
-                                    <th>Действие</th>
-                                </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane fade show" id="tab_pills" role="tabpanel">
-                    <div class="card">
-                        <div class="card-body">
-                            <a href="#" class="btn btn-sm btn-success float-right text-white mb-2">
-                                <i class="fas fa-plus-circle mr-2"></i>Добавить лекарство
-                            </a>
-                            <table id="table_pills" class="table table-striped table-hover">
-                                <thead class="text-white" style="background-color: var(--cyan-color);">
-                                <tr>
-                                    <th>Название</th>
-                                    <th>Доза</th>
-                                    <th>Правило приема</th>
-                                    <th>Повторы</th>
-                                    <th>Срок, д.</th>
-                                    <th>Врач</th>
-                                    <th>Действие</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td class="text-muted" data-label="Название:">Диклофенак</td>
-                                    <td class="text-muted" data-label="Доза:">1/2 таблетки</td>
-                                    <td class="text-muted" data-label="ПП:">Во время еды</td>
-                                    <td class="text-muted" data-label="Повторы:">3 раза в день</td>
-                                    <td class="text-muted" data-label="Срок, д.:">10</td>
-                                    <td class="text-muted" data-label="Врач:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
-                                    <td>
-                                        <ul class="list-unstyled">
-                                            <li><button type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)">Редактирование</button></li>
-                                            <li><button type="button" class="btn mt-1 btn-sm btn-danger" data-toggle="modal" data-target="#openModalRemoveNote">Удаление</button></li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-muted" data-label="Название:">Диклофенак</td>
-                                    <td class="text-muted" data-label="Доза:">1/2 таблетки</td>
-                                    <td class="text-muted" data-label="ПП:">Во время еды</td>
-                                    <td class="text-muted" data-label="Повторы:">3 раза в день</td>
-                                    <td class="text-muted" data-label="Срок, д.:">10</td>
-                                    <td class="text-muted" data-label="Врач:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
-                                    <td>
-                                    </td>
-                                </tr>
-                                </tbody>
-                                <tfoot class="text-white" style="background-color: var(--cyan-color);">
-                                <tr>
-                                    <th>Название</th>
-                                    <th>Доза</th>
-                                    <th>Правило приема</th>
-                                    <th>Повторы</th>
-                                    <th>Срок, д.</th>
-                                    <th>Врач</th>
-                                    <th>Действие</th>
-                                </tr>
-                                </tfoot>
-                            </table>
-                        </div>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="tab_epicrisis" role="tabpanel">
+                <div class="card">
+                    <div class="card-body">
+                        <a href="/lk/patients/add_epicrisis.php" class="btn btn-sm btn-success float-right text-white mb-2">
+                            <i class="fas fa-plus-circle mr-2"></i>Добавить эпикриз
+                        </a>
+                        <table id="table_epicrisis" class="table table-striped table-hover">
+                            <thead class="text-white" style="background-color: var(--cyan-color);">
+                            <tr>
+                                <th>Дата</th>
+                                <th>ID</th>
+                                <th>Анамнез</th>
+                                <th>Врач</th>
+                                <th>Действие</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="text-muted" data-label="Дата:">01.01.2020</td>
+                                <td class="text-muted" data-label="ID:">12345</td>
+                                <td class="text-muted" data-label="Анамнез:" style="max-width: 15rem">
+                                    <p>
+                                        <?php
+                                        $string = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquam commodi corporis debitis dolor eaque esse eveniet expedita laudantium molestias non optio quia, recusandae tempore tenetur veniam voluptates voluptatum. Accusamus adipisci cum nam quae sunt? Autem fugit necessitatibus totam! Accusamus ad earum modi nisi numquam qui repellat suscipit tempora velit!";
+                                        echo mb_strimwidth($string, 0, 100, '...');
+                                        ?>
+                                    </p>
+                                </td>
+                                <td class="text-muted" data-label="Врач:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
+                                <td>
+                                    <ul class="list-unstyled">
+                                        <li><button type="button" class="btn mt-1 btn-sm text-white" data-toggle="modal" data-target="#openModalInfoEpicrisis" style="background-color: var(--cyan-color)">Просмотр</button></li>
+                                        <li><button type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)">Редактирование</button></li>
+                                        <li><button type="button" class="btn mt-1 btn-sm btn-danger" data-toggle="modal" data-target="#openModalRemoveNote">Удаление</button></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-muted" data-label="Дата:">01.01.2020</td>
+                                <td class="text-muted" data-label="ID:">12345</td>
+                                <td class="text-muted" data-label="Анамнез:" style="max-width: 15rem">
+                                    <p>
+                                        <?php
+                                        $string = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquam commodi corporis debitis dolor eaque esse eveniet expedita laudantium molestias non optio quia, recusandae tempore tenetur veniam voluptates voluptatum. Accusamus adipisci cum nam quae sunt? Autem fugit necessitatibus totam! Accusamus ad earum modi nisi numquam qui repellat suscipit tempora velit!";
+                                        echo mb_strimwidth($string, 0, 100, '...');
+                                        ?>
+                                    </p>
+                                </td>
+                                <td class="text-muted" data-label="Врач:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
+                                <td>
+                                    <ul class="list-unstyled">
+                                        <li><button type="button" class="btn mt-1 btn-sm text-white" data-toggle="modal" data-target="#openModalInfoEpicrisis" style="background-color: var(--cyan-color)">Просмотр</button></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <tfoot class="text-white" style="background-color: var(--cyan-color);">
+                            <tr>
+                                <th>Дата</th>
+                                <th>ID</th>
+                                <th>Анамнез</th>
+                                <th>Врач</th>
+                                <th>Действие</th>
+                            </tr>
+                            </tfoot>
+                        </table>
                     </div>
                 </div>
             </div>
-        </nav>
+            <div class="tab-pane fade show" id="tab_examinations" role="tabpanel">
+                <div class="card">
+                    <div class="card-body">
+                        <a href="#" class="btn btn-sm btn-success float-right text-white mb-2">
+                            <i class="fas fa-plus-circle mr-2"></i>Добавить обследование
+                        </a>
+                        <table id="table_examinations" class="table table-striped table-hover">
+                            <thead class="text-white" style="background-color: var(--cyan-color);">
+                            <tr>
+                                <th>Дата</th>
+                                <th>ID</th>
+                                <th>Название</th>
+                                <th>Специалист</th>
+                                <th>Действие</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="text-muted" data-label="Дата:">01.01.2020</td>
+                                <td class="text-muted" data-label="ID:">12345</td>
+                                <td class="text-muted" data-label="Название:">
+                                    Общий анализ крови
+                                </td>
+                                <td class="text-muted" data-label="Врач:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
+                                <td>
+                                    <ul class="list-unstyled">
+                                        <li><button type="button" class="btn mt-1 btn-sm text-white" data-toggle="modal" data-target="#openModalInfoExamination" style="background-color: var(--cyan-color)">Просмотр</button></li>
+                                        <li><button type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)">Редактирование</button></li>
+                                        <li><button type="button" class="btn mt-1 btn-sm btn-danger" data-toggle="modal" data-target="#openModalRemoveNote">Удаление</button></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-muted" data-label="Дата:">01.01.2020</td>
+                                <td class="text-muted" data-label="ID:">12345</td>
+                                <td class="text-muted" data-label="Название:" style="max-width: 15rem">
+                                    Магнитно-резонансная терапия
+                                </td>
+                                <td class="text-muted" data-label="Врач:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
+                                <td>
+                                    <ul class="list-unstyled">
+                                        <li><button type="button" class="btn mt-1 btn-sm text-white" data-toggle="modal" data-target="#openModalInfoExamination" style="background-color: var(--cyan-color)">Просмотр</button></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <tfoot class="text-white" style="background-color: var(--cyan-color);">
+                            <tr>
+                                <th>Дата</th>
+                                <th>ID</th>
+                                <th>Название</th>
+                                <th>Специалист</th>
+                                <th>Действие</th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade show" id="tab_disease" role="tabpanel">
+                <div class="card">
+                    <div class="card-body">
+                        <table id="table_disease" class="table table-striped table-hover">
+                            <thead class="text-white" style="background-color: var(--cyan-color);">
+                            <tr>
+                                <th>Тип</th>
+                                <th>МКБ</th>
+                                <th>Описание</th>
+                                <th>Врач</th>
+                                <th>Действие</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="text-muted" data-label="Тип:">Основной</td>
+                                <td class="text-muted" data-label="МКБ:">021.3</td>
+                                <td class="text-muted" data-label="Описание:" style="max-width: 20rem">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis laborum, officiis perspiciatis reiciendis voluptas voluptatum.
+                                </td>
+                                <td class="text-muted" data-label="Врач:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
+                                <td>
+                                    <ul class="list-unstyled">
+                                        <li><button type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)">Редактирование</button></li>
+                                        <li><button type="button" class="btn mt-1 btn-sm btn-danger" data-toggle="modal" data-target="#openModalRemoveNote">Удаление</button></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-muted" data-label="Тип:">Сопутствующий</td>
+                                <td class="text-muted" data-label="МКБ:">027</td>
+                                <td class="text-muted" data-label="Описание:" style="max-width: 20rem">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur error quis sed velit voluptate? Laudantium.
+                                </td>
+                                <td class="text-muted" data-label="Врач:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
+                                <td>
+
+                                </td>
+                            </tr>
+                            </tbody>
+                            <tfoot class="text-white" style="background-color: var(--cyan-color);">
+                            <tr>
+                                <th>Тип</th>
+                                <th>МКБ</th>
+                                <th>Описание</th>
+                                <th>Врач</th>
+                                <th>Действие</th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade show" id="tab_pills" role="tabpanel">
+                <div class="card">
+                    <div class="card-body">
+                        <table id="table_pills" class="table table-striped table-hover">
+                            <thead class="text-white" style="background-color: var(--cyan-color);">
+                            <tr>
+                                <th>Название</th>
+                                <th>Доза</th>
+                                <th>Правило приема</th>
+                                <th>Повторы</th>
+                                <th>Период, д.</th>
+                                <th>Врач</th>
+                                <th>Действие</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="text-muted" data-label="Название:">Диклофенак</td>
+                                <td class="text-muted" data-label="Доза:">1/2 таблетки</td>
+                                <td class="text-muted" data-label="ПП:">Во время еды</td>
+                                <td class="text-muted" data-label="Повторы:">3 раза в день</td>
+                                <td class="text-muted" data-label="Период, д.:">10</td>
+                                <td class="text-muted" data-label="Врач:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
+                                <td>
+                                    <ul class="list-unstyled">
+                                        <li><button type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)">Редактирование</button></li>
+                                        <li><button type="button" class="btn mt-1 btn-sm btn-danger" data-toggle="modal" data-target="#openModalRemoveNote">Удаление</button></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-muted" data-label="Название:">Диклофенак</td>
+                                <td class="text-muted" data-label="Доза:">1/2 таблетки</td>
+                                <td class="text-muted" data-label="ПП:">Во время еды</td>
+                                <td class="text-muted" data-label="Повторы:">3 раза в день</td>
+                                <td class="text-muted" data-label="Срок, д.:">10</td>
+                                <td class="text-muted" data-label="Врач:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
+                                <td>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <tfoot class="text-white" style="background-color: var(--cyan-color);">
+                            <tr>
+                                <th>Название</th>
+                                <th>Доза</th>
+                                <th>Правило приема</th>
+                                <th>Повторы</th>
+                                <th>Срок, д.</th>
+                                <th>Врач</th>
+                                <th>Действие</th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade show" id="tab_recommendations" role="tabpanel">
+                <div class="card">
+                    <div class="card-body">
+                        <table id="table_recommendations" class="table table-striped table-hover">
+                            <thead class="text-white" style="background-color: var(--cyan-color);">
+                            <tr>
+                                <th>Рекомендация</th>
+                                <th>Название</th>
+                                <th>Тип</th>
+                                <th>Период</th>
+                                <th>Врач</th>
+                                <th>Действие</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="text-muted" data-label="Рек.-ия:">Процедура</td>
+                                <td class="text-muted" data-label="Наз.-ие:">Бассейн</td>
+                                <td class="text-muted" data-label="Тип:">
+                                    <span class="badge badge-pill text-white" style="background-color: var(--cyan-color)">Дополнительно</span>
+                                </td>
+                                <td class="text-muted" data-label="Период:">По желанию</td>
+                                <td class="text-muted" data-label="Порек.-л:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
+                                <td>
+                                    <ul class="list-unstyled">
+                                        <li><button type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)">Редактирование</button></li>
+                                        <li><button type="button" class="btn mt-1 btn-sm btn-danger" data-toggle="modal" data-target="#openModalRemoveNote">Удаление</button></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-muted" data-label="Рек.-ия:">Самоконтроль</td>
+                                <td class="text-muted" data-label="Наз.-ие:">Пройти 3000 шагов</td>
+                                <td class="text-muted" data-label="Тип:">
+                                    <span class="badge badge-pill badge-danger text-white">Обязательно</span>
+                                </td>
+                                <td class="text-muted" data-label="Период:">Ежедневно</td>
+                                <td class="text-muted" data-label="Порек.-л:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
+                                <td>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <tfoot class="text-white" style="background-color: var(--cyan-color);">
+                            <tr>
+                                <th>Рекомендация</th>
+                                <th>Название</th>
+                                <th>Тип</th>
+                                <th>Период</th>
+                                <th>Врач</th>
+                                <th>Действие</th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -418,10 +409,38 @@ $whose_user = 3;
                 </h5>
                 <p class="text-muted">Жалобы: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex, placeat.</p>
                 <p class="text-muted">Анамнез: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex, placeat.</p>
+
+
+                <h5 class="mb-0 text-muted text-uppercase bg-light p-2">
+                    <i class="fas fa-pills mr-1"></i>
+                    Лекарства
+                </h5>
+                <table class="table table-striped table-hover table-sm">
+                    <thead class="text-white" style="background-color: var(--cyan-color);">
+                    <tr>
+                        <th>Название</th>
+                        <th>Доза</th>
+                        <th>Правило приема</th>
+                        <th>Повторы</th>
+                        <th>Срок, д.</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="text-muted" data-label="Название:">Диклофенак</td>
+                        <td class="text-muted" data-label="Доза:">1/2 таблетки</td>
+                        <td class="text-muted" data-label="ПП:">Во время еды</td>
+                        <td class="text-muted" data-label="Повторы:">3 раза в день</td>
+                        <td class="text-muted" data-label="Срок, д.:">10</td>
+                    </tr>
+                    </tbody>
+                </table>
+
                 <h5 class="mb-3 text-muted text-uppercase bg-light p-2">
                     <i class="fas fa-clipboard mr-1"></i>
                     Рекомендации
                 </h5>
+
                 <ul class="text-muted">
                     <li>Ограничение физических нагрузок</li>
                     <li>Ежедневная прогулка по 3000 шагов</li>
@@ -449,26 +468,6 @@ $whose_user = 3;
                 <h5 class="text-muted">Принимал специалист: <a href="" class="text-decoration-none text-danger">Иванов И. И.</a></h5>
                 <h5 class="text-muted">Название: Общий анализ крови</h5>
                 <h5 class="text-muted">Результаты:</h5>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Закрыть</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!--Модальное окно добавления эпикриза-->
-<div class="modal fade" tabindex="-1" id="openModalAddEpicrisis">
-    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title" style="color: var(--cyan-color)">Добавление выписного эпикриза</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
 
             </div>
             <div class="modal-footer">

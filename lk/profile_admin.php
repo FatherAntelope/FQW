@@ -30,7 +30,10 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-2 text-center">
-                        <img src="/images/user.png" class="img-thumbnail rounded-circle mb-4" width="120" alt="">
+                        <img src="/images/user.png" class="img-thumbnail rounded-circle mb-2" width="120" alt="">
+                        <br>
+                        <a href="/lk/settings/" type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)"><i class="fas fa-user-cog"></i></a>
+                        <button type="button" class="btn mt-1 btn-sm btn-danger text-white"><i class="fas fa-door-open"></i></button>
                     </div>
                     <div class="col-lg-10">
                         <div class="row">

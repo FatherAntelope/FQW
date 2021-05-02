@@ -31,7 +31,10 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-2 text-center">
-                        <img src="/images/user.png" class="img-thumbnail rounded-circle mb-4" width="120" alt="">
+                        <img src="/images/user.png" class="img-thumbnail rounded-circle mb-2" width="120" alt="">
+                        <br>
+                        <a href="/lk/settings/" type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)"><i class="fas fa-user-cog"></i></a>
+                        <button type="button" class="btn mt-1 btn-sm btn-danger text-white"><i class="fas fa-door-open"></i></button>
                     </div>
                     <div class="col-lg-10">
                         <div class="row">
@@ -50,27 +53,19 @@
                                 <h5 class="text-muted">ID карты: 123456789</h5>
                                 <h5 class="text-muted">Ваш терапевт: <a href="#" style="color: var(--dark-cyan-color); text-decoration: none">Иванов И.И.</a> </h5>
                                 <h5 class="text-muted">Дата поступления: 01.01.1999</h5>
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <h5 class="text-muted">Группа пациента:</h5>
-                                    </div>
-                                    <div class="col">
-                                        <ul class="list-unstyled">
-                                            <li>
-                                                <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">С сахарным диабетом</span>
-                                            </li>
-                                            <li>
-                                                <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">После Ковид</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <hr style="border-top: 3px solid var(--yellow-color);">
+                <div class="row">
+                    <div class="col">
+                        <h5 class="text-muted">Субъективные жалобы:</h5>
+                        <h6 class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda natus nemo quis sequi. Aut debitis deleniti id in possimus quidem, quo tempore tenetur! A cupiditate dicta dolore doloremque eius ex impedit laborum, libero, mollitia nam nemo optio praesentium qui quo reprehenderit similique totam. Ab delectus labore nihil. Deserunt, enim, vel!</h6>
+                    </div>
+                </div>
 
+                <hr style="border-top: 3px solid var(--yellow-color);">
                 <div class="row">
                     <div class="col-lg-12 d-flex justify-content-around flex-xl-row flex-md-row flex-sm-column flex-column">
                         <a href="tel:+7 (999) 999-99-99" aria-haspopup="true" style="text-decoration: none; color: var(--yellow-color)">
@@ -235,7 +230,7 @@
                             </div>
                         </div>
                         <div class="table-responsive">
-                            <table class="table table-centered table-striped table-hover mb-0">
+                            <table class="table table-centered table-sm table-striped table-hover mb-0">
                                 <tbody>
                                 <tr>
                                     <td>
@@ -251,6 +246,10 @@
                                         <h5>Иванов И. И.</h5>
                                     </td>
                                     <td>
+                                        <span class="text-muted">Расположение</span>
+                                        <h5>505 каб.</h5>
+                                    </td>
+                                    <td>
                                         <span class="text-muted">До начала</span>
                                         <h5>3ч 20мин</h5>
                                     </td>
@@ -262,11 +261,15 @@
                                     </td>
                                     <td>
                                         <span class="text-muted">Статус</span> <br>
-                                        <span class="badge badge-pill badge-danger">Не посещено</span>
+                                        <span class="badge badge-pill badge-danger">Не выполнено</span>
                                     </td>
                                     <td>
                                         <span class="text-muted">Специалист</span>
                                         <h5>Иванов И. И.</h5>
+                                    </td>
+                                    <td>
+                                        <span class="text-muted">Расположение</span>
+                                        <h5>505 каб.</h5>
                                     </td>
                                     <td>
                                         <span class="text-muted">До начала</span>
@@ -280,11 +283,15 @@
                                     </td>
                                     <td>
                                         <span class="text-muted">Статус</span> <br>
-                                        <span class="badge badge-pill badge-success">Посещено</span>
+                                        <span class="badge badge-pill badge-success">Выполнено</span>
                                     </td>
                                     <td>
                                         <span class="text-muted">Специалист</span>
                                         <h5>Иванов И. И.</h5>
+                                    </td>
+                                    <td>
+                                        <span class="text-muted">Расположение</span>
+                                        <h5>505 каб.</h5>
                                     </td>
                                     <td>
                                         <span class="text-muted">До начала</span>
@@ -295,6 +302,10 @@
                                     <td>
                                         <h5 class="my-1" style="color: var(--dark-cyan-color)">Принять лекарство</h5>
                                         <span class="text-muted">Магнелис B6</span>
+                                    </td>
+                                    <td>
+                                        <span class="text-muted">Статус</span> <br>
+                                        <span class="badge badge-pill badge-success">Выполнено</span>
                                     </td>
                                     <td>
                                         <span class="text-muted">Доза</span> <br>

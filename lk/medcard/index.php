@@ -224,6 +224,31 @@ $whose_user = 2;
                 </h5>
                 <p class="text-muted">Жалобы: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex, placeat.</p>
                 <p class="text-muted">Анамнез: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex, placeat.</p>
+
+                <h5 class="mb-0 text-muted text-uppercase bg-light p-2">
+                    <i class="fas fa-pills mr-1"></i>
+                    Лекарства
+                </h5>
+                <table class="table table-striped table-hover table-sm">
+                    <thead class="text-white" style="background-color: var(--cyan-color);">
+                    <tr>
+                        <th>Название</th>
+                        <th>Доза</th>
+                        <th>Правило приема</th>
+                        <th>Повторы</th>
+                        <th>Срок, д.</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="text-muted" data-label="Название:">Диклофенак</td>
+                        <td class="text-muted" data-label="Доза:">1/2 таблетки</td>
+                        <td class="text-muted" data-label="ПП:">Во время еды</td>
+                        <td class="text-muted" data-label="Повторы:">3 раза в день</td>
+                        <td class="text-muted" data-label="Срок, д.:">10</td>
+                    </tr>
+                    </tbody>
+                </table>
                 <h5 class="mb-3 text-muted text-uppercase bg-light p-2">
                     <i class="fas fa-clipboard mr-1"></i>
                     Рекомендации
@@ -331,7 +356,7 @@ $whose_user = 2;
                                 <span class="badge badge-pill text-white" style="background-color: var(--cyan-color)">Дополнительно</span>
                             </td>
                             <td>
-                                <span class="text-muted">Повторы</span>
+                                <span class="text-muted">Период</span>
                                 <h5>По желанию</h5>
                             </td>
                             <td>
@@ -349,7 +374,7 @@ $whose_user = 2;
                                 <span class="badge badge-pill text-white badge-danger">Обязательно</span>
                             </td>
                             <td>
-                                <span class="text-muted">Повторы</span>
+                                <span class="text-muted">Период</span>
                                 <h5>5</h5>
                             </td>
                             <td>
@@ -367,7 +392,7 @@ $whose_user = 2;
                                 <span class="badge badge-pill text-white badge-danger">Обязательно</span>
                             </td>
                             <td>
-                                <span class="text-muted">Повторы</span>
+                                <span class="text-muted">Период</span>
                                 <h5>Ежедневно</h5>
                             </td>
                             <td>
@@ -404,7 +429,7 @@ $whose_user = 2;
                         <th>Доза</th>
                         <th>Правило приема</th>
                         <th>Повторы</th>
-                        <th>Срок, д.</th>
+                        <th>Период, д.</th>
                         <th>Врач</th>
                     </tr>
                     </thead>
@@ -414,7 +439,7 @@ $whose_user = 2;
                         <td class="text-muted" data-label="Доза:">1/2 таблетки</td>
                         <td class="text-muted" data-label="ПП:">Во время еды</td>
                         <td class="text-muted" data-label="Повторы:">3 раза в день</td>
-                        <td class="text-muted" data-label="Срок, д.:">10</td>
+                        <td class="text-muted" data-label="Период, д.:">10</td>
                         <td class="text-muted" data-label="Врач:">Иванов И. И.</td>
                     </tr>
                     </tbody>
