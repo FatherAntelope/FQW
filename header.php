@@ -173,7 +173,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link link-navbar" aria-haspopup="true">
+                        <a href="/lk/nutrition/editor.php" class="nav-link link-navbar" aria-haspopup="true">
                             <i class="fas fa-utensils mr-1"></i>
                             Питание
                         </a>
@@ -234,7 +234,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link link-navbar" aria-haspopup="true">
+                        <a href="/lk/diary/" class="nav-link link-navbar" aria-haspopup="true">
                             <i class="fas fa-heartbeat mr-1"></i>
                             Дневник самонаблюдения
                         </a>
@@ -246,9 +246,15 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link link-navbar" aria-haspopup="true">
+                        <a href="/lk/organizer/" class="nav-link link-navbar" aria-haspopup="true">
                             <i class="fas fa-calendar-alt mr-1"></i>
                             Органайзер
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/lk/nutrition/" class="nav-link link-navbar" aria-haspopup="true">
+                            <i class="fas fa-utensils mr-1"></i>
+                            Питание
                         </a>
                     </li>
                 </ul>

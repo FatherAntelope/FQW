@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="dd690a98-02d7-475c-ab21-dec0f2dd0976" name="Default Changelist" comment="Добавлена страница FAQ и модальное окно поддержки.&#10;Добавлен виджет посещаемости пациентов у медперсонала">
+    <list default="true" id="dd690a98-02d7-475c-ab21-dec0f2dd0976" name="Default Changelist" comment="Изменена карточка пациента (добавлено отображение паспортных данных) в просмотре профиля пользователя у администратора">
+      <change afterPath="$PROJECT_DIR$/lk/diary/index.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lk/nutrition/editor.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lk/nutrition/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/header.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lk/users/profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/users/profile.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -146,7 +152,10 @@
       <workItem from="1619337340513" duration="9784000" />
       <workItem from="1619358025889" duration="17780000" />
       <workItem from="1619443682784" duration="6173000" />
-      <workItem from="1619945163478" duration="24387000" />
+      <workItem from="1619945163478" duration="24691000" />
+      <workItem from="1619970304486" duration="597000" />
+      <workItem from="1620040620902" duration="3390000" />
+      <workItem from="1620410067780" duration="1554000" />
     </task>
     <task id="LOCAL-00001" summary="Начал делать шапку">
       <created>1611600872960</created>
@@ -435,7 +444,21 @@
       <option name="project" value="LOCAL" />
       <updated>1619969785462</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="Изменена карточка пациента (добавлено отображение паспортных данных) в просмотре профиля пользователя у администратора">
+      <created>1619970080561</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1619970080561</updated>
+    </task>
+    <task id="LOCAL-00043" summary="Изменена карточка пациента (добавлено отображение паспортных данных) в просмотре профиля пользователя у администратора">
+      <created>1619970239609</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1619970239609</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -457,7 +480,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Изменена бренд-иконка, панель регистрации пользователей" />
     <MESSAGE value="Доделан фронтенд страницы регистрации пользователей. Добавлена страница новостей (без контента)" />
     <MESSAGE value="Добавлена страница управления услугами у пациента" />
     <MESSAGE value="Сделала заготовка страницы услуг для записи" />
@@ -482,6 +504,7 @@
     <MESSAGE value="Добавлена страница настроек для администратора и медперсонала" />
     <MESSAGE value="В регистрации пациента убраны поля добавления диагнозов и физических параметров.&#10;Добавлена страница добавления выписного эпикриза пациента.&#10;Добавлены страницы просмотров пациентов у медперсонала, а также страница просмотра пользователей у администратора" />
     <MESSAGE value="Добавлена страница FAQ и модальное окно поддержки.&#10;Добавлен виджет посещаемости пациентов у медперсонала" />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавлена страница FAQ и модальное окно поддержки.&#10;Добавлен виджет посещаемости пациентов у медперсонала" />
+    <MESSAGE value="Изменена карточка пациента (добавлено отображение паспортных данных) в просмотре профиля пользователя у администратора" />
+    <option name="LAST_COMMIT_MESSAGE" value="Изменена карточка пациента (добавлено отображение паспортных данных) в просмотре профиля пользователя у администратора" />
   </component>
 </project>

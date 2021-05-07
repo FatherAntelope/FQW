@@ -28,6 +28,34 @@ body {
         margin-top: 3.3rem !important;
     }
 
+    .table thead, .table tfoot {
+        display: none !important;
+    }
+
+    .table, .table tbody, .table tr, .table td {
+        display: inline-block !important;
+        width: 100% !important;
+    }
+
+    .table tr {
+        margin-bottom: 15px;
+    }
+
+    .table td {
+        text-align: right;
+        padding-left: 35%;
+        position: relative;
+    }
+
+    .table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 65%;
+        padding-left: 15px;
+        font-size: 15px;
+        text-align: left;
+    }
 }
 
 @media (min-width: 992px) {
@@ -64,34 +92,7 @@ body {
         background-color: transparent !important;
     }
 
-    .table thead, .table tfoot {
-        display: none !important;
-    }
 
-    .table, .table tbody, .table tr, .table td {
-        display: block !important;
-        width: 100% !important;
-    }
-
-    .table tr {
-        margin-bottom: 15px;
-    }
-
-    .table td {
-        text-align: right;
-        padding-left: 35%;
-        position: relative;
-    }
-
-    .table td::before {
-        content: attr(data-label);
-        position: absolute;
-        left: 0;
-        width: 65%;
-        padding-left: 15px;
-        font-size: 15px;
-        text-align: left;
-    }
 }
 
 @media (max-width: 574px) {

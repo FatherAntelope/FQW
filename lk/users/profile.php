@@ -81,7 +81,6 @@ $whose_user = 1;
                         </div>
                     </div>
                 </div>
-
                 <hr style="border-top: 3px solid var(--yellow-color);">
                 <div class="row">
                     <div class="col-lg-4">
@@ -108,7 +107,6 @@ $whose_user = 1;
                         <h6 class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda natus nemo quis sequi. Aut debitis deleniti id in possimus quidem, quo tempore tenetur! A cupiditate dicta dolore doloremque eius ex impedit laborum, libero, mollitia nam nemo optio praesentium qui quo reprehenderit similique totam. Ab delectus labore nihil. Deserunt, enim, vel!</h6>
                     </div>
                 </div>
-
                 <hr style="border-top: 3px solid var(--yellow-color);">
                 <div class="row">
                     <div class="col-lg-12 d-flex justify-content-around flex-xl-row flex-md-row flex-sm-column flex-column">
@@ -179,7 +177,6 @@ $whose_user = 1;
                     </div>
                 </div>
                 <hr style="border-top: 3px solid var(--yellow-color);">
-
                 <div class="row">
                     <div class="col-lg-12 d-flex justify-content-around flex-xl-row flex-md-row flex-sm-column flex-column">
                         <a href="tel:+7 (999) 999-99-99" aria-haspopup="true" style="text-decoration: none; color: var(--yellow-color)">
@@ -216,7 +213,6 @@ $whose_user = 1;
                     </div>
                 </div>
                 <hr style="border-top: 3px solid var(--yellow-color);">
-
                 <div class="row">
                     <div class="col-lg-12 d-flex justify-content-around flex-xl-row flex-md-row flex-sm-column flex-column">
                         <a href="tel:+7 (999) 999-99-99" aria-haspopup="true" style="text-decoration: none; color: var(--yellow-color)">
@@ -231,7 +227,6 @@ $whose_user = 1;
         </div>
     </div>
 </div>
-
 
 <!--Список всплывающих уведомлений-->
 <div class="position-fixed p-3" style="z-index: 5; right: 0; bottom: 0;">
