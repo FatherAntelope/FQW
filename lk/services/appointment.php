@@ -44,7 +44,14 @@ if($getSelected != "doctors" &&
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#" style="color: var(--dark-cyan-color)">Профиль</a></li>
                 <li class="breadcrumb-item"><a href="/lk/services/" style="color: var(--dark-cyan-color)">Услуги</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Запись на услуги</li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    <?php
+                    if($getSelected == 'doctors') echo "Врачи";
+                    if($getSelected == 'procedures') echo "Процедуры";
+                    if($getSelected == 'examinations') echo "Обследования";
+                    if($getSelected == 'events') echo "Мероприятия";
+                    ?>
+                </li>
             </ol>
         </nav>
         <ul class="nav nav-pills flex-column flex-sm-row mb-2" role="tablist">

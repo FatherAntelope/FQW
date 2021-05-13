@@ -14,13 +14,13 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label style="color: var(--yellow-color)">Ваше имя <strong style="color: var(--red--color)">*</strong></label>
-                                <input type="text" class="form-control" required>
+                                <input type="text" class="form-control" name="user_name" required>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label style="color: var(--yellow-color)">Ваша почта <strong style="color: var(--red--color)">*</strong></label>
-                                <input type="email" class="form-control" required>
+                                <input type="email" class="form-control" name="user_email" required>
                             </div>
                         </div>
                     </div>

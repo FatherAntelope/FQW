@@ -113,8 +113,9 @@ $whose_user = 3;
                 <hr style="border-top: 3px solid var(--yellow-color);">
                 <div class="row">
                     <div class="col-lg-12 d-flex justify-content-center flex-xl-row flex-md-row flex-sm-column flex-column">
-                        <a href="#" type="button" class="btn mt-1 text-white mr-xl-2 mr-sm-0" style="background-color: var(--cyan-color)">Записать к себе</a>
-                        <a href="#" type="button" class="btn mt-1 text-white" style="background-color: var(--dark-cyan-color)">Записать к другому врачу</a>
+                        <a href="#" type="button" class="btn mt-1 text-white mr-xl-2 mr-md-2 mr-sm-0" style="background-color: var(--cyan-color)">Записать к себе</a>
+                        <a href="#" type="button" class="btn mt-1 text-white mr-xl-2 mr-md-2" style="background-color: var(--cyan-color)">Записать на обследование</a>
+                        <a href="#" type="button" class="btn mt-1 text-white" style="background-color: var(--cyan-color)">Записать к другому врачу</a>
                     </div>
                 </div>
             </div>
