@@ -1,6 +1,6 @@
 <!--Модальное окно поддержки-->
 <div class="modal fade" id="openModalSendMessageSupport">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title" style="color: var(--cyan-color)">Задайте вопрос</h3>
@@ -9,17 +9,17 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form id="querySendMsgSupport">
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label style="color: var(--yellow-color)">Ваше имя <strong style="color: var(--red--color)">*</strong></label>
+                                <label style="color: var(--yellow-color)">Ваше имя</label>
                                 <input type="text" class="form-control" name="user_name" required>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label style="color: var(--yellow-color)">Ваша почта <strong style="color: var(--red--color)">*</strong></label>
+                                <label style="color: var(--yellow-color)">Ваша почта</label>
                                 <input type="email" class="form-control" name="user_email" required>
                             </div>
                         </div>
@@ -27,16 +27,18 @@
                     <div class="row">
                         <div class="col">
                             <div class="form-group">
-                                <label style="color: var(--yellow-color)">Сообщение <strong style="color: var(--red--color)">*</strong></label>
+                                <label style="color: var(--yellow-color)">Сообщение</label>
                                 <textarea class="form-control" required></textarea>
                             </div>
                         </div>
                     </div>
-
+                    <div class="alert alert-success animate slideIn" role="alert" style="font-size: 12px" id="alertSuccessSendMsgSupport" hidden>
+                        Ваше сообщение отправлено службе поддержки. Ответ придет на указанную почту в течение нескольких дней
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-info text-white mr-1" style="background-color: var(--cyan-color)">
+                <button type="submit" class="btn btn-info text-white mr-1" style="background-color: var(--cyan-color)" form="querySendMsgSupport">
                     <i class="fas fa-envelope mr-1"></i> Отправить
                 </button>
             </div>
@@ -216,3 +218,18 @@
         </div>
     </div>
 </footer>
+<script>
+    $("#querySendMsgSupport").submit(function () {
+        $.ajax({
+            url: "/queries/sendMsgSupport.php",
+            method: "POST",
+            data: $(this).serialize(),
+            success: function () {
+                $("#alertSuccessSendMsgSupport").attr("hidden", "hidden");
+            },
+            error: function () {
+            }
+        });
+        return false;
+    });
+</script>

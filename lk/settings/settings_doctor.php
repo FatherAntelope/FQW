@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery.maskedinput@1.4.1/src/jquery.maskedinput.min.js" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script defer src="/js/all.js"></script>
@@ -38,27 +38,32 @@
                 <div class="card">
                     <div class="card-header text-center" style="background-color: var(--cyan-color">
                         <img src="/images/user.png" class="rounded-circle img-thumbnail" style="height: 12rem;width: 12rem;">
-                        <h4 class="mb-0 mt-2" style="color: var(--yellow-color)">"Имя Фамилия"</h4>
+                        <h4 class="mb-0 mt-2" style="color: var(--yellow-color)">
+                            <?php echo "Иванов Иван Иванович"; ?>
+                        </h4>
                         <p class="mb-2 text-white" >Медперсонал</p>
                         <button data-toggle="modal" data-target="#openModalReplaceAvatar" class="btn btn-warning btn-sm text-white" style="background-color: var(--yellow-color)">
                             Изменить фото
                         </button>
-                        <button type="submit" class="btn btn-danger btn-sm text-white" style="background-color: var(--red--color)">Выйти</button>
+                        <a href="/queries/exitUser.php" class="btn btn-danger btn-sm text-white" style="background-color: var(--red--color)">Выйти</a>
                     </div>
                     <div class="card-body">
                         <div class="text-left mt-1">
                             <h6 class="text-muted text-uppercase bg-light p-2"><i class="fas fa-address-book mr-1"></i>Основные данные</h6>
                             <p class="text-muted mb-1">
                                 <strong>Возраст:</strong>
-                                <span class="ml-2">10 (10.10.1000)</span>
+                                <span class="ml-2">
+                                    <?php echo floor( (time() - strtotime("1976-10-01")) /(60 * 60 * 24 * 365.25));?>
+                                    (<?php echo date("d.m.Y", strtotime("1976-10-01"));?>)
+                                </span>
                             </p>
                             <p class="text-muted mb-1">
                                 <strong>Должность:</strong>
-                                <span class="ml-2">Врач</span>
+                                <span class="ml-2"><?php echo "Врач"; ?></span>
                             </p>
                             <p class="text-muted mb-1">
                                 <strong>Кв. категория:</strong>
-                                <span class="ml-2">Высшая</span>
+                                <span class="ml-2"><?php echo "Высшая"; ?></span>
                             </p>
                             <p class="text-muted mb-1">
                                 <strong>Специальность:</strong>
@@ -67,7 +72,7 @@
                             </p>
                             <p class="text-muted mb-1">
                                 <strong>Стаж:</strong>
-                                <span class="ml-2">14 лет</span>
+                                <span class="ml-2"><?php echo "14 лет"; ?></span>
                             </p>
                         </div>
                     </div>
@@ -90,48 +95,28 @@
                     <div class="tab-pane fade show active" id="user_data_edit" role="tabpanel">
                         <div class="card">
                             <div class="card-body">
-                                <form>
-                                    <h5 class="mb-3 text-muted text-uppercase bg-light p-2"><i class="fas fa-user mr-1"></i> Персональные данные</h5>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label style="color: var(--yellow-color)">Фамилия</label>
-                                                <input type="text" class="form-control" id="firstname" placeholder="Ваша фамилия">
-                                            </div>
+                                <form id="queryEditContactDataUser">
+                                    <h6 class="mb-3 text-muted text-uppercase bg-light p-2"><i class="fas fa-address-book mr-1"></i>
+                                        Контактные данные
+                                        <div class="spinner-border spinner-border-sm float-right text-info" role="status" hidden>
+                                            <span class="sr-only">Loading...</span>
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label style="color: var(--yellow-color)">Имя</label>
-                                                <input type="text" class="form-control" placeholder="Ваше имя">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label style="color: var(--yellow-color)">Отчество</label>
-                                                <input type="text" class="form-control" placeholder="Ваше отчество">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="text-right">
-                                        <button type="submit" class="btn mb-3 text-white" style="background-color: var(--cyan-color)">Изменить<i class="fas fa-user ml-2"></i></button>
-                                    </div>
-                                </form>
-                                <form>
-                                    <h5 class="mb-3 text-muted text-uppercase bg-light p-2"><i class="fas fa-address-book mr-1"></i> Контактные данные</h5>
+                                        <i class="fas fa-check float-right text-success animate slideIn" hidden></i>
+                                    </h6>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label style="color: var(--yellow-color)">Почта</label>
-                                                <input type="email" class="form-control" placeholder="example@mail.ru" name="user_email" value="mail@mail.ru" required>
+                                                <input type="email" class="form-control" placeholder="example@mail.ru" name="user_email" value="<?php echo "mail@mail.ru"; ?>" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label style="color: var(--yellow-color)">Номер телефона </label>
-                                                <input type="tel" class="form-control" placeholder="+7 (999) 99-99-999" name="user_phone" value="+7 (999) 99-99-999">
+                                                <input type="tel" class="form-control" placeholder="+7 (999) 99-99-999" name="user_phone" value="<?php echo "+7 (999) 99-99-999";?>">
                                             </div>
                                         </div>
-                                        <div class="col alert alert-danger alert-dismissible fade show animate slideIn mr-3 ml-3" role="alert" style="font-size: 12px">
+                                        <div class="col alert alert-danger alert-dismissible fade show animate slideIn mr-3 ml-3" role="alert" id="alertErrorUserEditContactData" style="font-size: 12px" hidden>
                                             Аккаунт с указанным адресом электронной почты уже существует. Измените или проверьте введенный адрес электронной почты!
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
@@ -142,14 +127,20 @@
                                         <button type="submit" class="btn mb-3 text-white" style="background-color: var(--cyan-color)">Изменить<i class="fas fa-address-book ml-2"></i></button>
                                     </div>
                                 </form>
-                                <form>
-                                    <h5 class="mb-3 text-muted text-uppercase bg-light p-2"><i class="fas fa-key mr-1"></i>Пароль</h5>
+                                <form id="queryEditPasswordUser">
+                                    <h6 class="mb-3 text-muted text-uppercase bg-light p-2"><i class="fas fa-key mr-1"></i>
+                                        Пароль
+                                        <div class="spinner-border spinner-border-sm float-right text-info" role="status" hidden>
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                        <i class="fas fa-check float-right text-success animate slideIn" hidden></i>
+                                    </h6>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label style="color: var(--yellow-color)">Старый пароль</label>
                                                 <div class="input-group" id="show_hide_password">
-                                                    <input type="password" class="form-control" placeholder="Ваш старый пароль">
+                                                    <input type="password" class="form-control" name="user_old_password" placeholder="Ваш старый пароль" minlength="6" required>
                                                     <div class="input-group-append">
                                                 <span class="input-group-text">
                                                     <a href="javascript://" class="text-muted text-decoration-none">
@@ -167,7 +158,7 @@
                                             <div class="form-group">
                                                 <label style="color: var(--yellow-color)">Новый пароль</label>
                                                 <div class="input-group" id="show_hide_password">
-                                                    <input type="password" class="form-control" placeholder="Ваш новый пароль">
+                                                    <input type="password" class="form-control" name="user_new_password" placeholder="Ваш новый пароль" minlength="6" required>
                                                     <div class="input-group-append" >
                                                 <span class="input-group-text">
                                                     <a href="javascript://" class="text-muted text-decoration-none">
@@ -179,7 +170,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col alert alert-danger alert-dismissible fade show animate slideIn mr-3 ml-3" role="alert" style="font-size: 12px">
+                                        <div class="col alert alert-danger alert-dismissible fade show animate slideIn mr-3 ml-3" role="alert" id="alertErrorUserEditPassword" style="font-size: 12px" hidden>
                                             Старый пароль введен неверно или новый пароль соответствует старому
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
@@ -190,11 +181,17 @@
                                         <button type="submit" class="btn mb-3 text-white" style="background-color: var(--cyan-color)">Изменить<i class="fas fa-key ml-2"></i></button>
                                     </div>
                                 </form>
-                                <form>
-                                    <h5 class="mb-3 text-muted text-uppercase bg-light p-2"><i class="fas fa-graduation-cap mr-1"></i>Достижения</h5>
+                                <form id="queryEditAchievementsDoctor">
+                                    <h6 class="mb-3 text-muted text-uppercase bg-light p-2"><i class="fas fa-graduation-cap mr-1"></i>
+                                        Достижения
+                                        <div class="spinner-border spinner-border-sm float-right text-info" role="status" hidden>
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                        <i class="fas fa-check float-right text-success animate slideIn" hidden></i>
+                                    </h6>
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Биография</label>
-                                        <textarea class="form-control" placeholder="Чем владеете, чем занимаетесь и т.п."></textarea>
+                                        <textarea class="form-control" name="doctor_biography" placeholder="Чем владеете, чем занимаетесь и т.п." minlength="50" required></textarea>
                                         <small class="text-muted form-text">Напишите о себе</small>
                                     </div>
                                     <div class="row">
@@ -226,29 +223,53 @@
                     <div class="tab-pane fade show" id="settings_system" role="tabpanel">
                         <div class="card">
                             <div class="card-body">
-                                <form>
-                                    <h5 class="text-muted text-uppercase bg-light p-2"><i class="fas fa-bell mr-1"></i> Уведомления </h5>
+                                <form id="queryEditNotificationUser">
+                                    <h6 class="text-muted text-uppercase bg-light p-2"><i class="fas fa-bell mr-1"></i>
+                                        Уведомления
+                                        <div class="spinner-border spinner-border-sm float-right text-info" role="status" hidden>
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                        <i class="fas fa-check float-right text-success animate slideIn" hidden></i>
+                                    </h6>
                                     <div class="alert alert-info">Выберите за какое время уведомлять вас о событиях?</div>
                                     <div class="ml-3">
                                         <div class="custom-switch custom-control">
-                                            <input class="custom-control-input" id="time_notify_5" type="checkbox" checked>
+                                            <input class="custom-control-input" name="user_notification[]" value="5" id="time_notify_5" type="checkbox" checked>
                                             <label class="custom-control-label text-muted" for="time_notify_5">5 минут</label>
                                         </div>
                                         <div class="custom-switch custom-control mt-2">
-                                            <input class="custom-control-input" id="time_notify_10" type="checkbox">
+                                            <input class="custom-control-input" name="user_notification[]" value="10" id="time_notify_10" type="checkbox">
                                             <label class="custom-control-label text-muted" for="time_notify_10">10 минут</label>
                                         </div>
                                         <div class="custom-switch custom-control mt-2">
-                                            <input class="custom-control-input" id="time_notify_30" type="checkbox">
+                                            <input class="custom-control-input" name="user_notification[]" value="30" id="time_notify_30" type="checkbox">
                                             <label class="custom-control-label text-muted" for="time_notify_30">30 минут</label>
                                         </div>
                                         <div class="custom-switch custom-control mt-2">
-                                            <input class="custom-control-input" id="time_notify_60" type="checkbox">
+                                            <input class="custom-control-input" name="user_notification[]" value="60" id="time_notify_60" type="checkbox">
                                             <label class="custom-control-label text-muted" for="time_notify_60">60 минут</label>
                                         </div>
+
+                                    </div>
+                                    <div class="alert alert-danger alert-dismissible fade show animate slideIn mt-2" role="alert" id="alertErrorEditNotificationUser" style="font-size: 12px" hidden>
+                                        Выберите хотя бы один параметр!
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
                                     </div>
 
-                                    <h5 class="mt-3 text-muted text-uppercase bg-light p-2"><i class="fas fa-shapes mr-1"></i> Виджеты </h5>
+                                    <div class="text-right">
+                                        <button type="submit" class="btn mt-2 text-white" style="background-color: var(--cyan-color)">Изменить<i class="fas fa-sliders-h ml-2"></i></button>
+                                    </div>
+                                </form>
+                                <form>
+                                    <h6 class="mt-3 text-muted text-uppercase bg-light p-2"><i class="fas fa-shapes mr-1"></i>
+                                        Виджеты
+                                        <div class="spinner-border spinner-border-sm float-right text-info" role="status" hidden>
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                        <i class="fas fa-check float-right text-success animate slideIn" hidden></i>
+                                    </h6>
                                     <div class="alert alert-info">Выберите какие виджеты отображать в профиле?</div>
                                     <div class="ml-3">
                                         <div class="custom-switch custom-control">
@@ -285,29 +306,32 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title" style="color: var(--cyan-color)">Восстановление пароля</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
                 <div class="alert alert-info" role="alert" style="font-size: 12px">
                     Введите адрес электронной почты, который вы указали при регистрации в регистратуре. На указанный адрес будет отправлена ссылка для восстановления доступа к учетной записи.
                 </div>
-                <form>
+                <form id="queryRecoveryPasswordUser">
                     <div class="form-group">
                         <label style="color: var(--yellow-color)">Почта</label>
-                        <input type="email" name="user_mail" class="form-control" placeholder="Введите адрес электронной почты" required>
+                        <input type="email" name="user_email" class="form-control" placeholder="Введите адрес электронной почты" required>
                     </div>
                 </form>
-                <div class="alert alert-danger alert-dismissible fade show animate slideIn" role="alert" style="font-size: 12px">
+                <div class="alert alert-danger alert-dismissible fade show animate slideIn" role="alert" style="font-size: 12px" id="alertErrorRecoveryPasswordUser" hidden>
                     Учетная запись с указанным адресом электронной почты не найдена. Повторите ввод и убедитесь, что вы были зарегистрированы с данным адресом.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="alert alert-success animate slideIn" role="alert" style="font-size: 12px">
+                <div class="alert alert-success animate slideIn" role="alert" style="font-size: 12px" id="alertSuccessRecoveryPasswordUser" hidden>
                     Сообщение отправлено на указанную электронную почту. Если сообщение не пришло, то проверьте его в разделе <strong>спам</strong>.
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Отправить</button>
+                <button type="submit" class="btn btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)" form="queryRecoveryPasswordUser">Отправить</button>
             </div>
         </div>
     </div>
@@ -355,8 +379,8 @@
 
     $(document).on('click', '.plus-education', function(){
         $(this).closest('.information_json_plus').before(
-            '<tr>' +
-            '<td class="pl-0"><input type="text" class="form-control" name=education_json_val[]" placeholder="Даты. Описание" required></td>' +
+            '<tr class="animate slideIn">' +
+            '<td class="pl-0"><input type="text" class="form-control" name=doctor_education_json[]" minlength="5" placeholder="Дата. Описание" required></td>' +
             '<td class="pl-0"><span class="btn btn-sm btn-danger rounded-circle minus mt-1"><i class="fas fa-minus"></i></span></td>' +
             '</tr>'
         );
@@ -372,5 +396,110 @@
     });
 
     $('input[name="user_phone"]').mask("+7 (999) 99-99-999");
+</script>
+<script>
+    $("#queryEditContactDataUser").submit(function () {
+        let spinner = $(this).children().find('.spinner-border');
+        let checker = $(this).children().find('.fa-check');
+        spinner.removeAttr("hidden");
+        $.ajax({
+            url: "/queries/editContactDataUser.php",
+            method: "POST",
+            data: $(this).serialize(),
+            success: function () {
+                $("#alertErrorUserEditContactData").attr("hidden", "hidden");
+                spinner.attr("hidden", "hidden");
+                checker.removeAttr("hidden");
+                setTimeout(function(){ checker.attr("hidden", "hidden"); location.reload();}, 1100);
+            },
+            error: function () {
+                $("#alertErrorUserEditContactData").removeAttr("hidden");
+                spinner.attr("hidden", "hidden");
+            }
+        });
+        return false;
+    });
+
+    $("#queryEditPasswordUser").submit(function () {
+        let spinner = $(this).children().find('.spinner-border');
+        let checker = $(this).children().find('.fa-check');
+        spinner.removeAttr("hidden");
+        $.ajax({
+            url: "/queries/editPasswordUser.php",
+            method: "POST",
+            data: $(this).serialize(),
+            success: function () {
+                $("#alertErrorUserEditPassword").attr("hidden", "hidden");
+                spinner.attr("hidden", "hidden");
+                checker.removeAttr("hidden");
+                setTimeout(function(){checker.attr("hidden", "hidden"); }, 1100);
+            },
+            error: function () {
+                $("#alertErrorUserEditPassword").removeAttr("hidden");
+                spinner.attr("hidden", "hidden");
+            }
+        });
+        return false;
+    });
+
+    $("#queryRecoveryPasswordUser").submit(function () {
+        $.ajax({
+            url: "/queries/recoveryPasswordUser.php",
+            method: "POST",
+            data: $(this).serialize(),
+            success: function () {
+                $("#alertSuccessRecoveryPasswordUser").removeAttr("hidden");
+                $("#alertErrorRecoveryPasswordUser").attr("hidden", "hidden");
+                $("input[name='user_email']").val("");
+            },
+            error: function () {
+                $("#alertErrorRecoveryPasswordUser").removeAttr("hidden");
+            }
+        });
+        return false;
+    });
+
+    $("#queryEditAchievementsDoctor").submit(function () {
+        let spinner = $(this).children().find('.spinner-border');
+        let checker = $(this).children().find('.fa-check');
+        spinner.removeAttr("hidden");
+        $.ajax({
+            url: "/queries/doctor/editAchievements.php",
+            method: "POST",
+            data: $(this).serialize(),
+            success: function () {
+                spinner.attr("hidden", "hidden");
+                checker.removeAttr("hidden");
+                setTimeout(function(){checker.attr("hidden", "hidden"); }, 1100);
+            },
+            error: function () {
+                spinner.attr("hidden", "hidden");
+            }
+        });
+        return false;
+    });
+
+    $("#queryEditNotificationUser").submit(function () {
+        let spinner = $(this).children().find('.spinner-border');
+        let checker = $(this).children().find('.fa-check');
+        spinner.removeAttr("hidden");
+        $.ajax({
+            url: "/queries/editNotificationUser.php",
+            method: "POST",
+            data: $(this).serialize(),
+            success: function () {
+                $("#alertErrorEditNotificationUser").attr("hidden", "hidden");
+                spinner.attr("hidden", "hidden");
+                checker.removeAttr("hidden");
+                setTimeout(function(){ checker.attr("hidden", "hidden");}, 1100);
+            },
+            error: function () {
+                console.log($(this).text());
+                $("#alertErrorEditNotificationUser").removeAttr("hidden");
+                spinner.attr("hidden", "hidden");
+            }
+        });
+        return false;
+    });
 </script>
 </html>

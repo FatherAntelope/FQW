@@ -207,6 +207,8 @@ body {
     }
 }
 
+
+
 .dropdown-item:active {
     background-color: var(--cyan-color);
 }

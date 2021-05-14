@@ -17,7 +17,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/auth.php" class="btn btn-warning text-secondary" style="background: var(--yellow-color); margin: 0.6rem 1rem">Авторизация</a>
+                    <a href="/auth.php" class="btn btn-warning text-secondary mr-md-0" style="background: var(--yellow-color); margin: 0.6rem 1rem">Авторизация</a>
                 </li>
             </ul>
         </div>
@@ -113,7 +113,9 @@
                         <img src="/images/user.png" alt="user-image" class="rounded-circle" height="40">
                     </span>
                     <span>
-                        <span class="account-user-name">"Имя Фамилия"</span>
+                        <span class="account-user-name">
+                            <?echo "Иван Иванович";?>
+                        </span>
                         <span class="account-role">
                             <?php
                             if($whose_user === 1)
@@ -136,7 +138,7 @@
                         <i class="fas fa-user-cog mr-2"></i>
                         Настройки
                     </a>
-                    <a class="dropdown-item" href="#" style="color: var(--dark-cyan-color)">
+                    <a class="dropdown-item" href="/queries/exitUser.php" style="color: var(--dark-cyan-color)">
                         <i class="fas fa-door-open mr-2"></i>
                         Выйти
                     </a>

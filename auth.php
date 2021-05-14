@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="/images/logo-mini.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script defer src="/js/all.js"></script>
     <title>Авторизация</title>
@@ -39,10 +39,10 @@
                         </div>
                         <div class="col-md-6">
                             <h3 style="color: var(--cyan-color)">Авторизация</h3>
-                            <form>
+                            <form id="queryLoginUser">
                                 <div class="form-group">
                                     <label style="color: #ffa400">Логин</label>
-                                    <input type="text" name="user_login" class="form-control" placeholder="Ваш логин">
+                                    <input type="text" name="user_login" class="form-control" placeholder="Ваш логин" required>
                                 </div>
                                 <div class="form-group">
                                     <label style="color: var(--yellow-color)">Пароль</label>
@@ -50,7 +50,7 @@
                                         <small> Забыли пароль? </small>
                                     </a>
                                     <div class="input-group" id="show_hide_password">
-                                        <input type="password" name="user_password" class="form-control" placeholder="Ваш пароль">
+                                        <input type="password" name="user_password" class="form-control" placeholder="Ваш пароль" required>
                                         <div class="input-group-append" >
                                                 <span class="input-group-text">
                                                     <a href="javascript://" class="text-muted text-decoration-none">
@@ -60,7 +60,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="alert alert-danger alert-dismissible animate slideIn" role="alert" style="font-size: 12px">
+                                <div class="alert alert-danger alert-dismissible animate slideIn" id="alertErrorLogin" style="font-size: 12px;" hidden>
                                     <strong>Ошибка авторизации.</strong>
                                     <hr style="margin: 5px">
                                     Пожалуйста, убедитесь что логин и пароль указаны верно.
@@ -70,7 +70,7 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <button type="button" class="btn btn-warning btn-block text-secondary font-weight-bold" style="background-color: var(--yellow-color)">Войти</button>
+                                <button type="submit" class="btn btn-warning btn-block text-secondary font-weight-bold" style="background-color: var(--yellow-color)">Войти</button>
                             </form>
                         </div>
                     </div>
@@ -100,24 +100,24 @@
                 <div class="alert alert-info" role="alert" style="font-size: 12px">
                     Введите адрес электронной почты, который вы указали при регистрации в регистратуре. На указанный адрес будет отправлена ссылка для восстановления доступа к учетной записи.
                 </div>
-                <form>
+                <form id="queryRecoveryPasswordUser">
                     <div class="form-group">
                         <label style="color: var(--yellow-color)">Почта</label>
-                        <input type="email" name="user_mail" class="form-control" placeholder="Введите адрес электронной почты" required>
+                        <input type="email" name="user_email" class="form-control" placeholder="Введите адрес электронной почты" required>
                     </div>
                 </form>
-                <div class="alert alert-danger alert-dismissible fade show animate slideIn" role="alert" style="font-size: 12px">
+                <div class="alert alert-danger alert-dismissible fade show animate slideIn" role="alert" style="font-size: 12px" id="alertErrorRecoveryPasswordUser" hidden>
                     Учетная запись с указанным адресом электронной почты не найдена. Повторите ввод и убедитесь, что вы были зарегистрированы с данным адресом.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="alert alert-success animate slideIn" role="alert" style="font-size: 12px">
+                <div class="alert alert-success animate slideIn" role="alert" style="font-size: 12px" id="alertSuccessRecoveryPasswordUser" hidden>
                     Сообщение отправлено на указанную электронную почту. Если сообщение не пришло, то проверьте его в разделе <strong>спам</strong>.
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Отправить</button>
+                <button type="submit" class="btn btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)" form="queryRecoveryPasswordUser">Отправить</button>
             </div>
         </div>
     </div>
@@ -125,16 +125,50 @@
 <script>
     $(document).ready(function() {
         $("#show_hide_password a").on('click', function() {
-            if($(this).parent().parent().prev().attr('type') == "text"){
+            if($(this).parent().parent().prev().attr('type') === "text"){
                 $(this).parent().parent().prev().attr('type', 'password');
                 $(this).children().removeClass("fa-eye");
                 $(this).children().addClass("fa-eye-slash" );
-            }else if($(this).parent().parent().prev().attr('type') == "password"){
+            }else if($(this).parent().parent().prev().attr('type') === "password"){
                 $(this).parent().parent().prev().attr('type', 'text');
                 $(this).children().removeClass("fa-eye-slash" );
                 $(this).children().addClass("fa-eye");
             }
         });
+    });
+</script>
+<script>
+    $("#queryLoginUser").submit(function () {
+        $.ajax({
+            url: "/queries/loginUser.php",
+            method: "POST",
+            data: $(this).serialize(),
+            success: function () {
+                $(location).attr('href', '/lk/');
+            },
+            error: function () {
+                $("#alertErrorLogin").removeAttr("hidden");
+                $("input[name='user_password']").val("");
+            }
+        });
+        return false;
+    });
+
+    $("#queryRecoveryPasswordUser").submit(function () {
+        $.ajax({
+            url: "/queries/recoveryPasswordUser.php",
+            method: "POST",
+            data: $(this).serialize(),
+            success: function () {
+                $("#alertSuccessRecoveryPasswordUser").removeAttr("hidden");
+                $("#alertErrorRecoveryPasswordUser").attr("hidden", "hidden");
+                $("input[name='user_email']").val("");
+            },
+            error: function () {
+                $("#alertErrorRecoveryPasswordUser").removeAttr("hidden");
+            }
+        });
+        return false;
     });
 </script>
 </body>
