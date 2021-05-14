@@ -99,7 +99,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label style="color: var(--yellow-color)">Отчество</label>
-                                                <input type="text" class="form-control" name="admin_patronymic" value="<?php echo "Иванович"; ?>" placeholder="Ваше отчество" minlength="3" maxlength="26" onkeyup="checkInputRu(this)" required>
+                                                <input type="text" class="form-control" name="admin_patronymic" value="<?php echo "Иванович"; ?>" placeholder="Ваше отчество" minlength="2" maxlength="26" onkeyup="checkInputRu(this)" required>
                                             </div>
                                         </div>
                                     </div>
@@ -125,7 +125,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label style="color: var(--yellow-color)">Номер телефона </label>
-                                                <input type="tel" class="form-control" placeholder="+7 (999) 99-99-999" name="user_phone" value="<?php echo "+7 (999) 99-99-999";?>">
+                                                <input type="tel" class="form-control" placeholder="+7 (999) 999-99-99" name="user_phone" value="<?php echo "+7 (999) 999-99-99";?>">
                                             </div>
                                         </div>
                                         <div class="col alert alert-danger alert-dismissible fade show animate slideIn mr-3 ml-3" role="alert" id="alertErrorUserEditContactData" style="font-size: 12px" hidden>
@@ -349,7 +349,7 @@
         $(this).next('.custom-file-label').addClass("selected").html(fileName);
     });
 
-    $('input[name="user_phone"]').mask("+7 (999) 99-99-999");
+    $('input[name="user_phone"]').mask("+7 (999) 999-99-99");
 </script>
 <script>
     $("#queryEditFullNameAdmin").submit(function () {
@@ -448,7 +448,6 @@
                 setTimeout(function(){ checker.attr("hidden", "hidden");}, 1100);
             },
             error: function () {
-                console.log($(this).text());
                 $("#alertErrorEditNotificationUser").removeAttr("hidden");
                 spinner.attr("hidden", "hidden");
             }

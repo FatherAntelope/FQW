@@ -113,7 +113,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label style="color: var(--yellow-color)">Номер телефона </label>
-                                                <input type="tel" class="form-control" placeholder="+7 (999) 99-99-999" name="user_phone" value="<?php echo "+7 (999) 99-99-999";?>">
+                                                <input type="tel" class="form-control" placeholder="+7 (999) 999-99-99" name="user_phone" value="<?php echo "+7 (999) 999-99-99";?>">
                                             </div>
                                         </div>
                                         <div class="col alert alert-danger alert-dismissible fade show animate slideIn mr-3 ml-3" role="alert" id="alertErrorUserEditContactData" style="font-size: 12px" hidden>
@@ -395,7 +395,7 @@
         $(this).next('.custom-file-label').addClass("selected").html(fileName);
     });
 
-    $('input[name="user_phone"]').mask("+7 (999) 99-99-999");
+    $('input[name="user_phone"]').mask("+7 (999) 999-99-99");
 </script>
 <script>
     $("#queryEditContactDataUser").submit(function () {

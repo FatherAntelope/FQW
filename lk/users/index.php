@@ -14,7 +14,7 @@ $whose_user = 1;
     <link rel="stylesheet" type="text/css" href="/css/jquery.dataTables.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" charset="utf8" src="/js/datatables.js"></script>
     <script defer src="/js/all.js"></script>
@@ -107,7 +107,7 @@ $whose_user = 1;
                                 <td class="text-muted" data-label="Телефон:">+7 (999) 999-99-99</td>
                                 <td>
                                     <ul class="list-unstyled">
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-secondary text-white" data-toggle="modal" data-target="#openModalRecoveryPatientAccess">Восстановить доступ</button></li>
+                                        <li><button type="button" class="btn mt-1 btn-sm btn-secondary text-white" data-toggle="modal" data-target="#openModalRecoveryAccessPatient">Восстановить доступ</button></li>
                                         <li><button type="button" class="btn mt-1 btn-sm text-white" style="background-color: var(--cyan-color)">Профиль</button></li>
                                         <li><button type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)">Редактирование</button></li>
                                         <li><button type="button" class="btn mt-1 btn-sm btn-danger" data-toggle="modal" data-target="#openModalRemoveUser">Удаление</button></li>
@@ -263,7 +263,10 @@ $whose_user = 1;
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Нет</button>
-                <button type="button" class="btn btn-success">Да</button>
+                <form id="queryDeleteUserProfile">
+                    <input type="hidden">
+                    <button type="submit" class="btn btn-success" name="user_email" value="mail@mail.ru">Да</button>
+                </form>
             </div>
         </div>
     </div>
@@ -280,14 +283,17 @@ $whose_user = 1;
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Нет</button>
-                <button type="button" class="btn btn-success">Да</button>
+                <form id="queryRecoveryPasswordUser">
+                    <input type="hidden" name="user_email" value="mail@mail.ru">
+                    <button type="submit" class="btn btn-success">Да</button>
+                </form>
             </div>
         </div>
     </div>
 </div>
 
 <!--Модальное окно восстановления доступа пользователя после его повторного приезда-->
-<div class="modal fade" tabindex="-1" id="openModalRecoveryPatientAccess" data-backdrop="static">
+<div class="modal fade" tabindex="-1" id="openModalRecoveryAccessPatient" data-backdrop="static">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -300,25 +306,24 @@ $whose_user = 1;
                 <div class="alert alert-info" role="alert" style="font-size: 12px">
                     Пользователь <b>Иванов И. И.</b> повторно приехал в санаторий? Выберите его категорию
                 </div>
-                <label style="color: var(--yellow-color)">Категория пациента <strong style="color: var(--red--color)">*</strong></label><br>
-                <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="radio_box_healing" name="user_type" value="healing" class="custom-control-input" checked>
-                    <label class="custom-control-label" for="radio_box_healing">Лечащийся</label>
-                </div>
-                <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="radio_box_resting" name="user_type" value="resting" class="custom-control-input">
-                    <label class="custom-control-label" for="radio_box_resting">Отдыхающий</label>
-                </div>
-                <div class="alert alert-info alert-dismissible fade show animate slideIn mt-3" role="alert" style="font-size: 12px">
+                <form id="queryRecoveryAccessPatient" method="post" action="/queries/admin/recoveryAccessPatient.php">
+                    <label style="color: var(--yellow-color)">Категория пациента</label><br>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="radio_box_healing" name="patient_category" value="healing" class="custom-control-input" checked>
+                        <label class="custom-control-label" for="radio_box_healing">Лечащийся</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="radio_box_resting" name="patient_category" value="resting" class="custom-control-input">
+                        <label class="custom-control-label" for="radio_box_resting">Отдыхающий</label>
+                    </div>
+                </form>
+                <div class="alert alert-success mt-3" role="alert" style="font-size: 12px" id="alertSuccessRecoveryAccessPatient" hidden>
                     Пользователю на почту отправлено сообщение с восстановлением пароля к профилю!
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Нет</button>
-                <button type="button" class="btn btn-success">Да</button>
+                <button type="submit" class="btn btn-success" form="queryRecoveryAccessPatient">Да</button>
             </div>
         </div>
     </div>
@@ -347,34 +352,6 @@ $whose_user = 1;
 <?php require $_SERVER['DOCUMENT_ROOT']."/footer.php"; ?>
 </body>
 <script>
-    $('.custom-file-input').on('change', function() {
-        let fileName = $(this).val().split('\\').pop();
-        $(this).next('.custom-file-label').addClass("selected").html(fileName);
-    });
-
-
-    $(document).on('click', '.plus-contraindications', function(){
-        $(this).closest('.information_json_plus').before(
-            '<tr>' +
-            '<td class="pl-0"><input type="text" class="form-control" name=contraindications_json_val[]" placeholder="Противопоказание" required></td>' +
-            '<td class="pl-0"><span class="btn btn-sm btn-danger rounded-circle minus mt-1"><i class="fas fa-minus"></i></span></td>' +
-            '</tr>'
-        );
-    });
-
-    $(document).on('click', '.plus-destinations', function(){
-        $(this).closest('.information_json_plus').before(
-            '<tr>' +
-            '<td class="pl-0"><input type="text" class="form-control" name=destinations_json_val[]" placeholder="Назначение" required></td>' +
-            '<td class="pl-0"><span class="btn btn-sm btn-danger rounded-circle minus mt-1"><i class="fas fa-minus"></i></span></td>' +
-            '</tr>'
-        );
-    });
-
-    $(document).on('click', '.minus', function(){
-        $(this).closest('tr').remove();
-    });
-
     $('#notificationToast').toast('show');
 
     $('#table_patients, #table_doctors, #table_administrators').DataTable({
@@ -399,6 +376,56 @@ $whose_user = 1;
                 "previous": "Назад"
             }
         },
+    });
+</script>
+<script>
+    $("#queryDeleteUserProfile").submit(function () {
+        $.ajax({
+            url: "/queries/admin/deleteUserProfile.php",
+            method: "POST",
+            data: $(this).serialize(),
+            success: function () {
+                $("#openModalRemoveUser").modal('hide');
+            },
+            error: function () {
+
+            }
+        });
+        return false;
+    });
+
+    $("#queryRecoveryPasswordUser").submit(function () {
+        $.ajax({
+            url: "/queries/recoveryPasswordUser.php",
+            method: "POST",
+            data: $(this).serialize(),
+            success: function () {
+                $("#openModalRecoveryPasswordUser").modal('hide');
+            },
+            error: function () {
+
+            }
+        });
+        return false;
+    });
+
+    $("#queryRecoveryAccessPatient").submit(function () {
+        $.ajax({
+            url: "/queries/admin/recoveryAccessPatient.php",
+            method: "POST",
+            data: $(this).serialize(),
+            success: function () {
+                $('#alertSuccessRecoveryAccessPatient').removeAttr("hidden");
+                $('#queryRecoveryAccessPatient').attr("hidden", "hidden");
+                $('#queryRecoveryAccessPatient').prev().attr("hidden", "hidden");
+                $('#queryRecoveryAccessPatient').parent().next().attr("hidden", "hidden");
+                setTimeout(function(){ $("#openModalRecoveryAccessPatient").modal('hide');}, 3000);
+            },
+            error: function () {
+
+            }
+        });
+        return false;
     });
 </script>
 </html>

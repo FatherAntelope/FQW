@@ -22,7 +22,7 @@ if($getSelected != "patient" &&
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery.maskedinput@1.4.1/src/jquery.maskedinput.min.js" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script defer src="/js/all.js"></script>
@@ -64,7 +64,19 @@ if($getSelected != "patient" &&
             <div class="tab-pane fade show <? if($getSelected == 'patient') echo "active";?>" id="patient" role="tabpanel">
                 <div class="card">
                     <div class="card-body">
-                        <form>
+                        <div class="row justify-content-center animate slideIn" hidden>
+                            <div class="col-md-12">
+                                <div class="text-center mt-2">
+                                    <img src="/images/mail_sent.svg" alt="" height="170">
+                                    <h3 class="mt-4" style="color: var(--dark-cyan-color)"><b>Пациент зарегистрирован</b></h3>
+                                    <p class="text-muted">Теперь он может пользоваться всеми функциями профиля! Не забудьте сообщить, что на указанную почту при регистрации ему отправлен пароль для входа в профиль</p>
+                                    <button type="button" class="btn mt-2 text-white" style="background-color: var(--dark-cyan-color)" onclick="location.reload();">
+                                        <i class="fas fa-reply mr-2"></i>Зарегистрировать еще
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <form id="queryRegistrationPatient">
                             <h5 class="mb-3 text-muted text-uppercase bg-light p-2">
                                 <i class="fas fa-user mr-1"></i>
                                 Персональные данные
@@ -73,19 +85,19 @@ if($getSelected != "patient" &&
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Фамилия <strong style="color: var(--red--color)">*</strong></label>
-                                        <input type="text" class="form-control" name="user_name" required>
+                                        <input type="text" class="form-control" name="user_name" minlength="2" maxlength="26" onkeyup="checkInputRu(this)" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Имя <strong style="color: var(--red--color)">*</strong></label>
-                                        <input type="text" class="form-control" name="user_surname" required>
+                                        <input type="text" class="form-control" name="user_surname" minlength="2" maxlength="26" onkeyup="checkInputRu(this)" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Отчество</label>
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" name="user_patronymic" maxlength="26" onkeyup="checkInputRu(this)">
                                     </div>
                                 </div>
                             </div>
@@ -93,36 +105,36 @@ if($getSelected != "patient" &&
                                 <div class="col-lg-2">
                                     <label style="color: var(--yellow-color)">Пол <strong style="color: var(--red--color)">*</strong></label><br>
                                     <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="radio_box_man" name="user_sex" value="man" class="custom-control-input" checked>
+                                        <input type="radio" id="radio_box_man" name="patient_sex" value="man" class="custom-control-input" checked>
                                         <label class="custom-control-label" for="radio_box_man">М</label>
                                     </div>
                                     <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="radio_box_woman" name="user_sex" value="woman" class="custom-control-input">
+                                        <input type="radio" id="radio_box_woman" name="patient_sex" value="woman" class="custom-control-input">
                                         <label class="custom-control-label" for="radio_box_woman">Ж</label>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <label style="color: var(--yellow-color)">Категория пациента <strong style="color: var(--red--color)">*</strong></label><br>
                                     <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="radio_box_healing" name="user_type" value="healing" class="custom-control-input" checked>
+                                        <input type="radio" id="radio_box_healing" name="patient_category" value="healing" class="custom-control-input" checked>
                                         <label class="custom-control-label" for="radio_box_healing">Лечащийся</label>
                                     </div>
                                     <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="radio_box_resting" name="user_type" value="resting" class="custom-control-input">
+                                        <input type="radio" id="radio_box_resting" name="patient_category" value="resting" class="custom-control-input">
                                         <label class="custom-control-label" for="radio_box_resting">Отдыхающий</label>
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Дата рождения <strong style="color: var(--red--color)">*</strong></label>
-                                        <input type="date" class="form-control" required>
+                                        <input type="date" class="form-control" name="patient_date_birth" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Фото</label>
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="customFile" accept="image/*">
+                                            <input type="file" class="custom-file-input" id="customFile" name="user_photo" accept="image/*">
                                             <label class="custom-file-label" for="customFile" data-browse="Открыть">Выберите фото</label>
                                         </div>
                                     </div>
@@ -132,25 +144,23 @@ if($getSelected != "patient" &&
                                 <label style="color: var(--yellow-color)">Паспортные данные <strong style="color: var(--red--color)">*</strong></label>
                                 <div class="form-row">
                                     <div class="col-lg-2">
-                                        <input type="text" class="form-control" placeholder="99 99 999999" name="user_passport_id" required>
+                                        <input type="text" class="form-control" placeholder="99 99 999999" name="patient_passport_id" required>
                                         <small class="text-muted form-text">Серия и номер</small>
                                     </div>
                                     <div class="col-lg-2">
-                                        <input type="text" class="form-control" placeholder="999-999" name="user_passport_code" required>
+                                        <input type="text" class="form-control" placeholder="999-999" name="patient_passport_code" required>
                                         <small class="text-muted form-text">Код подразделения</small>
                                     </div>
                                     <div class="col-lg-2">
-                                        <input type="date" class="form-control" placeholder="Дата выдачи" required>
+                                        <input type="date" class="form-control" placeholder="Дата выдачи" name="patient_passport_date_issue" required>
                                         <small class="text-muted form-text">Дата выдачи</small>
                                     </div>
                                     <div class="col-lg">
-                                        <input type="text" class="form-control" required>
+                                        <input type="text" class="form-control" name="patient_passport_who_issue" minlength="4" required>
                                         <small class="text-muted form-text">Кем выдан</small>
                                     </div>
                                 </div>
                             </div>
-
-
                             <h5 class="mb-3 text-muted text-uppercase bg-light p-2">
                                 <i class="fas fa-address-book mr-1"></i>
                                 Контактные данные
@@ -164,13 +174,13 @@ if($getSelected != "patient" &&
                                 </div>
                                 <div class="col-md">
                                     <div class="form-group">
-                                        <label style="color: var(--yellow-color)">Номер телефона </label>
-                                        <input type="tel" class="form-control" placeholder="+7 (999) 99-99-999" name="user_phone">
+                                        <label style="color: var(--yellow-color)">Номер телефона <strong style="color: var(--red--color)">*</strong></label>
+                                        <input type="tel" class="form-control" placeholder="+7 (999) 999-99-99" minlength="18" name="user_phone" required>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col alert alert-danger alert-dismissible fade show animate slideIn mr-3 ml-3" role="alert" style="font-size: 12px">
+                                <div class="col alert alert-danger alert-dismissible fade show animate slideIn mr-3 ml-3" id="alertErrorRegistrationPatient" role="alert" style="font-size: 12px" hidden>
                                     Аккаунт с указанным адресом электронной почтой уже существует. Измените или проверьте введенный адрес электронной почты!
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
@@ -181,7 +191,7 @@ if($getSelected != "patient" &&
                                 <div class="col-md">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Регион <strong style="color: var(--red--color)">*</strong></label>
-                                        <select id="chosen_required_region" name="user_region" class="form-control form-control-chosen-required" data-placeholder="Выберите регион" required>
+                                        <select id="chosen_required_region" name="patient_region" class="form-control form-control-chosen-required" data-placeholder="Выберите регион" required>
                                             <option></option>
                                             <option value="22"> Алтайский край</option>
                                             <option value="28"> Амурская область</option>
@@ -275,19 +285,19 @@ if($getSelected != "patient" &&
                                 <div class="col-md">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Населенный пункт <strong style="color: var(--red--color)">*</strong></label>
-                                        <input type="text" class="form-control" required>
+                                        <input type="text" class="form-control" name="patient_locality" required>
                                     </div>
                                 </div>
                             </div>
                             <h5 class="mb-3 text-muted text-uppercase bg-light p-2">
                                 <i class="fas fa-file-medical-alt mr-1"></i>
-                                Cостояние здоровья
+                                Состояние здоровья
                             </h5>
                             <div class="row">
                                 <div class="col">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Субъективные жалобы <strong style="color: var(--red--color)">*</strong></label>
-                                        <textarea class="form-control"></textarea>
+                                        <textarea class="form-control" name="patient_subjective_complaint" required></textarea>
                                         <small class="text-muted form-text">Кратко с чем поступил пациент</small>
                                     </div>
                                 </div>
@@ -304,7 +314,19 @@ if($getSelected != "patient" &&
             <div class="tab-pane fade show <? if($getSelected == 'doctor') echo "active";?>" id="doctor" role="tabpanel">
                 <div class="card">
                     <div class="card-body">
-                        <form>
+                        <div class="row justify-content-center animate slideIn" hidden>
+                            <div class="col-md-12">
+                                <div class="text-center mt-2">
+                                    <img src="/images/mail_sent.svg" alt="" height="170">
+                                    <h3 class="mt-4" style="color: var(--dark-cyan-color)"><b>Медперсонал зарегистрирован</b></h3>
+                                    <p class="text-muted">Теперь он может пользоваться всеми функциями профиля! Не забудьте сообщить, что на указанную почту при регистрации ему отправлен пароль для входа в профиль</p>
+                                    <button type="button" class="btn mt-2 text-white" style="background-color: var(--dark-cyan-color)" onclick="location.reload();">
+                                        <i class="fas fa-reply mr-2"></i>Зарегистрировать еще
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <form id="queryRegistrationDoctor">
                             <h5 class="mb-3 text-muted text-uppercase bg-light p-2">
                                 <i class="fas fa-user mr-1"></i>
                                 Персональные данные
@@ -313,19 +335,19 @@ if($getSelected != "patient" &&
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Фамилия <strong style="color: var(--red--color)">*</strong></label>
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" name="user_name" minlength="2" maxlength="26" onkeyup="checkInputRu(this)" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Имя <strong style="color: var(--red--color)">*</strong></label>
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" name="user_surname" minlength="2" maxlength="26" onkeyup="checkInputRu(this)" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Отчество</label>
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" name="user_patronymic" maxlength="26" onkeyup="checkInputRu(this)">
                                     </div>
                                 </div>
                             </div>
@@ -333,14 +355,14 @@ if($getSelected != "patient" &&
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Дата рождения <strong style="color: var(--red--color)">*</strong></label>
-                                        <input type="date" class="form-control" required>
+                                        <input type="date" class="form-control" name="doctor_date_birth" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Фото</label>
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="customFile" accept="image/*">
+                                            <input type="file" class="custom-file-input" name="user_photo" id="customFile" accept="image/*">
                                             <label class="custom-file-label" for="customFile" data-browse="Открыть">Выберите фото</label>
                                         </div>
                                     </div>
@@ -359,13 +381,13 @@ if($getSelected != "patient" &&
                                 </div>
                                 <div class="col-md">
                                     <div class="form-group">
-                                        <label style="color: var(--yellow-color)">Номер телефона </label>
-                                        <input type="tel" class="form-control" placeholder="+7 (999) 99-99-999" name="user_phone">
+                                        <label style="color: var(--yellow-color)">Номер телефона <strong style="color: var(--red--color)">*</strong></label>
+                                        <input type="tel" class="form-control" placeholder="+7 (999) 999-99-99" minlength="18" name="user_phone" required>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col alert alert-danger alert-dismissible fade show animate slideIn mr-3 ml-3" role="alert" style="font-size: 12px">
+                                <div class="col alert alert-danger alert-dismissible fade show animate slideIn mr-3 ml-3" role="alert" id="alertErrorRegistrationDoctor" style="font-size: 12px" hidden>
                                     Аккаунт с указанным адресом электронной почтой уже существует. Измените или проверьте введенный адрес электронной почты!
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
@@ -381,16 +403,15 @@ if($getSelected != "patient" &&
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Должность <strong style="color: var(--red--color)">*</strong></label>
-                                        <select id="chosen_required_post" name="user_med_post" class="form-control form-control-chosen-required" data-placeholder="Выберите должность" required>
+                                        <select id="chosen_required_post" name="doctor_med_post" class="form-control form-control-chosen-required" data-placeholder="Выберите должность" required>
                                             <option></option>
                                             <option value="doctor"> Врач</option>
-                                            <option value="nurse"> Медсестра (процедура)</option>
-                                            <option value="nurse"> Медсестра (обследование)</option>
+                                            <option value="specialist"> Специалист по услугам</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-lg-5" id="chosen_med">
-                                    <!--Тег для элемента выбора направления работы медперсонала-->
+                                    <!--Тег для элемента выбора направления работы медперсонала. Не трогать. Используется JS-->
                                 </div>
 
                             </div>
@@ -398,7 +419,7 @@ if($getSelected != "patient" &&
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Квалификационная категория <strong style="color: var(--red--color)">*</strong></label>
-                                        <select id="chosen_required_category" name="user_med_category" class="form-control form-control-chosen-required" data-placeholder="Выберите категорию" required>
+                                        <select id="chosen_required_category" name="doctor_med_category" class="form-control form-control-chosen-required" data-placeholder="Выберите категорию" required>
                                             <option></option>
                                             <option value="0"> Без категории</option>
                                             <option value="1"> Первая</option>
@@ -410,7 +431,7 @@ if($getSelected != "patient" &&
                                 <div class="col-lg-2">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Стаж <strong style="color: var(--red--color)">*</strong></label>
-                                        <input type="number" class="form-control" min="0" placeholder="Лет">
+                                        <input type="number" name="doctor_job_stage" class="form-control" min="0" placeholder="Лет" required>
                                     </div>
                                 </div>
                             </div>
@@ -428,7 +449,19 @@ if($getSelected != "patient" &&
             <div class="tab-pane fade show <? if($getSelected == 'administrator') echo "active";?>" id="admin" role="tabpanel">
                 <div class="card">
                     <div class="card-body">
-                        <form>
+                        <div class="row justify-content-center animate slideIn" hidden>
+                            <div class="col-md-12">
+                                <div class="text-center mt-2">
+                                    <img src="/images/mail_sent.svg" alt="" height="170">
+                                    <h3 class="mt-4" style="color: var(--dark-cyan-color)"><b>Администратор зарегистрирован</b></h3>
+                                    <p class="text-muted">Теперь он может пользоваться всеми функциями профиля! Не забудьте сообщить, что на указанную почту при регистрации ему отправлен пароль для входа в профиль</p>
+                                    <button type="button" class="btn mt-2 text-white" style="background-color: var(--dark-cyan-color)" onclick="location.reload();">
+                                        <i class="fas fa-reply mr-2"></i>Зарегистрировать еще
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <form id="queryRegistrationAdmin">
                             <h5 class="mb-3 text-muted text-uppercase bg-light p-2">
                                 <i class="fas fa-user mr-1"></i>
                                 Персональные данные
@@ -437,19 +470,19 @@ if($getSelected != "patient" &&
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Фамилия <strong style="color: var(--red--color)">*</strong></label>
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" name="user_name" minlength="2" maxlength="26" onkeyup="checkInputRu(this)" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Имя <strong style="color: var(--red--color)">*</strong></label>
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" name="user_surname" minlength="2" maxlength="26" onkeyup="checkInputRu(this)" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Отчество</label>
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" name="user_patronymic" maxlength="26" onkeyup="checkInputRu(this)">
                                     </div>
                                 </div>
                             </div>
@@ -467,15 +500,15 @@ if($getSelected != "patient" &&
                                 </div>
                                 <div class="col-md">
                                     <div class="form-group">
-                                        <label style="color: var(--yellow-color)">Номер телефона </label>
-                                        <input type="tel" class="form-control" placeholder="+7 (999) 99-99-999" name="user_phone">
+                                        <label style="color: var(--yellow-color)">Номер телефона <strong style="color: var(--red--color)">*</strong></label>
+                                        <input type="tel" class="form-control" placeholder="+7 (999) 999-99-99" minlength="18" name="user_phone" required>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col alert alert-danger alert-dismissible fade show animate slideIn mr-3 ml-3" role="alert" style="font-size: 12px">
+                                <div class="col alert alert-danger alert-dismissible fade show animate slideIn mr-3 ml-3" role="alert" id="alertErrorRegistrationAdmin" style="font-size: 12px" hidden>
                                     Аккаунт с указанным адресом электронной почтой уже существует. Измените или проверьте введенный адрес электронной почты!
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <button type="submit" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
@@ -490,7 +523,7 @@ if($getSelected != "patient" &&
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Должность <strong style="color: var(--red--color)">*</strong></label>
-                                        <select id="chosen_required_post_adm" name="user_post" class="form-control form-control-chosen-required" onselect="" data-placeholder="Выберите должность" required>
+                                        <select id="chosen_required_post_adm" name="admin_post" class="form-control form-control-chosen-required" data-placeholder="Выберите должность" required>
                                             <option></option>
                                             <option value="main">Главный администратор</option>
                                             <option value="registrar">Регистратор</option>
@@ -499,7 +532,6 @@ if($getSelected != "patient" &&
                                     </div>
                                 </div>
                             </div>
-
                             <div class="text-right">
                                 <button type="submit" class="btn mt-2 text-white" style="background-color: var(--dark-cyan-color)">
                                     <i class="fas fa-user-cog mr-2"></i>Зарегистрировать
@@ -517,6 +549,10 @@ if($getSelected != "patient" &&
 <?php require $_SERVER['DOCUMENT_ROOT']."/footer.php"; ?>
 </body>
 <script>
+    function checkInputRu(obj) {
+        obj.value = obj.value.replace(/[^а-яё]/ig,'');
+    }
+
     $('#chosen_required_region').chosen();
     $('#chosen_required_post').chosen();
     $('#chosen_required_post_adm').chosen();
@@ -526,50 +562,52 @@ if($getSelected != "patient" &&
         let index = this.options.selectedIndex;
         if(index === 1) {
             $('#chosen_med').append(
-                '<div class="form-group" id="div_chosen_profession">' +
+                '<div class="form-group">' +
                     '<label style="color: var(--yellow-color)">Специальность <strong style="color: var(--red--color)">*</strong></label>' +
-                    '<select multiple  id="chosen_required_profession" name="user_med_profession" class="form-control form-control-chosen-required" data-placeholder="Выберите специальность" required>' +
+                    '<select multiple  id="chosen_required_profession" name="doctor_profession[]" class="form-control form-control-chosen-required" data-placeholder="Выберите специальность" required>' +
                         '<option></option>' +
                         '<option value="profession1"> Специальность 1</option>' +
                         '<option value="profession2"> Специальность 2</option>' +
                     '</select>' +
+                '</div>' +
+                '<div class="form-group">' +
+                    '<label style="color: var(--yellow-color)">Расположение <strong style="color: var(--red--color)">*</strong></label>' +
+                    '<input type="text" class="form-control" placeholder="Номер кабинета или зала" name="doctor_profession_location" required>'+
                 '</div>'
             );
             $('#chosen_required_profession').chosen();
             $('#chosen_required_procedure').closest('div').remove();
+            $('#chosen_required_examination').parent().next().closest('div').remove();
             $('#chosen_required_examination').closest('div').remove();
         }
         if(index === 2) {
             $('#chosen_med').append(
-                '<div class="form-group" id="div_chosen_procedure">' +
-                    '<label style="color: var(--yellow-color)">Процедура <strong style="color: var(--red--color)">*</strong></label>' +
-                    '<select multiple id="chosen_required_procedure" name="user_med_procedure" class="form-control form-control-chosen-required" data-placeholder="Выберите процедуру" required>' +
+                '<div class="form-group">' +
+                    '<label style="color: var(--yellow-color)">Процедура</label>' +
+                    '<select multiple id="chosen_required_procedure" name="doctor_procedure[]" class="form-control form-control-chosen-required" data-placeholder="Выберите процедуру">' +
                         '<option></option>' +
                         '<option value="procedure1"> Процедура 1</option>' +
                         '<option value="procedure2"> Процедура 2</option>' +
                     '</select>' +
-                '</div>'
-            );
-            $('#chosen_required_profession').closest('div').remove();
-            $('#chosen_required_procedure').chosen();
-            $('#chosen_required_examination').closest('div').remove();
-        }
-        if(index === 3) {
-            $('#chosen_med').append(
-                '<div class="form-group" id="div_chosen_examination">' +
-                    '<label style="color: var(--yellow-color)">Обследование <strong style="color: var(--red--color)">*</strong></label>' +
-                    '<select multiple id="chosen_required_examination" name="user_med_examination" class="form-control form-control-chosen-required" data-placeholder="Выберите обследование" required>' +
+                '</div>' +
+                '<div class="form-group">' +
+                    '<label style="color: var(--yellow-color)">Обследование</label>' +
+                    '<select multiple id="chosen_required_examination" name="doctor_examination[]" class="form-control form-control-chosen-required" data-placeholder="Выберите обследование">' +
                         '<option></option>' +
                         '<option value="examination1"> Обследование 1</option>' +
                         '<option value="examination2"> Обследование 2</option>' +
                     '</select>' +
+                '</div>' +
+                '<div class="alert alert-info" role="alert" style="font-size: 12px">'
+                    + 'Необходимо назначить хотя-бы одну процедуру или обследование' +
                 '</div>'
             );
+
+            $('#chosen_required_profession').parent().next().closest('div').remove();
             $('#chosen_required_profession').closest('div').remove();
-            $('#chosen_required_procedure').closest('div').remove();
+            $('#chosen_required_procedure').chosen();
             $('#chosen_required_examination').chosen();
         }
-        console.log(index);
     });
 
 
@@ -578,9 +616,71 @@ if($getSelected != "patient" &&
         $(this).next('.custom-file-label').addClass("selected").html(fileName);
     });
 
-    $('input[name="user_phone"]').mask("+7 (999) 99-99-999");
-    $('input[name="user_passport_id"]').mask("99 99 999999");
-    $('input[name="user_passport_code"]').mask("999-999");
+    $('input[name="user_phone"]').mask("+7 (999) 999-99-99");
+    $('input[name="patient_passport_id"]').mask("99 99 999999");
+    $('input[name="patient_passport_code"]').mask("999-999");
+</script>
+<script>
+    $("#queryRegistrationPatient").submit(function () {
+        $.ajax({
+            url: "/queries/admin/registrationUser.php",
+            method: "POST",
+            data: $(this).serialize(),
+            success: function () {
+                $("#queryRegistrationPatient").prev().removeAttr("hidden");
+                $("#queryRegistrationPatient").attr("hidden", "hidden");
+                $("#alertErrorRegistrationPatient").attr("hidden", "hidden");
+            },
+            error: function () {
+                $("#alertErrorRegistrationPatient").removeAttr("hidden");
+            }
+        });
+        return false;
+    });
 
+    $("#queryRegistrationDoctor").submit(function () {
+        if($('#chosen_required_post').prop('selectedIndex') === 2) {
+            if($('#chosen_required_examination').val().length === 0 && $('#chosen_required_procedure').val().length === 0) {
+                $("#alertErrorRegistrationDoctor").removeAttr("hidden");
+                $('#chosen_required_examination').parent().next().removeClass("alert-info");
+                $('#chosen_required_examination').parent().next().addClass("alert-danger");
+                return false;
+            } else {
+                $('#chosen_required_examination').parent().next().removeClass("alert-danger");
+                $('#chosen_required_examination').parent().next().addClass("alert-info");
+            }
+        }
+        $.ajax({
+            url: "/queries/admin/registrationUser.php",
+            method: "POST",
+            data: $(this).serialize(),
+            success: function () {
+                $("#queryRegistrationDoctor").prev().removeAttr("hidden");
+                $("#queryRegistrationDoctor").attr("hidden", "hidden");
+                $("#alertErrorRegistrationDoctor").attr("hidden", "hidden");
+            },
+            error: function () {
+                $("#alertErrorRegistrationDoctor").removeAttr("hidden");
+            }
+        });
+        return false;
+    });
+
+    $("#queryRegistrationAdmin").submit(function () {
+        $.ajax({
+            url: "/queries/admin/registrationUser.php",
+            method: "POST",
+            data: $(this).serialize(),
+            success: function () {
+                $("#queryRegistrationAdmin").prev().removeAttr("hidden");
+                $("#queryRegistrationAdmin").attr("hidden", "hidden");
+                $("#alertErrorRegistrationAdmin").attr("hidden", "hidden");
+            },
+            error: function () {
+                $("#alertErrorRegistrationAdmin").removeAttr("hidden");
+            }
+        });
+        return false;
+    });
 </script>
 </html>
