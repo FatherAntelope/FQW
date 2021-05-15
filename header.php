@@ -181,7 +181,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/lk/services/editor.php" class="nav-link link-navbar" aria-haspopup="true">
+                        <a href="/lk/services/editor.php?selected=specializations" class="nav-link link-navbar" aria-haspopup="true">
                             <i class="fas fa-procedures mr-1"></i>
                             Услуги
                         </a>

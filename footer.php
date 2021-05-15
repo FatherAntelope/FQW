@@ -123,7 +123,7 @@
                                     <a href="#">Питание</a>
                                 </li>
                                 <li>
-                                    <a href="/lk/services/">Услуги</a>
+                                    <a href="/lk/services/editor.php?selected=specializations">Услуги</a>
                                 </li>
                                 <li>
                                     <a href="/lk/users/">Пользователи</a>

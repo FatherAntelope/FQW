@@ -1,5 +1,14 @@
 <?php
 $whose_user = 1;
+
+$getSelected = $_GET['selected'];
+if($getSelected != "specializations" &&
+    $getSelected != "procedures" &&
+    $getSelected != "examinations" &&
+    $getSelected != "events") {
+    header("Location: /lk/");
+    exit;
+}
 ?>
 <!doctype html>
 <html lang="ru">
@@ -14,7 +23,7 @@ $whose_user = 1;
     <link rel="stylesheet" type="text/css" href="/css/jquery.dataTables.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" charset="utf8" src="/js/datatables.js"></script>
     <script defer src="/js/all.js"></script>
@@ -35,31 +44,31 @@ $whose_user = 1;
         </nav>
         <ul class="nav nav-pills flex-column flex-sm-row mb-2" role="tablist">
             <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
-                <a class="nav-link tab-bg-active font-weight-bold active" data-toggle="tab" href="#tab-specializations" role="tab">
+                <a class="nav-link tab-bg-active font-weight-bold <? if($getSelected == 'specializations') echo "active";?>" onclick="window.history.pushState('', '', '/lk/services/editor.php?selected=specializations');" data-toggle="tab" href="#tab-specializations" role="tab">
                     <i class="fas fa-user-md mr-2"></i>Специальности
                 </a>
             </li>
             <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
-                <a class="nav-link tab-bg-active font-weight-bold" data-toggle="tab" href="#tab-procedures" role="tab">
+                <a class="nav-link tab-bg-active font-weight-bold <? if($getSelected == 'procedures') echo "active";?>" onclick="window.history.pushState('', '', '/lk/services/editor.php?selected=procedures');" data-toggle="tab" href="#tab-procedures" role="tab">
                     <i class="fas fa-diagnoses mr-2"></i>Процедуры
                 </a>
             </li>
             <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
-                <a class="nav-link tab-bg-active font-weight-bold" data-toggle="tab" href="#tab-examinations" role="tab">
+                <a class="nav-link tab-bg-active font-weight-bold <? if($getSelected == 'examinations') echo "active";?>" onclick="window.history.pushState('', '', '/lk/services/editor.php?selected=examinations');" data-toggle="tab" href="#tab-examinations" role="tab">
                     <i class="fas fa-microscope mr-1"></i>Обследования
                 </a>
             </li>
             <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
-                <a class="nav-link tab-bg-active font-weight-bold" data-toggle="tab" href="#tab-events" role="tab">
+                <a class="nav-link tab-bg-active font-weight-bold <? if($getSelected == 'events') echo "active";?>" onclick="window.history.pushState('', '', '/lk/services/editor.php?selected=events');" data-toggle="tab" href="#tab-events" role="tab">
                     <i class="fas fa-walking mr-1"></i>Мероприятия
                 </a>
             </li>
         </ul>
 
         <div class="tab-content">
-            <div class="tab-pane fade show active" id="tab-specializations" role="tabpanel">
+            <div class="tab-pane fade show <? if($getSelected == 'specializations') echo "active";?>" id="tab-specializations" role="tabpanel">
                 <div class="card d-flex align-items-center">
-                    <div class="card-body" style="max-width: 600px">
+                    <div class="card-body" style="max-width: 800px">
                         <button type="submit" class="btn btn-sm btn-success float-right text-white mb-2" data-toggle="modal" data-target="#openModalCreateSpecialization">
                             <i class="fas fa-plus-circle mr-2"></i>Создать специальность
                         </button>
@@ -67,28 +76,36 @@ $whose_user = 1;
                             <thead class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
                                 <th>Название</th>
+                                <th>Специалисты</th>
+                                <th>Стоимость, руб.</th>
                                 <th>Действие</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
                                 <td class="text-muted" data-label="Название:">Терапевт</td>
+                                <td class="text-muted" data-label="Спец.-ты:">Иванов И. И., Кузнецов К. К.</td>
+                                <td class="text-muted" data-label="Сто.-ть:">300</td>
                                 <td>
-                                    <button type="button" class="btn mt-1 btn-sm btn-warning text-white" style="background-color: var(--yellow-color)">Редактирование</button>
-                                    <button type="button" class="btn mt-1 btn-sm btn-danger" data-toggle="modal" data-target="#openModalRemoveServices">Удаление</button>
+                                    <button type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)">Редактирование</button>
+                                    <button type="button" class="btn mt-1 btn-sm btn-danger" data-toggle="modal" data-target="#openModalRemoveService">Удаление</button>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="text-muted" data-label="Название:">Сурдолог</td>
+                                <td class="text-muted" data-label="Спец.-ты:">Иванов И. И.</td>
+                                <td class="text-muted" data-label="Стоимость:">400</td>
                                 <td>
-                                    <button type="button" class="btn mt-1 btn-sm btn-warning text-white" style="background-color: var(--yellow-color)">Редактирование</button>
-                                    <button type="button" class="btn mt-1 btn-sm btn-danger" data-toggle="modal" data-target="#openModalRemoveServices">Удаление</button>
+                                    <button type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)">Редактирование</button>
+                                    <button type="button" class="btn mt-1 btn-sm btn-danger" data-toggle="modal" data-target="#openModalRemoveService">Удаление</button>
                                 </td>
                             </tr>
                             </tbody>
                             <tfoot class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
                                 <th>Название</th>
+                                <th>Специалисты</th>
+                                <th>Стоимость, руб.</th>
                                 <th>Действие</th>
                             </tr>
                             </tfoot>
@@ -97,7 +114,7 @@ $whose_user = 1;
                 </div>
             </div>
 
-            <div class="tab-pane fade show" id="tab-procedures" role="tabpanel">
+            <div class="tab-pane fade show <? if($getSelected == 'procedures') echo "active";?>" id="tab-procedures" role="tabpanel">
                 <div class="card">
                     <div class="card-body">
                         <button type="submit" class="btn btn-sm btn-success float-right text-white mb-2" data-toggle="modal" data-target="#openModalCreateProcedure">
@@ -107,18 +124,18 @@ $whose_user = 1;
                             <thead class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
                                 <th>Название</th>
-                                <th>Описание</th>
+                                <th>Специалисты</th>
                                 <th>Противопоказания</th>
                                 <th>Назначения</th>
-                                <th>Цена, руб.</th>
+                                <th>Стоимость, руб.</th>
                                 <th>Действие</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
                                 <td class="text-muted" data-label="Название:">Карбокситерапия</td>
-                                <td class="text-muted" data-label="Описание:">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, saepe...
+                                <td class="text-muted" data-label="Спец.-ты:">
+                                    Иванов И. И, Кузнецов К. К.
                                 </td>
                                 <td class="text-muted" data-label="Прот.-ия:">
                                     <ul class="list-unstyled">
@@ -135,12 +152,12 @@ $whose_user = 1;
                                         <li><span class="badge badge-pill badge-success">Рубцы и шрамы</span></li>
                                     </ul>
                                 </td>
-                                <td class="text-muted" data-label="Цена, р.:">500</td>
+                                <td class="text-muted" data-label="Стоимость:">500</td>
                                 <td>
                                     <ul class="list-unstyled">
                                         <li><button type="button" class="btn btn-sm text-white btn-block" style="background-color: var(--cyan-color)">Просмотр</button></li>
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-warning text-white btn-block" style="background-color: var(--yellow-color)">Редактирование</button></li>
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-danger btn-block" data-toggle="modal" data-target="#openModalRemoveServices">Удаление</button></li>
+                                        <li><button type="button" class="btn mt-1 btn-sm btn-warning text-secondary btn-block" style="background-color: var(--yellow-color)">Редактирование</button></li>
+                                        <li><button type="button" class="btn mt-1 btn-sm btn-danger btn-block" data-toggle="modal" data-target="#openModalRemoveService">Удаление</button></li>
                                     </ul>
                                 </td>
                             </tr>
@@ -148,10 +165,10 @@ $whose_user = 1;
                             <tfoot class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
                                 <th>Название</th>
-                                <th>Описание</th>
+                                <th>Специалисты</th>
                                 <th>Противопоказания</th>
                                 <th>Назначения</th>
-                                <th>Цена, руб.</th>
+                                <th>Стоимость, руб.</th>
                                 <th>Действие</th>
                             </tr>
                             </tfoot>
@@ -160,7 +177,7 @@ $whose_user = 1;
                 </div>
             </div>
 
-            <div class="tab-pane fade show" id="tab-examinations" role="tabpanel">
+            <div class="tab-pane fade show <? if($getSelected == 'examinations') echo "active";?>" id="tab-examinations" role="tabpanel">
                 <div class="card">
                     <div class="card-body">
                         <button type="submit" class="btn btn-sm btn-success float-right text-white mb-2" data-toggle="modal" data-target="#openModalCreateExamination">
@@ -170,17 +187,17 @@ $whose_user = 1;
                             <thead class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
                                 <th>Название</th>
-                                <th>Описание</th>
+                                <th>Специалисты</th>
                                 <th>Назначения</th>
-                                <th>Цена, руб.</th>
+                                <th>Стоимость, руб.</th>
                                 <th>Действие</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
                                 <td class="text-muted" data-label="Название:">ОАК</td>
-                                <td class="text-muted" data-label="Описание:">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, saepe...
+                                <td class="text-muted" data-label="Спец.-ты:">
+                                    Иванов И. И, Кузнецов К. К.
                                 </td>
                                 <td class="text-muted" data-label="Назн.-ия:">
                                     <ul class="list-unstyled">
@@ -188,12 +205,12 @@ $whose_user = 1;
                                         <li><span class="badge badge-pill badge-success">...</span></li>
                                     </ul>
                                 </td>
-                                <td class="text-muted" data-label="Цена, р.:">500</td>
+                                <td class="text-muted" data-label="Стоимость:">500</td>
                                 <td>
                                     <ul class="list-unstyled">
                                         <li><button type="button" class="btn btn-sm text-white btn-block" style="background-color: var(--cyan-color)">Просмотр</button></li>
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-warning text-white btn-block" style="background-color: var(--yellow-color)">Редактирование</button></li>
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-danger btn-block" data-toggle="modal" data-target="#openModalRemoveServices">Удаление</button></li>
+                                        <li><button type="button" class="btn mt-1 btn-sm btn-warning text-secondary btn-block" style="background-color: var(--yellow-color)">Редактирование</button></li>
+                                        <li><button type="button" class="btn mt-1 btn-sm btn-danger btn-block" data-toggle="modal" data-target="#openModalRemoveService">Удаление</button></li>
                                     </ul>
                                 </td>
                             </tr>
@@ -201,9 +218,9 @@ $whose_user = 1;
                             <tfoot class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
                                 <th>Название</th>
-                                <th>Противопоказания</th>
+                                <th>Специалисты</th>
                                 <th>Назначения</th>
-                                <th>Цена, руб.</th>
+                                <th>Стоимость, руб.</th>
                                 <th>Действие</th>
                             </tr>
                             </tfoot>
@@ -212,8 +229,53 @@ $whose_user = 1;
                 </div>
             </div>
 
-            <div class="tab-pane fade show" id="tab-events" role="tabpanel">
-                4
+            <div class="tab-pane fade show <? if($getSelected == 'events') echo "active";?>" id="tab-events" role="tabpanel">
+                <div class="card">
+                    <div class="card-body">
+                        <button type="submit" class="btn btn-sm btn-success float-right text-white mb-2" data-toggle="modal" data-target="#openModalCreateEvent">
+                            <i class="fas fa-plus-circle mr-2"></i>Создать мероприятие
+                        </button>
+                        <table id="table_events" class="table table-striped table-hover">
+                            <thead class="text-white" style="background-color: var(--cyan-color);">
+                            <tr>
+                                <th>Название</th>
+                                <th>Специалисты</th>
+                                <th>Даты проведения</th>
+                                <th>Стоимость, руб.</th>
+                                <th>Действие</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="text-muted" data-label="Название:">Экскурсия по зоопарку</td>
+                                <td class="text-muted" data-label="Спец.-ты:">
+                                    Иванов И. И, Кузнецов К. К.
+                                </td>
+                                <td class="text-muted" data-label="Даты:">
+                                    10.10.2020 - бессрочно
+                                </td>
+                                <td class="text-muted" data-label="Стоимость:">500</td>
+                                <td>
+                                    <ul class="list-unstyled">
+                                        <li><button type="button" class="btn btn-sm text-white btn-block" style="background-color: var(--cyan-color)">Просмотр</button></li>
+                                        <li><button type="button" class="btn mt-1 btn-sm btn-warning text-secondary btn-block" style="background-color: var(--yellow-color)">Редактирование</button></li>
+                                        <li><button type="button" class="btn mt-1 btn-sm btn-danger btn-block" data-toggle="modal" data-target="#openModalRemoveService">Удаление</button></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <tfoot class="text-white" style="background-color: var(--cyan-color);">
+                            <tr>
+                                <th>Название</th>
+                                <th>Специалисты</th>
+                                <th>Даты проведения</th>
+                                <th>Стоимость, руб.</th>
+                                <th>Действие</th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -231,23 +293,26 @@ $whose_user = 1;
             </div>
             <div class="modal-body">
                 <div class="alert alert-info" role="alert" style="font-size: 12px">
-                    Внимательно создавайте специальности. Проверяйте заполненные поля перед созданием специальности.
+                    Внимательно создавайте специальности. Проверяйте заполненные поля перед созданием специальности
                 </div>
-                <form>
+                <form id="queryAddServiceSpecialization">
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-md-8">
+                            <div class="col-lg-7">
                                 <label style="color: var(--yellow-color)">Название специальности <strong style="color: var(--red--color)">*</strong></label>
-                                <input type="text" name="specialization_name" class="form-control" placeholder="На русском" required>
+                                <input type="text" name="service_name" class="form-control" placeholder="На русском" required>
                             </div>
-                            <div class="col-md-4">
-                                <label style="color: var(--yellow-color)">Цена услуги (руб.) <strong style="color: var(--red--color)">*</strong></label>
-                                <input type="number" min="0" name="specialization_cost" class="form-control" placeholder="Введите цену" required>
+                            <div class="col-lg-5">
+                                <label style="color: var(--yellow-color)">Стоимость услуги (руб.) <strong style="color: var(--red--color)">*</strong></label>
+                                <input type="number" min="0" name="service_cost" class="form-control" placeholder="Введите стоимость" required>
                             </div>
                         </div>
                     </div>
                 </form>
-                <div class="alert alert-danger alert-dismissible fade show animate slideIn" role="alert" style="font-size: 12px">
+                <div class="alert alert-success" role="alert" id="alertSuccessAddServiceSpecialization" hidden>
+                    Специальность успешно создана, теперь она появится в таблице
+                </div>
+                <div class="alert alert-danger alert-dismissible fade show animate slideIn" role="alert" id="alertErrorAddServiceSpecialization" style="font-size: 12px" hidden>
                     Специальность с указанным названием уже существует!
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -256,7 +321,7 @@ $whose_user = 1;
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Отмена</button>
-                <button type="button" class="btn btn-success">Создать</button>
+                <button type="submit" class="btn btn-success" form="queryAddServiceSpecialization">Создать</button>
             </div>
         </div>
     </div>
@@ -264,7 +329,7 @@ $whose_user = 1;
 
 <!--Модальное окно создания процедуры-->
 <div class="modal fade" tabindex="-1" id="openModalCreateProcedure" data-backdrop="static">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title" style="color: var(--cyan-color)">Создание процедуры</h3>
@@ -274,24 +339,24 @@ $whose_user = 1;
             </div>
             <div class="modal-body">
                 <div class="alert alert-info" role="alert" style="font-size: 12px">
-                    Внимательно создавайте процедуры. Проверяйте заполненные поля перед созданием процедуры.
+                    Внимательно создавайте процедуры. Проверяйте заполненные поля перед созданием процедуры
                 </div>
-                <form>
+                <form id="queryAddServiceProcedure">
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-md-5">
+                            <div class="col-lg-5">
                                 <label style="color: var(--yellow-color)">Название процедуры <strong style="color: var(--red--color)">*</strong></label>
-                                <input type="text" name="procedure_name" class="form-control" placeholder="На русском" required>
+                                <input type="text" name="service_name" class="form-control" required>
                             </div>
-                            <div class="col-md-3">
-                                <label style="color: var(--yellow-color)">Цена услуги (руб.) <strong style="color: var(--red--color)">*</strong></label>
-                                <input type="number" min="0" name="procedure_cost" class="form-control" placeholder="Введите цену" required>
+                            <div class="col-lg-3">
+                                <label style="color: var(--yellow-color)">Стоимость услуги (руб.) <strong style="color: var(--red--color)">*</strong></label>
+                                <input type="number" min="0" name="service_cost" class="form-control" placeholder="Введите стоимость" required>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label style="color: var(--yellow-color)">Фото <strong style="color: var(--red--color)">*</strong></label>
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="customFile" accept="image/*">
+                                        <input type="file" class="custom-file-input" id="customFile" name="procedure_photo" accept="image/*">
                                         <label class="custom-file-label" for="customFile" data-browse="Открыть">Выберите фото</label>
                                     </div>
                                 </div>
@@ -301,12 +366,12 @@ $whose_user = 1;
                             <div class="col">
                                 <div class="form-group">
                                     <label style="color: var(--yellow-color)">Описание процедуры <strong style="color: var(--red--color)">*</strong></label>
-                                    <textarea class="form-control" placeholder="Назначение процедуры, ее описание и т.п."></textarea>
+                                    <textarea class="form-control" placeholder="Назначение процедуры, ее описание и т.п." name="procedure_description" required></textarea>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-6" id="list_contraindications">
+                            <div class="col-lg-6" id="list_contraindications_procedure">
                                 <label style="color: var(--yellow-color)">Противопоказания</label>
                                 <table class="table table-sm table-borderless information_json">
                                     <tr class="information_json_plus">
@@ -319,12 +384,12 @@ $whose_user = 1;
                                     </tr>
                                 </table>
                             </div>
-                            <div class="col-lg-6" id="list_destinations">
+                            <div class="col-lg-6" id="list_destinations_procedure">
                                 <label style="color: var(--yellow-color)">Назначения</label>
                                 <table class="table table-sm table-borderless information_json">
                                     <tr class="information_json_plus">
                                         <td class="pl-0">
-                                                <span class="btn btn-sm btn-success rounded-circle plus-destinations">
+                                                <span class="btn btn-sm btn-success rounded-circle plus-destinations_procedure">
                                                     <i class="fas fa-plus"></i>
                                                 </span>
                                         </td>
@@ -335,7 +400,10 @@ $whose_user = 1;
                         </div>
                     </div>
                 </form>
-                <div class="alert alert-danger alert-dismissible fade show animate slideIn" role="alert" style="font-size: 12px">
+                <div class="alert alert-success" role="alert" id="alertSuccessAddServiceProcedure" hidden>
+                    Процедура успешно создана, теперь она появится в таблице
+                </div>
+                <div class="alert alert-danger alert-dismissible fade show animate slideIn" role="alert" style="font-size: 12px" id="alertErrorAddServiceProcedure" hidden>
                     Процедура с указанным названием уже существует!
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -344,7 +412,7 @@ $whose_user = 1;
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Отмена</button>
-                <button type="button" class="btn btn-success">Создать</button>
+                <button type="submit" class="btn btn-success" form="queryAddServiceProcedure">Создать</button>
             </div>
         </div>
     </div>
@@ -362,35 +430,35 @@ $whose_user = 1;
             </div>
             <div class="modal-body">
                 <div class="alert alert-info" role="alert" style="font-size: 12px">
-                    Внимательно создавайте обследования. Проверяйте заполненные поля перед созданием обследования.
+                    Внимательно создавайте обследования. Проверяйте заполненные поля перед созданием обследования
                 </div>
-                <form>
+                <form id="queryAddServiceExamination">
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-md-8">
+                            <div class="col-lg-8">
                                 <label style="color: var(--yellow-color)">Название обследования <strong style="color: var(--red--color)">*</strong></label>
-                                <input type="text" name="examination_name" class="form-control" placeholder="На русском" required>
+                                <input type="text" name="service_name" class="form-control" required>
                             </div>
-                            <div class="col-md-4">
-                                <label style="color: var(--yellow-color)">Цена услуги (руб.) <strong style="color: var(--red--color)">*</strong></label>
-                                <input type="number" min="0" name="examination_cost" class="form-control" placeholder="Введите цену" required>
+                            <div class="col-lg-4">
+                                <label style="color: var(--yellow-color)">Стоимость услуги (руб.) <strong style="color: var(--red--color)">*</strong></label>
+                                <input type="number" min="0" name="service_cost" class="form-control" placeholder="Введите стоимость" required>
                             </div>
                         </div>
-                        <div class="row mt-3">
+                        <div class="row mt-lg-3">
                             <div class="col">
                                 <div class="form-group">
                                     <label style="color: var(--yellow-color)">Описание обследования <strong style="color: var(--red--color)">*</strong></label>
-                                    <textarea class="form-control" placeholder="Назначение обследование, ее описание и т.п."></textarea>
+                                    <textarea class="form-control" name="examination_description" placeholder="Назначение обследование, ее описание и т.п." required></textarea>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-6" id="list_destinations"> <!------ЕСЛИ БУДЕТ ОШИБКА ПРИ СОЗДАНИИ ПРОЦЕДУРЫ, ТО СМЕНИТЬ ID---->
+                            <div class="col-lg-6" id="list_destinations_examination"> <!------ЕСЛИ БУДЕТ ОШИБКА ПРИ СОЗДАНИИ ПРОЦЕДУРЫ, ТО СМЕНИТЬ ID---->
                                 <label style="color: var(--yellow-color)">Назначения</label>
                                 <table class="table table-sm table-borderless information_json">
                                     <tr class="information_json_plus">
                                         <td class="pl-0">
-                                                <span class="btn btn-sm btn-success rounded-circle plus-destinations">
+                                                <span class="btn btn-sm btn-success rounded-circle plus-destinations_examination">
                                                     <i class="fas fa-plus"></i>
                                                 </span>
                                         </td>
@@ -401,8 +469,11 @@ $whose_user = 1;
                         </div>
                     </div>
                 </form>
-                <div class="alert alert-danger alert-dismissible fade show animate slideIn" role="alert" style="font-size: 12px">
-                    Процедура с указанным названием уже существует!
+                <div class="alert alert-success" role="alert" id="alertSuccessAddServiceExamination" hidden>
+                    Обследование успешно создано, теперь оно появится в таблице
+                </div>
+                <div class="alert alert-danger alert-dismissible fade show animate slideIn" id="alertErrorAddServiceExamination" role="alert" style="font-size: 12px" hidden>
+                    Обследование с указанным названием уже существует!
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -410,14 +481,81 @@ $whose_user = 1;
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Отмена</button>
-                <button type="button" class="btn btn-success">Создать</button>
+                <button type="submit" class="btn btn-success" form="queryAddServiceExamination">Создать</button>
             </div>
         </div>
     </div>
 </div>
 
-<!--Модальное окно отмены записи-->
-<div class="modal fade" tabindex="-1" id="openModalRemoveServices" data-backdrop="static">
+<!--Модальное окно создания мероприятия-->
+<div class="modal fade" tabindex="-1" id="openModalCreateEvent" data-backdrop="static">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" style="color: var(--cyan-color)">Создание мероприятия</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-info" role="alert" style="font-size: 12px">
+                    Внимательно создавайте мероприятия. Проверяйте заполненные поля перед созданием мероприятия
+                </div>
+                <form id="queryAddServiceEvent">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-lg-7">
+                                <label style="color: var(--yellow-color)">Название мероприятия<strong style="color: var(--red--color)">*</strong></label>
+                                <input type="text" name="service_name" class="form-control required">
+                            </div>
+                            <div class="col-lg-5">
+                                <label style="color: var(--yellow-color)">Стоимость услуги (руб.) <strong style="color: var(--red--color)">*</strong></label>
+                                <input type="number" min="0" name="service_cost" class="form-control" placeholder="Введите стоимость" required>
+                            </div>
+                        </div>
+                        <div class="row mt-lg-3">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label style="color: var(--yellow-color)">Описание мероприятия <strong style="color: var(--red--color)">*</strong></label>
+                                    <textarea class="form-control" name="event_description" placeholder="Назначение мероприятия, ее описание и т.п." required></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <label style="color: var(--yellow-color)">Дата начала мероприятия<strong style="color: var(--red--color)">*</strong></label>
+                                <input type="date" name="event_date_start" class="form-control" required>
+                            </div>
+                            <div class="col-lg-5">
+                                <label style="color: var(--yellow-color)">Дата окончания мероприятия</label>
+                                <input type="date" name="event_date_end" class="form-control">
+                                <small class="form-text text-muted">
+                                    Оставьте поле пустым, если мероприятие непрерывно
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="alert alert-success" role="alert" id="alertSuccessAddServiceEvent" hidden>
+                    Мероприятие успешно создано, теперь оно появится в таблице
+                </div>
+                <div class="alert alert-danger alert-dismissible fade show animate slideIn" role="alert" id="alertErrorAddServiceEvent" style="font-size: 12px" hidden>
+                    Мероприятие с указанным названием уже существует!
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Отмена</button>
+                <button type="submit" class="btn btn-success" form="queryAddServiceEvent">Создать</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Модальное удаления услуги-->
+<div class="modal fade" tabindex="-1" id="openModalRemoveService" data-backdrop="static">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-body">
@@ -427,7 +565,10 @@ $whose_user = 1;
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Нет</button>
-                <button type="button" class="btn btn-success">Да</button>
+                <form id="queryDeleteService">
+                    <input type="hidden" name="service_id" value="1">
+                    <button type="submit" class="btn btn-success">Да</button>
+                </form>
             </div>
         </div>
     </div>
@@ -468,16 +609,25 @@ $whose_user = 1;
     $(document).on('click', '.plus-contraindications', function(){
         $(this).closest('.information_json_plus').before(
             '<tr>' +
-            '<td class="pl-0"><input type="text" class="form-control" name=contraindications_json_val[]" placeholder="Противопоказание" required></td>' +
+            '<td class="pl-0"><input type="text" class="form-control" name="procedure_contraindications[]" placeholder="Противопоказание" required></td>' +
             '<td class="pl-0"><span class="btn btn-sm btn-danger rounded-circle minus mt-1"><i class="fas fa-minus"></i></span></td>' +
             '</tr>'
         );
     });
 
-    $(document).on('click', '.plus-destinations', function(){
+    $(document).on('click', '.plus-destinations_procedure', function(){
         $(this).closest('.information_json_plus').before(
             '<tr>' +
-            '<td class="pl-0"><input type="text" class="form-control" name=destinations_json_val[]" placeholder="Назначение" required></td>' +
+            '<td class="pl-0"><input type="text" class="form-control" name="procedure_destinations[]" placeholder="Назначение" required></td>' +
+            '<td class="pl-0"><span class="btn btn-sm btn-danger rounded-circle minus mt-1"><i class="fas fa-minus"></i></span></td>' +
+            '</tr>'
+        );
+    });
+
+    $(document).on('click', '.plus-destinations_examination', function(){
+        $(this).closest('.information_json_plus').before(
+            '<tr>' +
+            '<td class="pl-0"><input type="text" class="form-control" name="examination_destinations[]" placeholder="Назначение" required></td>' +
             '<td class="pl-0"><span class="btn btn-sm btn-danger rounded-circle minus mt-1"><i class="fas fa-minus"></i></span></td>' +
             '</tr>'
         );
@@ -487,7 +637,7 @@ $whose_user = 1;
         $(this).closest('tr').remove();
     });
 
-    $('#table_doctors, #table_procedures, #table_examinations').DataTable({
+    $('#table_doctors, #table_procedures, #table_examinations, #table_events').DataTable({
         "language": {
             "zeroRecords": "<span class='text-muted'>Совпадения отсутствуют</span>",
             "search": "<span class='text-muted' style='margin-right: 0.5rem; font-size: 1.3rem'>Поиск:</span>",
@@ -511,5 +661,106 @@ $whose_user = 1;
         },
 
     });
+</script>
+<script>
+    $("#queryDeleteService").submit(function () {
+        $.ajax({
+            url: "/queries/admin/deleteService.php",
+            method: "POST",
+            data: $(this).serialize(),
+            success: function () {
+                $("#openModalRemoveService").modal('hide');
+            },
+            error: function () {
+
+            }
+        });
+        return false;
+    });
+
+    $("#queryAddServiceSpecialization").submit(function () {
+        $.ajax({
+            url: "/queries/admin/addService.php",
+            method: "POST",
+            data: $(this).serialize(),
+            success: function () {
+                $("#alertErrorAddServiceSpecialization").attr("hidden", "hidden");
+                $("#queryAddServiceSpecialization").attr("hidden", "hidden");
+                $("#queryAddServiceSpecialization").prev().attr("hidden", "hidden");
+                $("#queryAddServiceSpecialization").parent().next().attr("hidden", "hidden");
+                $("#alertSuccessAddServiceSpecialization").removeAttr("hidden");
+                setTimeout(function(){ location.reload(); }, 2000);
+
+            },
+            error: function () {
+                $("#alertErrorAddServiceSpecialization").removeAttr("hidden");
+            }
+        });
+        return false;
+    });
+
+    $("#queryAddServiceProcedure").submit(function () {
+        $.ajax({
+            url: "/queries/admin/addService.php",
+            method: "POST",
+            data: $(this).serialize(),
+            success: function () {
+                $("#alertErrorAddServiceProcedure").attr("hidden", "hidden");
+                $("#queryAddServiceProcedure").attr("hidden", "hidden");
+                $("#queryAddServiceProcedure").prev().attr("hidden", "hidden");
+                $("#queryAddServiceProcedure").parent().next().attr("hidden", "hidden");
+                $("#alertSuccessAddServiceProcedure").removeAttr("hidden");
+                setTimeout(function(){ location.reload(); }, 2000);
+
+            },
+            error: function () {
+                $("#alertErrorAddServiceProcedure").removeAttr("hidden");
+            }
+        });
+        return false;
+    });
+
+    $("#queryAddServiceExamination").submit(function () {
+        $.ajax({
+            url: "/queries/admin/addService.php",
+            method: "POST",
+            data: $(this).serialize(),
+            success: function () {
+                $("#alertErrorAddServiceExamination").attr("hidden", "hidden");
+                $("#queryAddServiceExamination").attr("hidden", "hidden");
+                $("#queryAddServiceExamination").prev().attr("hidden", "hidden");
+                $("#queryAddServiceExamination").parent().next().attr("hidden", "hidden");
+                $("#alertSuccessAddServiceExamination").removeAttr("hidden");
+                setTimeout(function(){ location.reload(); }, 2000);
+
+            },
+            error: function () {
+                $("#alertErrorAddServiceExamination").removeAttr("hidden");
+            }
+        });
+        return false;
+    });
+
+    $("#queryAddServiceEvent").submit(function () {
+        $.ajax({
+            url: "/queries/admin/addService.php",
+            method: "POST",
+            data: $(this).serialize(),
+            success: function () {
+                $("#alertErrorAddServiceEvent").attr("hidden", "hidden");
+                $("#queryAddServiceEvent").attr("hidden", "hidden");
+                $("#queryAddServiceEvent").prev().attr("hidden", "hidden");
+                $("#queryAddServiceEvent").parent().next().attr("hidden", "hidden");
+                $("#alertSuccessAddServiceEvent").removeAttr("hidden");
+                setTimeout(function(){ location.reload(); }, 2000);
+
+            },
+            error: function () {
+                $("#alertErrorAddServiceEvent").removeAttr("hidden");
+            }
+        });
+        return false;
+    });
+
 </script>
 </html>

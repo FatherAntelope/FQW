@@ -143,7 +143,7 @@ $whose_user = 1;
                         <div class="row">
                             <div class="col-lg-6">
                                 <h5 class="text-muted">Возраст: 45</h5>
-                                <h5 class="text-muted">Должность: Врач / Специалист по процедурам / Специалист по обследованиям </h5>
+                                <h5 class="text-muted">Должность: Врач / Специалист по услугам </h5>
                                 <h5 class="text-muted">Квалификационная категория: Без категории / Первая / Вторая / Высшая</h5>
                             </div>
                             <div class="col-lg-6">
@@ -151,6 +151,9 @@ $whose_user = 1;
                                 <h5 class="text-muted">Специальность:</h5>
                                 <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">Стоматолог</span>
                                 <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">Терапевт</span>
+                                <h5 class="text-muted">Услуги:</h5>
+                                <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">Бассейн</span>
+                                <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">ОАК</span>
                             </div>
                         </div>
                     </div>
