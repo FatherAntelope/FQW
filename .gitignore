@@ -1,0 +1,4 @@
+# Файл с описанием проекта для Sublime Text
+# удобно иметь файл для быстрого переключения
+*.sublime-project
+*.sublime-workspace
