@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="dd690a98-02d7-475c-ab21-dec0f2dd0976" name="Default Changelist" comment="Созданы AJAX запросы на регистрацию пользователей администратором без добавления фотографии, а также удаление, восстановление доступа пациенту и восстановление пароля (отправка сообщения на почту)">
-      <change afterPath="$PROJECT_DIR$/queries/admin/addService.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/queries/admin/deleteService.php" afterDir="false" />
+    <list default="true" id="dd690a98-02d7-475c-ab21-dec0f2dd0976" name="Default Changelist" comment="Созданы AJAX запросы на создание сервисов у администратора с удалением (без редактирования), также добавлено мероприятие">
+      <change afterPath="$PROJECT_DIR$/css/lightslider.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/css/record.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/sanatorium-dining.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/lightslider.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lk/services/record_.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/footer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/organizer/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/organizer/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/services/editor.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/services/editor.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/users/profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/users/profile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth.php" beforeDir="false" afterPath="$PROJECT_DIR$/auth.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lk/nutrition/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/nutrition/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/queries/loginUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/queries/loginUser.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/queries/recoveryPasswordUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/queries/recoveryPasswordUser.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +66,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/lk/services" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/css" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -78,11 +80,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\OpenServer\domains\fqw\css" />
+      <recent name="D:\OpenServer\domains\fqw\js" />
+      <recent name="D:\OpenServer\domains\fqw\images" />
       <recent name="D:\OpenServer\domains\fqw\lk\services" />
       <recent name="D:\OpenServer\domains\fqw\faq" />
-      <recent name="D:\OpenServer\domains\fqw\lk\users" />
-      <recent name="D:\OpenServer\domains\fqw\lk\patients" />
-      <recent name="D:\OpenServer\domains\fqw\lk\settings" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\OpenServer\domains\fqw\images" />
@@ -163,7 +165,11 @@
       <workItem from="1620906536724" duration="28318000" />
       <workItem from="1620979674546" duration="23057000" />
       <workItem from="1621078456308" duration="7320000" />
-      <workItem from="1621099765533" duration="4848000" />
+      <workItem from="1621099765533" duration="5115000" />
+      <workItem from="1621151748492" duration="24418000" />
+      <workItem from="1621260428867" duration="5179000" />
+      <workItem from="1621349932378" duration="2112000" />
+      <workItem from="1621352436763" duration="9802000" />
     </task>
     <task id="LOCAL-00001" summary="Начал делать шапку">
       <created>1611600872960</created>
@@ -501,7 +507,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621011086018</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="Созданы AJAX запросы на создание сервисов у администратора с удалением (без редактирования), также добавлено мероприятие">
+      <created>1621105672374</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1621105672374</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -523,7 +536,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Добавлена страница редактирования услуг. Сделан фронтент создания специальности и процедуры" />
     <MESSAGE value="На странице контроля услуг у пациента карточки услуг заменены на таблицы" />
     <MESSAGE value="У администратора добавлена таблица редактирования обследования. Также добавлены модальные окна на подтверждение отмены записи у пациента и удаление услуг у администратора. &#10;add_user.php переименован в add.php и перемещен в users. &#10;control.php переименован в index.php и перемещен в services.&#10;Создан файл index.php для папки users - просмотр пользователей у администратора" />
     <MESSAGE value="Добавлены таблицы по просмотру по управлению пользователями у администратора" />
@@ -548,6 +560,7 @@
     <MESSAGE value="Добавлены страницы информации об услугах без выбора записи" />
     <MESSAGE value="Созданы AJAX запросы на авторизацию и настройки пользователей (кроме смены виджетов и фотографии)" />
     <MESSAGE value="Созданы AJAX запросы на регистрацию пользователей администратором без добавления фотографии, а также удаление, восстановление доступа пациенту и восстановление пароля (отправка сообщения на почту)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Созданы AJAX запросы на регистрацию пользователей администратором без добавления фотографии, а также удаление, восстановление доступа пациенту и восстановление пароля (отправка сообщения на почту)" />
+    <MESSAGE value="Созданы AJAX запросы на создание сервисов у администратора с удалением (без редактирования), также добавлено мероприятие" />
+    <option name="LAST_COMMIT_MESSAGE" value="Созданы AJAX запросы на создание сервисов у администратора с удалением (без редактирования), также добавлено мероприятие" />
   </component>
 </project>

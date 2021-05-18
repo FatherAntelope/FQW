@@ -39,7 +39,7 @@
                         </div>
                         <div class="col-md-6">
                             <h3 style="color: var(--cyan-color)">Авторизация</h3>
-                            <form id="queryLoginUser">
+                            <form method="post" action="/queries/loginUser.php">
                                 <div class="form-group">
                                     <label style="color: #ffa400">Логин</label>
                                     <input type="text" name="user_login" class="form-control" placeholder="Ваш логин" required>
@@ -66,7 +66,7 @@
                                     Пожалуйста, убедитесь что логин и пароль указаны верно.
                                     <br>
                                     Если вы не еще зарегистрированы, то обратитесь в регистратуру вашего санатория для выдачи вам данных к личному кабинету.
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <button type="submit" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
@@ -144,7 +144,7 @@
             method: "POST",
             data: $(this).serialize(),
             success: function () {
-                $(location).attr('href', '/lk/');
+                //$(location).attr('href', '/lk/');
             },
             error: function () {
                 $("#alertErrorLogin").removeAttr("hidden");
