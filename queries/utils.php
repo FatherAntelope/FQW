@@ -42,7 +42,7 @@ function utils_call_api($method, $url, $data = false,
     // авторизация
     // curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 
-    $result = utf8_decode(curl_exec($curl));
+    $result = curl_exec($curl);
     if (!$result) {
         die("Connection Failure");
     }
