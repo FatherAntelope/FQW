@@ -1,3 +1,10 @@
+<?php
+$weeks = [ "Mon"=> "Пн" , "Tue" => "Вт" , "Wed" => "Ср" , "Thu" => "Чт" , "Fri" => "Пт" , "Sat" => "Сб",  "Sun" =>"Вс"];
+$days_num = 7; //количество
+$time_start = "8:00"; //время старта
+$time_span = 15; //минуты
+$count_records = 10; //количество
+?>
 <!doctype html>
 <html lang="ru">
 <head>
@@ -8,6 +15,7 @@
     <link rel="shortcut icon" href="/images/logo-mini.png" type="image/x-icon">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/record.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -74,7 +82,7 @@
                 <hr style="border-top: 3px solid var(--yellow-color);">
                 <div class="row">
                     <div class="col">
-                        <h5 class="text-muted">Биография:</h5>
+                        <h5 class="text-muted">Специализация:</h5>
                         <h6 class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda natus nemo quis sequi. Aut debitis deleniti id in possimus quidem, quo tempore tenetur! A cupiditate dicta dolore doloremque eius ex impedit laborum, libero, mollitia nam nemo optio praesentium qui quo reprehenderit similique totam. Ab delectus labore nihil. Deserunt, enim, vel!</h6>
                     </div>
                     <div class="col">
@@ -107,9 +115,15 @@
         </div>
         <!--Карточка выбора даты и времени записи на слугу-->
         <div class="card mt-3">
-            <div class="card-body"></div>
+            <div class="card-body">
+                <h3 class="text-muted font-weight-bold">Выберите свободную запись</h3>
+                <div class="card-body__table" id="card-body__table">
+
+                </div>
+            </div>
         </div>
     </div>
+
 </div>
 
 <!--Список всплывающих уведомлений-->
@@ -131,10 +145,128 @@
     </div>
 </div>
 
+<!--Модальное окно подтверждения записи-->
+<div class="modal fade" id="openModalRecordConfirm">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <h3 style="color: var(--dark-cyan-color)">Регистрация записи на услугу</h3>
+                    <span class="text-muted">Запись к врачу</span>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="text-muted">Специальность:
+                    <span style="color: var(--cyan-color)" id="span_service_name"></span>
+                </p>
+                <p class="text-muted">Врач:
+                    <span style="color: var(--cyan-color)" id="span_service_doctor"></span>
+                </p>
+                <p class="text-muted">Расположение:
+                    <span style="color: var(--cyan-color)" id="span_service_location"></span>
+                </p>
+                <p class="text-muted">Дата и время:
+                    <span style="color: var(--cyan-color)" id="span_service_datetime"></span>
+                </p>
+                <p class="text-muted">Стоимость услуги:
+                    <span style="color: var(--cyan-color)" id="span_service_cost"></span>
+                </p>
+                <div class="alert alert-secondary" style="font-size: 12px">
+                    Правило: <br>
+                    Если не сможете посетить услугу в выбранное время, пожалуйста, отмените прием
+                </div>
+                <form id="queryRecordConfirm">
+                    <div class="custom-checkbox custom-control">
+                        <input class="custom-control-input" id="record_confirm" name="record_confirm" type="checkbox" required>
+                        <label class="custom-control-label text-muted" for="record_confirm" style="text-decoration-line: none">Соглашаюсь с правилом и даю согласие на запись</label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-info text-white mr-1" style="background-color: var(--cyan-color)" form="queryRecordConfirm">
+                    <i class="fas fa-edit mr-1"></i> Подтвердить
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!--Футер (нижний блок)-->
 <?php require $_SERVER['DOCUMENT_ROOT']."/footer.php"; ?>
 </body>
 <script>
     $('#notificationToast').toast('show');
+</script>
+<script>
+    $(document).ready( () => {
+        const timeMap = {
+            <?php for($i = 0; $i < $days_num; $i++) {?>
+            '<?php echo date("d.m", time() + 86400 * $i)." ".$weeks[date("D", time() + 86400 * ($i))]; ?> ' : [
+                <?php
+                //past, busy, empty
+                for($j = 0; $j < $count_records; $j++) { ?>
+                {
+                    time: '<?php echo date("H:i", strtotime('+'.$time_span * $j.' min', strtotime($time_start))); ?>',
+                    flag: '',
+                    id: '<?php echo "datetime_".$i."_".$j?>',
+                },
+                <?php } ?>
+            ],
+            <?php } ?>
+        }
+        for(let key in timeMap){
+            const timeTable = $('#card-body__table');
+            if(timeMap.hasOwnProperty(key)){
+                //создаем элемент столбца
+                let row = document.createElement('div');
+                row.classList.add('card-body__row');
+
+                //создаем элемент главной ячейки
+                let ceilHead = document.createElement('div');
+                ceilHead.classList.add('card-body__ceil');
+                ceilHead.classList.add('head');
+                ceilHead.innerHTML = key;
+
+                //вставляем ячейку в столбец
+                row.append(ceilHead);
+
+                //вставляем столбец на страницу
+                timeTable.append(row);
+
+                timeMap[key].forEach(element => {
+                    let ceil = document.createElement('div');
+                    ceil.classList.add('card-body__ceil');
+
+                    if(element.flag && element.flag != ''){
+                        ceil.classList.add(element.flag);
+                    }
+                    if(element.time && element.time != ''){
+                        ceil.innerHTML = element.time;
+                    }
+                    if(element.id && element.id != ''){
+                        ceil.id = element.id;
+                    }
+                    row.append(ceil);
+                });
+            }
+        }
+
+
+        $(".card-body__ceil").click(function(){
+            $('#span_service_name').text('Терапевт');
+            $('#span_service_doctor').text('Иванова Екатерина Ивановна');
+            $('#span_service_location').text('505 кабинет');
+            $('#span_service_datetime').text($(this).siblings(".head").text() + " " +$(this).text());
+            $('#span_service_cost').text('500₽');
+
+            $('#openModalRecordConfirm').modal('show');
+        });
+
+    });
+
+
 </script>
 </html>

@@ -161,7 +161,7 @@ $whose_user = 1;
                 <hr style="border-top: 3px solid var(--yellow-color);">
                 <div class="row">
                     <div class="col">
-                        <h5 class="text-muted">Биография:</h5>
+                        <h5 class="text-muted">Специализация:</h5>
                         <h6 class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda natus nemo quis sequi. Aut debitis deleniti id in possimus quidem, quo tempore tenetur! A cupiditate dicta dolore doloremque eius ex impedit laborum, libero, mollitia nam nemo optio praesentium qui quo reprehenderit similique totam. Ab delectus labore nihil. Deserunt, enim, vel!</h6>
                     </div>
                     <div class="col">

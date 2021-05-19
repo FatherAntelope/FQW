@@ -190,9 +190,9 @@
                                         <i class="fas fa-check float-right text-success animate slideIn" hidden></i>
                                     </h6>
                                     <div class="form-group">
-                                        <label style="color: var(--yellow-color)">Биография</label>
+                                        <label style="color: var(--yellow-color)">Специализация</label>
                                         <textarea class="form-control" name="doctor_biography" placeholder="Чем владеете, чем занимаетесь и т.п." minlength="50" required></textarea>
-                                        <small class="text-muted form-text">Напишите о себе</small>
+                                        <small class="text-muted form-text">Минимум 500 символов</small>
                                     </div>
                                     <div class="row">
                                         <div class="col" id="list_education">
