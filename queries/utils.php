@@ -42,7 +42,7 @@ function utils_call_api($method, $url, $data = false,
     // авторизация
     // curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 
-    $result = curl_exec($curl);
+    $result = utf8_decode(curl_exec($curl));
     if (!$result) {
         die("Connection Failure");
     }
@@ -50,7 +50,7 @@ function utils_call_api($method, $url, $data = false,
     $content_type = curl_getinfo($curl, CURLINFO_CONTENT_TYPE);
     if ($content_type !== null) {
         // если тип содержимого - json, то декодируем
-        if (strcmp($content_type, "application/json") == 0) {
+        if (strpos($content_type, "application/json") !== false) {
             $result = json_decode($result, true);
         }
     }
