@@ -14,12 +14,14 @@ $count_records = 10; //количество
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="/images/logo-mini.png" type="image/x-icon">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/chosen.min.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/record.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/chosen.js"></script>
     <script defer src="/js/all.js"></script>
     <title>СанКонтроль</title>
 </head>
@@ -117,6 +119,10 @@ $count_records = 10; //количество
         <div class="card mt-3">
             <div class="card-body">
                 <h3 class="text-muted font-weight-bold">Выберите свободную запись</h3>
+                <select id="chosen_select_specialization" name="record_select_specialization" class="form-control form-control-chosen-required" data-placeholder="Выберите должность" required>
+                    <option value="main" selected>Терапевт</option>
+                    <option value="registrar">Стоматолог</option>
+                </select>
                 <div class="card-body__table" id="card-body__table">
 
                 </div>
@@ -199,6 +205,7 @@ $count_records = 10; //количество
 </body>
 <script>
     $('#notificationToast').toast('show');
+    $('#chosen_select_specialization').chosen();
 </script>
 <script>
     $(document).ready( () => {

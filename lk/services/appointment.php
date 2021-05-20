@@ -88,7 +88,7 @@ if($getSelected != "doctors" &&
                                 <th>Специальность</th>
                                 <th>Расположение</th>
                                 <th>Разрешение</th>
-                                <th>Цена, руб.</th>
+                                <th>Стоимость, руб.</th>
                                 <th>Действие</th>
                             </tr>
                             </thead>
@@ -100,7 +100,7 @@ if($getSelected != "doctors" &&
                                 </td>
                                 <td class="text-muted" data-label="Расп.-ие:">505 каб.</td>
                                 <td class="text-muted" data-label="Раз.-ие:"><span class="badge badge-pill badge-success">Дополнительно</span></td>
-                                <td class="text-muted" data-label="Цена, р.:">500</td>
+                                <td class="text-muted" data-label="Стоимость, р.:">500</td>
                                 <td><button type="button" class="btn btn-sm btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Запись</button></td>
                             </tr>
                             <tr>
@@ -110,7 +110,7 @@ if($getSelected != "doctors" &&
                                 </td>
                                 <td class="text-muted" data-label="Расп.-ие:">302 каб.</td>
                                 <td class="text-muted" data-label="Раз.-ие:"><span class="badge badge-pill badge-danger">Обязательно</span></td>
-                                <td class="text-muted" data-label="Цена, р.:">700</td>
+                                <td class="text-muted" data-label="Стоимость, р.:">700</td>
                                 <td><button type="button" class="btn btn-sm btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Запись</button></td>
                             </tr>
                             </tbody>
@@ -120,7 +120,7 @@ if($getSelected != "doctors" &&
                                 <th>Специальность</th>
                                 <th>Расположение</th>
                                 <th>Разрешение</th>
-                                <th>Цена, руб.</th>
+                                <th>Стоимость, руб.</th>
                                 <th>Действие</th>
                             </tr>
                             </tfoot>
@@ -135,42 +135,42 @@ if($getSelected != "doctors" &&
                         <table id="table_procedures" class="table table-striped table-hover">
                             <thead class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
-                                <th>Специалист</th>
-                                <th>Процедура</th>
+                                <th>Название</th>
+                                <th>Специалисты</th>
                                 <th>Расположение</th>
                                 <th>Разрешение</th>
-                                <th>Цена, руб.</th>
+                                <th>Стоимость, руб.</th>
                                 <th>Повторы</th>
                                 <th>Действие</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
-                                <td class="text-muted" data-label="Сп.-ист:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
                                 <td class="text-muted" data-label="Спец.-ть:">Бассейн</td>
+                                <td class="text-muted" data-label="Сп.-ист:">Николаев И. И., Иванов И. И.</td>
                                 <td class="text-muted" data-label="Расп.-ие:">105 каб.</td>
                                 <td class="text-muted" data-label="Раз.-ие:"><span class="badge badge-pill badge-success">Дополнительно</span></td>
-                                <td class="text-muted" data-label="Цена, р.:">550</td>
+                                <td class="text-muted" data-label="Стоимость, р.:">550</td>
                                 <td class="text-muted" data-label="Повторов:">–</td>
                                 <td><a href="#" type="button" class="btn btn-sm btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Запись</a></td>
                             </tr>
                             <tr>
-                                <td class="text-muted" data-label="Сп.-ист:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Николаев И. И.</td>
                                 <td class="text-muted" data-label="Спец.-ть:">Мануальная терапия</td>
+                                <td class="text-muted" data-label="Сп.-ист:">Николаев И. И., Иванов И. И.</td>
                                 <td class="text-muted" data-label="Расп.-ие:">108 каб.</td>
                                 <td class="text-muted" data-label="Раз.-ие:"><span class="badge badge-pill badge-danger">Обязательно</span></td>
-                                <td class="text-muted" data-label="Цена, р.:">750</td>
+                                <td class="text-muted" data-label="Стоимость, р.:">750</td>
                                 <td class="text-muted" data-label="Повторов:">10</td>
                                 <td><a href="#" type="button" class="btn btn-sm btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Запись</a></td>
                             </tr>
                             </tbody>
                             <tfoot class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
-                                <th>Специалист</th>
-                                <th>Процедура</th>
+                                <th>Название</th>
+                                <th>Специалисты</th>
                                 <th>Расположение</th>
                                 <th>Разрешение</th>
-                                <th>Цена, руб.</th>
+                                <th>Стоимость, руб.</th>
                                 <th>Повторов</th>
                                 <th>Действие</th>
                             </tr>
@@ -186,35 +186,35 @@ if($getSelected != "doctors" &&
                         <table id="table_examinations" class="table table-striped table-hover">
                             <thead class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
-                                <th>Специалист</th>
-                                <th>Обследование</th>
+                                <th>Название</th>
+                                <th>Специалисты</th>
                                 <th>Расположение</th>
-                                <th>Цена, руб.</th>
+                                <th>Стоимость, руб.</th>
                                 <th>Действие</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
-                                <td class="text-muted" data-label="Сп.-ист:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
                                 <td class="text-muted" data-label="Спец.-ть:">ОАК</td>
+                                <td class="text-muted" data-label="Сп.-ист:">Николаев И. И., Иванов И. И.</td>
                                 <td class="text-muted" data-label="Расп.-ие:">105 каб.</td>
-                                <td class="text-muted" data-label="Цена, р.:">550</td>
+                                <td class="text-muted" data-label="Стоимость, р.:">550</td>
                                 <td><a href="#" type="button" class="btn btn-sm btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Запись</a></td>
                             </tr>
                             <tr>
-                                <td class="text-muted" data-label="Сп.-ист:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Николаев И. И.</td>
                                 <td class="text-muted" data-label="Спец.-ть:">ОАМ</td>
+                                <td class="text-muted" data-label="Сп.-ист:">Николаев И. И., Иванов И. И.</td>
                                 <td class="text-muted" data-label="Расп.-ие:">108 каб.</td>
-                                <td class="text-muted" data-label="Цена, р.:">750</td>
+                                <td class="text-muted" data-label="Стоимость, р.:">750</td>
                                 <td><a href="#" type="button" class="btn btn-sm btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Запись</a></td>
                             </tr>
                             </tbody>
                             <tfoot class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
-                                <th>Специалист</th>
                                 <th>Обследование</th>
+                                <th>Специалисты</th>
                                 <th>Расположение</th>
-                                <th>Цена, руб.</th>
+                                <th>Стоимость, руб.</th>
                                 <th>Действие</th>
                             </tr>
                             </tfoot>
@@ -224,7 +224,50 @@ if($getSelected != "doctors" &&
             </div>
 
             <div class="tab-pane fade show <? if($getSelected == 'events') echo "active";?>" id="tab-events" role="tabpanel">
-                4
+                <div class="card">
+                    <div class="card-body">
+                        <table id="table_events" class="table table-striped table-hover">
+                            <thead class="text-white" style="background-color: var(--cyan-color);">
+                            <tr>
+                                <th>Название</th>
+                                <th>Специалисты</th>
+                                <th>Даты проведения</th>
+                                <th>Расположение</th>
+                                <th>Стоимость, руб.</th>
+                                <th>Действие</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="text-muted" data-label="Спец.-ть:">Зоопарк</td>
+                                <td class="text-muted" data-label="Сп.-ист:">Николаев И. И., Иванов И. И.</td>
+                                <td class="text-muted" data-label="Даты:">Бессрочно</td>
+                                <td class="text-muted" data-label="Расп.-ие:">Главный вход</td>
+                                <td class="text-muted" data-label="Стоимость, р.:">550</td>
+                                <td><a href="#" type="button" class="btn btn-sm btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Запись</a></td>
+                            </tr>
+                            <tr>
+                                <td class="text-muted" data-label="Спец.-ть:">Экскурсия по водохранилищу</td>
+                                <td class="text-muted" data-label="Сп.-ист:">Николаев И. И., Иванов И. И.</td>
+                                <td class="text-muted" data-label="Даты:">10.05.2021 - 21.05.2021</td>
+                                <td class="text-muted" data-label="Расп.-ие:">Главный вход</td>
+                                <td class="text-muted" data-label="Стоимость, р.:">300</td>
+                                <td><a href="#" type="button" class="btn btn-sm btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Запись</a></td>
+                            </tr>
+                            </tbody>
+                            <tfoot class="text-white" style="background-color: var(--cyan-color);">
+                            <tr>
+                                <th>Обследование</th>
+                                <th>Специалисты</th>
+                                <th>Даты проведения</th>
+                                <th>Расположение</th>
+                                <th>Стоимость, руб.</th>
+                                <th>Действие</th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -254,7 +297,7 @@ if($getSelected != "doctors" &&
 </body>
 <script>
 $('#notificationToast').toast('show');
-$('#table_doctors, #table_procedures, #table_examinations').DataTable({
+$('#table_doctors, #table_procedures, #table_examinations, #table_events').DataTable({
     "language": {
         "zeroRecords": "<span class='text-muted'>Услуги отсутствуют</span>",
         "search": "<span class='text-muted' style='margin-right: 0.5rem; font-size: 1.3rem'>Поиск:</span>",

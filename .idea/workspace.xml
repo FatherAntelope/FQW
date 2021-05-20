@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="dd690a98-02d7-475c-ab21-dec0f2dd0976" name="Default Changelist" comment="Добавлена верстка страницы питания. Добавлена таблица времени записи на услуги (без передачи данных в модальное окно). Протестирована авторизация по CURL запросам к удаленному API Django приложения для подключения к БД PostgreSQL">
+    <list default="true" id="dd690a98-02d7-475c-ab21-dec0f2dd0976" name="Default Changelist" comment="Добавлена временная диаграмма записи пациента на услугу (к врачу). У медперсонала &quot;Биография&quot; переименована в &quot;Специализация&quot;">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/record.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/record.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lk/services/appointment.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/services/appointment.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lk/services/record_doctor.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/services/record_doctor.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lk/settings/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/settings/index.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -163,14 +164,8 @@
       <workItem from="1621260428867" duration="5179000" />
       <workItem from="1621349932378" duration="2112000" />
       <workItem from="1621352436763" duration="9967000" />
-      <workItem from="1621428310614" duration="15144000" />
-    </task>
-    <task id="LOCAL-00002" summary="Начал делать шапку">
-      <created>1611603219374</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1611603219374</updated>
+      <workItem from="1621428310614" duration="16208000" />
+      <workItem from="1621523337681" duration="4567000" />
     </task>
     <task id="LOCAL-00003" summary="Добавлено модальное окно &quot;восстановление пароля&quot; вместе с заметками об ошибках и прочей информации">
       <created>1611675599200</created>
@@ -508,7 +503,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621367063158</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="Добавлена временная диаграмма записи пациента на услугу (к врачу). У медперсонала &quot;Биография&quot; переименована в &quot;Специализация&quot;">
+      <created>1621454027007</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1621454027008</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -530,7 +532,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="У администратора добавлена таблица редактирования обследования. Также добавлены модальные окна на подтверждение отмены записи у пациента и удаление услуг у администратора. &#10;add_user.php переименован в add.php и перемещен в users. &#10;control.php переименован в index.php и перемещен в services.&#10;Создан файл index.php для папки users - просмотр пользователей у администратора" />
     <MESSAGE value="Добавлены таблицы по просмотру по управлению пользователями у администратора" />
     <MESSAGE value="Залиты новые недостающиеся файлы" />
     <MESSAGE value="Удалены лишние файлы" />
@@ -555,6 +556,7 @@
     <MESSAGE value="Созданы AJAX запросы на регистрацию пользователей администратором без добавления фотографии, а также удаление, восстановление доступа пациенту и восстановление пароля (отправка сообщения на почту)" />
     <MESSAGE value="Созданы AJAX запросы на создание сервисов у администратора с удалением (без редактирования), также добавлено мероприятие" />
     <MESSAGE value="Добавлена верстка страницы питания. Добавлена таблица времени записи на услуги (без передачи данных в модальное окно). Протестирована авторизация по CURL запросам к удаленному API Django приложения для подключения к БД PostgreSQL" />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавлена верстка страницы питания. Добавлена таблица времени записи на услуги (без передачи данных в модальное окно). Протестирована авторизация по CURL запросам к удаленному API Django приложения для подключения к БД PostgreSQL" />
+    <MESSAGE value="Добавлена временная диаграмма записи пациента на услугу (к врачу). У медперсонала &quot;Биография&quot; переименована в &quot;Специализация&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавлена временная диаграмма записи пациента на услугу (к врачу). У медперсонала &quot;Биография&quot; переименована в &quot;Специализация&quot;" />
   </component>
 </project>
