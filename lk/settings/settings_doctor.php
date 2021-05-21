@@ -1,3 +1,6 @@
+<?php
+$user_data = $user_data;
+?>
 <!doctype html>
 <html lang="ru">
 <head>
@@ -39,7 +42,7 @@
                     <div class="card-header text-center" style="background-color: var(--cyan-color">
                         <img src="/images/user.png" class="rounded-circle img-thumbnail" style="height: 12rem;width: 12rem;">
                         <h4 class="mb-0 mt-2" style="color: var(--yellow-color)">
-                            <?php echo "Иванов Иван Иванович"; ?>
+                            <?php echo $user_data->data['user']['surname']." ".$user_data->data['user']['name']." ".$user_data->data['user']['patronymic'];?>
                         </h4>
                         <p class="mb-2 text-white" >Медперсонал</p>
                         <button data-toggle="modal" data-target="#openModalReplaceAvatar" class="btn btn-warning btn-sm text-white" style="background-color: var(--yellow-color)">
@@ -107,13 +110,13 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label style="color: var(--yellow-color)">Почта</label>
-                                                <input type="email" class="form-control" placeholder="example@mail.ru" name="user_email" value="<?php echo "mail@mail.ru"; ?>" required>
+                                                <input type="email" class="form-control" placeholder="example@mail.ru" name="user_email" value="<?php echo $user_data->data['user']['email'];?>" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label style="color: var(--yellow-color)">Номер телефона </label>
-                                                <input type="tel" class="form-control" placeholder="+7 (999) 999-99-99" name="user_phone" value="<?php echo "+7 (999) 999-99-99";?>">
+                                                <input type="tel" class="form-control" placeholder="+7 (999) 999-99-99" name="user_phone" value="<?php echo $user_data->data['user']['phone_number'];?>" required>
                                             </div>
                                         </div>
                                         <div class="col alert alert-danger alert-dismissible fade show animate slideIn mr-3 ml-3" role="alert" id="alertErrorUserEditContactData" style="font-size: 12px" hidden>

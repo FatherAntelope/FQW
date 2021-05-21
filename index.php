@@ -1,5 +1,26 @@
 <?php
-$whose_user = 0;
+if(isset($_COOKIE['user_token'])) {
+    require $_SERVER['DOCUMENT_ROOT'] . "/utils/curl.php";
+    require $_SERVER['DOCUMENT_ROOT'] . "/utils/variables.php";
+
+    $url = "https://".domain_name_api."/api/med/user";
+    $method = "GET";
+    $auth_token = 'Authorization: Bearer '.$_COOKIE['user_token'];
+    $user_data = utils_call_api($method, $url, null, [$auth_token]);
+    $whose_user = $user_data->data['user']['role'];
+    if($whose_user === "Admin") {
+        $whose_user = 1;
+    } elseif ($whose_user === "Patient") {
+        $whose_user = 2;
+    } elseif ($whose_user === "Doctor") {
+        $whose_user = 3;
+    } else {
+        $whose_user = 0;
+    }
+} else {
+    $whose_user = 0;
+}
+
 ?>
 <!doctype html>
 <html lang="ru">

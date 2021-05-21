@@ -1,3 +1,7 @@
+<?php
+if (isset($_COOKIE['user_token']))
+    header("Location: /lk/");
+?>
 <!doctype html>
 <html lang="ru">
 <head>
@@ -39,7 +43,7 @@
                         </div>
                         <div class="col-md-6">
                             <h3 style="color: var(--cyan-color)">Авторизация</h3>
-                            <form method="post" action="/queries/loginUser.php">
+                            <form id="queryLoginUser">
                                 <div class="form-group">
                                     <label style="color: #ffa400">Логин</label>
                                     <input type="text" name="user_login" class="form-control" placeholder="Ваш логин" required>
@@ -144,7 +148,7 @@
             method: "POST",
             data: $(this).serialize(),
             success: function () {
-                //$(location).attr('href', '/lk/');
+                $(location).attr('href', '/lk/');
             },
             error: function () {
                 $("#alertErrorLogin").removeAttr("hidden");

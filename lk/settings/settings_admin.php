@@ -1,3 +1,6 @@
+<?php
+$user_data = $user_data;
+?>
 <!doctype html>
 <html lang="ru">
 <head>
@@ -14,12 +17,8 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery.maskedinput@1.4.1/src/jquery.maskedinput.min.js" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script defer src="/js/all.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-show-password/1.0.3/bootstrap-show-password.min.js"></script>
     <title>СанКонтроль</title>
 </head>
-<style>
-
-</style>
 <body>
 <!--Панель навигации по модулям пользователя-->
 <?php require $_SERVER['DOCUMENT_ROOT']."/header.php"; ?>
@@ -38,7 +37,9 @@
                 <div class="card">
                     <div class="card-header text-center" style="background-color: var(--cyan-color">
                         <img src="/images/user.png" class="rounded-circle img-thumbnail" style="height: 12rem;width: 12rem;">
-                        <h4 class="mb-0 mt-2" style="color: var(--yellow-color)"><?php echo "Иванов Иван Иванович"; ?></h4>
+                        <h4 class="mb-0 mt-2" style="color: var(--yellow-color)">
+                            <?php echo $user_data->data['user']['surname']." ".$user_data->data['user']['name']." ".$user_data->data['user']['patronymic'];?>
+                        </h4>
                         <p class="mb-2 text-white" >
                             Администратор
                         </p>
@@ -87,19 +88,19 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label style="color: var(--yellow-color)">Фамилия</label>
-                                                <input type="text" class="form-control" name="admin_name" value="<?php echo "Иванов"; ?>" placeholder="Ваша фамилия" minlength="2" maxlength="26" onkeyup="checkInputRu(this)" required>
+                                                <input type="text" class="form-control" name="admin_name" value="<?php echo $user_data->data['user']['surname']; ?>" placeholder="Ваша фамилия" minlength="2" maxlength="26" onkeyup="checkInputRu(this)" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label style="color: var(--yellow-color)">Имя</label>
-                                                <input type="text" class="form-control" name="admin_surname" value="<?php echo "Иван"; ?>" placeholder="Ваше имя" minlength="2" maxlength="26" onkeyup="checkInputRu(this)" required>
+                                                <input type="text" class="form-control" name="admin_surname" value="<?php echo $user_data->data['user']['name']?>" placeholder="Ваше имя" minlength="2" maxlength="26" onkeyup="checkInputRu(this)" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label style="color: var(--yellow-color)">Отчество</label>
-                                                <input type="text" class="form-control" name="admin_patronymic" value="<?php echo "Иванович"; ?>" placeholder="Ваше отчество" minlength="2" maxlength="26" onkeyup="checkInputRu(this)" required>
+                                                <input type="text" class="form-control" name="admin_patronymic" value="<?php echo $user_data->data['user']['patronymic'];?>" placeholder="Ваше отчество" minlength="2" maxlength="26" onkeyup="checkInputRu(this)" required>
                                             </div>
                                         </div>
                                     </div>
@@ -119,13 +120,13 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label style="color: var(--yellow-color)">Почта</label>
-                                                <input type="email" class="form-control" placeholder="example@mail.ru" name="user_email" value="<?php echo "mail@mail.ru"; ?>" required>
+                                                <input type="email" class="form-control" placeholder="example@mail.ru" name="user_email" value="<?php echo $user_data->data['user']['email'];?>" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label style="color: var(--yellow-color)">Номер телефона </label>
-                                                <input type="tel" class="form-control" placeholder="+7 (999) 999-99-99" name="user_phone" value="<?php echo "+7 (999) 999-99-99";?>">
+                                                <input type="tel" class="form-control" placeholder="+7 (999) 999-99-99" name="user_phone" value="<?php echo $user_data->data['user']['phone_number'];?>" required>
                                             </div>
                                         </div>
                                         <div class="col alert alert-danger alert-dismissible fade show animate slideIn mr-3 ml-3" role="alert" id="alertErrorUserEditContactData" style="font-size: 12px" hidden>

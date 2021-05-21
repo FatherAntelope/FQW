@@ -114,7 +114,7 @@
                     </span>
                     <span>
                         <span class="account-user-name">
-                            <?echo "Иван Иванович";?>
+                            <?php echo $user_data->data['user']['surname']." ".$user_data->data['user']['name'];?>
                         </span>
                         <span class="account-role">
                             <?php

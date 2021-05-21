@@ -1,5 +1,5 @@
 <?php
-
+$user_data = $user_data;
 ?>
 <!doctype html>
 <html lang="ru">
@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script defer src="/js/all.js"></script>
@@ -33,12 +33,14 @@
                         <img src="/images/user.png" class="img-thumbnail rounded-circle mb-2" width="120" alt="">
                         <br>
                         <a href="/lk/settings/" type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)"><i class="fas fa-user-cog"></i></a>
-                        <button type="button" class="btn mt-1 btn-sm btn-danger text-white"><i class="fas fa-door-open"></i></button>
+                        <a href="/queries/exitUser.php" type="button" class="btn mt-1 btn-sm btn-danger text-white"><i class="fas fa-door-open"></i></a>
                     </div>
                     <div class="col-lg-10">
                         <div class="row">
                             <div class="col">
-                                <h4 class="font-weight-bold" style="color: var(--dark-cyan-color)">Иванов Иван Иванович</h4>
+                                <h4 class="font-weight-bold" style="color: var(--dark-cyan-color)">
+                                    <?php echo $user_data->data['user']['surname']." ".$user_data->data['user']['name']." ".$user_data->data['user']['patronymic'];?>
+                                </h4>
                             </div>
                         </div>
                         <div class="row">
@@ -52,11 +54,11 @@
 
                 <div class="row">
                     <div class="col-lg-12 d-flex justify-content-around flex-xl-row flex-md-row flex-sm-column flex-column">
-                        <a href="tel:+7 (999) 999-99-99" aria-haspopup="true" style="text-decoration: none; color: var(--yellow-color)">
-                            <h5 class="font-weight-bold"><i class="fas fa-phone mr-1"></i> +7 (999) 999-99-99</h5>
+                        <a href="tel:<?php echo $user_data->data['user']['phone_number'];?>" aria-haspopup="true" style="text-decoration: none; color: var(--yellow-color)">
+                            <h5 class="font-weight-bold"><i class="fas fa-phone mr-1"></i> <?php echo $user_data->data['user']['phone_number'];?></h5>
                         </a>
-                        <a href="mailto:mail@mail.ru" aria-haspopup="true" style="text-decoration: none; color: var(--yellow-color)">
-                            <h5 class="font-weight-bold"><i class="fas fa-envelope-open-text mr-1"></i>mail@mail.ru</h5>
+                        <a href="mailto:<?php echo $user_data->data['user']['email'];?>" aria-haspopup="true" style="text-decoration: none; color: var(--yellow-color)">
+                            <h5 class="font-weight-bold"><i class="fas fa-envelope-open-text mr-1"></i><?php echo $user_data->data['user']['email'];?></h5>
                         </a>
                     </div>
                 </div>
