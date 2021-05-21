@@ -1,12 +1,14 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . "/utils/curl.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/utils/variables.php";
 //регистрация
 $url = "https://".domain_name_api."/api/med/registration";
+$method = "POST";
 $data = [
     "user" => [
-        "email" => "gorbunov.vladlen2014@gmail.com",
-        "username" => "Admin",
-        "password" => "123456789",
+        "email" => "",
+        "username" => "",
+        "password" => "",
         "name" => "Владлен",
         "surname" => "Горбунов",
         "patronymic" => "Вячеславович",
@@ -15,9 +17,7 @@ $data = [
     ]
 ];
 
-$response = utils_call_api("POST", $url, $data);
-echo "<pre>";
+$response = utils_call_api($method , $url, $data);
+print_r($response->status_code);
 print_r($response->data);
-print_r($response->data->token);
-echo "</pre>";
 ?>

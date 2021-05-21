@@ -1,15 +1,16 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . "/utils/curl.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/utils/variables.php";
 //авторизация
-$url = 'http://109.68.212.98/api/med/users/login';
+$url = "http://".domain_name_api."/api/med/users/login";
+$method = "POST";
 $data = [
     "user" => [
-        "email" => $_POST['user_login'],
-        "password" => $_POST['user_password']
+        "email" => "",
+        "password" => ""
     ]
 ];
 
-$response = utils_call_api("POST", $url, $data);
-
+$response = utils_call_api($method, $url, $data);
 print_r($response->data);
 ?>

@@ -59,5 +59,4 @@ function utils_call_api($method, $url, $data = false,
     curl_close($curl);
     return new CurlHttpResponse($result, $status_code);
 }
-
 ?>
