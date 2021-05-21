@@ -1,7 +1,7 @@
 <?php
-require $_SERVER['DOCUMENT_ROOT'] . "/functions/curl.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/utils/curl.php";
 //регистрация
-$url = 'http://109.68.212.98/api/med/registration';
+$url = "https://".domain_name_api."/api/med/registration";
 $data = [
     "user" => [
         "email" => "gorbunov.vladlen2014@gmail.com",

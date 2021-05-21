@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="dd690a98-02d7-475c-ab21-dec0f2dd0976" name="Default Changelist" comment="Добавлена таблица просмотра списка мероприятий у пациента для записи на услугу, также исправлены некоторые текстовые моменты в таблицах услуг. На странице записи к врачу добавлен селектор выбора к какой специальности врача записаться">
-      <change afterPath="$PROJECT_DIR$/queries/registrationAdmin.php" afterDir="false" />
+    <list default="true" id="dd690a98-02d7-475c-ab21-dec0f2dd0976" name="Default Changelist" comment="utils.php переименовано в curl.php и перемещено в папку functions">
+      <change afterPath="$PROJECT_DIR$/utils/variables.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions/curl.php" beforeDir="false" afterPath="$PROJECT_DIR$/utils/curl.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/datatables.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/datatables.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/fullcalendar/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/fullcalendar/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/queries/loginUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/queries/loginUser.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/queries/utils.php" beforeDir="false" afterPath="$PROJECT_DIR$/functions/utils.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/queries/registrationAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/queries/registrationAdmin.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,14 +169,7 @@
       <workItem from="1621352436763" duration="9967000" />
       <workItem from="1621428310614" duration="16208000" />
       <workItem from="1621523337681" duration="4933000" />
-      <workItem from="1621602136569" duration="2437000" />
-    </task>
-    <task id="LOCAL-00004" summary="Добавлен footer и панель уведомлений">
-      <created>1612026959444</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1612026959445</updated>
+      <workItem from="1621602136569" duration="3345000" />
     </task>
     <task id="LOCAL-00005" summary="Добавлен footer и панель уведомлений">
       <created>1612027181462</created>
@@ -511,7 +507,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621531840228</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="utils.php переименовано в curl.php и перемещено в папку functions">
+      <created>1621613394900</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1621613394901</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -533,7 +536,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Залиты новые недостающиеся файлы" />
     <MESSAGE value="Удалены лишние файлы" />
     <MESSAGE value="Добавлен фронтенд профиля пациента" />
     <MESSAGE value="Добавлен фронтенд профиля администратора" />
@@ -558,6 +560,7 @@
     <MESSAGE value="Добавлена верстка страницы питания. Добавлена таблица времени записи на услуги (без передачи данных в модальное окно). Протестирована авторизация по CURL запросам к удаленному API Django приложения для подключения к БД PostgreSQL" />
     <MESSAGE value="Добавлена временная диаграмма записи пациента на услугу (к врачу). У медперсонала &quot;Биография&quot; переименована в &quot;Специализация&quot;" />
     <MESSAGE value="Добавлена таблица просмотра списка мероприятий у пациента для записи на услугу, также исправлены некоторые текстовые моменты в таблицах услуг. На странице записи к врачу добавлен селектор выбора к какой специальности врача записаться" />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавлена таблица просмотра списка мероприятий у пациента для записи на услугу, также исправлены некоторые текстовые моменты в таблицах услуг. На странице записи к врачу добавлен селектор выбора к какой специальности врача записаться" />
+    <MESSAGE value="utils.php переименовано в curl.php и перемещено в папку functions" />
+    <option name="LAST_COMMIT_MESSAGE" value="utils.php переименовано в curl.php и перемещено в папку functions" />
   </component>
 </project>

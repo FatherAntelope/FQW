@@ -1,11 +1,11 @@
 <?php
-require $_SERVER['DOCUMENT_ROOT'] . "/functions/curl.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/utils/curl.php";
 //авторизация
 $url = 'http://109.68.212.98/api/med/users/login';
 $data = [
     "user" => [
         "email" => $_POST['user_login'],
-        "password" => password_hash($_POST['user_password'], PASSWORD_ARGON2I)
+        "password" => $_POST['user_password']
     ]
 ];
 

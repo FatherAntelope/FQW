@@ -5179,7 +5179,7 @@ var FullCalendar = (function (exports) {
         };
     }
 
-    // high-level segmenting-aware tester functions
+    // high-level segmenting-aware tester utils
     // ------------------------------------------------------------------------------------------------------------------------
     function isInteractionValid(interaction, context) {
         return isNewPropsValid({ eventDrag: interaction }, context); // HACK: the eventDrag props is used for ALL interactions
