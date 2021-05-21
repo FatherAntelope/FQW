@@ -60,25 +60,4 @@ function utils_call_api($method, $url, $data = false,
     return new CurlHttpResponse($result, $status_code);
 }
 
-$data = [
-    "user" => [
-        "email" => "gorbunov12151.vladl@gmail.com",
-        // "username" => "Admin1214",
-        "password" => "123456781325230",
-        // "name" => "Владлен",
-        // "surname" => "Горбунов",
-        // "patronymic" => "Вячеславович",
-        // "phone_number" => "+79273208929",
-        // "role" => "Admin"
-    ]
-];
-
-// Пример использования:
-$url = 'https://530083-cu85770.tmweb.ru/api/med/users/login';
-
-$response = utils_call_api("POST", $url, $data);
-
-print_r($response->data);
-echo 'Status code: ', $response->status_code;
-
 ?>
