@@ -50,7 +50,7 @@ function utils_call_api($method, $url, $data = false,
     $content_type = curl_getinfo($curl, CURLINFO_CONTENT_TYPE);
     if ($content_type !== null) {
         // если тип содержимого - json, то декодируем
-        if (strcmp($content_type, "application/json") == 0) {
+        if (strpos($content_type, "application/json") !== false) {
             $result = json_decode($result, true);
         }
     }
@@ -60,12 +60,25 @@ function utils_call_api($method, $url, $data = false,
     return new CurlHttpResponse($result, $status_code);
 }
 
-// // Пример использования:
-// $url = 'http://127.0.0.1:8000/organizer/records/';
+$data = [
+    "user" => [
+        "email" => "gorbunov12151.vladl@gmail.com",
+        // "username" => "Admin1214",
+        "password" => "123456781325230",
+        // "name" => "Владлен",
+        // "surname" => "Горбунов",
+        // "patronymic" => "Вячеславович",
+        // "phone_number" => "+79273208929",
+        // "role" => "Admin"
+    ]
+];
 
-// $response = utils_call_api("GET", $url);
+// Пример использования:
+$url = 'https://530083-cu85770.tmweb.ru/api/med/users/login';
 
-// print_r($response->data);
-// echo 'Status code: ', $response->status_code;
+$response = utils_call_api("POST", $url, $data);
+
+print_r($response->data);
+echo 'Status code: ', $response->status_code;
 
 ?>
