@@ -109,6 +109,42 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="notification">
+                                <div class="notification-icon">
+                                    <i class="bi bi-credit-card-2-back-fill" style="color: #fff; background-color: var(--dark-cyan-color)"></i>
+                                </div>
+                                <div class="content">
+                                    <a class="header stretched-link" href="#">"Тип уведомления"</a>
+                                    <div class="text">"Описание уведомления"</div>
+                                    <div class="actions">
+                                        <p>"10.10.2000"</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="notification">
+                                <div class="notification-icon">
+                                    <i class="bi bi-credit-card-2-back-fill" style="color: #fff; background-color: var(--dark-cyan-color)"></i>
+                                </div>
+                                <div class="content">
+                                    <a class="header stretched-link" href="#">"Тип уведомления"</a>
+                                    <div class="text">"Описание уведомления"</div>
+                                    <div class="actions">
+                                        <p>"10.10.2000"</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="notification">
+                                <div class="notification-icon">
+                                    <i class="bi bi-credit-card-2-back-fill" style="color: #fff; background-color: var(--dark-cyan-color)"></i>
+                                </div>
+                                <div class="content">
+                                    <a class="header stretched-link" href="#">"Тип уведомления"</a>
+                                    <div class="text">"Описание уведомления"</div>
+                                    <div class="actions">
+                                        <p>"10.10.2000"</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -8,21 +8,24 @@ class User {
     public function __construct($user_token) {
         $this->user_token = $user_token;
         $url = "https://".domain_name_api."/api/med/user";
-        $method = "GET";
-        $auth_token = 'Authorization: Bearer '.$this->user_token;
-        $this->user_data = utils_call_api($method, $url, null, [$auth_token]);
+        $config = [
+            "method" => "GET",
+            "token" => $this->user_token
+        ];
+        $this->user_data = utils_call_api($url, $config);
         $this->user_role = $this->user_data->data['user']['role'];
     }
 
-    public function isUserRole($check_name_role) {
+    public function isUserRole($check_name_role) : string {
         return $this->user_role === $check_name_role;
     }
 
-    public function getUserData() {
+    public function getUserData() : array {
         return $this->user_data->data['user'];
     }
 
-    public function getUserStatusCode() {
+    public function getUserStatusCode() : int {
         return $this->user_data->status_code;
     }
 }
+

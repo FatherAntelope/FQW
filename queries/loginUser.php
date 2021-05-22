@@ -3,7 +3,6 @@ require $_SERVER['DOCUMENT_ROOT'] . "/utils/CurlHttpResponse.php";
 require $_SERVER['DOCUMENT_ROOT'] . "/utils/variables.php";
 //авторизация
 $url = "https://".domain_name_api."/api/med/users/login";
-$method = "POST";
 $data = [
     "user" => [
         "email" => $_POST["user_login"],
@@ -11,7 +10,12 @@ $data = [
     ]
 ];
 
-$response = utils_call_api($method, $url, $data);
+$config = [
+    "method" => "POST",
+    "data" => $data
+];
+
+$response = utils_call_api($url, $config);
 if($response->status_code === 200 && $response->data['user']['role'] !== "") {
     setcookie('user_token', $response->data['user']['token'], time()+(60*60*24*30), "/");
 } else {

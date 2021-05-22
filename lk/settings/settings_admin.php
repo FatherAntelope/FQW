@@ -2,6 +2,20 @@
 if(!isset($user_data) || $user_data['role'] !== "Admin") {
     header("Location: /error/403.php");
 }
+$url = "https://".domain_name_api."/api/med/admin";
+$config = [
+    "method" => "GET",
+    "token" => $_COOKIE['user_token']
+];
+$admin_data = utils_call_api($url, $config);
+$admin_position = null;
+if($admin_data->data['position']=== "Main") {
+    $admin_position = "Главный администратор";
+} elseif ($admin_data->data['position']=== "Registrar") {
+    $admin_position = "Регистратор";
+} elseif ($admin_data->data['position'] === "Maintenance") {
+    $admin_position = "Управляющий услугами";
+}
 ?>
 <!doctype html>
 <html lang="ru">
@@ -55,7 +69,7 @@ if(!isset($user_data) || $user_data['role'] !== "Admin") {
                             <h6 class="text-muted text-uppercase bg-light p-2"><i class="fas fa-address-book mr-1"></i>Основные данные</h6>
                             <p class="text-muted mb-1">
                                 <strong>Должность:</strong>
-                                <span class="ml-2"><?php echo "Главный администратор"; ?></span>
+                                <span class="ml-2"><?php echo $admin_position; ?></span>
                             </p>
                         </div>
                     </div>

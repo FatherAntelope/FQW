@@ -11,7 +11,7 @@ class CurlHttpResponse {
 }
  
 // отправляет и принимает данные только в формате json
-function utils_call_api($url, $config = false) {
+function utils_call_api($url, $config = false): CurlHttpResponse {
     // параметры по умолчанию
     $headers = [];
     $method = 'GET';

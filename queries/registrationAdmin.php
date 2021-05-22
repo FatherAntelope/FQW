@@ -2,24 +2,43 @@
 require $_SERVER['DOCUMENT_ROOT'] . "/utils/CurlHttpResponse.php";
 require $_SERVER['DOCUMENT_ROOT'] . "/utils/variables.php";
 //регистрация
-//$url = "https://".domain_name_api."/api/med/registration";
-//$method = "POST";
-//$data = [
-//    "user" => [
-//        "email" => "fatherantelope@gmail.com",
-//        "password" => "24758910",
-//        "name" => "Владлен",
-//        "surname" => "Горбунов",
-//        "patronymic" => "Вячеславович",
-//        "phone_number" => "+7 (927) 320-89-29",
-//        "role" => "Admin"
-//    ]
-//];
-//$response = utils_call_api($method , $url, $data);
-//print_r($response->status_code);
-//print_r($response->data['user']['token']);
+$url = "https://".domain_name_api."/api/med/registration";
+$data = [
+    "user" => [
+        "email" => "fatherantelope@gmail.com",
+        "password" => "24758910",
+        "name" => "Владлен",
+        "surname" => "Горбунов",
+        "patronymic" => "Вячеславович",
+        "phone_number" => "+7 (927) 320-89-29",
+        "role" => "Admin"
+    ]
+];
 
-//$token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MjMsImV4cCI6MTYyMTc4NDE0OX0.MkBpmCHiUncwCxopD3AcQxCfa1MKkgZ_riZA8LJ_2lM";
+$config = [
+    "method" => "POST",
+    "data" => $data
+];
+
+$user = utils_call_api($url, $config);
+if($user->status_code === 400) {
+    die(header("HTTP/1.0 400 Bad Request"));
+}
+
+    $url = "https://".domain_name_api."/api/med/admin";
+    $method = "POST";
+    $data = [
+        "admin" => [
+            "position" => $_POST['admin_post']
+        ]
+    ];
+    $config = [
+        "method" => "POST",
+        "token" => $user->data['user']['token'],
+        "data" => $data
+    ];
+    $response = utils_call_api($url, $config);
+
 //$url = "https://".domain_name_api."/api/med/patient";
 //$method = "POST";
 //$data = [
@@ -37,20 +56,19 @@ require $_SERVER['DOCUMENT_ROOT'] . "/utils/variables.php";
 //    ]
 //];
 
-$token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MjMsImV4cCI6MTYyMTc4NDE0OX0.MkBpmCHiUncwCxopD3AcQxCfa1MKkgZ_riZA8LJ_2lM";
-$url = "https://".domain_name_api."/api/med/admin";
-$method = "POST";
-$data = [
-    "admin" => [
-        "position" => "Main"
-    ]
-];
+//$url = "https://".domain_name_api."/api/med/admin";
+//$method = "POST";
+//$data = [
+//    "admin" => [
+//        "position" => "Main"
+//    ]
+//];
 
 
-$auth_token = 'Authorization: Bearer '.$token;
-
-$response = utils_call_api($method , $url, $data, [$auth_token]);
-print_r($response->status_code);
-print_r($response->data);
+//$auth_token = 'Authorization: Bearer '.$token;
+//
+//$response = utils_call_api($method , $url, $data, [$auth_token]);
+//print_r($response->status_code);
+//print_r($response->data);
 
 ?>

@@ -55,7 +55,7 @@ if($getSelected != "patient" &&
                 <li class="breadcrumb-item active" aria-current="page">Регистрация нового пользователя</li>
             </ol>
         </nav>
-        <ul class="nav nav-pills flex-column flex-sm-row mb-2" role="tablist">
+        <ul class="nav nav-pills flex-column flex-sm-row mb-2" role="tablist" id="tablist">
             <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
                 <a class="nav-link tab-bg-active font-weight-bold <? if($getSelected == 'patient') echo "active";?>" onclick="window.history.pushState('', '', '/lk/users/add.php?selected=patient');"  data-toggle="tab" href="#patient" role="tab">
                     <i class="fas fa-user-injured mr-1"></i>Пациент
@@ -88,6 +88,7 @@ if($getSelected != "patient" &&
                                 </div>
                             </div>
                         </div>
+<!--                        id="queryRegistrationPatient"-->
                         <form id="queryRegistrationPatient">
                             <h5 class="mb-3 text-muted text-uppercase bg-light p-2">
                                 <i class="fas fa-user mr-1"></i>
@@ -97,13 +98,13 @@ if($getSelected != "patient" &&
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Фамилия <strong style="color: var(--red--color)">*</strong></label>
-                                        <input type="text" class="form-control" name="user_name" minlength="2" maxlength="30" onkeyup="checkInputRu(this)" required>
+                                        <input type="text" class="form-control" name="user_surname" minlength="2" maxlength="30" onkeyup="checkInputRu(this)" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Имя <strong style="color: var(--red--color)">*</strong></label>
-                                        <input type="text" class="form-control" name="user_surname" minlength="2" maxlength="30" onkeyup="checkInputRu(this)" required>
+                                        <input type="text" class="form-control" name="user_name" minlength="2" maxlength="30" onkeyup="checkInputRu(this)" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
@@ -146,7 +147,7 @@ if($getSelected != "patient" &&
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Фото</label>
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="customFile" name="user_photo" accept="image/*">
+                                            <input type="file" class="custom-file-input" accept="image/png,image/jpeg" id="customFile" name="user_photo">
                                             <label class="custom-file-label" for="customFile" data-browse="Открыть">Выберите фото</label>
                                         </div>
                                     </div>
@@ -348,13 +349,13 @@ if($getSelected != "patient" &&
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Фамилия <strong style="color: var(--red--color)">*</strong></label>
-                                        <input type="text" class="form-control" name="user_name" minlength="2" maxlength="30" onkeyup="checkInputRu(this)" required>
+                                        <input type="text" class="form-control" name="user_surname" minlength="2" maxlength="30" onkeyup="checkInputRu(this)" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Имя <strong style="color: var(--red--color)">*</strong></label>
-                                        <input type="text" class="form-control" name="user_surname" minlength="2" maxlength="30" onkeyup="checkInputRu(this)" required>
+                                        <input type="text" class="form-control" name="user_name" minlength="2" maxlength="30" onkeyup="checkInputRu(this)" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
@@ -484,19 +485,30 @@ if($getSelected != "patient" &&
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Фамилия <strong style="color: var(--red--color)">*</strong></label>
-                                        <input type="text" class="form-control" name="user_name" minlength="2" maxlength="30" onkeyup="checkInputRu(this)" required>
+                                        <input type="text" class="form-control" name="user_surname" minlength="2" maxlength="30" onkeyup="checkInputRu(this)" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Имя <strong style="color: var(--red--color)">*</strong></label>
-                                        <input type="text" class="form-control" name="user_surname" minlength="2" maxlength="30" onkeyup="checkInputRu(this)" required>
+                                        <input type="text" class="form-control" name="user_name" minlength="2" maxlength="30" onkeyup="checkInputRu(this)" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Отчество</label>
                                         <input type="text" class="form-control" name="user_patronymic" maxlength="30" onkeyup="checkInputRu(this)">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label style="color: var(--yellow-color)">Фото</label>
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" name="user_photo" id="customFile" accept="image/*">
+                                            <label class="custom-file-label" for="customFile" data-browse="Открыть">Выберите фото</label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -539,9 +551,9 @@ if($getSelected != "patient" &&
                                         <label style="color: var(--yellow-color)">Должность <strong style="color: var(--red--color)">*</strong></label>
                                         <select id="chosen_required_post_adm" name="admin_post" class="form-control form-control-chosen-required" data-placeholder="Выберите должность" required>
                                             <option></option>
-                                            <option value="main">Главный администратор</option>
-                                            <option value="registrar">Регистратор</option>
-                                            <option value="maintenance">Управляющий услугами</option>
+                                            <option value="Main">Главный администратор</option>
+                                            <option value="Registrar">Регистратор</option>
+                                            <option value="Maintenance">Управляющий услугами</option>
                                         </select>
                                     </div>
                                 </div>
@@ -640,7 +652,7 @@ if($getSelected != "patient" &&
         $.ajax({
             url: "/queries/admin/registrationUser.php",
             method: "POST",
-            data: $(this).serialize(),
+            data: new FormData(this),
             success: function () {
                 $("#queryRegistrationPatient").prev().removeAttr("hidden");
                 $("#queryRegistrationPatient").attr("hidden", "hidden");
@@ -690,6 +702,7 @@ if($getSelected != "patient" &&
                 $("#queryRegistrationAdmin").prev().removeAttr("hidden");
                 $("#queryRegistrationAdmin").attr("hidden", "hidden");
                 $("#alertErrorRegistrationAdmin").attr("hidden", "hidden");
+                $('html, body').stop().animate({ scrollTop: $("body").offset().top - 100 }, 400);
             },
             error: function () {
                 $("#alertErrorRegistrationAdmin").removeAttr("hidden");
