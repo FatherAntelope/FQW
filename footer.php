@@ -74,8 +74,14 @@
 
                 <div class="row">
                     <div class="col-lg-4 mb-5 mb-lg-0">
-                        <a href="/">
-                            <img src="/images/logo.png" height="40">
+                        <a href="/" class="text-decoration-none">
+                            <div class="d-flex">
+                                <img src="/images/logo-mini.png" alt="" height="40">
+                                <div class="ml-2 d-flex justify-content-center flex-column">
+                                    <h5 class="text-uppercase mb-0 pb-0" style=" font-family: 'PT Serif', serif; font-family: 'Source Serif Pro', serif; color: var(--yellow-color)">Санконтроль</h5>
+                                    <span class="text-white" style="font-size: 12px; font-family: 'PT Serif', serif; font-family: 'Source Serif Pro', serif;">Медицинская информационная система</span>
+                                </div>
+                            </div>
                         </a>
                         <p class="mt-2 text-white opacity-8 pr-lg-4">
                             Медицинская информационная система для повышения эффективности процесса рекреации в санатории, мобильности и оперативности информационной поддержки

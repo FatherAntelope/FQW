@@ -1,9 +1,9 @@
 <?php
-require $_SERVER['DOCUMENT_ROOT'] . "/utils/User.php";
 if(!isset($_COOKIE['user_token']))
     header("Location: /error/401.php");
+require $_SERVER['DOCUMENT_ROOT'] . "/utils/User.php";
 $user = new User($_COOKIE['user_token']);
-if($user->getUserStatusCode() === 400) {
+if($user->getUserStatusCode() === 400 || $user->getUserStatusCode() === 403) {
     setcookie('user_token', '', 0, "/");
     header("Location: /error/401.php");
 }

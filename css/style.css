@@ -67,7 +67,7 @@ body {
 
 @media (max-width: 767px) {
     .nav-user {
-        padding: 1.85rem 1.55rem 1.85rem 1.55rem !important;
+        padding: 1.5rem 1.55rem 1.85rem 1.55rem !important;
     }
 
     .nav-user:hover {
@@ -109,8 +109,9 @@ body {
 
 
 .nav-user {
-    padding: 0.75rem 0.7rem 0.40rem 3.6rem;
+    padding: 0.6rem 0.7rem 0.40rem 3.6rem;
     background-color: var(--cyan-color);
+    height: 100%;
 }
 
 .nav-user:hover {
@@ -126,7 +127,7 @@ body {
     display: block;
     color: var(--yellow-color);
     font-weight: 600;
-    margin-top: -0.15rem;
+    margin-top: -0.1rem;
 }
 
 .nav-user .account-role {
@@ -207,14 +208,12 @@ body {
     }
 }
 
-
-
 .dropdown-item:active {
     background-color: var(--cyan-color);
 }
 
 .notify-icon {
-    padding: 7px 10px 13px 10px
+    padding: 5px 10px 13px 10px
 }
 
 .notify-icon i {

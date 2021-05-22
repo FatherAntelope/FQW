@@ -1,3 +1,5 @@
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=Source+Serif+Pro:wght@600&display=swap" rel="stylesheet">
 <?php if($whose_user === 0) { ?>
 <!--Меню для неавторизованного пользователя-->
 <nav class="navbar shadow-lg fixed-top navbar-expand-sm navbar-light" style="background: var(--cyan-color); padding: 0;">
@@ -40,7 +42,13 @@
 
         <!--Иконка бренда (мини) в широком формате-->
         <a class="navbar-brand" id="logo-big" href="/">
-            <img src="/images/logo.png" alt="" height="40">
+            <div class="d-flex">
+                <img src="/images/logo-mini.png" alt="" height="40">
+                <div class="ml-2 d-flex justify-content-center flex-column">
+                    <h5 class="text-uppercase mb-0 pb-0" style="font-family: 'PT Serif', serif; font-family: 'Source Serif Pro', serif; color: var(--yellow-color)">Санконтроль</h5>
+                    <span class="text-white" style="font-size: 12px; font-family: 'PT Serif', serif; font-family: 'Source Serif Pro', serif;">Медицинская информационная система</span>
+                </div>
+            </div>
         </a>
 
         <!--Содержимое меню-->
@@ -151,7 +159,7 @@
 
 <?php if($whose_user === 1) { ?>
 <!--Панель навигации по модулям администратора-->
-<div class="topnav shadow-lg fixed-top" style="top: 3.7rem">
+<div class="topnav shadow-lg fixed-top" style="top: 3.5rem">
     <div class="container">
         <nav class="navbar navbar-expand-lg topnav-menu">
             <div class="collapse navbar-collapse justify-content-center" id="offcanvas">
