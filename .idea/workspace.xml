@@ -1,25 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="dd690a98-02d7-475c-ab21-dec0f2dd0976" name="Default Changelist" comment="Добавлен файл с переходом на страницы ошибок .htaccess. getUserData.php изменен на класс User.php">
-      <change afterPath="$PROJECT_DIR$/utils/functions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.htaccess" beforeDir="false" afterPath="$PROJECT_DIR$/.htaccess" afterDir="false" />
+    <list default="true" id="dd690a98-02d7-475c-ab21-dec0f2dd0976" name="Default Changelist" comment="Переделаны моменты с доступом к модулям админа">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/footer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/nutrition/editor.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/nutrition/editor.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/services/editor.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/services/editor.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/services/record_.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/settings/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/settings/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/users/add.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/users/add.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/users/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/users/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/queries/admin/registrationUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/queries/admin/registrationUser.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/queries/loginUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/queries/loginUser.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/queries/registrationAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/queries/registrationAdmin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/utils/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/curl.php" beforeDir="false" afterPath="$PROJECT_DIR$/utils/CurlHttpResponse.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -181,14 +165,7 @@
       <workItem from="1621428310614" duration="16208000" />
       <workItem from="1621523337681" duration="4933000" />
       <workItem from="1621602136569" duration="18489000" />
-      <workItem from="1621667743909" duration="18272000" />
-    </task>
-    <task id="LOCAL-00009" summary="Добавлена страница настройки данных аккаунта">
-      <created>1612364454309</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1612364454309</updated>
+      <workItem from="1621667743909" duration="21271000" />
     </task>
     <task id="LOCAL-00010" summary="Добавлены страницы ошибок. Дополнена навигационная панель. Начата реализация профиля">
       <created>1612460076198</created>
@@ -526,7 +503,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621672472033</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="Переделаны моменты с доступом к модулям админа">
+      <created>1621696926300</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1621696926300</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -548,7 +532,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Добавлена лицензия" />
     <MESSAGE value="Добавлена страница просмотра пациентов у врача. Текст в элементах с желтым фоном изменен с белого на серый" />
     <MESSAGE value="Изменена цветовая палитра элементов органайзера" />
     <MESSAGE value="Добавлена страница медкарты пациента" />
@@ -573,6 +556,7 @@
     <MESSAGE value="Удаление лишних строк" />
     <MESSAGE value="Готова авторизация в профиль и выход из него по бекенду" />
     <MESSAGE value="Добавлен файл с переходом на страницы ошибок .htaccess. getUserData.php изменен на класс User.php" />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавлен файл с переходом на страницы ошибок .htaccess. getUserData.php изменен на класс User.php" />
+    <MESSAGE value="Переделаны моменты с доступом к модулям админа" />
+    <option name="LAST_COMMIT_MESSAGE" value="Переделаны моменты с доступом к модулям админа" />
   </component>
 </project>
