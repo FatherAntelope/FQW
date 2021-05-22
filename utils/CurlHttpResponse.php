@@ -9,20 +9,46 @@ class CurlHttpResponse {
         $this->status_code = $status_code;
     }
 }
-
+ 
 // отправляет и принимает данные только в формате json
-function utils_call_api($method, $url, $data = false,
-                        $headers = array('Content-Type: application/json')) {
+function utils_call_api($url, $config = false) {
+    // параметры по умолчанию
+    $headers = [];
+    $method = 'GET';
+    $data = false;
+
+    if (array_key_exists('method', $config)) {
+        $method = $config['method'];
+        switch($method) {
+            case 'POST':
+            case 'PUT':
+            case 'PATCH':
+                $headers[] = 'Content-Type: application/json';
+        }
+    }
+    if (array_key_exists('token', $config)) {
+        $headers[] = 'Authorization: Bearer ' . $config['token'];
+    }
+    if (array_key_exists('data', $config)) {
+        $data = $config['data'];
+    }
+
     $curl = curl_init();
     switch ($method) {
-        case "POST":
+        case 'POST':
             curl_setopt($curl, CURLOPT_POST, 1);
             if ($data) {
                 curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
             }
             break;
-        case "PUT":
+        case 'PUT':
             curl_setopt($curl, CURLOPT_PUT, 1);
+            if ($data) {
+                curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
+            }
+            break;
+        case 'PATCH':
+            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'PATCH');
             if ($data) {
                 curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
             }
