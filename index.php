@@ -1,13 +1,13 @@
 <?php
 if(isset($_COOKIE['user_token'])) {
-    require $_SERVER['DOCUMENT_ROOT'] . "/utils/curl.php";
-    require $_SERVER['DOCUMENT_ROOT'] . "/utils/variables.php";
-
-    $url = "https://".domain_name_api."/api/med/user";
-    $method = "GET";
-    $auth_token = 'Authorization: Bearer '.$_COOKIE['user_token'];
-    $user_data = utils_call_api($method, $url, null, [$auth_token]);
-    $whose_user = $user_data->data['user']['role'];
+    require $_SERVER['DOCUMENT_ROOT'] . "/utils/User.php";
+    $user = new User($_COOKIE['user_token']);
+    if($user->getUserStatusCode() === 400) {
+        setcookie('user_token', '', 0, "/");
+        header("Location: /auth.php");
+    }
+    $user_data = $user->getUserData();
+    $whose_user = $user_data['role'];
     if($whose_user === "Admin") {
         $whose_user = 1;
     } elseif ($whose_user === "Patient") {

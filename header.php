@@ -12,7 +12,7 @@
             </a>
             <ul class="nav">
                 <li>
-                    <a class="nav-link arrow-none notify-icon" href="#">
+                    <a class="nav-link arrow-none notify-icon" href="/news.php">
                         <i class="bi bi-newspaper"></i>
                     </a>
                 </li>
@@ -47,7 +47,7 @@
         <ul class="nav">
             <!--Раздел новостей-->
             <li>
-                <a class="nav-link arrow-none notify-icon" href="#">
+                <a class="nav-link arrow-none notify-icon" href="/news.php">
                     <i class="bi bi-newspaper"></i>
                 </a>
             </li>
@@ -114,7 +114,7 @@
                     </span>
                     <span>
                         <span class="account-user-name">
-                            <?php echo $user_data->data['user']['surname']." ".$user_data->data['user']['name'];?>
+                            <?php echo $user_data['surname']." ".$user_data['name'];?>
                         </span>
                         <span class="account-role">
                             <?php

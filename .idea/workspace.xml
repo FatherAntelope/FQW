@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="dd690a98-02d7-475c-ab21-dec0f2dd0976" name="Default Changelist" comment="Удаление лишних строк">
-      <change afterPath="$PROJECT_DIR$/utils/getUserData.php" afterDir="false" />
+    <list default="true" id="dd690a98-02d7-475c-ab21-dec0f2dd0976" name="Default Changelist" comment="Готова авторизация в профиль и выход из него по бекенду">
+      <change afterPath="$PROJECT_DIR$/.htaccess" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/User.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth.php" beforeDir="false" afterPath="$PROJECT_DIR$/auth.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/header.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lk/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/index.php" afterDir="false" />
@@ -15,9 +15,7 @@
       <change beforePath="$PROJECT_DIR$/lk/settings/settings_admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/settings/settings_admin.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lk/settings/settings_doctor.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/settings/settings_doctor.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lk/settings/settings_patient.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/settings/settings_patient.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/queries/exitUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/queries/exitUser.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/queries/loginUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/queries/loginUser.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/queries/registrationAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/queries/registrationAdmin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/news.php" beforeDir="false" afterPath="$PROJECT_DIR$/news.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -178,14 +176,8 @@
       <workItem from="1621352436763" duration="9967000" />
       <workItem from="1621428310614" duration="16208000" />
       <workItem from="1621523337681" duration="4933000" />
-      <workItem from="1621602136569" duration="18426000" />
-    </task>
-    <task id="LOCAL-00007" summary="Изменен дизайн страницы авторизации">
-      <created>1612348424795</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1612348424795</updated>
+      <workItem from="1621602136569" duration="18489000" />
+      <workItem from="1621667743909" duration="4365000" />
     </task>
     <task id="LOCAL-00008" summary="Добавлена страница настройки данных аккаунта">
       <created>1612363884772</created>
@@ -523,7 +515,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621618318940</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="Готова авторизация в профиль и выход из него по бекенду">
+      <created>1621632692001</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1621632692001</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -545,7 +544,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Добавлен фронтенд профиля администратора" />
     <MESSAGE value="Изменен профиль администратора и добавлен фронтенд для профиля медперсонала" />
     <MESSAGE value="Добавлена лицензия" />
     <MESSAGE value="Добавлена страница просмотра пациентов у врача. Текст в элементах с желтым фоном изменен с белого на серый" />
@@ -570,6 +568,7 @@
     <MESSAGE value="utils.php переименовано в curl.php и перемещено в папку functions" />
     <MESSAGE value="utils.php переименовано в curl.php и перемещено в папку utils" />
     <MESSAGE value="Удаление лишних строк" />
-    <option name="LAST_COMMIT_MESSAGE" value="Удаление лишних строк" />
+    <MESSAGE value="Готова авторизация в профиль и выход из него по бекенду" />
+    <option name="LAST_COMMIT_MESSAGE" value="Готова авторизация в профиль и выход из него по бекенду" />
   </component>
 </project>

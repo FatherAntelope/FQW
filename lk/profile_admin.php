@@ -1,5 +1,7 @@
 <?php
-$user_data = $user_data;
+if(!isset($user_data) || $user_data['role'] !== "Admin") {
+    header("Location: /error/403.php");
+}
 ?>
 <!doctype html>
 <html lang="ru">
@@ -39,7 +41,7 @@ $user_data = $user_data;
                         <div class="row">
                             <div class="col">
                                 <h4 class="font-weight-bold" style="color: var(--dark-cyan-color)">
-                                    <?php echo $user_data->data['user']['surname']." ".$user_data->data['user']['name']." ".$user_data->data['user']['patronymic'];?>
+                                    <?php echo $user_data['surname']." ".$user_data['name']." ".$user_data['patronymic'];?>
                                 </h4>
                             </div>
                         </div>
@@ -54,11 +56,11 @@ $user_data = $user_data;
 
                 <div class="row">
                     <div class="col-lg-12 d-flex justify-content-around flex-xl-row flex-md-row flex-sm-column flex-column">
-                        <a href="tel:<?php echo $user_data->data['user']['phone_number'];?>" aria-haspopup="true" style="text-decoration: none; color: var(--yellow-color)">
-                            <h5 class="font-weight-bold"><i class="fas fa-phone mr-1"></i> <?php echo $user_data->data['user']['phone_number'];?></h5>
+                        <a href="tel:<?php echo $user_data['phone_number'];?>" aria-haspopup="true" style="text-decoration: none; color: var(--yellow-color)">
+                            <h5 class="font-weight-bold"><i class="fas fa-phone mr-1"></i> <?php echo $user_data['phone_number'];?></h5>
                         </a>
-                        <a href="mailto:<?php echo $user_data->data['user']['email'];?>" aria-haspopup="true" style="text-decoration: none; color: var(--yellow-color)">
-                            <h5 class="font-weight-bold"><i class="fas fa-envelope-open-text mr-1"></i><?php echo $user_data->data['user']['email'];?></h5>
+                        <a href="mailto:<?php echo $user_data['email'];?>" aria-haspopup="true" style="text-decoration: none; color: var(--yellow-color)">
+                            <h5 class="font-weight-bold"><i class="fas fa-envelope-open-text mr-1"></i><?php echo $user_data['email'];?></h5>
                         </a>
                     </div>
                 </div>

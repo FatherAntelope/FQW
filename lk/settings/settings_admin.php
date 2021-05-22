@@ -1,5 +1,7 @@
 <?php
-$user_data = $user_data;
+if(!isset($user_data) || $user_data['role'] !== "Admin") {
+    header("Location: /error/403.php");
+}
 ?>
 <!doctype html>
 <html lang="ru">
@@ -38,7 +40,7 @@ $user_data = $user_data;
                     <div class="card-header text-center" style="background-color: var(--cyan-color">
                         <img src="/images/user.png" class="rounded-circle img-thumbnail" style="height: 12rem;width: 12rem;">
                         <h4 class="mb-0 mt-2" style="color: var(--yellow-color)">
-                            <?php echo $user_data->data['user']['surname']." ".$user_data->data['user']['name']." ".$user_data->data['user']['patronymic'];?>
+                            <?php echo $user_data['surname']." ".$user_data['name']." ".$user_data['patronymic'];?>
                         </h4>
                         <p class="mb-2 text-white" >
                             Администратор
@@ -88,19 +90,19 @@ $user_data = $user_data;
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label style="color: var(--yellow-color)">Фамилия</label>
-                                                <input type="text" class="form-control" name="admin_name" value="<?php echo $user_data->data['user']['surname']; ?>" placeholder="Ваша фамилия" minlength="2" maxlength="26" onkeyup="checkInputRu(this)" required>
+                                                <input type="text" class="form-control" name="admin_name" value="<?php echo $user_data['surname']; ?>" placeholder="Ваша фамилия" minlength="2" maxlength="26" onkeyup="checkInputRu(this)" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label style="color: var(--yellow-color)">Имя</label>
-                                                <input type="text" class="form-control" name="admin_surname" value="<?php echo $user_data->data['user']['name']?>" placeholder="Ваше имя" minlength="2" maxlength="26" onkeyup="checkInputRu(this)" required>
+                                                <input type="text" class="form-control" name="admin_surname" value="<?php echo $user_data['name']?>" placeholder="Ваше имя" minlength="2" maxlength="26" onkeyup="checkInputRu(this)" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label style="color: var(--yellow-color)">Отчество</label>
-                                                <input type="text" class="form-control" name="admin_patronymic" value="<?php echo $user_data->data['user']['patronymic'];?>" placeholder="Ваше отчество" minlength="2" maxlength="26" onkeyup="checkInputRu(this)" required>
+                                                <input type="text" class="form-control" name="admin_patronymic" value="<?php echo $user_data['patronymic'];?>" placeholder="Ваше отчество" minlength="2" maxlength="26" onkeyup="checkInputRu(this)" required>
                                             </div>
                                         </div>
                                     </div>
@@ -120,13 +122,13 @@ $user_data = $user_data;
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label style="color: var(--yellow-color)">Почта</label>
-                                                <input type="email" class="form-control" placeholder="example@mail.ru" name="user_email" value="<?php echo $user_data->data['user']['email'];?>" required>
+                                                <input type="email" class="form-control" placeholder="example@mail.ru" name="user_email" value="<?php echo $user_data['email'];?>" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label style="color: var(--yellow-color)">Номер телефона </label>
-                                                <input type="tel" class="form-control" placeholder="+7 (999) 999-99-99" name="user_phone" value="<?php echo $user_data->data['user']['phone_number'];?>" required>
+                                                <input type="tel" class="form-control" placeholder="+7 (999) 999-99-99" name="user_phone" value="<?php echo $user_data['phone_number'];?>" required>
                                             </div>
                                         </div>
                                         <div class="col alert alert-danger alert-dismissible fade show animate slideIn mr-3 ml-3" role="alert" id="alertErrorUserEditContactData" style="font-size: 12px" hidden>
