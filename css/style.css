@@ -137,6 +137,11 @@ body {
     left: 0.6rem;
 }
 
+.nav-user .account-user-avatar img {
+    height: 2.5rem;
+    width: 2.5rem;
+}
+
 .nav-user .account-user-name {
     display: block;
     color: var(--yellow-color);

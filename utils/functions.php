@@ -10,4 +10,8 @@ function sendMessageToEmail($from, $to, $subject, $message) {
     mail($to, $subject, $message, $headers);
 }
 
+function getUrlUserPhoto ($user_photo) : string {
+    return ($user_photo === null) ?  "/images/user.png" : ("https://" . domain_name_api . $user_photo);
+}
 
+?>

@@ -33,7 +33,7 @@ if($admin_data->data['position']=== "Main") {
     <script src="https://cdn.jsdelivr.net/npm/jquery.maskedinput@1.4.1/src/jquery.maskedinput.min.js" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script defer src="/js/all.js"></script>
-    <title>СанКонтроль</title>
+    <title><? echo web_name_header; ?></title>
 </head>
 <body>
 <!--Панель навигации по модулям пользователя-->
@@ -52,7 +52,7 @@ if($admin_data->data['position']=== "Main") {
             <div class="col-xl-4 col-lg-5">
                 <div class="card">
                     <div class="card-header text-center" style="background-color: var(--cyan-color">
-                        <img src="/images/user.png" class="rounded-circle img-thumbnail" style="height: 12rem;width: 12rem;">
+                        <img src="<?php echo getUrlUserPhoto($user_data['photo']); ?>" class="rounded-circle img-thumbnail" style="height: 12rem;width: 12rem;">
                         <h4 class="mb-0 mt-2" style="color: var(--yellow-color)">
                             <?php echo $user_data['surname']." ".$user_data['name']." ".$user_data['patronymic'];?>
                         </h4>

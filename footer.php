@@ -78,8 +78,8 @@
                             <div class="d-flex">
                                 <img src="/images/logo-mini.png" alt="" height="40">
                                 <div class="ml-2 d-flex justify-content-center flex-column">
-                                    <h5 class="text-uppercase mb-0 pb-0" style=" font-family: 'PT Serif', serif; font-family: 'Source Serif Pro', serif; color: var(--yellow-color)">Санконтроль</h5>
-                                    <span class="text-white" style="font-size: 12px; font-family: 'PT Serif', serif; font-family: 'Source Serif Pro', serif;">Медицинская информационная система</span>
+                                    <h5 class="text-uppercase mb-0 pb-0" style=" font-family: 'PT Serif', serif; font-family: 'Source Serif Pro', serif; color: var(--yellow-color)"><? echo web_name_header; ?></h5>
+                                    <span class="text-white" style="font-size: 12px; font-family: 'PT Serif', serif; font-family: 'Source Serif Pro', serif;"><? echo web_name_span; ?></span>
                                 </div>
                             </div>
                         </a>

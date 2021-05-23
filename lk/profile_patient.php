@@ -19,7 +19,7 @@ if(!isset($user_data) || $user_data['role'] !== "Patient") {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script defer src="/js/all.js"></script>
-    <title>СанКонтроль</title>
+    <title><? echo web_name_header; ?></title>
 </head>
 <body>
 <!--Панель навигации по модулям пользователя-->
@@ -33,7 +33,7 @@ if(!isset($user_data) || $user_data['role'] !== "Patient") {
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-2 text-center">
-                        <img src="/images/user.png" class="img-thumbnail rounded-circle mb-2" width="120" alt="">
+                        <img src="<? echo getUrlUserPhoto($user_data['photo'])?> " class="rounded-circle img-thumbnail mb-2" style="height: 8rem;width: 8rem;">
                         <br>
                         <a href="/lk/settings/" type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)"><i class="fas fa-user-cog"></i></a>
                         <button type="button" class="btn mt-1 btn-sm btn-danger text-white"><i class="fas fa-door-open"></i></button>

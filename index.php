@@ -1,4 +1,5 @@
 <?php
+require $_SERVER['DOCUMENT_ROOT'] . '/utils/variables.php';
 if(isset($_COOKIE['user_token'])) {
     require $_SERVER['DOCUMENT_ROOT'] . "/utils/User.php";
     $user = new User($_COOKIE['user_token']);
@@ -37,7 +38,7 @@ if(isset($_COOKIE['user_token'])) {
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script defer src="js/all.js"></script>
-    <title>СанКонтроль</title>
+    <title><? echo web_name_header; ?></title>
 </head>
 
 <body>
