@@ -118,22 +118,22 @@ if($getSelected != "patient" &&
                                 <div class="col-lg-2">
                                     <label style="color: var(--yellow-color)">Пол <strong style="color: var(--red--color)">*</strong></label><br>
                                     <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="radio_box_man" name="patient_sex" value="man" class="custom-control-input" checked>
+                                        <input type="radio" id="radio_box_man" name="patient_gender" value="Male" class="custom-control-input" checked>
                                         <label class="custom-control-label" for="radio_box_man">М</label>
                                     </div>
                                     <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="radio_box_woman" name="patient_sex" value="woman" class="custom-control-input">
+                                        <input type="radio" id="radio_box_woman" name="patient_gender" value="Female" class="custom-control-input">
                                         <label class="custom-control-label" for="radio_box_woman">Ж</label>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <label style="color: var(--yellow-color)">Категория пациента <strong style="color: var(--red--color)">*</strong></label><br>
                                     <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="radio_box_healing" name="patient_category" value="healing" class="custom-control-input" checked>
+                                        <input type="radio" id="radio_box_healing" name="patient_category" value="Treating" class="custom-control-input" checked>
                                         <label class="custom-control-label" for="radio_box_healing">Лечащийся</label>
                                     </div>
                                     <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="radio_box_resting" name="patient_category" value="resting" class="custom-control-input">
+                                        <input type="radio" id="radio_box_resting" name="patient_category" value="Vacationer" class="custom-control-input">
                                         <label class="custom-control-label" for="radio_box_resting">Отдыхающий</label>
                                     </div>
                                 </div>
@@ -150,6 +150,7 @@ if($getSelected != "patient" &&
                                             <input type="file" class="custom-file-input" accept="image/png,image/jpeg" id="customFile" name="user_photo">
                                             <label class="custom-file-label" for="customFile" data-browse="Открыть">Выберите фото</label>
                                         </div>
+                                        <small class="form-text text-danger" hidden>Размер превышает 2мб</small>
                                     </div>
                                 </div>
                             </div>
@@ -206,92 +207,89 @@ if($getSelected != "patient" &&
                                         <label style="color: var(--yellow-color)">Регион <strong style="color: var(--red--color)">*</strong></label>
                                         <select id="chosen_required_region" name="patient_region" class="form-control form-control-chosen-required" data-placeholder="Выберите регион" required>
                                             <option></option>
-                                            <option value="Алтайский край"> Алтайский край</option>
-                                            <option value="Амурская область"> Амурская область</option>
-                                            <option value="Архангельская область"> Архангельская область</option>
-                                            <option value="Астраханская область"> Астраханская область</option>
-                                            <option value="Белгородская область"> Белгородская область</option>
-                                            <option value="Брянская область"> Брянская область</option>
-                                            <option value="Владимирская область"> Владимирская область</option>
-                                            <option value="Волгоградская область"> Волгоградская область</option>
-                                            <option value="Вологодская область"> Вологодская область</option>
-                                            <option value="Воронежская область"> Воронежская область</option>
-                                            <option value="г. Москва"> г. Москва</option>
-                                            <option value="Еврейская автономная область"> Еврейская автономная область</option>
-                                            <option value="Забайкальский край"> Забайкальский край</option>
+                                            <option value="Алтайский край">Алтайский край</option>
+                                            <option value="Амурская область">Амурская область</option>
+                                            <option value="Архангельская область">Архангельская область</option>
+                                            <option value="Астраханская область">Астраханская область</option>
+                                            <option value="Белгородская область">Белгородская область</option>
+                                            <option value="Брянская область">Брянская область</option>
+                                            <option value="Владимирская область">Владимирская область</option>
+                                            <option value="Волгоградская область">Волгоградская область</option>
+                                            <option value="Вологодская область">Вологодская область</option>
+                                            <option value="Воронежская область">Воронежская область</option>
+                                            <option value="Москва">г. Москва</option>
+                                            <option value="Еврейская автономная область">Еврейская автономная область</option>
+                                            <option value="Забайкальский край">Забайкальский край</option>
                                             <option value="Ивановская область"> Ивановская область</option>
-                                            <option value="Иные территории, включая город и космодром Байконур"> Иные территории, включая город и космодром Байконур</option>
+                                            <option value="Иные территории">Иные территории, включая город и космодром Байконур</option>
                                             <option value="Иркутская область"> Иркутская область</option>
-                                            <option value="Кабардино-Балкарская Республика"> Кабардино-Балкарская Республика</option>
-                                            <option value="Калининградская область"> Калининградская область</option>
-                                            <option value="Калужская область"> Калужская область</option>
-                                            <option value="Камчатский край"> Камчатский край</option>
-                                            <option value="Карачаево-Черкесская Республика"> Карачаево-Черкесская Республика</option>
+                                            <option value="Кабардино-Балкарская Республика">Кабардино-Балкарская Республика</option>
+                                            <option value="Калининградская область">Калининградская область</option>
+                                            <option value="Калужская область">Калужская область</option>
+                                            <option value="Камчатский край">Камчатский край</option>
+                                            <option value="Карачаево-Черкесская Республика">Карачаево-Черкесская Республика</option>
                                             <option value="Кемеровская область - Кузбасс"> Кемеровская область - Кузбасс</option>
-                                            <option value="Кировская область"> Кировская область</option>
-                                            <option value="Костромская область"> Костромская область</option>
-                                            <option value="Краснодарский край"> Краснодарский край</option>
-                                            <option value="Красноярский край"> Красноярский край</option>
-                                            <option value="Курганская область">	Курганская область</option>
-                                            <option value="Курская область"> Курская область</option>
-                                            <option value="Ленинградская область"> Ленинградская область</option>
-                                            <option value="Липецкая область"> Липецкая область</option>
-                                            <option value="Магаданская область"> Магаданская область</option>
-                                            <option value="Московская область"> Московская область</option>
-                                            <option value="Мурманская область"> Мурманская область</option>
-                                            <option value="Ненецкий автономный округ"> Ненецкий автономный округ</option>
-                                            <option value="Нижегородская область"> Нижегородская область</option>
-                                            <option value="Новгородская область"> Новгородская область</option>
-                                            <option value="Новосибирская область"> Новосибирская область</option>
-                                            <option value="Омская область"> Омская область</option>
-                                            <option value="Оренбургская область"> Оренбургская область</option>
-                                            <option value="Орловская область"> Орловская область</option>
-                                            <option value="Пензенская область"> Пензенская область</option>
-                                            <option value="Пермский край"> Пермский край</option>
-                                            <option value="Приморский край"> Приморский край</option>
-                                            <option value="Псковская область"> Псковская область</option>
-                                            <option value="Республика Адыгея (Адыгея)"> Республика Адыгея (Адыгея)</option>
-                                            <option value="Республика Алтай"> Республика Алтай</option>
-                                            <option value="Республика Башкортостан"> Республика Башкортостан</option>
-                                            <option value="Республика Бурятия"> Республика Бурятия</option>
-                                            <option value="Республика Дагестан"> Республика Дагестан</option>
-                                            <option value="Республика Ингушетия"> Республика Ингушетия</option>
-                                            <option value="Республика Калмыкия"> Республика Калмыкия</option>
-                                            <option value="Республика Карелия"> Республика Карелия</option>
-                                            <option value="Республика Коми"> Республика Коми</option>
-                                            <option value="Республика Крым"> Республика Крым</option>
-                                            <option value="Республика Марий Эл"> Республика Марий Эл</option>
-                                            <option value="Республика Мордовия"> Республика Мордовия</option>
-                                            <option value="Республика Саха (Якутия)"> Республика Саха (Якутия)</option>
-                                            <option value="Республика Северная Осетия - Алания"> Республика Северная Осетия - Алания</option>
-                                            <option value="Республика Татарстан (Татарстан)"> Республика Татарстан (Татарстан)</option>
-                                            <option value="Республика Тыва"> Республика Тыва</option>
-                                            <option value="Республика Хакасия"> Республика Хакасия</option>
-                                            <option value="Ростовская область"> Ростовская область</option>
-                                            <option value="Рязанская область"> Рязанская область</option>
-                                            <option value="Самарская область"> Самарская область</option>
-                                            <option value="Санкт-Петербург"> Санкт-Петербург</option>
-                                            <option value="Саратовская область"> Саратовская область</option>
-                                            <option value="Сахалинская область"> Сахалинская область</option>
-                                            <option value="Свердловская область"> Свердловская область</option>
-                                            <option value="Севастополь"> Севастополь</option>
-                                            <option value="Смоленская область"> Смоленская область</option>
-                                            <option value="Ставропольский край"> Ставропольский край</option>
-                                            <option value="Тамбовская область"> Тамбовская область</option>
-                                            <option value="Тверская область"> Тверская область</option>
-                                            <option value="Томская область"> Томская область</option>
-                                            <option value="Тульская область"> Тульская область</option>
-                                            <option value="Тюменская область"> Тюменская область</option>
-                                            <option value="Удмуртская Республика"> Удмуртская Республика</option>
-                                            <option value="Ульяновская область"> Ульяновская область</option>
-                                            <option value="Хабаровский край"> Хабаровский край</option>
-                                            <option value="Ханты-Мансийский автономный округ - Югра"> Ханты-Мансийский автономный округ - Югра</option>
-                                            <option value="Челябинская область"> Челябинская область</option>
-                                            <option value="Чеченская Республика"> Чеченская Республика</option>
-                                            <option value="Чувашская Республика - Чувашия">	Чувашская Республика - Чувашия</option>
-                                            <option value="Чукотский автономный округ">	Чукотский автономный округ</option>
-                                            <option value="Ямало-Ненецкий автономный округ"> Ямало-Ненецкий автономный округ</option>
-                                            <option value="Ярославская область"> Ярославская область</option>
+                                            <option value="Кировская область">Кировская область</option>
+                                            <option value="Костромская область">Костромская область</option>
+                                            <option value="Краснодарский край">Краснодарский край</option>
+                                            <option value="Красноярский край">Красноярский край</option>
+                                            <option value="Курганская область">Курганская область</option>
+                                            <option value="Курская область">Курская область</option>
+                                            <option value="Ленинградская область">Ленинградская область</option>
+                                            <option value="Липецкая область">Липецкая область</option>
+                                            <option value="Магаданская область">Магаданская область</option>
+                                            <option value="Московская область">Московская область</option>
+                                            <option value="Мурманская область">Мурманская область</option>
+                                            <option value="Ненецкий автономный округ">Ненецкий автономный округ</option>
+                                            <option value="Нижегородская область">Нижегородская область</option>
+                                            <option value="Новгородская область">Новгородская область</option>
+                                            <option value="Новосибирская область">Новосибирская область</option>
+                                            <option value="Омская область">Омская область</option>
+                                            <option value="Оренбургская область">Оренбургская область</option>
+                                            <option value="Орловская область">Орловская область</option>
+                                            <option value="Пензенская область">Пензенская область</option>
+                                            <option value="Пермский край">Пермский край</option>
+                                            <option value="Приморский край">Приморский край</option>
+                                            <option value="Псковская область">Псковская область</option>
+                                            <option value="Республика Адыгея (Адыгея)">Республика Адыгея (Адыгея)</option>
+                                            <option value="Республика Алтай">Республика Алтай</option>
+                                            <option value="Республика Башкортостан">Республика Башкортостан</option>
+                                            <option value="Республика Бурятия">Республика Бурятия</option>
+                                            <option value="Республика Дагестан">Республика Дагестан</option>
+                                            <option value="Республика Ингушетия">Республика Ингушетия</option>
+                                            <option value="Республика Калмыкия">Республика Калмыкия</option>
+                                            <option value="Республика Карелия">Республика Карелия</option>
+                                            <option value="Республика Коми">Республика Коми</option>
+                                            <option value="Республика Крым">Республика Крым</option>
+                                            <option value="Республика Марий Эл">Республика Марий Эл</option>
+                                            <option value="Республика Мордовия">Республика Мордовия</option>
+                                            <option value="Республика Тыва">Республика Тыва</option>
+                                            <option value="Республика Хакасия">Республика Хакасия</option>
+                                            <option value="Ростовская область">Ростовская область</option>
+                                            <option value="Рязанская область">Рязанская область</option>
+                                            <option value="Самарская область">Самарская область</option>
+                                            <option value="Санкт-Петербург">Санкт-Петербург</option>
+                                            <option value="Саратовская область">Саратовская область</option>
+                                            <option value="Сахалинская область">Сахалинская область</option>
+                                            <option value="Свердловская область">Свердловская область</option>
+                                            <option value="Севастополь">Севастополь</option>
+                                            <option value="Смоленская область">Смоленская область</option>
+                                            <option value="Ставропольский край">Ставропольский край</option>
+                                            <option value="Тамбовская область">Тамбовская область</option>
+                                            <option value="Тверская область">Тверская область</option>
+                                            <option value="Томская область">Томская область</option>
+                                            <option value="Тульская область">Тульская область</option>
+                                            <option value="Тюменская область">Тюменская область</option>
+                                            <option value="Удмуртская Республика">Удмуртская Республика</option>
+                                            <option value="Ульяновская область">Ульяновская область</option>
+                                            <option value="Хабаровский край">Хабаровский край</option>
+                                            <option value="Ханты-Мансийский автономный округ - Югра">Ханты-Мансийский автономный округ - Югра</option>
+                                            <option value="Челябинская область">Челябинская область</option>
+                                            <option value="Чеченская Республика">Чеченская Республика</option>
+                                            <option value="Чувашская Республика - Чувашия">Чувашская Республика - Чувашия</option>
+                                            <option value="Чукотский автономный округ">Чукотский автономный округ</option>
+                                            <option value="Ямало-Ненецкий автономный округ">Ямало-Ненецкий автономный округ</option>
+                                            <option value="Ярославская область">Ярославская область</option>
                                         </select>
                                     </div>
                                 </div>
@@ -379,6 +377,7 @@ if($getSelected != "patient" &&
                                             <input type="file" class="custom-file-input" name="user_photo" id="customFile" accept="image/*">
                                             <label class="custom-file-label" for="customFile" data-browse="Открыть">Выберите фото</label>
                                         </div>
+                                        <small class="form-text text-danger" hidden>Размер превышает 2мб</small>
                                     </div>
                                 </div>
                             </div>
@@ -509,6 +508,7 @@ if($getSelected != "patient" &&
                                             <input type="file" class="custom-file-input" name="user_photo" id="customFile" accept="image/*">
                                             <label class="custom-file-label" for="customFile" data-browse="Открыть">Выберите фото</label>
                                         </div>
+                                        <small class="form-text text-danger" hidden>Размер превышает 2мб</small>
                                     </div>
                                 </div>
                             </div>
@@ -580,10 +580,25 @@ if($getSelected != "patient" &&
         obj.value = obj.value.replace(/[^а-яё]/ig,'');
     }
 
+    $('#chosen_required_post_adm').chosen();
     $('#chosen_required_region').chosen();
     $('#chosen_required_post').chosen();
-    $('#chosen_required_post_adm').chosen();
     $('#chosen_required_category').chosen();
+
+
+    $('[name="user_photo"]').on('change', function () {
+        if($(this).val !== "") {
+            if (this.files[0].size > 2097152) {
+                $(this).addClass('is-invalid');
+                $(this).val("");
+                $(this).parent().next().removeAttr("hidden");
+            } else {
+                $(this).removeClass('is-invalid');
+                $(this).attr("placeholder", "Выберите фото");
+                $(this).parent().next().attr("hidden", "hidden");
+            }
+        }
+    });
 
     $(document).on('change', '#chosen_required_post', function () {
         let index = this.options.selectedIndex;

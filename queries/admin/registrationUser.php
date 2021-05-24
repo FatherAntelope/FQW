@@ -2,10 +2,8 @@
 require $_SERVER['DOCUMENT_ROOT'] . "/utils/CurlHttpResponse.php";
 require $_SERVER['DOCUMENT_ROOT'] . "/utils/variables.php";
 require $_SERVER['DOCUMENT_ROOT']. "/utils/functions.php";
-
 $url = "https://".domain_name_api."/api/med/registration";
 $password_generate = passwordGenerate();
-
 $data = [
     "user" => [
         "email" => $_POST['user_email'],
@@ -15,9 +13,10 @@ $data = [
         "patronymic" => $_POST['user_patronymic'],
         "phone_number" => $_POST['user_phone'],
         "role" => $_POST['user_role'],
-        "photo" => base64_encode(file_get_contents($_FILES['user_photo']['tmp_name']))
+        "photo" => ($_FILES['user_photo']['tmp_name'] !== "") ? base64_encode(file_get_contents($_FILES['user_photo']['tmp_name'])) : ""
     ]
 ];
+
 
 $config = [
     "method" => "POST",
@@ -25,15 +24,13 @@ $config = [
 ];
 
 $user = utils_call_api($url, $config);
-
-if($user->status_code === 400) {
+if($user->status_code === 400 || $user->status_code === 403) {
     die(header("HTTP/1.0 400 Bad Request"));
     exit;
 }
 
 if ($_POST['user_role'] === "Admin") {
     $url = "https://".domain_name_api."/api/med/admin";
-    $method = "POST";
     $data = [
         "admin" => [
             "position" => $_POST['admin_post']
@@ -49,19 +46,14 @@ if ($_POST['user_role'] === "Admin") {
 
 if ($_POST['user_role'] === "Patient") {
     $url = "https://".domain_name_api."/api/med/patient";
-    $method = "POST";
     $data = [
         "patient" => [
-            "birth_date" => "1999-03-23",
-            "gender" => "Male",
-            "region" => "Республика Башкортостан",
-            "city" => "Уфа",
-            "bonus" => "Unknown",
-            "status" => "Accept",
-            "api_tracker" => "xxxxxxxx",
-            "type" => "Vacationer",
-            "group" => "Диабетик",
-            "complaints" => "..."
+            "birth_date" => $_POST['patient_date_birth'],
+            "gender" => $_POST['patient_gender'],
+            "region" => $_POST['patient_region'],
+            "city" => $_POST['patient_locality'],
+            "type" => $_POST['patient_category'],
+            "complaints" => $_POST['patient_subjective_complaint']
         ]
     ];
     $config = [
@@ -70,6 +62,23 @@ if ($_POST['user_role'] === "Patient") {
         "data" => $data
     ];
     $patient = utils_call_api($url, $config);
+
+
+    $url = "https://".domain_name_api."/api/med/passport";
+    $data = [
+        "passport" => [
+            "series_number" => $_POST['patient_passport_id'],
+            "code" => $_POST['patient_passport_code'],
+            "date" => $_POST['patient_passport_date_issue'],
+            "by_whom" => $_POST['patient_passport_who_issue']
+        ]
+    ];
+    $config = [
+        "method" => "POST",
+        "token" => $user->data['user']['token'],
+        "data" => $data
+    ];
+    $passport = utils_call_api($url, $config);
 }
 
 if ($_POST['user_role'] === "Doctor") {

@@ -2,6 +2,27 @@
 if(!isset($user_data) || $user_data['role'] !== "Patient") {
     header("Location: /error/403.php");
 }
+
+$url = "https://".domain_name_api."/api/med/patient";
+$config = [
+    "method" => "GET",
+    "token" => $_COOKIE['user_token']
+];
+$patient_data = utils_call_api($url, $config);
+$patient_gender = null;
+$patient_category = null;
+if($patient_data->data['gender'] == "Male")
+    $patient_gender = "Мужской";
+else
+    $patient_gender = "Женский";
+
+if($patient_data->data['type'] == "Treating") {
+    $patient_category = "Лечащийся";
+} elseif ($patient_data->data['type'] == "Vacationer") {
+    $patient_category = "Отдыхающий";
+} elseif ($patient_data->data['type'] == "Discharged") {
+    $patient_category = "Выписан";
+}
 ?>
 <!doctype html>
 <html lang="ru">
@@ -31,9 +52,10 @@ if(!isset($user_data) || $user_data['role'] !== "Patient") {
         <!--Карточка с основной информацией пользователя-->
         <div class="card">
             <div class="card-body">
+                <? print_r($patient_data->data);?>
                 <div class="row">
                     <div class="col-lg-2 text-center">
-                        <img src="<? echo getUrlUserPhoto($user_data['photo'])?> " class="rounded-circle img-thumbnail mb-2" style="height: 8rem;width: 8rem;">
+                        <img src="<?php echo getUrlUserPhoto($user_data['photo'])?> " class="rounded-circle img-thumbnail mb-2" style="height: 8rem;width: 8rem;">
                         <br>
                         <a href="/lk/settings/" type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)"><i class="fas fa-user-cog"></i></a>
                         <button type="button" class="btn mt-1 btn-sm btn-danger text-white"><i class="fas fa-door-open"></i></button>
@@ -48,15 +70,18 @@ if(!isset($user_data) || $user_data['role'] !== "Patient") {
                         </div>
                         <div class="row">
                             <div class="col-lg-5">
-                                <h5 class="text-muted">Возраст: 22 (01.01.1999)</h5>
+                                <h5 class="text-muted">Возраст:
+                                    <?php echo floor( (time() - strtotime($patient_data->data['birth_date'])) /(60 * 60 * 24 * 365.25));?>
+                                    (<?php echo date("d.m.Y", strtotime($patient_data->data['birth_date']));?>)
+                                </h5>
                                 <h5 class="text-muted">Пол: Мужской</h5>
                                 <h5 class="text-muted">Рост: 170 cм. </h5>
-                                <h5 class="text-muted">Категория: Лечащийся </h5>
+                                <h5 class="text-muted">Категория: <?php echo $patient_category; ?> </h5>
                             </div>
                             <div class="col-lg-7">
                                 <h5 class="text-muted">ID карты: 123456789</h5>
                                 <h5 class="text-muted">Ваш терапевт: <a href="#" style="color: var(--dark-cyan-color); text-decoration: none">Иванов И.И.</a> </h5>
-                                <h5 class="text-muted">Дата поступления: 01.01.1999</h5>
+                                <h5 class="text-muted">Дата поступления: <?php echo date("d.m.Y", strtotime($patient_data->data['receipt_date']));?></h5>
                             </div>
                         </div>
                     </div>
@@ -65,7 +90,7 @@ if(!isset($user_data) || $user_data['role'] !== "Patient") {
                 <div class="row">
                     <div class="col">
                         <h5 class="text-muted">Субъективные жалобы:</h5>
-                        <h6 class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda natus nemo quis sequi. Aut debitis deleniti id in possimus quidem, quo tempore tenetur! A cupiditate dicta dolore doloremque eius ex impedit laborum, libero, mollitia nam nemo optio praesentium qui quo reprehenderit similique totam. Ab delectus labore nihil. Deserunt, enim, vel!</h6>
+                        <h6 class="text-muted"><?php echo $patient_data->data['complaints']; ?></h6>
                     </div>
                 </div>
 
@@ -80,7 +105,7 @@ if(!isset($user_data) || $user_data['role'] !== "Patient") {
                         </a>
                         <h5 class="font-weight-bold" style="color: var(--yellow-color)">
                             <i class="fas fa-map-marked-alt mr-1"></i>
-                            Республика Башкортостан
+                            <?php echo $patient_data->data['region']; ?>
                         </h5>
                     </div>
                 </div>
