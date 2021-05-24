@@ -52,7 +52,6 @@ if($patient_data->data['type'] == "Treating") {
         <!--Карточка с основной информацией пользователя-->
         <div class="card">
             <div class="card-body">
-                <? print_r($patient_data->data);?>
                 <div class="row">
                     <div class="col-lg-2 text-center">
                         <img src="<?php echo getUrlUserPhoto($user_data['photo'])?> " class="rounded-circle img-thumbnail mb-2" style="height: 8rem;width: 8rem;">

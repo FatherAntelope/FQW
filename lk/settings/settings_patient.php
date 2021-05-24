@@ -1,5 +1,35 @@
 <?php
-$user_data = $user_data;
+if(!isset($user_data) || $user_data['role'] !== "Patient") {
+    header("Location: /error/403.php");
+}
+
+$url = "https://".domain_name_api."/api/med/patient";
+$config = [
+    "method" => "GET",
+    "token" => $_COOKIE['user_token']
+];
+$patient_data = utils_call_api($url, $config);
+$patient_gender = null;
+$patient_category = null;
+if($patient_data->data['gender'] == "Male")
+    $patient_gender = "Мужской";
+else
+    $patient_gender = "Женский";
+
+if($patient_data->data['type'] == "Treating") {
+    $patient_category = "Лечащийся";
+} elseif ($patient_data->data['type'] == "Vacationer") {
+    $patient_category = "Отдыхающий";
+} elseif ($patient_data->data['type'] == "Discharged") {
+    $patient_category = "Выписан";
+}
+
+$url = "https://".domain_name_api."/api/med/passport";
+$config = [
+    "method" => "GET",
+    "token" => $_COOKIE['user_token']
+];
+$passport_data = utils_call_api($url, $config);
 ?>
 <!doctype html>
 <html lang="ru">
@@ -56,26 +86,32 @@ $user_data = $user_data;
                             <p class="text-muted mb-1">
                                 <strong>Возраст:</strong>
                                 <span class="ml-2">
-                                    <?php echo floor( (time() - strtotime("1999-10-01")) /(60 * 60 * 24 * 365.25));?>
-                                    (<?php echo date("d.m.Y", strtotime("1999-10-01"));?>)
+                                    <?php echo floor( (time() - strtotime($patient_data->data['birth_date'])) /(60 * 60 * 24 * 365.25));?>
+                                    (<?php echo date("d.m.Y", strtotime($patient_data->data['birth_date']));?>)
+                                </span>
+                            </p>
+                            <p class="text-muted mb-1">
+                                <strong>Пол:</strong>
+                                <span class="ml-2">
+                                    <?php echo $patient_gender; ?>
                                 </span>
                             </p>
                             <p class="text-muted mb-1">
                                 <strong>Категория:</strong>
                                 <span class="ml-2">
-                                    <?php echo "Лечащийся"; ?>
+                                    <?php echo $patient_category; ?>
                                 </span>
                             </p>
                             <p class="text-muted mb-1">
                                 <strong>Регион проживания:</strong>
                                 <span class="ml-2">
-                                    <?php echo "Республика Башкортостан"; ?>
+                                    <?php echo $patient_data->data['region']; ?>
                                 </span>
                             </p>
                             <p class="text-muted mb-1">
                                 <strong>Населенный пункт:</strong>
                                 <span class="ml-2">
-                                    <?php echo "г. Уфа"; ?>
+                                    <?php echo $patient_data->data['city']; ?>
                                 </span>
                             </p>
                             <p class="text-muted mb-1">
@@ -88,25 +124,25 @@ $user_data = $user_data;
                             <p class="text-muted mb-1">
                                 <strong>Серия и номер:</strong>
                                 <span class="ml-2">
-                                    <?php echo "99 99 999999"; ?>
+                                    <?php echo $passport_data->data['series_number']; ?>
                                 </span>
                             </p>
                             <p class="text-muted mb-1">
                                 <strong>Код подразделения:</strong>
                                 <span class="ml-2">
-                                    <?php echo "111-111"; ?>
+                                    <?php echo $passport_data->data['code']; ?>
                                 </span>
                             </p>
                             <p class="text-muted mb-1">
                                 <strong>Дата выдачи:</strong>
                                 <span class="ml-2">
-                                    <?php echo date("d.m.Y", strtotime("2020-10-10")); ?>
+                                    <?php echo date("d.m.Y", strtotime($passport_data->data['date'])); ?>
                                 </span>
                             </p>
                             <p class="text-muted mb-1">
                                 <strong>Кем выдан:</strong>
                                 <span class="ml-2">
-                                    <?php echo "Отделом МВД по РБ в г.Уфа"; ?>
+                                    <?php echo $passport_data->data['by_whom']; ?>
                                 </span>
                             </p>
                         </div>
