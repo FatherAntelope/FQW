@@ -18,7 +18,7 @@ $whose_user = 2;
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/js/lightslider.js"></script>
     <script defer src="/js/all.js"></script>
-    <title>СанКонтроль</title>
+    <title><? echo web_name_header; ?></title>
 </head>
 
 <body>

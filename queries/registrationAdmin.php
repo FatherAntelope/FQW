@@ -5,7 +5,7 @@ require $_SERVER['DOCUMENT_ROOT'] . "/utils/variables.php";
 $url = "https://".domain_name_api."/api/med/registration";
 $data = [
     "user" => [
-        "email" => "fatherantelope@gmail.com",
+        "email" => "gorbunov.vladlen2014@gmail.com",
         "password" => "24758910",
         "name" => "Владлен",
         "surname" => "Горбунов",
@@ -25,19 +25,19 @@ if($user->status_code === 400) {
     die(header("HTTP/1.0 400 Bad Request"));
 }
 
-    $url = "https://".domain_name_api."/api/med/admin";
-    $method = "POST";
-    $data = [
-        "admin" => [
-            "position" => $_POST['admin_post']
-        ]
-    ];
-    $config = [
-        "method" => "POST",
-        "token" => $user->data['user']['token'],
-        "data" => $data
-    ];
-    $response = utils_call_api($url, $config);
+$url = "https://".domain_name_api."/api/med/admin";
+$method = "POST";
+$data = [
+    "admin" => [
+        "position" => $_POST['admin_post']
+    ]
+];
+$config = [
+    "method" => "POST",
+    "token" => $user->data['user']['token'],
+    "data" => $data
+];
+$response = utils_call_api($url, $config);
 
 //$url = "https://".domain_name_api."/api/med/patient";
 //$method = "POST";

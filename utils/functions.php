@@ -14,3 +14,8 @@ function normJsonStr($str){
     $str = preg_replace_callback('/\\\\u([a-f0-9]{4})/i', create_function('$m', 'return chr(hexdec($m[1])-1072+224);'), $str);
     return iconv('cp1251', 'utf-8', $str);
 }
+
+function getUrlUserPhoto ($user_photo) : string {
+    return ($user_photo === null) ?  "/images/user.png" : ("https://" . domain_name_api . $user_photo);
+}
+

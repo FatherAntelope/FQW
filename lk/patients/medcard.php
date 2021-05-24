@@ -19,7 +19,7 @@ $whose_user = 3;
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="text/javascript" charset="utf8" src="/js/datatables.js"></script>
     <script defer src="/js/all.js"></script>
-    <title>СанКонтроль</title>
+    <title><? echo web_name_header; ?></title>
 </head>
 <body>
 <!--Панель навигации по модулям пользователя-->

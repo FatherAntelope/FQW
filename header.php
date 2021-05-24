@@ -1,6 +1,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=Source+Serif+Pro:wght@600&display=swap" rel="stylesheet">
-<?php if($whose_user === 0) { ?>
+<?php
+require $_SERVER['DOCUMENT_ROOT']."/utils/functions.php";
+if($whose_user === 0) { ?>
 <!--Меню для неавторизованного пользователя-->
 <nav class="navbar shadow-lg fixed-top navbar-expand-sm navbar-light" style="background: var(--cyan-color); padding: 0;">
         <div class="container">
@@ -10,7 +12,13 @@
             </a>
             <!--Иконка бренда (мини) в широком формате-->
             <a class="navbar-brand" id="logo-big" href="#">
-                <img src="/images/logo.png" alt="" height="40">
+                <div class="d-flex">
+                    <img src="/images/logo-mini.png" alt="" height="40">
+                    <div class="ml-2 d-flex justify-content-center flex-column">
+                        <h5 class="text-uppercase mb-0 pb-0" style="font-family: 'PT Serif', serif; font-family: 'Source Serif Pro', serif; color: var(--yellow-color)"><? echo web_name_header; ?></h5>
+                        <span class="text-white" style="font-size: 12px; font-family: 'PT Serif', serif; font-family: 'Source Serif Pro', serif;"><? echo web_name_span; ?></span>
+                    </div>
+                </div>
             </a>
             <ul class="nav">
                 <li>
@@ -45,8 +53,8 @@
             <div class="d-flex">
                 <img src="/images/logo-mini.png" alt="" height="40">
                 <div class="ml-2 d-flex justify-content-center flex-column">
-                    <h5 class="text-uppercase mb-0 pb-0" style="font-family: 'PT Serif', serif; font-family: 'Source Serif Pro', serif; color: var(--yellow-color)">Санконтроль</h5>
-                    <span class="text-white" style="font-size: 12px; font-family: 'PT Serif', serif; font-family: 'Source Serif Pro', serif;">Медицинская информационная система</span>
+                    <h5 class="text-uppercase mb-0 pb-0" style="font-family: 'PT Serif', serif; font-family: 'Source Serif Pro', serif; color: var(--yellow-color)"><? echo web_name_header; ?></h5>
+                    <span class="text-white" style="font-size: 12px; font-family: 'PT Serif', serif; font-family: 'Source Serif Pro', serif;"><? echo web_name_span; ?></span>
                 </div>
             </div>
         </a>
@@ -154,7 +162,7 @@
                 <!--Кнопка развертывания выпадающего меню со списком управления пользовательской панелью-->
                 <a class="nav-link arrow-none nav-user" href="#" id="dropdown-menu-user" data-toggle="dropdown">
                     <span class="account-user-avatar">
-                        <img src="/images/user.png" alt="user-image" class="rounded-circle" height="40">
+                        <img src="<? echo getUrlUserPhoto($user_data['photo']); ?>" alt="user-image" class="rounded-circle">
                     </span>
                     <span>
                         <span class="account-user-name">

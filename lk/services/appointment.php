@@ -26,7 +26,7 @@ if($getSelected != "doctors" &&
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" charset="utf8" src="/js/datatables.js"></script>
     <script defer src="/js/all.js"></script>
-    <title>СанКонтроль</title>
+    <title><? echo web_name_header; ?></title>
 </head>
 <style>
  .form-control-sm option:link {

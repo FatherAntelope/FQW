@@ -89,7 +89,7 @@ if($getSelected != "patient" &&
                             </div>
                         </div>
 <!--                        id="queryRegistrationPatient"-->
-                        <form id="queryRegistrationPatient">
+                        <form id="queryRegistrationPatient" enctype="multipart/form-data">
                             <h5 class="mb-3 text-muted text-uppercase bg-light p-2">
                                 <i class="fas fa-user mr-1"></i>
                                 Персональные данные
@@ -194,7 +194,7 @@ if($getSelected != "patient" &&
                             </div>
                             <div class="row">
                                 <div class="col alert alert-danger alert-dismissible fade show animate slideIn mr-3 ml-3" id="alertErrorRegistrationPatient" role="alert" style="font-size: 12px" hidden>
-                                    Аккаунт с указанным адресом электронной почтой уже существует. Измените или проверьте введенный адрес электронной почты!
+                                    Аккаунт с указанным адресом электронной почты уже существует. Измените или проверьте введенный адрес электронной почты!
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -402,7 +402,7 @@ if($getSelected != "patient" &&
                             </div>
                             <div class="row">
                                 <div class="col alert alert-danger alert-dismissible fade show animate slideIn mr-3 ml-3" role="alert" id="alertErrorRegistrationDoctor" style="font-size: 12px" hidden>
-                                    Аккаунт с указанным адресом электронной почтой уже существует. Измените или проверьте введенный адрес электронной почты!
+                                    Аккаунт с указанным адресом электронной почты уже существует. Измените или проверьте введенный адрес электронной почты!
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -476,7 +476,7 @@ if($getSelected != "patient" &&
                                 </div>
                             </div>
                         </div>
-                        <form id="queryRegistrationAdmin">
+                        <form id="queryRegistrationAdmin" enctype="multipart/form-data">
                             <h5 class="mb-3 text-muted text-uppercase bg-light p-2">
                                 <i class="fas fa-user mr-1"></i>
                                 Персональные данные
@@ -533,7 +533,7 @@ if($getSelected != "patient" &&
                             </div>
                             <div class="row">
                                 <div class="col alert alert-danger alert-dismissible fade show animate slideIn mr-3 ml-3" role="alert" id="alertErrorRegistrationAdmin" style="font-size: 12px" hidden>
-                                    Аккаунт с указанным адресом электронной почтой уже существует. Измените или проверьте введенный адрес электронной почты!
+                                    Аккаунт с указанным адресом электронной почты уже существует. Измените или проверьте введенный адрес электронной почты!
                                     <button type="submit" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -652,6 +652,9 @@ if($getSelected != "patient" &&
         $.ajax({
             url: "/queries/admin/registrationUser.php",
             method: "POST",
+            contentType: false,
+            processData: false,
+            enctype: 'multipart/form-data',
             data: new FormData(this),
             success: function () {
                 $("#queryRegistrationPatient").prev().removeAttr("hidden");
@@ -680,7 +683,10 @@ if($getSelected != "patient" &&
         $.ajax({
             url: "/queries/admin/registrationUser.php",
             method: "POST",
-            data: $(this).serialize(),
+            contentType: false,
+            processData: false,
+            enctype: 'multipart/form-data',
+            data: new FormData(this),
             success: function () {
                 $("#queryRegistrationDoctor").prev().removeAttr("hidden");
                 $("#queryRegistrationDoctor").attr("hidden", "hidden");
@@ -697,7 +703,10 @@ if($getSelected != "patient" &&
         $.ajax({
             url: "/queries/admin/registrationUser.php",
             method: "POST",
-            data: $(this).serialize(),
+            contentType: false,
+            processData: false,
+            enctype: 'multipart/form-data',
+            data: new FormData(this),
             success: function () {
                 $("#queryRegistrationAdmin").prev().removeAttr("hidden");
                 $("#queryRegistrationAdmin").attr("hidden", "hidden");

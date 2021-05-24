@@ -1,6 +1,7 @@
 <?php
 if (isset($_COOKIE['user_token']))
     header("Location: /lk/");
+require $_SERVER['DOCUMENT_ROOT']. '/utils/variables.php';
 ?>
 <!doctype html>
 <html lang="ru">
@@ -9,6 +10,8 @@ if (isset($_COOKIE['user_token']))
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=Source+Serif+Pro:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="shortcut icon" href="/images/logo-mini.png" type="image/x-icon">
@@ -31,9 +34,15 @@ if (isset($_COOKIE['user_token']))
     <div class="row justify-content-center pt-5" id="card">
         <div class="col-lg-10">
             <div class="card shadow-lg">
-                <div class="card-header text-center pt-3 pb-3" style="background-color: var(--cyan-color)">
-                    <a href="/">
-                        <img src="/images/logo.png" alt="" height="40">
+                <div class="card-header pt-3 pb-3 d-flex justify-content-center" style="background-color: var(--cyan-color)">
+                    <a href="/" class="text-decoration-none">
+                        <div class="d-flex">
+                            <img src="/images/logo-mini.png" alt="" height="40">
+                            <div class="ml-2 d-flex justify-content-center flex-column">
+                                <h5 class="text-uppercase mb-0 pb-0" style="font-family: 'PT Serif', serif; font-family: 'Source Serif Pro', serif; color: var(--yellow-color)"><? echo web_name_header; ?></h5>
+                                <span class="text-white" style="font-size: 12px; font-family: 'PT Serif', serif; font-family: 'Source Serif Pro', serif;"><? echo web_name_span; ?></span>
+                            </div>
+                        </div>
                     </a>
                 </div>
                 <div class="card-body">
@@ -82,7 +91,7 @@ if (isset($_COOKIE['user_token']))
                 <div class="card-footer" style="background-color: var(--cyan-color)">
                     <div class="row justify-content-center align-items-center">
                         <div class="text-white pt-2 text-center">
-                            <p class="mb-1">©2021 СанКонтроль. Все права защищены</p>
+                            <p class="mb-1">©2021 <? echo web_name_header; ?>. Все права защищены</p>
                         </div>
                     </div>
                 </div>

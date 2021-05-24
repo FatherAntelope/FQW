@@ -18,7 +18,7 @@ $user_data = $user_data;
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script defer src="/js/all.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-show-password/1.0.3/bootstrap-show-password.min.js"></script>
-    <title>СанКонтроль</title>
+    <title><? echo web_name_header; ?></title>
 </head>
 <style>
 
@@ -40,7 +40,7 @@ $user_data = $user_data;
             <div class="col-xl-4 col-lg-5">
                 <div class="card">
                     <div class="card-header text-center" style="background-color: var(--cyan-color">
-                        <img src="/images/user.png" class="rounded-circle img-thumbnail" style="height: 12rem;width: 12rem;">
+                        <img src="<? echo getUrlUserPhoto($user_data['photo']); ?>" class="rounded-circle img-thumbnail" style="height: 12rem;width: 12rem;">
                         <h4 class="mb-0 mt-2" style="color: var(--yellow-color)">
                             <?php echo $user_data['surname']." ".$user_data['name']." ".$user_data['patronymic'];?>
                         </h4>
