@@ -13,24 +13,27 @@ class CurlHttpResponse {
 // отправляет и принимает данные только в формате json
 function utils_call_api($url, $config = false): CurlHttpResponse {
     // параметры по умолчанию
+    $content_type = ['charset=utf-8'];
     $headers = [];
     $method = 'GET';
     $data = false;
 
-    if (array_key_exists('method', $config)) {
-        $method = $config['method'];
-        switch($method) {
-            case 'POST':
-            case 'PUT':
-            case 'PATCH':
-                $headers[] = 'Content-Type: application/json';
+    if ($config !== false) {
+        if (array_key_exists('method', $config)) {
+            $method = $config['method'];
+            switch($method) {
+                case 'POST':
+                case 'PUT':
+                case 'PATCH':
+                    $content_type[] = 'application/json';
+            }
         }
-    }
-    if (array_key_exists('token', $config)) {
-        $headers[] = 'Authorization: Bearer ' . $config['token'];
-    }
-    if (array_key_exists('data', $config)) {
-        $data = $config['data'];
+        if (array_key_exists('token', $config)) {
+            $headers[] = 'Authorization: Bearer ' . $config['token'];
+        }
+        if (array_key_exists('data', $config)) {
+            $data = $config['data'];
+        }
     }
 
     $curl = curl_init();
@@ -62,8 +65,18 @@ function utils_call_api($url, $config = false): CurlHttpResponse {
     // установка параметров
     curl_setopt($curl, CURLOPT_URL, $url);
     // возврат в виде строки
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+
+    $content_type_str = 'Content-Type: ';
+    for ($i = 0; $i < count($content_type); $i++) {
+        $content_type_str .= $content_type[$i];
+        if ($i != count($content_type) - 1) {
+            $content_type_str .= '; ';
+        }
+    }
+
+    $headers[] = $content_type_str;
     curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
     // авторизация
     // curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
