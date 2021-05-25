@@ -1,5 +1,5 @@
 <?php
-const domain_name_api = "530083-cu85770.tmweb.ru";
-const web_name_header = "СанКонтроль";
+const domain_name_api = "saturn-mis.online";
+const web_name_header = "Сатурн";
 const web_name_span = "Медицинская информационная система";
 ?>

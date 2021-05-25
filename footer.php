@@ -216,7 +216,7 @@
 
                 <div class="row justify-content-center align-items-center">
                     <div class="text-white">
-                        <p>©2021 СанКонтроль. Все права защищены</p>
+                        <p>©2021 <? echo web_name_header; ?>. Все права защищены</p>
                     </div>
                 </div>
             </div>
