@@ -1,37 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="dd690a98-02d7-475c-ab21-dec0f2dd0976" name="Default Changelist" comment="Добавлены проверки доступа к модулям пациента">
-      <change afterPath="$PROJECT_DIR$/js/jquery.min.js" afterDir="false" />
+    <list default="true" id="dd690a98-02d7-475c-ab21-dec0f2dd0976" name="Default Changelist" comment="Поправлены включения библиотек">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth.php" beforeDir="false" afterPath="$PROJECT_DIR$/auth.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/footer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/diary/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/diary/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/medcard/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/medcard/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/nutrition/editor.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/nutrition/editor.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/nutrition/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/nutrition/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/patients/add_epicrisis.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/patients/add_epicrisis.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/patients/diary.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/patients/diary.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/patients/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/patients/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/patients/medcard.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/patients/medcard.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/patients/profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/patients/profile.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/profile_admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/profile_admin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/profile_doctor.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/profile_doctor.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/profile_patient.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/profile_patient.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/services/appointment.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/services/appointment.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/services/editor.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/services/editor.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/services/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/services/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/services/record_doctor.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/services/record_doctor.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/services/record_event.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/services/record_event.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/services/record_examination.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/services/record_examination.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/services/record_procedure.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/services/record_procedure.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/settings/settings_admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/settings/settings_admin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/settings/settings_doctor.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/settings/settings_doctor.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lk/settings/settings_patient.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/settings/settings_patient.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/news.php" beforeDir="false" afterPath="$PROJECT_DIR$/news.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/variables.php" beforeDir="false" afterPath="$PROJECT_DIR$/utils/variables.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lk/users/add.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/users/add.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lk/users/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/users/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lk/users/profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/lk/users/profile.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -202,14 +176,7 @@
       <workItem from="1621718168508" duration="648000" />
       <workItem from="1621794806635" duration="8770000" />
       <workItem from="1621843267347" duration="21674000" />
-      <workItem from="1621943112265" duration="4400000" />
-    </task>
-    <task id="LOCAL-00016" summary="Доделан фронтенд страницы регистрации пользователей. Добавлена страница новостей (без контента)">
-      <created>1617813926188</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1617813926188</updated>
+      <workItem from="1621943112265" duration="5491000" />
     </task>
     <task id="LOCAL-00017" summary="Добавлена страница управления услугами у пациента">
       <created>1618080421750</created>
@@ -547,7 +514,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621879855936</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="Поправлены включения библиотек">
+      <created>1621947819694</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1621947819694</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -569,7 +543,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Добавлена страница настроек для администратора и медперсонала" />
     <MESSAGE value="В регистрации пациента убраны поля добавления диагнозов и физических параметров.&#10;Добавлена страница добавления выписного эпикриза пациента.&#10;Добавлены страницы просмотров пациентов у медперсонала, а также страница просмотра пользователей у администратора" />
     <MESSAGE value="Добавлена страница FAQ и модальное окно поддержки.&#10;Добавлен виджет посещаемости пациентов у медперсонала" />
     <MESSAGE value="Изменена карточка пациента (добавлено отображение паспортных данных) в просмотре профиля пользователя у администратора" />
@@ -594,6 +567,7 @@
     <MESSAGE value="Регистрация пациента готова с отображением данных профиля (без создания медкарты и данных дневника самонаблюдения)" />
     <MESSAGE value="Готово отображение данных в настройках пациента" />
     <MESSAGE value="Добавлены проверки доступа к модулям пациента" />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавлены проверки доступа к модулям пациента" />
+    <MESSAGE value="Поправлены включения библиотек" />
+    <option name="LAST_COMMIT_MESSAGE" value="Поправлены включения библиотек" />
   </component>
 </project>
