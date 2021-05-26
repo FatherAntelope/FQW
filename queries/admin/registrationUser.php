@@ -85,10 +85,10 @@ if ($_POST['user_role'] === "Doctor") {
 
 }
 
-$message = "Здравствуйте, ".$_POST['user_name']." ".$_POST['user_patronymic'];
+$message = "Здравствуйте, ".$_POST['user_name']." ".$_POST['user_patronymic']."!";
 $message .= "\nВаш пароль для входа в профиль: ".$password_generate;
 $message .= "\nПосле входа рекомендуем сменить пароль в настройках на тот, который вы запомните!";
-$message .= "\nЕсли вы не регистрировались в системе, то проигнорируйте это сообщение";
-sendMessageToEmail("info@fqw.ru", $_POST['user_email'], "Ваш пароль для входа", $message);
+$message .= "\nЕсли вы не регистрировались в системе, то проигнорируйте это сообщение.";
+sendMessageToEmail(email_info, $_POST['user_email'],"Пароль доступа к профилю", "Сатурн МИС", "utf-8", $message);
 
 ?>

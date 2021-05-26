@@ -1,4 +1,5 @@
 <?php
+require $_SERVER['DOCUMENT_ROOT'] . '/utils/variables.php';
 if(isset($_COOKIE['user_token'])) {
     require $_SERVER['DOCUMENT_ROOT'] . "/utils/User.php";
     $user = new User($_COOKIE['user_token']);

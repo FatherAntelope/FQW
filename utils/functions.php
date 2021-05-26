@@ -5,8 +5,11 @@ function passwordGenerate(int $length = 8): string {
     return $password;
 }
 
-function sendMessageToEmail($from, $to, $subject, $message) {
-    $headers = "From: FQW.ru <$from>\r\nContent-type: text/plain; charset=windows-1251 \r\n";
+function sendMessageToEmail($from, $to, $subject, $name, $charset, $message) {
+    $subject = "=?$charset?B?".base64_encode($subject)."?=";
+    $headers = "From: $name <$from>\r\n";
+    $headers.= "Reply-to: $from\r\n";
+    $headers.= "Content-type: text/plain; charset=$charset\r\n";
     mail($to, $subject, $message, $headers);
 }
 

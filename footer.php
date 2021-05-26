@@ -14,13 +14,13 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label style="color: var(--yellow-color)">Ваше имя</label>
-                                <input type="text" class="form-control" name="user_name" required>
+                                <input type="text" class="form-control" name="user_name" value="<?php echo ($whose_user === 0) ? "" : $user_data['name'] ?>" <?php echo ($whose_user === 0) ? "" : "disabled"?> required>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label style="color: var(--yellow-color)">Ваша почта</label>
-                                <input type="email" class="form-control" name="user_email" required>
+                                <input type="email" class="form-control" name="user_email" value="<?php echo ($whose_user === 0) ? "" : $user_data['email'] ?>" <?php echo ($whose_user === 0) ? "" : "disabled"?> required>
                             </div>
                         </div>
                     </div>
@@ -28,14 +28,14 @@
                         <div class="col">
                             <div class="form-group">
                                 <label style="color: var(--yellow-color)">Сообщение</label>
-                                <textarea class="form-control" required></textarea>
+                                <textarea class="form-control" name="user_message" required></textarea>
                             </div>
                         </div>
                     </div>
+                </form>
                     <div class="alert alert-success animate slideIn" role="alert" style="font-size: 12px" id="alertSuccessSendMsgSupport" hidden>
                         Ваше сообщение отправлено службе поддержки. Ответ придет на указанную почту в течение нескольких дней
                     </div>
-                </form>
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-info text-white mr-1" style="background-color: var(--cyan-color)" form="querySendMsgSupport">
@@ -53,15 +53,15 @@
             <div class="col-lg-12">
                 <?php if($whose_user === 0) { ?>
                 <div class="row align-items-center">
-                    <div class="col-lg-9">
+                    <div class="col-lg-10">
                         <h3 class="mb-2" style="color: var(--yellow-color)">
                             Быстрый запуск
                         </h3>
                         <p class="lead mb-0 text-white opacity-8">
-                            Записываться на услуги и отслеживать результаты процесса лечения стало просто
+                            Увеличьте качество лечения в санатории, предоставляющем вам свои услуги уже сейчас
                         </p>
                     </div>
-                    <div class="col-lg-3 text-lg-right mt-4 mt-lg-0">
+                    <div class="col-lg-2 text-lg-right mt-4 mt-lg-0">
                         <a href="/auth.php" class="btn btn-warning btn-icon my-2 text-secondary" style="background-color: var(--yellow-color)">
                             Приступить
                         </a>
@@ -88,20 +88,20 @@
                         </p>
                         <ul class="list-unstyled link-none">
                             <li>
-                                <a href="tel:+7 (999) 999-99-99" aria-haspopup="true">
-                                    <h4><i class="fas fa-phone mr-1"></i> +7 (999) 999-99-99</h4>
+                                <a href="tel:<?php echo contact_number; ?>" aria-haspopup="true">
+                                    <h4><i class="fas fa-phone mr-1"></i> <?php echo contact_number; ?></h4>
                                 </a>
                             </li>
                             <li>
-                                <a href="mailto:mail@mail.ru" aria-haspopup="true">
+                                <a href="mailto:<?php echo email_info; ?>" aria-haspopup="true">
                                     <i class="fas fa-envelope-open-text mr-1"></i>
-                                    mail@mail.ru
+                                    <?php echo email_info; ?>
                                 </a>
                             </li>
                             <li>
-                                <a href="https://yandex.ru/maps/org/raduga/1249162221/?display-text=%D0%A1%D0%B0%D0%BD%D0%B0%D1%82%D0%BE%D1%80%D0%B8%D0%B9%20%D0%A0%D0%B0%D0%B4%D1%83%D0%B3%D0%B0&ll=56.012919%2C54.703989&mode=search&sll=55.943574%2C54.768878&sspn=0.134043%2C0.045012&text=%D0%A1%D0%B0%D0%BD%D0%B0%D1%82%D0%BE%D1%80%D0%B8%D0%B9%20%D0%A0%D0%B0%D0%B4%D1%83%D0%B3%D0%B0&z=16.43" aria-haspopup="true">
+                                <a href="https://yandex.ru/maps/geo/ufa/53105309/?ll=56.037733%2C54.730300&source=wizbiz_new_map_single&z=9.92" aria-haspopup="true">
                                     <i class="fas fa-map-marked-alt mr-1"></i>
-                                    Уфа, Санаторий Радуга, ул. Авроры, 14/1
+                                    <?php echo contact_address; ?>
                                 </a>
                             </li>
                         </ul>
@@ -192,7 +192,7 @@
                         <h6 class="heading mb-3" style="font-weight: 700 ;color: var(--yellow-color)">Санаторий</h6>
                         <ul class="list-unstyled link-none">
                             <li>
-                                <a href="#">Новости</a>
+                                <a href="/news.php">Новости</a>
                             </li>
                             <li>
                                 <a href="#">Галерея</a>
@@ -231,7 +231,8 @@
             method: "POST",
             data: $(this).serialize(),
             success: function () {
-                $("#alertSuccessSendMsgSupport").attr("hidden", "hidden");
+                $("#querySendMsgSupport").attr("hidden", "hidden");
+                $("#alertSuccessSendMsgSupport").removeAttr("hidden");
             },
             error: function () {
             }

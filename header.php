@@ -11,7 +11,7 @@ if($whose_user === 0) { ?>
                 <img src="/images/logo-mini.png" alt="" height="40">
             </a>
             <!--Иконка бренда (мини) в широком формате-->
-            <a class="navbar-brand" id="logo-big" href="#">
+            <a class="navbar-brand" id="logo-big" href="/">
                 <div class="d-flex">
                     <img src="/images/logo-mini.png" alt="" height="40">
                     <div class="ml-2 d-flex justify-content-center flex-column">
@@ -162,7 +162,7 @@ if($whose_user === 0) { ?>
                 <!--Кнопка развертывания выпадающего меню со списком управления пользовательской панелью-->
                 <a class="nav-link arrow-none nav-user" href="#" id="dropdown-menu-user" data-toggle="dropdown">
                     <span class="account-user-avatar">
-                        <img src="<? echo getUrlUserPhoto($user_data['photo']); ?>" alt="user-image" class="rounded-circle">
+                        <img src="<? echo getUrlUserPhoto($user_data['photo']); ?>" alt="user-image" class="rounded-circle" style="object-fit: cover;">
                     </span>
                     <span>
                         <span class="account-user-name">
@@ -264,7 +264,7 @@ if($whose_user === 0) { ?>
 
 <?php } elseif ($whose_user === 2) { ?>
 <!--Панель навигации по модулям пациента-->
-<div class="topnav shadow-lg fixed-top" style="top: 3.7rem">
+<div class="topnav shadow-lg fixed-top" style="top: 3.5rem">
     <div class="container">
         <nav class="navbar navbar-expand-lg topnav-menu">
             <div class="collapse navbar-collapse justify-content-center" id="offcanvas">
@@ -319,7 +319,7 @@ if($whose_user === 0) { ?>
 
 <?php } elseif ($whose_user === 3) { ?>
 <!--Панель навигации по модулям медперсонала-->
-<div class="topnav shadow-lg fixed-top" style="top: 3.7rem">
+<div class="topnav shadow-lg fixed-top" style="top: 3.5rem">
     <div class="container">
         <nav class="navbar navbar-expand-lg topnav-menu">
             <div class="collapse navbar-collapse justify-content-center" id="offcanvas">

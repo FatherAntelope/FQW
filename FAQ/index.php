@@ -1,5 +1,26 @@
 <?php
-$whose_user = 0;
+require $_SERVER['DOCUMENT_ROOT'] . '/utils/variables.php';
+if(isset($_COOKIE['user_token'])) {
+    require $_SERVER['DOCUMENT_ROOT'] . "/utils/User.php";
+    $user = new User($_COOKIE['user_token']);
+    if($user->getUserStatusCode() === 400) {
+        setcookie('user_token', '', 0, "/");
+        header("Location: /auth.php");
+    }
+    $user_data = $user->getUserData();
+    $whose_user = $user_data['role'];
+    if($whose_user === "Admin") {
+        $whose_user = 1;
+    } elseif ($whose_user === "Patient") {
+        $whose_user = 2;
+    } elseif ($whose_user === "Doctor") {
+        $whose_user = 3;
+    } else {
+        $whose_user = 0;
+    }
+} else {
+    $whose_user = 0;
+}
 ?>
 <!doctype html>
 <html lang="ru">
@@ -11,10 +32,10 @@ $whose_user = 0;
     <link rel="shortcut icon" href="/images/logo-mini.png" type="image/x-icon">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <script src="//cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script defer src="/js/all.js"></script>
     <title>СанКонтроль</title>
 </head>
@@ -61,8 +82,8 @@ $whose_user = 0;
                                 </div>
                             </div>
                             <div class="col-sm-11">
-                                <h5 class="text-muted font-weight-bold">What is Lorem Ipsum?</h5>
-                                <p class="text-muted">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                                <h5 class="text-muted font-weight-bold">Как зарегистрироваться в системе?</h5>
+                                <p class="text-muted">Для получения доступа к своему профилю в системе, нужно обратиться к регистратору санатория, предоставляющему вам свои услуги</p>
                             </div>
                         </div>
                     </div>
@@ -74,8 +95,34 @@ $whose_user = 0;
                                 </div>
                             </div>
                             <div class="col-sm-11">
-                                <h5 class="text-muted font-weight-bold">What is Lorem Ipsum?</h5>
-                                <p class="text-muted">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                                <h5 class="text-muted font-weight-bold">Что делать, если не помню пароль?</h5>
+                                <p class="text-muted">Перейдите на страницу авторизации, нажмите на гиперссылку "Забыли пароль?" и введите адрес электронной почты, который вы указали при регистрации. На почту вам придет письмо со ссылкой на восстановление пароля</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <div class="faq-question-q-box">
+                                    <i class="far fa-question-circle"></i>
+                                </div>
+                            </div>
+                            <div class="col-sm-11">
+                                <h5 class="text-muted font-weight-bold">Что делать, если не помню адрес электронной почты?</h5>
+                                <p class="text-muted">Чтобы получить информацию о вашей электронной почте необходимо обратиться к регистратору санатория с документом, удостоверяющим вашу личность</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <div class="faq-question-q-box">
+                                    <i class="far fa-question-circle"></i>
+                                </div>
+                            </div>
+                            <div class="col-sm-11">
+                                <h5 class="text-muted font-weight-bold">Куда приходит пароль от профиля?</h5>
+                                <p class="text-muted">После регистрации профиля пароль приходит на ваш адрес электронной почты, который вы указали при регистрации</p>
                             </div>
                         </div>
                     </div>
