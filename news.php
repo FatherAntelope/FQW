@@ -1,23 +1,25 @@
+<!--Страница (модуль) новостей санатория-->
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/utils/variables.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/utils/functions.php';
+/**
+ * Проверка на существование авторизации пользователя
+ * Если токен при авторизации был выдан, то загружается содержимое интерфейса для определенного пользователя
+ * Иначе выдается код 0 - пользователь не авторизован
+ */
 if(isset($_COOKIE['user_token'])) {
     require $_SERVER['DOCUMENT_ROOT'] . "/utils/User.php";
+    //Объект пользователя для экспорта необходимой информации из БД
     $user = new User($_COOKIE['user_token']);
+    //Если произошла ошибка выгрузки данных пользователя - 400, то ...
     if($user->getUserStatusCode() === 400) {
+        //Очищаются Cookie и происходит перенаправление на страницу авторизации
         setcookie('user_token', '', 0, "/");
         header("Location: /auth.php");
     }
+    //получение основных данных пользователя и код его роли
     $user_data = $user->getUserData();
-    $whose_user = $user_data['role'];
-    if($whose_user === "Admin") {
-        $whose_user = 1;
-    } elseif ($whose_user === "Patient") {
-        $whose_user = 2;
-    } elseif ($whose_user === "Doctor") {
-        $whose_user = 3;
-    } else {
-        $whose_user = 0;
-    }
+    $whose_user = getUserRoleCode($user_data['role']);
 } else {
     $whose_user = 0;
 }
@@ -37,7 +39,7 @@ if(isset($_COOKIE['user_token'])) {
     <script type="text/javascript" src="/js/jquery.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script defer src="/js/all.js"></script>
-    <title><? echo web_name_header; ?></title>
+    <title><?php echo web_name_header; ?></title>
 </head>
 <body>
 <!--Панель навигации по модулям пользователя-->

@@ -22,3 +22,13 @@ function getUrlUserPhoto ($user_photo) : string {
     return ($user_photo === null) ?  "/images/user.png" : ("https://" . domain_name_api . $user_photo);
 }
 
+function getUserRoleCode($user_role) : int {
+    if($user_role === "Admin")
+        return 1;
+    if ($user_role === "Patient")
+        return 2;
+    if ($user_role === "Doctor")
+        return 3;
+    return 0;
+}
+?>

@@ -1,3 +1,7 @@
+<!--
+
+-->
+
 <!--Модальное окно поддержки-->
 <div class="modal fade" id="openModalSendMessageSupport">
     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -21,6 +25,14 @@
                             <div class="form-group">
                                 <label style="color: var(--yellow-color)">Ваша почта</label>
                                 <input type="email" class="form-control" name="user_email" value="<?php echo ($whose_user === 0) ? "" : $user_data['email'] ?>" <?php echo ($whose_user === 0) ? "" : "disabled"?> required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label style="color: var(--yellow-color)">Тема сообщения</label>
+                                <input type="text" class="form-control" name="user_message_subject" required>
                             </div>
                         </div>
                     </div>

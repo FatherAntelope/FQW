@@ -1,27 +1,30 @@
+<!--
+Главная промо-страница, описывающая возможности web-приложения
+-->
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/utils/variables.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/utils/functions.php';
+/**
+ * Проверка на существование авторизации пользователя
+ * Если токен при авторизации был выдан, то загружается содержимое интерфейса для определенного пользователя
+ * Иначе выдается код 0 - пользователь не авторизован
+ */
 if(isset($_COOKIE['user_token'])) {
     require $_SERVER['DOCUMENT_ROOT'] . "/utils/User.php";
+    //Объект пользователя для экспорта необходимой информации из БД
     $user = new User($_COOKIE['user_token']);
+    //Если произошла ошибка выгрузки данных пользователя - 400, то ...
     if($user->getUserStatusCode() === 400) {
+        //Очищаются Cookie и происходит перенаправление на страницу авторизации
         setcookie('user_token', '', 0, "/");
         header("Location: /auth.php");
     }
+    //получение основных данных пользователя и код его роли
     $user_data = $user->getUserData();
-    $whose_user = $user_data['role'];
-    if($whose_user === "Admin") {
-        $whose_user = 1;
-    } elseif ($whose_user === "Patient") {
-        $whose_user = 2;
-    } elseif ($whose_user === "Doctor") {
-        $whose_user = 3;
-    } else {
-        $whose_user = 0;
-    }
+    $whose_user = getUserRoleCode($user_data['role']);
 } else {
     $whose_user = 0;
 }
-
 ?>
 <!doctype html>
 <html lang="ru">
@@ -38,7 +41,7 @@ if(isset($_COOKIE['user_token'])) {
     <script type="text/javascript" src="/js/jquery.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script defer src="js/all.js"></script>
-    <title><? echo web_name_header; ?></title>
+    <title><?php echo web_name_header; ?></title>
 </head>
 <style>
     * {
@@ -49,28 +52,31 @@ if(isset($_COOKIE['user_token'])) {
 <!--Панель навигации по модулям пользователя-->
 <?php require $_SERVER['DOCUMENT_ROOT']."/header.php"; ?>
 
-
 <!--Основной контент страницы-->
 <div class="page-content" <?php if ($whose_user === 0) echo 'style="margin-top: 3.5rem !important;"';?>>
-        <div style="
-    background-image: url(/images/main-image.jpg);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-attachment: fixed;
-    background-size: cover;
-    min-height: <?php if ($whose_user === 0) echo '93vh'; else echo "92vh";?>;
-    filter: brightness(40%)"
-             class="text-center">
-        </div>
+    <div style="
+            background-image: url(/images/main-image.jpg);
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: fixed;
+            background-size: cover;
+            min-height: <?php if ($whose_user === 0) echo '93vh'; else echo "92vh";?>;
+            filter: brightness(40%)"
+         class="text-center">
+    </div>
+<!--Первая секция с изображением и заголовочным названием приложения-->
     <div style="position: absolute; top: 10rem; text-align: center">
         <h1 style=" font-size: 6rem; color: var(--yellow-color); " class="font-weight-bold">Сатурн</h1>
         <h3 style="z-index: 100; color: white">Персонифицированная комплексная медицинская информационная система сопровождения процесса реабилитации пациентов в лечебно-профилактических санаториях или профилакториях</h3>
         <a href="#info" class="btn btn-info btn-lg mt-3" style="background-color: var(--cyan-color)">Подробнее</a>
     </div>
+<!--Вторая секция с описанием возможностей пациента-->
     <div style="min-height: 100vh" class="d-flex flex-column justify-content-center" id="info">
         <h1 class="text-center" style="color: var(--dark-cyan-color)" >Возможности пациентов</h1>
         <div class="container pt-3 pb-3 d-flex justify-content-center align-items-center">
+<!--Строка объектов с описанием модуля-->
             <div class="row mt-2 ml-2 mr-2">
+<!--Объект описания модуля-->
                 <div class="col-md-6 col-xl-3">
                     <div class="text-center mt-3 pl-1 pr-1">
                         <img src="/images/promo/medcard-c.svg" alt="" class="mb-1" height="100">
@@ -130,6 +136,7 @@ if(isset($_COOKIE['user_token'])) {
             </div>
         </div>
     </div>
+<!--Третья секция с описанием возможностей медперсонала-->
     <div style="min-height: 100vh; background-color: #e5e5e5" class="d-flex flex-column justify-content-center">
         <h1 class="text-center" style="color: var(--yellow-color)" >Возможности медицинского персонала</h1>
         <div class="container pt-3 pb-3 d-flex justify-content-center align-items-center">
@@ -193,28 +200,34 @@ if(isset($_COOKIE['user_token'])) {
             </div>
         </div>
     </div>
+<!--Четвертая секция с контактными данными для связи-->
     <div style="min-height: 100vh" class="d-flex justify-content-center align-items-center flex-column" id="info">
         <div class="container">
+<!--Заголовочная информация секции-->
             <div class="text-center">
                 <h1 style="color: var(--dark-cyan-color);">Контакты</h1>
                 <p class="text-muted mt-2">Напишите нам, если у вас остались вопросы. Для этого необходимо
                     <br> заполнить форму ниже или связаться по контактным данным</p>
             </div>
             <div class="row">
+<!--Первая колонка контактных данных-->
                 <div class="col-md-4">
                     <p class="text-muted mt-4"><span class="font-weight-bold">Телефон поддержки:</span><br> <span class="d-block mt-1"><?php echo contact_number; ?></span></p>
                     <p class="text-muted mt-4"><span class="font-weight-bold">Электронная почта:</span><br> <span class="d-block mt-1"><?php echo email_info; ?></span></p>
                     <p class="text-muted mt-4"><span class="font-weight-bold">Адрес:</span><br> <span class="d-block mt-1"><?php echo contact_address; ?></span></p>
                 </div>
+<!--Вторая колонка с формой для отправки вопросов-->
                 <div class="col-md-8">
                     <form>
                         <div class="row mt-4">
+<!--Поле с вводом имени пользователя-->
                             <div class="col-lg-6">
                                 <div class="mb-2">
                                     <label class="form-label text-muted font-weight-bold">Ваше имя</label>
                                     <input class="form-control" type="text" required placeholder="Имя...">
                                 </div>
                             </div>
+<!--Поле с вводом почты пользователя-->
                             <div class="col-lg-6">
                                 <div class="mb-2">
                                     <label class="form-label text-muted font-weight-bold">Электронная почта</label>
@@ -222,7 +235,7 @@ if(isset($_COOKIE['user_token'])) {
                                 </div>
                             </div>
                         </div>
-
+<!--Поле с вводом темы сообщения-->
                         <div class="row mt-1">
                             <div class="col-lg-12">
                                 <div class="mb-2">
@@ -231,7 +244,7 @@ if(isset($_COOKIE['user_token'])) {
                                 </div>
                             </div>
                         </div>
-
+<!--Поле с вводом основного сообщения с вопросами и т. п.-->
                         <div class="row mt-1">
                             <div class="col-lg-12">
                                 <div class="mb-2">
@@ -240,24 +253,22 @@ if(isset($_COOKIE['user_token'])) {
                                 </div>
                             </div>
                         </div>
+<!--Кнопка для отправки данных формы-->
                         <div class="row mt-2">
                             <div class="col-12 ">
-                                <button class="btn btn-info float-right text-white" style="background-color: var(--dark-cyan-color)">Отправить <i class="fas fa-envelope"></i> </button>
+                                <button type="submit" class="btn btn-info float-right text-white" style="background-color: var(--dark-cyan-color)">Отправить <i class="fas fa-envelope"></i> </button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-
     </div>
-
-
 </div>
 
 <!--Список всплывающих уведомлений-->
 <div class="position-fixed p-3" style="z-index: 5; right: 0; bottom: 0;">
-<!--Всплывающее уведомление-->
+    <!--Всплывающее уведомление с задержкой в 5 сек-->
     <div id="notificationToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
         <div class="toast-header">
             <strong class="mr-auto" style="color: var(--cyan-color)">
@@ -278,6 +289,7 @@ if(isset($_COOKIE['user_token'])) {
 <?php require $_SERVER['DOCUMENT_ROOT']."/footer.php"; ?>
 </body>
 <script>
-$('#notificationToast').toast('show');
+    //Вызов отображения уведомления с указанным ID
+    $('#notificationToast').toast('show');
 </script>
 </html>

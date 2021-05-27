@@ -101,7 +101,6 @@ if($getSelected != "doctors" &&
                                 <th>Врач</th>
                                 <th>Специальность</th>
                                 <th>Расположение</th>
-                                <th>Разрешение</th>
                                 <th>Стоимость, руб.</th>
                                 <th>Действие</th>
                             </tr>
@@ -113,7 +112,6 @@ if($getSelected != "doctors" &&
                                     Терапевт
                                 </td>
                                 <td class="text-muted" data-label="Расп.-ие:">505 каб.</td>
-                                <td class="text-muted" data-label="Раз.-ие:"><span class="badge badge-pill badge-success">Дополнительно</span></td>
                                 <td class="text-muted" data-label="Стоимость, р.:">500</td>
                                 <td><button type="button" class="btn btn-sm btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Запись</button></td>
                             </tr>
@@ -123,7 +121,6 @@ if($getSelected != "doctors" &&
                                     Оториноларинголог
                                 </td>
                                 <td class="text-muted" data-label="Расп.-ие:">302 каб.</td>
-                                <td class="text-muted" data-label="Раз.-ие:"><span class="badge badge-pill badge-danger">Обязательно</span></td>
                                 <td class="text-muted" data-label="Стоимость, р.:">700</td>
                                 <td><button type="button" class="btn btn-sm btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Запись</button></td>
                             </tr>
@@ -133,7 +130,6 @@ if($getSelected != "doctors" &&
                                 <th>Врач</th>
                                 <th>Специальность</th>
                                 <th>Расположение</th>
-                                <th>Разрешение</th>
                                 <th>Стоимость, руб.</th>
                                 <th>Действие</th>
                             </tr>
