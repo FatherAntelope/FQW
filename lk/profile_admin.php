@@ -1,6 +1,6 @@
 <?php
 if(!isset($user_data) || $user_data['role'] !== "Admin") {
-    header("Location: /error/403.php");
+    header("Location: /error/403.html");
 }
 $url = "https://".domain_name_api."/api/med/admin";
 $config = [
@@ -47,10 +47,11 @@ if($admin_data->data['position']=== "Main") {
                 <div class="row">
                     <div class="col-lg-2 text-center">
                         <img src="<? echo getUrlUserPhoto($user_data['photo'])?> " class="rounded-circle img-thumbnail mb-2" style="height: 8rem;width: 8rem;">
+                        <br>
                         <a href="/lk/settings/" type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)"><i class="fas fa-user-cog"></i></a>
                         <a href="/queries/exitUser.php" type="button" class="btn mt-1 btn-sm btn-danger text-white"><i class="fas fa-door-open"></i></a>
                     </div>
-                    <div class="col-lg-10">
+                    <div class="col-lg-10 mt-2">
                         <div class="row">
                             <div class="col">
                                 <h4 class="font-weight-bold" style="color: var(--dark-cyan-color)">

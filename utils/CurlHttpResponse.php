@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Class CurlHttpResponse
+ * ОПИСАНИЕ
+ * @author https://github.com/akmubi
+ */
 class CurlHttpResponse {
     public $data;
     public $status_code;

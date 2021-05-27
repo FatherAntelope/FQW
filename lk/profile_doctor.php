@@ -1,6 +1,6 @@
 <?php
 if(!isset($user_data) || $user_data['role'] !== "Doctor") {
-    header("Location: /error/403.php");
+    header("Location: /error/403.html");
 }
 ?>
 <!doctype html>
@@ -37,7 +37,7 @@ if(!isset($user_data) || $user_data['role'] !== "Doctor") {
                         <a href="/lk/settings/" type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)"><i class="fas fa-user-cog"></i></a>
                         <button type="button" class="btn mt-1 btn-sm btn-danger text-white"><i class="fas fa-door-open"></i></button>
                     </div>
-                    <div class="col-lg-10">
+                    <div class="col-lg-10 mt-2">
                         <div class="row">
                             <div class="col">
                                 <h4 class="font-weight-bold" style="color: var(--dark-cyan-color)">

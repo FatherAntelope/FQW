@@ -13,8 +13,8 @@ if(isset($_COOKIE['user_token'])) {
     require $_SERVER['DOCUMENT_ROOT'] . "/utils/User.php";
     //Объект пользователя для экспорта необходимой информации из БД
     $user = new User($_COOKIE['user_token']);
-    //Если произошла ошибка выгрузки данных пользователя - 400, то ...
-    if($user->getUserStatusCode() === 400) {
+    // Если HTTP-код после обращения к выгрузке данных пользователя по API 400 или 403, то ...
+    if($user->getUserStatusCode() === 400 || $user->getUserStatusCode() === 403) {
         //Очищаются Cookie и происходит перенаправление на страницу авторизации
         setcookie('user_token', '', 0, "/");
         header("Location: /auth.php");
@@ -66,7 +66,7 @@ if(isset($_COOKIE['user_token'])) {
     </div>
 <!--Первая секция с изображением и заголовочным названием приложения-->
     <div style="position: absolute; top: 10rem; text-align: center">
-        <h1 style=" font-size: 6rem; color: var(--yellow-color); " class="font-weight-bold">Сатурн</h1>
+        <h1 style=" font-size: 5.5rem; color: var(--yellow-color); " class="font-weight-bold">Сатурн</h1>
         <h3 style="z-index: 100; color: white">Персонифицированная комплексная медицинская информационная система сопровождения процесса реабилитации пациентов в лечебно-профилактических санаториях или профилакториях</h3>
         <a href="#info" class="btn btn-info btn-lg mt-3" style="background-color: var(--cyan-color)">Подробнее</a>
     </div>
@@ -255,7 +255,7 @@ if(isset($_COOKIE['user_token'])) {
                         </div>
 <!--Кнопка для отправки данных формы-->
                         <div class="row mt-2">
-                            <div class="col-12 ">
+                            <div class="col-12 mb-3">
                                 <button type="submit" class="btn btn-info float-right text-white" style="background-color: var(--dark-cyan-color)">Отправить <i class="fas fa-envelope"></i> </button>
                             </div>
                         </div>

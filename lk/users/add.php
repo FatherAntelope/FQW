@@ -2,15 +2,15 @@
 require $_SERVER['DOCUMENT_ROOT'] . '/utils/variables.php';
 require $_SERVER['DOCUMENT_ROOT'] . '/utils/functions.php';
 if(!isset($_COOKIE['user_token']))
-    header("Location: /error/401.php");
+    header("Location: /error/401.html");
 require $_SERVER['DOCUMENT_ROOT'] . "/utils/User.php";
 $user = new User($_COOKIE['user_token']);
 if($user->getUserStatusCode() === 400) {
     setcookie('user_token', '', 0, "/");
-    header("Location: /error/401.php");
+    header("Location: /error/401.html");
 }
 if(!$user->isUserRole("Admin"))
-    header("Location: /error/403.php");
+    header("Location: /error/403.html");
 
 $user_data = $user->getUserData();
 $whose_user = 1;

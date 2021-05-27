@@ -1,5 +1,6 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/utils/variables.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/utils/functions.php';
 if(isset($_COOKIE['user_token'])) {
     require $_SERVER['DOCUMENT_ROOT'] . "/utils/User.php";
     $user = new User($_COOKIE['user_token']);
@@ -8,16 +9,7 @@ if(isset($_COOKIE['user_token'])) {
         header("Location: /auth.php");
     }
     $user_data = $user->getUserData();
-    $whose_user = $user_data['role'];
-    if($whose_user === "Admin") {
-        $whose_user = 1;
-    } elseif ($whose_user === "Patient") {
-        $whose_user = 2;
-    } elseif ($whose_user === "Doctor") {
-        $whose_user = 3;
-    } else {
-        $whose_user = 0;
-    }
+    $whose_user = getUserRoleCode($user_data['role']);
 } else {
     $whose_user = 0;
 }

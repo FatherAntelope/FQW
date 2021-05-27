@@ -1,15 +1,26 @@
+<!--
+Страница (модуль) дневника самонаблюдения пациента
+-->
 <?php
+require $_SERVER['DOCUMENT_ROOT'] . '/utils/variables.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/utils/functions.php';
+// Если токен авторизованного пользователя не существует, то направляет на страницу ошибки 401 (нет авторизации)
 if(!isset($_COOKIE['user_token']))
-    header("Location: /error/401.php");
+    header("Location: /error/401.html");
 require $_SERVER['DOCUMENT_ROOT'] . "/utils/User.php";
+// Выгрузка данных пользователя
 $user = new User($_COOKIE['user_token']);
+// Если HTTP-код после обращения к выгрузке данных пользователя по API 400 или 403, то ...
 if($user->getUserStatusCode() === 400 || $user->getUserStatusCode() === 403) {
+    // Очищает Cookie с токеном пользователя и направляет на страницу ошибки 401 (нет авторизации)
     setcookie('user_token', '', 0, "/");
-    header("Location: /error/401.php");
+    header("Location: /error/401.html");
 }
+// Если роль пользователя не "Patient", то направляет на страницу ошибки 403 (нет доступа)
 if(!$user->isUserRole("Patient"))
-    header("Location: /error/403.php");
+    header("Location: /error/403.html");
 
+// Получение данных пользователя
 $user_data = $user->getUserData();
 
 $whose_user = 2;
@@ -38,6 +49,7 @@ $whose_user = 2;
 <!--Основной контент страницы-->
 <div class="page-content">
     <div class="container pt-3 pb-3">
+<!--"Хлебные крошки" для ориентации и навигации по родительским страницам-->
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/lk/" style="color: var(--dark-cyan-color)">Профиль</a></li>

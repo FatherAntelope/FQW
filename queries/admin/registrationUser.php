@@ -1,9 +1,19 @@
 <?php
+/**
+ * AJAX запрос на регистрацию пользователя
+ * Регистрация администратора
+ * Регистрация пациента
+ * Регистрация медперсонала
+ */
 require $_SERVER['DOCUMENT_ROOT'] . "/utils/CurlHttpResponse.php";
 require $_SERVER['DOCUMENT_ROOT'] . "/utils/variables.php";
 require $_SERVER['DOCUMENT_ROOT']. "/utils/functions.php";
+
 $url = "https://".domain_name_api."/api/med/registration";
+// Получение сгенерированного пароля в переменную
 $password_generate = passwordGenerate();
+
+// Формирование данных пользователя для регистрации
 $data = [
     "user" => [
         "email" => $_POST['user_email'],
@@ -17,18 +27,22 @@ $data = [
     ]
 ];
 
-
+// Формирование конфига для API
 $config = [
     "method" => "POST",
     "data" => $data
 ];
 
+// Получение данных после запроса к точке API - авторизации пользователя
 $user = utils_call_api($url, $config);
+// Если HTTP-код 400 (неверный запрос) или 403 (нет доступа доступа) после обращения к API сервера БД,
+// то завершаем выполнение скрипта
 if($user->status_code === 400 || $user->status_code === 403) {
     die(header("HTTP/1.0 400 Bad Request"));
     exit;
 }
 
+// Регистрация администратора
 if ($_POST['user_role'] === "Admin") {
     $url = "https://".domain_name_api."/api/med/admin";
     $data = [
@@ -44,6 +58,7 @@ if ($_POST['user_role'] === "Admin") {
     $admin = utils_call_api($url, $config);
 }
 
+// Регистрация пациента
 if ($_POST['user_role'] === "Patient") {
     $url = "https://".domain_name_api."/api/med/patient";
     $data = [
@@ -63,7 +78,7 @@ if ($_POST['user_role'] === "Patient") {
     ];
     $patient = utils_call_api($url, $config);
 
-
+    // Запись его паспортных данных в БД
     $url = "https://".domain_name_api."/api/med/passport";
     $data = [
         "passport" => [
@@ -81,14 +96,16 @@ if ($_POST['user_role'] === "Patient") {
     $passport = utils_call_api($url, $config);
 }
 
+// Регистрация медперсонала
 if ($_POST['user_role'] === "Doctor") {
 
 }
 
+
+// Формирование сообщения для отправки пароля на почту зарегистрированного пользователя и его отправка
 $message = "Здравствуйте, ".$_POST['user_name']." ".$_POST['user_patronymic']."!";
 $message .= "\nВаш пароль для входа в профиль: ".$password_generate;
 $message .= "\nПосле входа рекомендуем сменить пароль в настройках на тот, который вы запомните!";
 $message .= "\nЕсли вы не регистрировались в системе, то проигнорируйте это сообщение.";
 sendMessageToEmail(email_info, $_POST['user_email'],"Пароль доступа к профилю", "Сатурн МИС", "utf-8", $message);
-
 ?>

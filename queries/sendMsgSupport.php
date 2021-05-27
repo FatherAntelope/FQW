@@ -1,5 +1,7 @@
 <?php
-print_r($_POST);
+/**
+ * AJAX Запрос на отправку сообщения на e-почту поддержке приложения
+ */
 require $_SERVER['DOCUMENT_ROOT'] . "/utils/variables.php";
 require $_SERVER['DOCUMENT_ROOT'] . "/utils/functions.php";
 $message = "Сообщение от: ".$_POST['user_name']."\n";
