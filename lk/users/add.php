@@ -1,4 +1,6 @@
 <?php
+require $_SERVER['DOCUMENT_ROOT'] . '/utils/variables.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/utils/functions.php';
 if(!isset($_COOKIE['user_token']))
     header("Location: /error/401.php");
 require $_SERVER['DOCUMENT_ROOT'] . "/utils/User.php";
@@ -88,7 +90,6 @@ if($getSelected != "patient" &&
                                 </div>
                             </div>
                         </div>
-<!--                        id="queryRegistrationPatient"-->
                         <form id="queryRegistrationPatient" enctype="multipart/form-data">
                             <h5 class="mb-3 text-muted text-uppercase bg-light p-2">
                                 <i class="fas fa-user mr-1"></i>

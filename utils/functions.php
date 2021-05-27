@@ -1,15 +1,30 @@
 <?php
+/**
+ * Генерирует пароль
+ * @param int $length длина пароля (по умолчанию 8)
+ * @return string сгенерированный пароль
+ */
 function passwordGenerate(int $length = 8): string {
     $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-?\\';
-    $password = substr(str_shuffle($characters), 0, $length);
-    return $password;
+    return substr(str_shuffle($characters), 0, $length);
 }
 
-function sendMessageToEmail($from, $to, $subject, $name, $charset, $message) {
+/**
+ * Формирует и отправляет сообщение на почту поддержке
+ * @param $from string от кого сообщение
+ * @param $to string кому сообщение
+ * @param $subject string наименование темы
+ * @param $name string имя отправителя
+ * @param $charset string кодировка сообщения
+ * @param $message string сообщение
+ */
+function sendMessageToEmail(string $from, string $to, string $subject, string $name, string $charset, string $message) {
+    //правильное формирование данных для отправки на почту (кодирование, формирование заголовка для HTTP запроса)
     $subject = "=?$charset?B?".base64_encode($subject)."?=";
     $headers = "From: $name <$from>\r\n";
     $headers.= "Reply-to: $from\r\n";
     $headers.= "Content-type: text/plain; charset=$charset\r\n";
+    //отправка сообщения на почту
     mail($to, $subject, $message, $headers);
 }
 
@@ -18,11 +33,25 @@ function normJsonStr($str){
     return iconv('cp1251', 'utf-8', $str);
 }
 
-function getUrlUserPhoto ($user_photo) : string {
+/**
+ * Формирует и возвращает ссылку на фотографию для верного отображения
+ * @param $user_photo string ссылка на фотографию без корневой папки
+ * @return string ссылка на базовую фотографию, если отсутствует фотография в БД, иначе ссылка на фотографию из БД
+ */
+function getUrlUserPhoto (string $user_photo) : string {
     return ($user_photo === null) ?  "/images/user.png" : ("https://" . domain_name_api . $user_photo);
 }
 
-function getUserRoleCode($user_role) : int {
+/**
+ * Формирует и возвращает код роли пользователя
+ * @param $user_role string роль пользователя
+ * @return int код роли пользователя
+ * @example Аdmin 1
+ * @example Patient 2
+ * @example Doctor 3
+ * @example other 0
+ */
+function getUserRoleCode(string $user_role) : int {
     if($user_role === "Admin")
         return 1;
     if ($user_role === "Patient")

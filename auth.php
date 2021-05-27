@@ -1,4 +1,8 @@
+<!--
+Страница авторизации в профиль пользователя
+-->
 <?php
+//Если пользователь авторизован, то направляет к странице профиля
 if (isset($_COOKIE['user_token']))
     header("Location: /lk/");
 require $_SERVER['DOCUMENT_ROOT']. '/utils/variables.php';
@@ -30,10 +34,13 @@ require $_SERVER['DOCUMENT_ROOT']. '/utils/variables.php';
     }
 </style>
 <body>
+<!--Основной контент страницы-->
 <div class="container align-items-center">
     <div class="row justify-content-center pt-5" id="card">
         <div class="col-lg-10">
+<!--Карточка с формой авторизации-->
             <div class="card shadow-lg">
+<!--Заголовок карточки с логотипом-гиперссылкой на главную страницу-->
                 <div class="card-header pt-3 pb-3 d-flex justify-content-center" style="background-color: var(--cyan-color)">
                     <a href="/" class="text-decoration-none">
                         <div class="d-flex">
@@ -47,9 +54,11 @@ require $_SERVER['DOCUMENT_ROOT']. '/utils/variables.php';
                 </div>
                 <div class="card-body">
                     <div class="row">
+<!--Левая колонка с изображением-->
                         <div class="col-md-6 mb-3">
                             <img src="images/login.svg" class="img-fluid" alt="image">
                         </div>
+<!--Правая колонка с формой авторизации-->
                         <div class="col-md-6">
                             <h3 style="color: var(--cyan-color)">Авторизация</h3>
                             <form id="queryLoginUser">
@@ -73,6 +82,7 @@ require $_SERVER['DOCUMENT_ROOT']. '/utils/variables.php';
                                         </div>
                                     </div>
                                 </div>
+<!--Всплывающее сообщения об ошибке авторизации (если пользователь неверно ввел данные авторизации)-->
                                 <div class="alert alert-danger alert-dismissible animate slideIn" id="alertErrorLogin" style="font-size: 12px;" hidden>
                                     <strong>Ошибка авторизации.</strong>
                                     <hr style="margin: 5px">
@@ -88,10 +98,11 @@ require $_SERVER['DOCUMENT_ROOT']. '/utils/variables.php';
                         </div>
                     </div>
                 </div>
+<!--Нижний блок карточки (копирайтер)-->
                 <div class="card-footer" style="background-color: var(--cyan-color)">
                     <div class="row justify-content-center align-items-center">
                         <div class="text-white pt-2 text-center">
-                            <p class="mb-1">©2021 <? echo web_name_header; ?>. Все права защищены</p>
+                            <p class="mb-1">©2021 <?php echo web_name_header; ?>. Все права защищены</p>
                         </div>
                     </div>
                 </div>
@@ -100,6 +111,7 @@ require $_SERVER['DOCUMENT_ROOT']. '/utils/variables.php';
     </div>
 </div>
 
+<!--Модальное окно с формой восстановления пароля пользователя-->
 <div class="modal fade" id="openModalRecoveryPersonAccount" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -110,21 +122,25 @@ require $_SERVER['DOCUMENT_ROOT']. '/utils/variables.php';
                 </button>
             </div>
             <div class="modal-body">
+<!--Сообщение-информация о том, как надо заполнять форму-->
                 <div class="alert alert-info" role="alert" style="font-size: 12px">
                     Введите адрес электронной почты, который вы указали при регистрации в регистратуре. На указанный адрес будет отправлена ссылка для восстановления доступа к учетной записи.
                 </div>
+<!--Форма с динамической отправкой данных с помощью AJAX-->
                 <form id="queryRecoveryPasswordUser">
                     <div class="form-group">
                         <label style="color: var(--yellow-color)">Почта</label>
                         <input type="email" name="user_email" class="form-control" placeholder="Введите адрес электронной почты" required>
                     </div>
                 </form>
+<!--Сообщение-предупреждение об ошибке (неверно указан адрес электронной почты - не найден)-->
                 <div class="alert alert-danger alert-dismissible fade show animate slideIn" role="alert" style="font-size: 12px" id="alertErrorRecoveryPasswordUser" hidden>
                     Учетная запись с указанным адресом электронной почты не найдена. Повторите ввод и убедитесь, что вы были зарегистрированы с данным адресом.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+<!--Сообщение-успех об удачной отправке данных на почту со ссылкой восстановления пароля-->
                 <div class="alert alert-success animate slideIn" role="alert" style="font-size: 12px" id="alertSuccessRecoveryPasswordUser" hidden>
                     Сообщение отправлено на указанную электронную почту. Если сообщение не пришло, то проверьте его в разделе <strong>спам</strong>.
                 </div>
@@ -136,6 +152,13 @@ require $_SERVER['DOCUMENT_ROOT']. '/utils/variables.php';
     </div>
 </div>
 <script>
+    /**
+     * Скрипт активируется при полной загрузке сообщения.
+     * Ожидает нажатие на элемент #show_hide_password.
+     * Скрипт для отображения символов пароля в поле ввода пароля.
+     * Если тип поля - "text", то меняем тип на "password",
+     * Иначе наоборот.
+     */
     $(document).ready(function() {
         $("#show_hide_password a").on('click', function() {
             if($(this).parent().parent().prev().attr('type') === "text"){
@@ -151,6 +174,12 @@ require $_SERVER['DOCUMENT_ROOT']. '/utils/variables.php';
     });
 </script>
 <script>
+    /**
+     * Ожидает отправки формы #queryLoginUser.
+     * Отправляет AJAX (асинхронный) запрос для обработки данных формы.
+     * success: данные авторизации введены верно, переход на страницу профиля.
+     * error: данные авторизации введены неверно, отображение сообщения об ошибке и очистка поля пароля.
+     */
     $("#queryLoginUser").submit(function () {
         $.ajax({
             url: "/queries/loginUser.php",
@@ -167,6 +196,12 @@ require $_SERVER['DOCUMENT_ROOT']. '/utils/variables.php';
         return false;
     });
 
+    /**
+     * Ожидает отправки формы #queryRecoveryPasswordUser.
+     * Отправляет AJAX (асинхронный) запрос для обработки данных формы.
+     * success: почта введена верно, вывод сообщения об успешной отправке сообщения на почту и скрытие формы.
+     * error: отображение ошибки о неверном вводе адреса e-почты.
+     */
     $("#queryRecoveryPasswordUser").submit(function () {
         $.ajax({
             url: "/queries/recoveryPasswordUser.php",
@@ -175,7 +210,6 @@ require $_SERVER['DOCUMENT_ROOT']. '/utils/variables.php';
             success: function () {
                 $("#alertSuccessRecoveryPasswordUser").removeAttr("hidden");
                 $("#alertErrorRecoveryPasswordUser").attr("hidden", "hidden");
-                $("input[name='user_email']").val("");
             },
             error: function () {
                 $("#alertErrorRecoveryPasswordUser").removeAttr("hidden");

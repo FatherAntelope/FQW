@@ -1,4 +1,6 @@
 <?php
+require $_SERVER['DOCUMENT_ROOT'] . '/utils/variables.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/utils/functions.php';
 if(!isset($_COOKIE['user_token']))
     header("Location: /error/401.php");
 require $_SERVER['DOCUMENT_ROOT'] . "/utils/User.php";
