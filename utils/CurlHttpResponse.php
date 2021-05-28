@@ -1,12 +1,14 @@
 <?php
 
 /**
- * Class CurlHttpResponse
- * ОПИСАНИЕ
+ * Представляет собой структуру ответа от сервера
  * @author https://github.com/akmubi
  */
 class CurlHttpResponse {
+
+    /** @var $data тело ответа */
     public $data;
+    /** @var int $status_code код состояния */
     public $status_code;
 
     function __construct($response_data, $status_code) {
@@ -15,7 +17,16 @@ class CurlHttpResponse {
     }
 }
  
-// отправляет и принимает данные только в формате json
+/**
+ * Отправляет запрос во данному адресу
+ * @author https://github.com/akmubi
+ * @param string $url адрес, куда отправляется запрос
+ * @param $config - конфигурация запроса. Включает в себя такие настройки, как:
+ *  + метод (GET, POST, PUT, PATCH, DELETE)
+ *  + токен аутентификации (Bearer Token)
+ *  + данные (тело) запроса
+ * @return CurlHttpResponse полученный ответ
+ */
 function utils_call_api($url, $config = false): CurlHttpResponse {
     // параметры по умолчанию
     $content_type = [];
