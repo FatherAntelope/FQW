@@ -39,7 +39,7 @@ $user_data = $user_data;
             <div class="col-xl-4 col-lg-5">
                 <div class="card">
                     <div class="card-header text-center" style="background-color: var(--cyan-color">
-                        <img src="<? echo getUrlUserPhoto($user_data['photo']); ?>" class="rounded-circle img-thumbnail" style="height: 12rem;width: 12rem;">
+                        <img src="<? echo getUrlUserPhoto($user_data['photo']); ?>" class="rounded-circle img-thumbnail" style="object-fit: cover; height: 12rem;width: 12rem;">
                         <h4 class="mb-0 mt-2" style="color: var(--yellow-color)">
                             <?php echo $user_data['surname']." ".$user_data['name']." ".$user_data['patronymic'];?>
                         </h4>
@@ -142,7 +142,7 @@ $user_data = $user_data;
                                             <div class="form-group">
                                                 <label style="color: var(--yellow-color)">Старый пароль</label>
                                                 <div class="input-group" id="show_hide_password">
-                                                    <input type="password" class="form-control" name="user_old_password" placeholder="Ваш старый пароль" minlength="6" required>
+                                                    <input type="password" class="form-control" name="user_old_password" placeholder="Ваш старый пароль" required>
                                                     <div class="input-group-append">
                                                 <span class="input-group-text">
                                                     <a href="javascript://" class="text-muted text-decoration-none">
@@ -160,7 +160,7 @@ $user_data = $user_data;
                                             <div class="form-group">
                                                 <label style="color: var(--yellow-color)">Новый пароль</label>
                                                 <div class="input-group" id="show_hide_password">
-                                                    <input type="password" class="form-control" name="user_new_password" placeholder="Ваш новый пароль" minlength="6" required>
+                                                    <input type="password" class="form-control" name="user_new_password" placeholder="Ваш новый пароль" minlength="8" maxlength="16" required>
                                                     <div class="input-group-append" >
                                                 <span class="input-group-text">
                                                     <a href="javascript://" class="text-muted text-decoration-none">
@@ -193,7 +193,7 @@ $user_data = $user_data;
                                     </h6>
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Специализация</label>
-                                        <textarea class="form-control" name="doctor_biography" placeholder="Чем владеете, чем занимаетесь и т.п." minlength="50" required></textarea>
+                                        <textarea class="form-control" name="doctor_biography" placeholder="Чем владеете, чем занимаетесь и т.п." minlength="500" maxlength="5000" required></textarea>
                                         <small class="text-muted form-text">Минимум 500 символов</small>
                                     </div>
                                     <div class="row">
@@ -382,7 +382,7 @@ $user_data = $user_data;
     $(document).on('click', '.plus-education', function(){
         $(this).closest('.information_json_plus').before(
             '<tr class="animate slideIn">' +
-            '<td class="pl-0"><input type="text" class="form-control" name=doctor_education_json[]" minlength="5" placeholder="Дата. Описание" required></td>' +
+            '<td class="pl-0"><input type="text" class="form-control" name=doctor_education_json[]" minlength="5" maxlength="100" placeholder="Дата. Описание" required></td>' +
             '<td class="pl-0"><span class="btn btn-sm btn-danger rounded-circle minus mt-1"><i class="fas fa-minus"></i></span></td>' +
             '</tr>'
         );

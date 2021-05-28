@@ -1,6 +1,6 @@
 <?php
 if(!isset($user_data) || $user_data['role'] !== "Admin") {
-    header("Location: /error/403.html");
+    header("Location: /error/403.php");
 }
 $url = "https://".domain_name_api."/api/med/admin";
 $config = [

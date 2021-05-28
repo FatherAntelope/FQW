@@ -1,5 +1,5 @@
 <!--
-Шапка web-приложение
+Шапка web-приложения
 -->
 <link rel="preconnect" href="//fonts.gstatic.com">
 <link href="//fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=Source+Serif+Pro:wght@600&display=swap" rel="stylesheet">

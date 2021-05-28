@@ -1,20 +1,30 @@
 <?php
+// Если токен авторизованного пользователя не существует, то направляет на страницу ошибки 401 (нет авторизации)
+if(!isset($_COOKIE['user_token'])) {
+    header("Location: /error/401.php");
+}
 require $_SERVER['DOCUMENT_ROOT'] . '/utils/variables.php';
 require $_SERVER['DOCUMENT_ROOT'] . '/utils/functions.php';
-if(!isset($_COOKIE['user_token']))
-    header("Location: /error/401.html");
 require $_SERVER['DOCUMENT_ROOT'] . "/utils/User.php";
+// Выгрузка данных пользователя
 $user = new User($_COOKIE['user_token']);
+// Если HTTP-код после обращения к выгрузке данных пользователя по API 400 или 403, то ...
 if($user->getUserStatusCode() === 400 || $user->getUserStatusCode() === 403) {
+    // Очищает Cookie с токеном пользователя и направляет на страницу ошибки 401 (нет авторизации)
     setcookie('user_token', '', 0, "/");
-    header("Location: /error/401.html");
+    header("Location: /error/401.php");
 }
+// Если роль пользователя не "Patient", то направляет на страницу ошибки 403 (нет доступа)
 if(!$user->isUserRole("Patient"))
-    header("Location: /error/403.html");
+    header("Location: /error/403.php");
 
+// Получение данных пользователя
 $user_data = $user->getUserData();
 $whose_user = 2;
 ?>
+<!--
+Страница просмотра медицинской карты от лица пациента
+-->
 <!doctype html>
 <html lang="ru">
 <head>
@@ -31,7 +41,7 @@ $whose_user = 2;
     <script src="//code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script defer src="/js/all.js"></script>
-    <title><? echo web_name_header; ?></title>
+    <title><?php echo web_name_header; ?></title>
 </head>
 <body>
 <!--Панель навигации по модулям пользователя-->
@@ -40,6 +50,7 @@ $whose_user = 2;
 <!--Основной контент страницы-->
 <div class="page-content">
     <div class="container pt-3 pb-3">
+<!--"Хлебные крошки" для ориентации и навигации по родительским страницам-->
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/lk/" style="color: var(--dark-cyan-color)">Профиль</a></li>
@@ -490,18 +501,5 @@ $whose_user = 2;
 </body>
 <script>
     $('#notificationToast').toast('show');
-
-    $(document).ready(function() {
-        $('input[type=checkbox]').change(function() {
-
-            if (this.checked) {
-                $(this).next().css("text-decoration-line", "line-through");
-            } else {
-                $(this).next().css("text-decoration-line", "none");
-            }
-
-        });
-    });
-
 </script>
 </html>

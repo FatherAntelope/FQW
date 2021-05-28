@@ -1,21 +1,29 @@
 <?php
+// Если токен авторизованного пользователя не существует, то направляет на страницу ошибки 401 (нет авторизации)
+if(!isset($_COOKIE['user_token']))
+    header("Location: /error/401.php");
 require $_SERVER['DOCUMENT_ROOT'] . '/utils/variables.php';
 require $_SERVER['DOCUMENT_ROOT'] . '/utils/functions.php';
-if(!isset($_COOKIE['user_token']))
-    header("Location: /error/401.html");
 require $_SERVER['DOCUMENT_ROOT'] . "/utils/User.php";
+
+// Выгрузка данных пользователя
 $user = new User($_COOKIE['user_token']);
+
+// Если HTTP-код после обращения к выгрузке данных пользователя по API 400 или 403, то ...
 if($user->getUserStatusCode() === 400 || $user->getUserStatusCode() === 403) {
     setcookie('user_token', '', 0, "/");
-    header("Location: /error/401.html");
+    header("Location: /error/401.php");
 }
+// Если роль пользователя не "Пациент", то направляет на страницу ошибки 403
 if(!$user->isUserRole("Patient"))
-    header("Location: /error/403.html");
+    header("Location: /error/403.php");
 
+// Выгружает данные пользователя
 $user_data = $user->getUserData();
-
 $whose_user = 2;
 
+// Если GET не содержит в переменной selected необходимого значения
+// то выход на услуг
 $getSelected = $_GET['selected'];
 if($getSelected != "doctors" &&
     $getSelected != "procedures" &&
@@ -25,6 +33,9 @@ if($getSelected != "doctors" &&
     exit;
 }
 ?>
+<!--
+Страница выбора услуги на запись у пациента
+-->
 <!doctype html>
 <html lang="ru">
 <head>
@@ -42,7 +53,7 @@ if($getSelected != "doctors" &&
     <script src="//cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" charset="utf8" src="/js/datatables.js"></script>
     <script defer src="/js/all.js"></script>
-    <title><? echo web_name_header; ?></title>
+    <title><?php echo web_name_header; ?></title>
 </head>
 <style>
  .form-control-sm option:link {
@@ -56,6 +67,7 @@ if($getSelected != "doctors" &&
 <!--Основной контент страницы-->
 <div class="page-content">
     <div class="container pt-3 pb-3">
+<!--"Хлебные крошки" для навигации по родительским страницам-->
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#" style="color: var(--dark-cyan-color)">Профиль</a></li>
@@ -70,31 +82,38 @@ if($getSelected != "doctors" &&
                 </li>
             </ol>
         </nav>
+<!--Содержимое таблиста-->
         <ul class="nav nav-pills flex-column flex-sm-row mb-2" role="tablist">
             <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
-                <a class="nav-link tab-bg-active font-weight-bold <? if($getSelected == 'doctors') echo "active";?>" onclick="window.history.pushState('', '', '/lk/services/appointment.php?selected=doctors');" data-toggle="tab" href="#tab-doctors" role="tab">
+<!-- Имитирует активацию нажатия на гиперссылку, если selected=doctors-->
+                <a class="nav-link tab-bg-active font-weight-bold <?php if($getSelected == 'doctors') echo "active";?>" onclick="window.history.pushState('', '', '/lk/services/appointment.php?selected=doctors');" data-toggle="tab" href="#tab-doctors" role="tab">
                     <i class="fas fa-user-md mr-2"></i>Врачи
                 </a>
             </li>
             <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
-                <a class="nav-link tab-bg-active font-weight-bold <? if($getSelected == 'procedures') echo "active";?>" onclick="window.history.pushState('', '', '/lk/services/appointment.php?selected=procedures');" data-toggle="tab" href="#tab-procedures" role="tab">
+                <a class="nav-link tab-bg-active font-weight-bold <?php if($getSelected == 'procedures') echo "active";?>" onclick="window.history.pushState('', '', '/lk/services/appointment.php?selected=procedures');" data-toggle="tab" href="#tab-procedures" role="tab">
                     <i class="fas fa-diagnoses mr-2"></i>Процедуры
                 </a>
             </li>
             <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
-                <a class="nav-link tab-bg-active font-weight-bold <? if($getSelected == 'examinations') echo "active";?>" onclick="window.history.pushState('', '', '/lk/services/appointment.php?selected=examinations');" data-toggle="tab" href="#tab-examinations" role="tab">
+                <a class="nav-link tab-bg-active font-weight-bold <?php if($getSelected == 'examinations') echo "active";?>" onclick="window.history.pushState('', '', '/lk/services/appointment.php?selected=examinations');" data-toggle="tab" href="#tab-examinations" role="tab">
                     <i class="fas fa-microscope mr-1"></i>Обследования
                 </a>
             </li>
             <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
-                <a class="nav-link tab-bg-active font-weight-bold <? if($getSelected == 'events') echo "active";?>" onclick="window.history.pushState('', '', '/lk/services/appointment.php?selected=events');" data-toggle="tab" href="#tab-events" role="tab">
+                <a class="nav-link tab-bg-active font-weight-bold <?php if($getSelected == 'events') echo "active";?>" onclick="window.history.pushState('', '', '/lk/services/appointment.php?selected=events');" data-toggle="tab" href="#tab-events" role="tab">
                     <i class="fas fa-walking mr-1"></i>Мероприятия
                 </a>
             </li>
         </ul>
 
+<!--Контент таблиста-->
         <div class="tab-content">
-            <div class="tab-pane fade show <? if($getSelected == 'doctors') echo "active";?>" id="tab-doctors" role="tabpanel">
+<!--
+Имитирует активацию нажатия на гиперссылку, если selected=doctors.
+Содержимое таблиста врачей
+-->
+            <div class="tab-pane fade show <?php if($getSelected == 'doctors') echo "active";?>" id="tab-doctors" role="tabpanel">
                 <div class="card">
                     <div class="card-body">
                         <table id="table_doctors" class="table table-striped table-hover">
@@ -141,6 +160,7 @@ if($getSelected != "doctors" &&
                 </div>
             </div>
 
+<!--Содержимое таблиста процедур-->
             <div class="tab-pane fade show <? if($getSelected == 'procedures') echo "active";?>" id="tab-procedures" role="tabpanel">
                 <div class="card">
                     <div class="card-body">
@@ -192,6 +212,7 @@ if($getSelected != "doctors" &&
                 </div>
             </div>
 
+<!--Содержимое таблиста обследования-->
             <div class="tab-pane fade show <? if($getSelected == 'examinations') echo "active";?>" id="tab-examinations" role="tabpanel">
                 <div class="card">
                     <div class="card-body">
@@ -235,6 +256,7 @@ if($getSelected != "doctors" &&
                 </div>
             </div>
 
+<!--Содержимое таблиста мероприятий-->
             <div class="tab-pane fade show <? if($getSelected == 'events') echo "active";?>" id="tab-events" role="tabpanel">
                 <div class="card">
                     <div class="card-body">
@@ -308,30 +330,32 @@ if($getSelected != "doctors" &&
 <?php require $_SERVER['DOCUMENT_ROOT']."/footer.php"; ?>
 </body>
 <script>
-$('#notificationToast').toast('show');
-$('#table_doctors, #table_procedures, #table_examinations, #table_events').DataTable({
-    "language": {
-        "zeroRecords": "<span class='text-muted'>Услуги отсутствуют</span>",
-        "search": "<span class='text-muted' style='margin-right: 0.5rem; font-size: 1.3rem'>Поиск:</span>",
-        "info": "<span class='text-muted'>Показан диапазон от _START_ до _END_ элементов</span>",
-        "infoEmpty": "<span class='text-muted'>Услуги отсутствуют</span>",
-        "infoFiltered": "<span class='text-muted'>(отфильтровано общих элементов - _MAX_)</span>",
-        "lengthMenu": '<span class="text-muted" style="margin-right: 0.5rem; font-size: 1rem">Отобразить элементов: <\span>' +
-            '<select class="form-control-sm">'+
-            '<option value="5">5</option>'+
-            '<option value="10">20</option>'+
-            '<option value="20">20</option>'+
-            '<option value="30">30</option>'+
-            '<option value="-1">Все</option>'+
-            '</select>',
-        "loadingRecords": "Загрузка...",
-        "processing": "Выполнение...",
-        "paginate": {
-            "next": "Вперед",
-            "previous": "Назад"
-        }
-    },
+    $('#notificationToast').toast('show');
 
-});
+    // Конфигурация динамических таблиц
+    $('#table_doctors, #table_procedures, #table_examinations, #table_events').DataTable({
+        "language": {
+            "zeroRecords": "<span class='text-muted'>Услуги отсутствуют</span>",
+            "search": "<span class='text-muted' style='margin-right: 0.5rem; font-size: 1.3rem'>Поиск:</span>",
+            "info": "<span class='text-muted'>Показан диапазон от _START_ до _END_ элементов</span>",
+            "infoEmpty": "<span class='text-muted'>Услуги отсутствуют</span>",
+            "infoFiltered": "<span class='text-muted'>(отфильтровано общих элементов - _MAX_)</span>",
+            "lengthMenu": '<span class="text-muted" style="margin-right: 0.5rem; font-size: 1rem">Отобразить элементов: <\span>' +
+                '<select class="form-control-sm">'+
+                '<option value="5">5</option>'+
+                '<option value="10">20</option>'+
+                '<option value="20">20</option>'+
+                '<option value="30">30</option>'+
+                '<option value="-1">Все</option>'+
+                '</select>',
+            "loadingRecords": "Загрузка...",
+            "processing": "Выполнение...",
+            "paginate": {
+                "next": "Вперед",
+                "previous": "Назад"
+            }
+        },
+
+    });
 </script>
 </html>

@@ -1,16 +1,16 @@
 <?php
+if (!isset($_COOKIE['user_token']))
+    header("Location: /error/401.php");
 require $_SERVER['DOCUMENT_ROOT'] . '/utils/variables.php';
 require $_SERVER['DOCUMENT_ROOT'] . '/utils/functions.php';
-if (!isset($_COOKIE['user_token']))
-    header("Location: /error/401.html");
 require $_SERVER['DOCUMENT_ROOT'] . "/utils/User.php";
 $user = new User($_COOKIE['user_token']);
 if ($user->getUserStatusCode() === 400 || $user->getUserStatusCode() === 403) {
     setcookie('user_token', '', 0, "/");
-    header("Location: /error/401.html");
+    header("Location: /error/401.php");
 }
 if (!$user->isUserRole("Patient"))
-    header("Location: /error/403.html");
+    header("Location: /error/403.php");
 
 $user_data = $user->getUserData();
 

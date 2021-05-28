@@ -1,13 +1,22 @@
+<!--
+Страница часто задаваемых вопросов
+-->
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/utils/variables.php';
 require $_SERVER['DOCUMENT_ROOT'] . '/utils/functions.php';
+// Если есть токен, то пользователь авторизован и ...
 if(isset($_COOKIE['user_token'])) {
     require $_SERVER['DOCUMENT_ROOT'] . "/utils/User.php";
+    // Выгрузка данных пользователя
     $user = new User($_COOKIE['user_token']);
-    if($user->getUserStatusCode() === 400) {
+
+    // Если HTTP-код после обращения к выгрузке данных пользователя по API 400 или 403, то ...
+    if($user->getUserStatusCode() === 400 || $user->getUserStatusCode() === 403) {
         setcookie('user_token', '', 0, "/");
         header("Location: /auth.php");
     }
+
+    // Выгружает данные пользователя
     $user_data = $user->getUserData();
     $whose_user = getUserRoleCode($user_data['role']);
 } else {
@@ -50,10 +59,12 @@ if(isset($_COOKIE['user_token'])) {
 <!--Основной контент страницы-->
 <div class="page-content" <?php if ($whose_user === 0) echo 'style="margin-top: 3.7rem !important;"';?>>
     <div class="container pt-3 pb-3">
+<!--Сегмент карточки-->
         <div class="card">
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-12">
+<!-- Заголовок перед списком FAQ -->
                         <div class="text-center">
                             <h3 class="font-weight-bold" style="color: var(--dark-cyan-color)">Часто задаваемые вопросы</h3>
                             <p class="text-muted mt-2 mb-1">
@@ -65,7 +76,9 @@ if(isset($_COOKIE['user_token'])) {
                         </div>
                     </div>
                 </div>
+<!--Список FAQ-->
                 <div class="row mt-5">
+<!--Содержимое FAQ-->
                     <div class="col-lg-6">
                         <div class="row">
                             <div class="col-sm-1">

@@ -1,6 +1,6 @@
 <?php
 if(!isset($user_data) || $user_data['role'] !== "Doctor") {
-    header("Location: /error/403.html");
+    header("Location: /error/403.php");
 }
 ?>
 <!doctype html>

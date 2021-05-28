@@ -33,7 +33,7 @@
             <div class="col-lg-6 text-center">
                 <h4 class="text-error font-weight-bold" >404</h4>
                 <p class="text-muted">К сожалению, данной страницы не существует. Вероятно, она была удалена администратором, либо ее здесь никогда не существовало.</p>
-                <a href="/" class="btn text-white btn-go-home">
+                <a href="/" class="btn text-white btn-go-home mb-3">
                     <i class="fas fa-home mr-2"></i>
                     На главную
                 </a>
