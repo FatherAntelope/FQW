@@ -1,5 +1,6 @@
 <?php
 /**
+ * @var $protocol string используемый доменом протокол
  * @var $domain_name_api string доменное имя для подключения к API (серверу БД)
  * @var $web_name_header string название-заголовок приложения
  * @var $web_name_span string дополнительное название-подзаголовок приложения
@@ -8,6 +9,7 @@
  * @var $contact_number string контактный номер телефона поддержки
  * @var $contact_address string контактный адрес
  */
+const protocol = 'https';
 const domain_name_api = "saturn-mis.online";
 const web_name_header = "Сатурн";
 const web_name_span = "Медицинская информационная система";

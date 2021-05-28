@@ -24,7 +24,7 @@ class User {
      */
     public function __construct(string $user_token) {
         $this->user_token = $user_token;
-        $url = "https://".domain_name_api."/api/med/user";
+        $url = protocol."://".domain_name_api."/api/med/user";
         $config = [
             "method" => "GET",
             "token" => $this->user_token

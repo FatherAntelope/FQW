@@ -6,7 +6,7 @@
 require $_SERVER['DOCUMENT_ROOT'] . "/utils/CurlHttpResponse.php";
 require $_SERVER['DOCUMENT_ROOT'] . "/utils/variables.php";
 
-$url = "https://".domain_name_api."/api/med/users/login";
+$url = protocol."://".domain_name_api."/api/med/users/login";
 $data = [
     "user" => [
         "email" => $_POST["user_login"],

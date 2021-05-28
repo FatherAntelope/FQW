@@ -2,7 +2,7 @@
 if(!isset($user_data) || $user_data['role'] !== "Admin") {
     header("Location: /error/403.html");
 }
-$url = "https://".domain_name_api."/api/med/admin";
+$url = protocol."://".domain_name_api."/api/med/admin";
 $config = [
     "method" => "GET",
     "token" => $_COOKIE['user_token']

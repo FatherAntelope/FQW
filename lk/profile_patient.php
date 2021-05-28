@@ -3,7 +3,7 @@ if(!isset($user_data) || $user_data['role'] !== "Patient") {
     header("Location: /error/403.html");
 }
 
-$url = "https://".domain_name_api."/api/med/patient";
+$url = protocol."://".domain_name_api."/api/med/patient";
 $config = [
     "method" => "GET",
     "token" => $_COOKIE['user_token']

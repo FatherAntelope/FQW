@@ -9,7 +9,7 @@ require $_SERVER['DOCUMENT_ROOT'] . "/utils/CurlHttpResponse.php";
 require $_SERVER['DOCUMENT_ROOT'] . "/utils/variables.php";
 require $_SERVER['DOCUMENT_ROOT']. "/utils/functions.php";
 
-$url = "https://".domain_name_api."/api/med/registration";
+$url = protocol."://".domain_name_api."/api/med/registration";
 // Получение сгенерированного пароля в переменную
 $password_generate = passwordGenerate();
 
@@ -44,7 +44,7 @@ if($user->status_code === 400 || $user->status_code === 403) {
 
 // Регистрация администратора
 if ($_POST['user_role'] === "Admin") {
-    $url = "https://".domain_name_api."/api/med/admin";
+    $url = protocol."://".domain_name_api."/api/med/admin";
     $data = [
         "admin" => [
             "position" => $_POST['admin_post']
@@ -60,7 +60,7 @@ if ($_POST['user_role'] === "Admin") {
 
 // Регистрация пациента
 if ($_POST['user_role'] === "Patient") {
-    $url = "https://".domain_name_api."/api/med/patient";
+    $url = protocol."://".domain_name_api."/api/med/patient";
     $data = [
         "patient" => [
             "birth_date" => $_POST['patient_date_birth'],
@@ -79,7 +79,7 @@ if ($_POST['user_role'] === "Patient") {
     $patient = utils_call_api($url, $config);
 
     // Запись его паспортных данных в БД
-    $url = "https://".domain_name_api."/api/med/passport";
+    $url = protocol."://".domain_name_api."/api/med/passport";
     $data = [
         "passport" => [
             "series_number" => $_POST['patient_passport_id'],
