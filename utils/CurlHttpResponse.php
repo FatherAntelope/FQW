@@ -45,7 +45,10 @@ function utils_call_api($url, $config = false): CurlHttpResponse {
             }
         }
         if (array_key_exists('token', $config)) {
-            $headers[] = 'Authorization: Bearer ' . $config['token'];
+            $token = $config['token'];
+            if (strlen($token) != 0) {
+                $headers[] = 'Authorization: Bearer ' . $token;
+            }
         }
         if (array_key_exists('data', $config)) {
             $data = $config['data'];
@@ -61,7 +64,7 @@ function utils_call_api($url, $config = false): CurlHttpResponse {
             }
             break;
         case 'PUT':
-            curl_setopt($curl, CURLOPT_PUT, 1);
+            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'PUT');
             if ($data) {
                 curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
             }
@@ -99,7 +102,8 @@ function utils_call_api($url, $config = false): CurlHttpResponse {
 
     $result = curl_exec($curl);
     if (!$result) {
-        die("Connection Failure");
+        header('Location: /errors/502.html');
+        // die("cURL: Connection Failure");
     }
 
     $content_type = curl_getinfo($curl, CURLINFO_CONTENT_TYPE);

@@ -2,3 +2,5 @@
 # удобно иметь файл для быстрого переключения
 *.sublime-project
 *.sublime-workspace
+
+.idea/
