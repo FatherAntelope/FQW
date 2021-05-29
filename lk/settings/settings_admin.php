@@ -33,7 +33,7 @@ if($admin_data->data['position']=== "Main") {
     <script src="//cdn.jsdelivr.net/npm/jquery.maskedinput@1.4.1/src/jquery.maskedinput.min.js" type="text/javascript"></script>
     <script src="//cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script defer src="/js/all.js"></script>
-    <title><? echo web_name_header; ?></title>
+    <title><?php echo web_name_header; ?></title>
 </head>
 <body>
 <!--Панель навигации по модулям пользователя-->
@@ -136,7 +136,7 @@ if($admin_data->data['position']=== "Main") {
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label style="color: var(--yellow-color)">Почта</label>
-                                                <input type="email" class="form-control" placeholder="example@mail.ru" name="user_email" value="<?php echo $user_data['email'];?>" required>
+                                                <input type="email" class="form-control" placeholder="example@mail.ru" name="user_email" onkeyup="checkInputEmail(this)" value="<?php echo $user_data['email'];?>" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -146,7 +146,7 @@ if($admin_data->data['position']=== "Main") {
                                             </div>
                                         </div>
                                         <div class="col alert alert-danger alert-dismissible fade show animate slideIn mr-3 ml-3" role="alert" id="alertErrorUserEditContactData" style="font-size: 12px" hidden>
-                                            Аккаунт с указанным адресом электронной почты уже существует. Измените или проверьте введенный адрес электронной почты!
+                                            Аккаунт с указанным адресом электронной почты уже существует, либо вы ее ввели неверно. Измените или проверьте введенный адрес электронной почты!
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
@@ -328,13 +328,18 @@ if($admin_data->data['position']=== "Main") {
                 <div class="alert alert-info" role="alert" style="font-size: 12px">
                     Выбирайте ту фотографию, где строго изображены только вы!
                 </div>
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="customFile" accept="image/*">
-                    <label class="custom-file-label" for="customFile" data-browse="Открыть">Выберите фотографию</label>
+                <form id="queryEditPhotoUser" method="post" action="/queries/editPhotoUser.php" enctype="multipart/form-data">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" name="user_photo" id="customFile" accept="image/png,image/jpeg">
+                        <label class="custom-file-label" for="customFile" data-browse="Открыть">Выберите фотографию</label>
+                    </div>
+                </form>
+                <div class="alert alert-success" role="alert" hidden>
+                    Фотография успешно изменена на новую!
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Изменить</button>
+                <button type="submit" class="btn btn-warning btn-block" form="queryEditPhotoUser" style="color: #fff; background-color: var(--yellow-color)">Изменить</button>
             </div>
         </div>
     </div>
@@ -347,6 +352,7 @@ if($admin_data->data['position']=== "Main") {
     function checkInputRu(obj) {
         obj.value = obj.value.replace(/[^а-яё]/ig,'');
     }
+
     $(document).ready(function() {
         $("#show_hide_password a").on('click', function() {
             if($(this).parent().parent().prev().attr('type') == "text"){
@@ -369,6 +375,28 @@ if($admin_data->data['position']=== "Main") {
     $('input[name="user_phone"]').mask("+7 (999) 999-99-99");
 </script>
 <script>
+    //Закомментить, если надо посмотреть, как происходит обработка в editPhotoUser.php
+    $("#queryEditPhotoUser").submit(function () {
+        $.ajax({
+            url: "/queries/editPhotoUser.php",
+            method: "POST",
+            contentType: false,
+            processData: false,
+            enctype: 'multipart/form-data',
+            data: new FormData(this),
+            success: function () {
+                $("#queryEditPhotoUser").prev().attr("hidden", "hidden");
+                $("#queryEditPhotoUser").attr("hidden", "hidden");
+                $("#queryEditPhotoUser").next().removeAttr("hidden");
+                setTimeout(function(){ location.reload();}, 2000);
+            },
+            error: function () {
+            }
+        });
+        return false;
+    });
+
+
     $("#queryEditFullNameAdmin").submit(function () {
         let spinner = $(this).children().find('.spinner-border');
         let checker = $(this).children().find('.fa-check');
