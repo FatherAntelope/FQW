@@ -11,7 +11,7 @@ $user = new User($_COOKIE['user_token']);
 
 // Если HTTP-код после обращения к выгрузке данных пользователя по API 400 или 403, то
 // очищаются Cookie и происходит направление на страницу ошибки 401
-if($user->getUserStatusCode() === 400 || $user->getUserStatusCode() === 403) {
+if($user->getStatusCode() === 400 || $user->getStatusCode() === 403) {
     setcookie('user_token', '', 0, "/");
     header("Location: /error/401.php");
 }
@@ -20,7 +20,7 @@ if(!$user->isUserRole("Admin"))
     header("Location: /error/403.php");
 
 // Выгружает данные пользователя
-$user_data = $user->getUserData();
+$user_data = $user->getData();
 $whose_user = 1;
 
 // Если GET не содержит в переменной selected необходимого значения

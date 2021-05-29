@@ -15,14 +15,14 @@ require $_SERVER['DOCUMENT_ROOT'] . "/utils/User.php";
 $user = new User($_COOKIE['user_token']);
 
 // Если HTTP-код после обращения к выгрузке данных пользователя по API 400 или 403, то ...
-if($user->getUserStatusCode() === 400 || $user->getUserStatusCode() === 403) {
+if($user->getStatusCode() === 400 || $user->getStatusCode() === 403) {
     //Очищаются Cookie и происходит направление на страницу авторизации
     setcookie('user_token', '', 0, "/");
     header("Location: /error/401.php");
 }
 
 // Выгружает данные пользователя
-$user_data = $user->getUserData();
+$user_data = $user->getData();
 $whose_user = getUserRoleCode($user_data['role']);
 
 // Загрузка соответствующего профиля

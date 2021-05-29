@@ -12,13 +12,13 @@ if(isset($_COOKIE['user_token'])) {
     //Объект пользователя для экспорта необходимой информации из БД
     $user = new User($_COOKIE['user_token']);
     //Если произошла ошибка выгрузки данных пользователя - 400, то ...
-    if($user->getUserStatusCode() === 400) {
+    if($user->getStatusCode() === 400) {
         //Очищаются Cookie и происходит перенаправление на страницу авторизации
         setcookie('user_token', '', 0, "/");
         header("Location: /auth.php");
     }
     //получение основных данных пользователя и код его роли
-    $user_data = $user->getUserData();
+    $user_data = $user->getData();
     $whose_user = getUserRoleCode($user_data['role']);
 } else {
     $whose_user = 0;
