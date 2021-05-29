@@ -2,15 +2,15 @@
 require $_SERVER['DOCUMENT_ROOT'] . '/utils/variables.php';
 require $_SERVER['DOCUMENT_ROOT'] . '/utils/functions.php';
 if(!isset($_COOKIE['user_token']))
-    header("Location: /error/401.html");
+    header("Location: /error/401.php");
 require $_SERVER['DOCUMENT_ROOT'] . "/utils/User.php";
 $user = new User($_COOKIE['user_token']);
 if($user->getUserStatusCode() === 400) {
     setcookie('user_token', '', 0, "/");
-    header("Location: /error/401.html");
+    header("Location: /error/401.php");
 }
 if(!$user->isUserRole("Admin"))
-    header("Location: /error/403.html");
+    header("Location: /error/403.php");
 
 $user_data = $user->getUserData();
 $whose_user = 1;
@@ -141,7 +141,7 @@ if($getSelected != "patient" &&
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Дата рождения <strong style="color: var(--red--color)">*</strong></label>
-                                        <input type="date" class="form-control" name="patient_date_birth" required>
+                                        <input type="date" class="form-control" name="patient_date_birth" max="<?php echo date("Y-m-d", mktime(0, 0, 0, date('m'), date('d'), date('Y') - 14))?>" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
@@ -151,7 +151,7 @@ if($getSelected != "patient" &&
                                             <input type="file" class="custom-file-input" accept="image/png,image/jpeg" id="customFile" name="user_photo">
                                             <label class="custom-file-label" for="customFile" data-browse="Открыть">Выберите фото</label>
                                         </div>
-                                        <small class="form-text text-danger" hidden>Размер превышает 2мб</small>
+                                        <small class="form-text text-muted">Не выше 2мб</small>
                                     </div>
                                 </div>
                             </div>
@@ -171,7 +171,7 @@ if($getSelected != "patient" &&
                                         <small class="text-muted form-text">Дата выдачи</small>
                                     </div>
                                     <div class="col-lg">
-                                        <input type="text" class="form-control" name="patient_passport_who_issue" minlength="4" required>
+                                        <input type="text" class="form-control" name="patient_passport_who_issue" minlength="5" maxlength="100" required>
                                         <small class="text-muted form-text">Кем выдан</small>
                                     </div>
                                 </div>
@@ -297,7 +297,7 @@ if($getSelected != "patient" &&
                                 <div class="col-md">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Населенный пункт <strong style="color: var(--red--color)">*</strong></label>
-                                        <input type="text" class="form-control" name="patient_locality" required>
+                                        <input type="text" class="form-control" name="patient_locality" minlength="2" maxlength="30" required>
                                     </div>
                                 </div>
                             </div>
@@ -309,7 +309,7 @@ if($getSelected != "patient" &&
                                 <div class="col">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Субъективные жалобы <strong style="color: var(--red--color)">*</strong></label>
-                                        <textarea class="form-control" name="patient_subjective_complaint" placeholder="Кратко о том, зачем приехал пациент" required></textarea>
+                                        <textarea class="form-control" name="patient_subjective_complaint" minlength="20" maxlength="500" placeholder="Кратко о том, зачем приехал пациент" required></textarea>
                                         <small class="text-muted form-text">Минимум 20 символов</small>
                                     </div>
                                 </div>
@@ -368,7 +368,7 @@ if($getSelected != "patient" &&
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Дата рождения <strong style="color: var(--red--color)">*</strong></label>
-                                        <input type="date" class="form-control" name="doctor_date_birth" required>
+                                        <input type="date" class="form-control" name="doctor_date_birth" max="<?php echo date("Y-m-d", mktime(0, 0, 0, date('m'), date('d'), date('Y') - 18))?>" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
@@ -378,7 +378,7 @@ if($getSelected != "patient" &&
                                             <input type="file" class="custom-file-input" name="user_photo" id="customFile" accept="image/*">
                                             <label class="custom-file-label" for="customFile" data-browse="Открыть">Выберите фото</label>
                                         </div>
-                                        <small class="form-text text-danger" hidden>Размер превышает 2мб</small>
+                                        <small class="form-text text-muted">Не выше 2 Мб</small>
                                     </div>
                                 </div>
                             </div>
@@ -445,7 +445,7 @@ if($getSelected != "patient" &&
                                 <div class="col-lg-2">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Стаж <strong style="color: var(--red--color)">*</strong></label>
-                                        <input type="number" name="doctor_job_stage" class="form-control" min="0" placeholder="Лет" required>
+                                        <input type="number" name="doctor_job_stage" class="form-control" min="0" max="70" placeholder="Лет" required>
                                     </div>
                                 </div>
                             </div>
@@ -509,7 +509,7 @@ if($getSelected != "patient" &&
                                             <input type="file" class="custom-file-input" name="user_photo" id="customFile" accept="image/*">
                                             <label class="custom-file-label" for="customFile" data-browse="Открыть">Выберите фото</label>
                                         </div>
-                                        <small class="form-text text-danger" hidden>Размер превышает 2мб</small>
+                                        <small class="form-text text-muted">Не выше 2 Мб</small>
                                     </div>
                                 </div>
                             </div>
@@ -592,11 +592,13 @@ if($getSelected != "patient" &&
             if (this.files[0].size > 2097152) {
                 $(this).addClass('is-invalid');
                 $(this).val("");
-                $(this).parent().next().removeAttr("hidden");
+                $(this).parent().next().removeClass('text-muted');
+                $(this).parent().next().addClass('text-danger');
             } else {
                 $(this).removeClass('is-invalid');
                 $(this).attr("placeholder", "Выберите фото");
-                $(this).parent().next().attr("hidden", "hidden");
+                $(this).parent().next().removeClass('text-danger');
+                $(this).parent().next().addClass('text-muted');
             }
         }
     });
@@ -615,7 +617,7 @@ if($getSelected != "patient" &&
                 '</div>' +
                 '<div class="form-group">' +
                     '<label style="color: var(--yellow-color)">Расположение <strong style="color: var(--red--color)">*</strong></label>' +
-                    '<input type="text" class="form-control" placeholder="Номер кабинета или зала" name="doctor_profession_location" required>'+
+                    '<input type="text" class="form-control" placeholder="Номер кабинета или зала" maxlength="30" name="doctor_profession_location" required>'+
                 '</div>'
             );
             $('#chosen_required_profession').chosen();
@@ -676,6 +678,7 @@ if($getSelected != "patient" &&
                 $("#queryRegistrationPatient").prev().removeAttr("hidden");
                 $("#queryRegistrationPatient").attr("hidden", "hidden");
                 $("#alertErrorRegistrationPatient").attr("hidden", "hidden");
+                $('html, body').stop().animate({ scrollTop: $("body").offset().top - 100 }, 400);
             },
             error: function () {
                 $("#alertErrorRegistrationPatient").removeAttr("hidden");

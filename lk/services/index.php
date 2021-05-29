@@ -1,21 +1,34 @@
 <?php
+// Если токен авторизованного пользователя не существует, то направляет на страницу ошибки 401 (нет авторизации)
+if(!isset($_COOKIE['user_token']))
+    header("Location: /error/401.php");
 require $_SERVER['DOCUMENT_ROOT'] . '/utils/variables.php';
 require $_SERVER['DOCUMENT_ROOT'] . '/utils/functions.php';
-if(!isset($_COOKIE['user_token']))
-    header("Location: /error/401.html");
 require $_SERVER['DOCUMENT_ROOT'] . "/utils/User.php";
+
+// Выгрузка данных пользователя
 $user = new User($_COOKIE['user_token']);
+
+// Если HTTP-код после обращения к выгрузке данных пользователя по API 400 или 403, то ...
+// очищаются Cookie и происходит направление на страницу ошибки 401
 if($user->getUserStatusCode() === 400 || $user->getUserStatusCode() === 403) {
     setcookie('user_token', '', 0, "/");
-    header("Location: /error/401.html");
+    header("Location: /error/401.php");
 }
+
+// Если роль пользователя не "Пациент", то направляет на страницу ошибки 403
 if(!$user->isUserRole("Patient"))
-    header("Location: /error/403.html");
+    header("Location: /error/403.php");
 
+// Выгружает данные пользователя
 $user_data = $user->getUserData();
-
 $whose_user = 2;
 ?>
+<!--
+Страница просмотра записей на предстоящие услуги и
+просмотра истории посещения услуг у пациента,
+а также выбора записи на услугу
+-->
 <!doctype html>
 <html lang="ru">
 <head>
@@ -33,7 +46,7 @@ $whose_user = 2;
     <script src="//cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" charset="utf8" src="/js/datatables.js"></script>
     <script defer src="/js/all.js"></script>
-    <title><? echo web_name_header; ?></title>
+    <title><?php echo web_name_header; ?></title>
 </head>
 <style>
 </style>
@@ -44,12 +57,14 @@ $whose_user = 2;
 <!--Основной контент страницы-->
 <div class="page-content">
     <div class="container pt-3 pb-3">
+<!--"Хлебные крошки" для навигации по родительским страницам-->
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/lk/" style="color: var(--dark-cyan-color)">Профиль</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Услуги</li>
             </ol>
         </nav>
+<!--Содержимое таблиста-->
         <ul class="nav nav-pills flex-column flex-sm-row mb-2" role="tablist">
             <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
                 <a class="nav-link tab-bg-active font-weight-bold active" data-toggle="tab" href="#tab-services" role="tab">
@@ -68,7 +83,9 @@ $whose_user = 2;
             </li>
         </ul>
 
+<!--Контент таблиста-->
         <div class="tab-content">
+<!--Содержимое таблиста выбора просмотра услуг-->
             <div class="tab-pane fade show active" id="tab-services" role="tabpanel">
                 <div class="card mt-3">
                     <div class="row justify-content-center">
@@ -119,6 +136,7 @@ $whose_user = 2;
                     </div>
                 </div>
             </div>
+<!--Содержимое таблиста просмота предстоящих записей на услуги-->
             <div class="tab-pane fade" id="tab-my-services" role="tabpanel">
                 <div class="card mt-3">
                     <div class="row justify-content-center">
@@ -170,7 +188,6 @@ $whose_user = 2;
                         </div>
                     </div>
                 </div>
-
 
                 <div class="card mt-3">
                     <div class="card-body">
@@ -294,6 +311,7 @@ $whose_user = 2;
                 </div>
             </div>
 
+<!--Содержимое таблиста просмотра истории посещения услуг-->
             <div class="tab-pane fade" id="tab-history-services" role="tabpanel">
                 <div class="card mt-3">
                     <div class="row justify-content-center">
@@ -508,6 +526,9 @@ $whose_user = 2;
 <?php require $_SERVER['DOCUMENT_ROOT']."/footer.php"; ?>
 </body>
 <script>
+    $('#notificationToast').toast('show');
+
+    // Конфигурация динамических таблиц
     $('#table_appointment, #table_appointment_history').DataTable({
         "language": {
             "zeroRecords": "<span class='text-muted'>Совпадения отсутствуют</span>",
@@ -532,6 +553,5 @@ $whose_user = 2;
         },
 
     });
-$('#notificationToast').toast('show');
 </script>
 </html>

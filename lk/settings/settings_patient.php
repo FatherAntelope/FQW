@@ -1,6 +1,6 @@
 <?php
 if(!isset($user_data) || $user_data['role'] !== "Patient") {
-    header("Location: /error/403.html");
+    header("Location: /error/403.php");
 }
 
 $url = protocol."://".domain_name_api."/api/med/patient";
@@ -69,7 +69,7 @@ $passport_data = utils_call_api($url, $config);
             <div class="col-xl-4 col-lg-5">
                 <div class="card">
                     <div class="card-header text-center" style="background-color: var(--cyan-color">
-                        <img src="<? echo getUrlUserPhoto($user_data['photo']); ?>" class="rounded-circle img-thumbnail" style="height: 12rem;width: 12rem;">
+                        <img src="<? echo getUrlUserPhoto($user_data['photo']); ?>" class="rounded-circle img-thumbnail" style="object-fit: cover; height: 12rem;width: 12rem;">
                         <h4 class="mb-0 mt-2" style="color: var(--yellow-color)">
                             <?php echo $user_data['surname']." ".$user_data['name']." ".$user_data['patronymic'];?>
                         </h4>

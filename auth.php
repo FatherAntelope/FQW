@@ -1,12 +1,12 @@
-<!--
-Страница авторизации в профиль пользователя
--->
 <?php
 //Если пользователь авторизован, то направляет к странице профиля
 if (isset($_COOKIE['user_token']))
     header("Location: /lk/");
 require $_SERVER['DOCUMENT_ROOT']. '/utils/variables.php';
 ?>
+<!--
+Страница авторизации в профиль пользователя
+-->
 <!doctype html>
 <html lang="ru">
 <head>

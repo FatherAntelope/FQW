@@ -1,6 +1,3 @@
-<!--
-Главная промо-страница, описывающая возможности web-приложения
--->
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/utils/variables.php';
 require $_SERVER['DOCUMENT_ROOT'] . '/utils/functions.php';
@@ -26,6 +23,9 @@ if(isset($_COOKIE['user_token'])) {
     $whose_user = 0;
 }
 ?>
+<!--
+Главная промо-страница, описывающая возможности web-приложения
+-->
 <!doctype html>
 <html lang="ru">
 <head>

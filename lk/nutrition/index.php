@@ -1,21 +1,28 @@
 <?php
+// Если токен авторизованного пользователя не существует, то направляет на страницу ошибки 401 (нет авторизации)
+if(!isset($_COOKIE['user_token']))
+    header("Location: /error/401.php");
 require $_SERVER['DOCUMENT_ROOT'] . '/utils/variables.php';
 require $_SERVER['DOCUMENT_ROOT'] . '/utils/functions.php';
-if(!isset($_COOKIE['user_token']))
-    header("Location: /error/401.html");
 require $_SERVER['DOCUMENT_ROOT'] . "/utils/User.php";
+// Выгрузка данных пользователя
 $user = new User($_COOKIE['user_token']);
+// Если HTTP-код после обращения к выгрузке данных пользователя по API 400 или 403, то ...
 if($user->getUserStatusCode() === 400 || $user->getUserStatusCode() === 403) {
     setcookie('user_token', '', 0, "/");
-    header("Location: /error/401.html");
+    header("Location: /error/401.php");
 }
+// Если роль пользователя не "Patient", то направляет на страницу ошибки 403 (нет доступа)
 if(!$user->isUserRole("Patient"))
-    header("Location: /error/403.html");
+    header("Location: /error/403.php");
 
+// Получение данных пользователя
 $user_data = $user->getUserData();
-
 $whose_user = 2;
 ?>
+<!--
+Страница просмотра меню питания и диеты от лица пациента
+-->
 <!doctype html>
 <html lang="ru">
 <head>
@@ -61,10 +68,11 @@ $whose_user = 2;
                 </p>
             </div>
             <div class="col-lg-5">
-                <img src="/images/sanatorium-dining.jpg" class="img-fluid  rounded" alt="...">
+                <img src="/images/sanatorium-dining.jpg" class="img-fluid  rounded" alt="..." style="object-fit: cover">
             </div>
         </div>
         <h4 class="text-muted mt-4"> Основное меню питания на 17.05.2021</h4>
+<!--Список основного меню на слайдере-->
         <ul id="sliderItems" class="cs-hidden mt-3">
             <li class="item-a">
                 <div class="card">
@@ -132,6 +140,7 @@ $whose_user = 2;
             </li>
         </ul>
         <h4 class="text-muted mt-4"> Индивидуальное меню питания </h4>
+<!--Таблица с диетой-->
         <table class="table table-hover table-striped table-bordered text-center">
             <thead class="thead-light">
             <tr>
@@ -231,11 +240,12 @@ $whose_user = 2;
 </body>
 <script>
     $('#notificationToast').toast('show');
-        $('#sliderItems').lightSlider({
-            loop: false,
-            onSliderLoad: function() {
-                $('#sliderItems').removeClass('cS-hidden');
-            }
-        });
+    //Настройка конфигурации слайдера
+    $('#sliderItems').lightSlider({
+        loop: false,
+        onSliderLoad: function() {
+            $('#sliderItems').removeClass('cS-hidden');
+        }
+    });
 </script>
 </html>

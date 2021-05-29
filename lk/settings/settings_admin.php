@@ -1,6 +1,6 @@
 <?php
 if(!isset($user_data) || $user_data['role'] !== "Admin") {
-    header("Location: /error/403.html");
+    header("Location: /error/403.php");
 }
 $url = protocol."://".domain_name_api."/api/med/admin";
 $config = [
@@ -52,7 +52,7 @@ if($admin_data->data['position']=== "Main") {
             <div class="col-xl-4 col-lg-5">
                 <div class="card">
                     <div class="card-header text-center" style="background-color: var(--cyan-color">
-                        <img src="<?php echo getUrlUserPhoto($user_data['photo']); ?>" class="rounded-circle img-thumbnail" style="height: 12rem;width: 12rem;">
+                        <img src="<?php echo getUrlUserPhoto($user_data['photo']); ?>" class="rounded-circle img-thumbnail" style="height: 12rem;width: 12rem; object-fit: cover;">
                         <h4 class="mb-0 mt-2" style="color: var(--yellow-color)">
                             <?php echo $user_data['surname']." ".$user_data['name']." ".$user_data['patronymic'];?>
                         </h4>
@@ -104,19 +104,19 @@ if($admin_data->data['position']=== "Main") {
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label style="color: var(--yellow-color)">Фамилия</label>
-                                                <input type="text" class="form-control" name="admin_name" value="<?php echo $user_data['surname']; ?>" placeholder="Ваша фамилия" minlength="2" maxlength="26" onkeyup="checkInputRu(this)" required>
+                                                <input type="text" class="form-control" name="admin_name" value="<?php echo $user_data['surname']; ?>" placeholder="Ваша фамилия" minlength="2" maxlength="30" onkeyup="checkInputRu(this)" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label style="color: var(--yellow-color)">Имя</label>
-                                                <input type="text" class="form-control" name="admin_surname" value="<?php echo $user_data['name']?>" placeholder="Ваше имя" minlength="2" maxlength="26" onkeyup="checkInputRu(this)" required>
+                                                <input type="text" class="form-control" name="admin_surname" value="<?php echo $user_data['name']?>" placeholder="Ваше имя" minlength="2" maxlength="30" onkeyup="checkInputRu(this)" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label style="color: var(--yellow-color)">Отчество</label>
-                                                <input type="text" class="form-control" name="admin_patronymic" value="<?php echo $user_data['patronymic'];?>" placeholder="Ваше отчество" minlength="2" maxlength="26" onkeyup="checkInputRu(this)" required>
+                                                <input type="text" class="form-control" name="admin_patronymic" value="<?php echo $user_data['patronymic'];?>" placeholder="Ваше отчество" minlength="2" maxlength="30" onkeyup="checkInputRu(this)" required>
                                             </div>
                                         </div>
                                     </div>
@@ -169,7 +169,7 @@ if($admin_data->data['position']=== "Main") {
                                             <div class="form-group">
                                                 <label style="color: var(--yellow-color)">Старый пароль</label>
                                                 <div class="input-group" id="show_hide_password">
-                                                    <input type="password" class="form-control" name="user_old_password" placeholder="Ваш старый пароль" minlength="6" required>
+                                                    <input type="password" class="form-control" name="user_old_password" placeholder="Ваш старый пароль" required>
                                                     <div class="input-group-append">
                                                 <span class="input-group-text">
                                                     <a href="javascript://" class="text-muted text-decoration-none">
@@ -187,7 +187,7 @@ if($admin_data->data['position']=== "Main") {
                                             <div class="form-group">
                                                 <label style="color: var(--yellow-color)">Новый пароль</label>
                                                 <div class="input-group" id="show_hide_password">
-                                                    <input type="password" class="form-control" name="user_new_password" placeholder="Ваш новый пароль" minlength="6" required>
+                                                    <input type="password" class="form-control" name="user_new_password" placeholder="Ваш новый пароль" minlength="8" maxlength="16" required>
                                                     <div class="input-group-append" >
                                                 <span class="input-group-text">
                                                     <a href="javascript://" class="text-muted text-decoration-none">
