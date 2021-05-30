@@ -83,51 +83,56 @@ $whose_user = 1;
                             </tr>
                             </thead>
                             <tbody>
+                            <?php
+                            $url = protocol.'://'.domain_name_api.'/api/med/patients';
+                            $config = [
+                                'token' => $_COOKIE['user_token'],
+                                'method' => 'GET'
+                            ];
+                            $patients_data = utils_call_api($url, $config);
+                            foreach ($patients_data->data as $patient) {
+                                $url = protocol.'://'.domain_name_api.'/api/med/users/'.$patient['user'];
+                                $patient_user = utils_call_api($url, $config);
+                            ?>
                             <tr>
-                                <td class="text-muted" data-label="Пац.-т:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Шамсемухаметов И. И.</td>
+                                <td class="text-muted" data-label="Пац.-т:">
+                                    <img src="<?php echo getUrlUserPhoto($patient_user->data['user']['photo']); ?>" height="30" class="rounded-circle mr-1" style="height: 25px; width: 25px; object-fit: cover">
+                                    <?php echo getItitialsFullName($patient_user->data['user']['surname'], $patient_user->data['user']['name'], $patient_user->data['user']['patronymic']); ?>
+                                </td>
                                 <td class="text-muted" data-label="ID карты:">123456789</td>
-                                <td class="text-muted" data-label="Тип:"><span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">Лечащийся</span></td>
-                                <td class="text-muted" data-label="Почта:">info@mail.ru</td>
-                                <td class="text-muted" data-label="Телефон:">+7 (999) 999-99-99</td>
+                                <td class="text-muted" data-label="Тип:">
+                                    <?php if($patient['type'] == "Treating") { ?>
+                                        <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">
+                                            <?php echo getPatientCategoryRu($patient['type']); ?>
+                                        </span>
+                                    <?php }
+                                    if ($patient['type'] == "Vacationer") { ?>
+                                        <span class="badge badge-pill text-muted" style="background-color: var(--yellow-color)">
+                                            <?php echo getPatientCategoryRu($patient['type']); ?>
+                                        </span>
+                                    <?php }
+                                    if($patient['type'] == "Discharged") { ?>
+                                        <span class="badge badge-pill badge-danger text-white">
+                                            <?php echo getPatientCategoryRu($patient['type']); ?>
+                                        </span>
+                                    <?php } ?>
+                                </td>
+                                <td class="text-muted" data-label="Почта:"><?php echo $patient_user->data['user']['email']; ?></td>
+                                <td class="text-muted" data-label="Телефон:"><?php echo $patient_user->data['user']['phone_number']; ?></td>
                                 <td>
                                     <ul class="list-unstyled">
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-secondary text-white" data-toggle="modal" data-target="#openModalRecoveryPasswordUser">Восстановить пароль</button></li>
-                                        <li><button type="button" class="btn mt-1 btn-sm text-white" style="background-color: var(--cyan-color)">Профиль</button></li>
+                                        <?php if ($patient['type'] == "Discharged") { ?>
+                                            <li><button type="button" class="btn mt-1 btn-sm btn-secondary text-white" data-toggle="modal" data-target="#openModalRecoveryAccessPatient">Восстановить доступ</button></li>
+                                        <?php } else {?>
+                                            <li><button type="button" class="btn mt-1 btn-sm btn-secondary text-white" data-toggle="modal" data-target="#openModalRecoveryPasswordUser">Восстановить пароль</button></li>
+                                        <?php } ?>
+                                        <li><a href="/lk/users/profile.php?patient=<?php echo $patient['id']; ?>" type="button" class="btn mt-1 btn-sm text-white" style="background-color: var(--cyan-color)">Профиль</a></li>
                                         <li><button type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)">Редактирование</button></li>
                                         <li><button type="button" class="btn mt-1 btn-sm btn-danger" data-toggle="modal" data-target="#openModalRemoveUser">Удаление</button></li>
                                     </ul>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="text-muted" data-label="Пац.-т:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
-                                <td class="text-muted" data-label="ID карты:">123456789</td>
-                                <td class="text-muted" data-label="Тип:"><span class="badge badge-pill text-muted" style="background-color: var(--yellow-color)">Отдыхающий</span></td>
-                                <td class="text-muted" data-label="Почта:">info@mail.ru</td>
-                                <td class="text-muted" data-label="Телефон:">+7 (999) 999-99-99</td>
-                                <td>
-                                    <ul class="list-unstyled">
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-secondary text-white" data-toggle="modal" data-target="#openModalRecoveryPasswordUser">Восстановить пароль</button></li>
-                                        <li><button type="button" class="btn mt-1 btn-sm text-white" style="background-color: var(--cyan-color)">Профиль</button></li>
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)">Редактирование</button></li>
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-danger" data-toggle="modal" data-target="#openModalRemoveUser">Удаление</button></li>
-                                    </ul>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-muted" data-label="Пац.-т:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
-                                <td class="text-muted" data-label="ID карты:">123456789</td>
-                                <td class="text-muted" data-label="Тип:"><span class="badge badge-pill badge-danger">Выписан</span></td>
-                                <td class="text-muted" data-label="Почта:">info@mail.ru</td>
-                                <td class="text-muted" data-label="Телефон:">+7 (999) 999-99-99</td>
-                                <td>
-                                    <ul class="list-unstyled">
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-secondary text-white" data-toggle="modal" data-target="#openModalRecoveryAccessPatient">Восстановить доступ</button></li>
-                                        <li><button type="button" class="btn mt-1 btn-sm text-white" style="background-color: var(--cyan-color)">Профиль</button></li>
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)">Редактирование</button></li>
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-danger" data-toggle="modal" data-target="#openModalRemoveUser">Удаление</button></li>
-                                    </ul>
-                                </td>
-                            </tr>
+                            <?php } ?>
                             </tbody>
                             <tfoot class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
@@ -152,7 +157,7 @@ $whose_user = 1;
                         <table id="table_doctors" class="table table-striped table-hover">
                             <thead class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
-                                <th>Специалист</th>
+                                <th>Медперсона</th>
                                 <th>Должность</th>
                                 <th>Направление</th>
                                 <th>Почта</th>
@@ -162,7 +167,7 @@ $whose_user = 1;
                             </thead>
                             <tbody>
                             <tr>
-                                <td class="text-muted" data-label="Пац.-т:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
+                                <td class="text-muted" data-label="Медп.-на:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
                                 <td class="text-muted" data-label="Долж.-ть:">Врач</td>
                                 <td class="text-muted" data-label="Напр.-ие:">
                                     <ul class="list-unstyled">
@@ -182,7 +187,7 @@ $whose_user = 1;
                                 </td>
                             </tr>
                             <tr>
-                                <td class="text-muted" data-label="Пац.-т:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
+                                <td class="text-muted" data-label="Спец.-т:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
                                 <td class="text-muted" data-label="Долж.-ть:">Специалист по процедурам</td>
                                 <td class="text-muted" data-label="Напр.-ие:">
                                     <ul class="list-unstyled">
@@ -204,8 +209,8 @@ $whose_user = 1;
                             </tbody>
                             <tfoot class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
-                                <th>Пациент</th>
-                                <th>ID карты</th>
+                                <th>Медперсона</th>
+                                <th>Должность</th>
                                 <th>Тип</th>
                                 <th>Почта</th>
                                 <th>Телефон</th>
@@ -233,20 +238,37 @@ $whose_user = 1;
                             </tr>
                             </thead>
                             <tbody>
+                            <?php
+                            $url = protocol.'://'.domain_name_api.'/api/med/admins';
+                            $config = [
+                                'token' => $_COOKIE['user_token'],
+                                'method' => 'GET'
+                            ];
+                            $admins_data = utils_call_api($url, $config);
+                            foreach ($admins_data->data as $admin) {
+                            $url = protocol.'://'.domain_name_api.'/api/med/users/'.$admin['user'];
+                            $admin_user = utils_call_api($url, $config);
+                            ?>
                             <tr>
-                                <td class="text-muted" data-label="Пац.-т:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
-                                <td class="text-muted" data-label="Долж.-ть:">Главный админ</td>
-                                <td class="text-muted" data-label="Почта:">info@mail.ru</td>
-                                <td class="text-muted" data-label="Телефон:">+7 (999) 999-99-99</td>
+                                <td class="text-muted" data-label="Адм.-ор:">
+                                    <img src="<?php echo getUrlUserPhoto($admin_user->data['user']['photo']); ?>" height="30" class="rounded-circle mr-1" style="height: 25px; width: 25px; object-fit: cover">
+                                    <?php echo getItitialsFullName($admin_user->data['user']['surname'], $admin_user->data['user']['name'], $admin_user->data['user']['patronymic']); ?>
+                                </td>
+                                <td class="text-muted" data-label="Долж.-ть:">
+                                    <?php echo getAdminPositionRu($admin['position']) ?>
+                                </td>
+                                <td class="text-muted" data-label="Почта:"><?php echo $admin_user->data['user']['email']; ?></td>
+                                <td class="text-muted" data-label="Телефон:"><?php echo $admin_user->data['user']['phone_number']; ?></td>
                                 <td>
                                     <ul class="list-unstyled">
                                         <li><button type="button" class="btn mt-1 btn-sm btn-secondary text-white" data-toggle="modal" data-target="#openModalRecoveryPasswordUser">Восстановить пароль</button></li>
-                                        <li><button type="button" class="btn mt-1 btn-sm text-white" style="background-color: var(--cyan-color)">Профиль</button></li>
+                                        <li><a href="/lk/users/profile.php?admin=<?php echo $admin['id']; ?>" type="button" class="btn mt-1 btn-sm text-white" style="background-color: var(--cyan-color)">Профиль</a></li>
                                         <li><button type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)">Редактирование</button></li>
                                         <li><button type="button" class="btn mt-1 btn-sm btn-danger" data-toggle="modal" data-target="#openModalRemoveUser">Удаление</button></li>
                                     </ul>
                                 </td>
                             </tr>
+                            <?php } ?>
                             </tbody>
                             <tfoot class="text-white" style="background-color: var(--cyan-color);">
                             <tr>

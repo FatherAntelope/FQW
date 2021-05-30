@@ -9,20 +9,8 @@ $config = [
     "token" => $_COOKIE['user_token']
 ];
 $patient_data = utils_call_api($url, $config);
-$patient_gender = null;
-$patient_category = null;
-if($patient_data->data['gender'] == "Male")
-    $patient_gender = "Мужской";
-else
-    $patient_gender = "Женский";
-
-if($patient_data->data['type'] == "Treating") {
-    $patient_category = "Лечащийся";
-} elseif ($patient_data->data['type'] == "Vacationer") {
-    $patient_category = "Отдыхающий";
-} elseif ($patient_data->data['type'] == "Discharged") {
-    $patient_category = "Выписан";
-}
+$patient_gender = getPatientGenderRu($patient_data->data['gender']);
+$patient_category = getPatientCategoryRu($patient_data->data['type']);
 ?>
 <!doctype html>
 <html lang="ru">

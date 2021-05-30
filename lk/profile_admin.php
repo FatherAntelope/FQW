@@ -8,14 +8,7 @@ $config = [
     "token" => $_COOKIE['user_token']
 ];
 $admin_data = utils_call_api($url, $config);
-$admin_position = null;
-if($admin_data->data['position']=== "Main") {
-    $admin_position = "Главный администратор";
-} elseif ($admin_data->data['position']=== "Registrar") {
-    $admin_position = "Регистратор";
-} elseif ($admin_data->data['position'] === "Maintenance") {
-    $admin_position = "Управляющий услугами";
-}
+$admin_position = getAdminPositionRu($admin_data->data['position']);
 ?>
 <!doctype html>
 <html lang="ru">

@@ -66,4 +66,45 @@ function getUserRoleCode(string $user_role) : int {
         return 3;
     return 0;
 }
+
+/**
+ * Принимает ФИО и возвращает инициалы
+ *
+ * @param string $surname фамилия
+ * @param string $name имя
+ * @param $patronymic null|string отчество
+ * @return string инициалы
+ */
+function getItitialsFullName(string $surname, string $name, $patronymic) : string {
+    return $surname." ".mb_substr($name,0,1,'UTF-8'). ". ".mb_substr($patronymic,0,1,'UTF-8').".";
+}
+
+/**
+ * Перевод категории пользователя на русский из базы данных
+ * @param string $patient_category_en
+ * @return string русский перевод категории пользователя
+ */
+function getPatientCategoryRu(string $patient_category_en) : string {
+    if($patient_category_en == "Treating")
+        return "Лечащийся";
+    if ($patient_category_en == "Vacationer")
+        return "Отдыхающий";
+    if ($patient_category_en == "Discharged")
+        return "Выписан";
+    return "Данная категория не найдена";
+}
+
+function getPatientGenderRu(string $patient_gender_en) : string{
+    return ($patient_gender_en == "Male") ? $patient_gender = "Мужской" : $patient_gender = "Женский";
+}
+
+function getAdminPositionRu(string $admin_position_en) : string {
+    if($admin_position_en == "Main")
+        return "Главный администратор";
+    if ($admin_position_en == "Registrar")
+        return "Регистратор";
+    if ($admin_position_en == "Maintenance")
+        return"Управляющий услугами";
+    return "Данная должность не найдена";
+}
 ?>
