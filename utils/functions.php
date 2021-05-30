@@ -44,7 +44,7 @@ function normJsonStr(string $str) : string {
  * @param $user_photo string ссылка на фотографию без корневой папки
  * @return string ссылка на базовую фотографию, если отсутствует фотография в БД, иначе ссылка на фотографию из БД
  */
-function getUrlUserPhoto (string $user_photo) : string {
+function getUrlUserPhoto ($user_photo) : string {
     return ($user_photo === null) ?  "/images/user.png" : (protocol."://" . domain_name_api . $user_photo);
 }
 

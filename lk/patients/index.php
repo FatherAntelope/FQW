@@ -1,4 +1,25 @@
 <?php
+// Если токен авторизованного пользователя не существует, то направляет на страницу ошибки 401 (нет авторизации)
+if(!isset($_COOKIE['user_token']))
+    header("Location: /error/401.php");
+require $_SERVER['DOCUMENT_ROOT'] . '/utils/variables.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/utils/functions.php';
+require $_SERVER['DOCUMENT_ROOT'] . "/utils/User.php";
+
+// Выгрузка данных пользователя
+$user = new User($_COOKIE['user_token']);
+
+// Если HTTP-код после обращения к выгрузке данных пользователя по API 400 или 403, то ...
+if($user->getStatusCode() === 400 || $user->getStatusCode() === 403) {
+    setcookie('user_token', '', 0, "/");
+    header("Location: /error/401.php");
+}
+// Если роль пользователя не "Доктор", то направляет на страницу ошибки 403
+if(!$user->isUserRole("Doctor"))
+    header("Location: /error/403.php");
+
+// Выгружает данные пользователя
+$user_data = $user->getData();
 $whose_user = 3;
 ?>
 <!doctype html>

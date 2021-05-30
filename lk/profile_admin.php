@@ -46,7 +46,7 @@ if($admin_data->data['position']=== "Main") {
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-2 text-center">
-                        <img src="<? echo getUrlUserPhoto($user_data['photo'])?> " class="rounded-circle img-thumbnail mb-2" style="height: 8rem;width: 8rem;">
+                        <img src="<?php echo getUrlUserPhoto($user_data['photo'])?> " class="rounded-circle img-thumbnail mb-2" style="height: 8rem;width: 8rem;">
                         <br>
                         <a href="/lk/settings/" type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)"><i class="fas fa-user-cog"></i></a>
                         <a href="/queries/exitUser.php" type="button" class="btn mt-1 btn-sm btn-danger text-white"><i class="fas fa-door-open"></i></a>

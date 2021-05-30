@@ -1,4 +1,11 @@
 <?php
+/**
+ * AJAX запрос на редактирование уведомлений пользователя
+ */
+//Если не выбран ни 1 параметр, то вернет ошибку
+if(!isset($_POST['user_notification'])) {
+    die(header("HTTP/1.0 400 Bad Request"));
+}
 // /* НЕ ГОТОВО!!! РЕАЛИЗАЦИИ УВЕДОМЛЕНИЙ ЕЩЁ НЕТ!!! */
 // require $_SERVER['DOCUMENT_ROOT'] . '/utils/CurlHttpResponse.php';
 // require $_SERVER['DOCUMENT_ROOT'] . '/utils/variables.php';

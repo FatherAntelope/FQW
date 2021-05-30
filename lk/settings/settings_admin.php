@@ -183,7 +183,7 @@ if($admin_data->data['position']=== "Main") {
                                             <div class="form-group">
                                                 <label style="color: var(--yellow-color)">Старый пароль</label>
                                                 <div class="input-group" id="show_hide_password">
-                                                    <input type="password" class="form-control" name="user_old_password" onkeydown="checkPassword()" placeholder="Ваш старый пароль" required>
+                                                    <input type="password" class="form-control" name="user_old_password" onkeyup="checkPassword()" placeholder="Ваш старый пароль" required>
                                                     <div class="input-group-append">
                                                 <span class="input-group-text">
                                                     <a href="javascript://" class="text-muted text-decoration-none">
@@ -201,7 +201,7 @@ if($admin_data->data['position']=== "Main") {
                                             <div class="form-group">
                                                 <label style="color: var(--yellow-color)">Новый пароль</label>
                                                 <div class="input-group" id="show_hide_password">
-                                                    <input type="password" class="form-control" name="user_new_password" onkeydown="checkPassword()" placeholder="Ваш новый пароль" minlength="8" maxlength="16" required>
+                                                    <input type="password" class="form-control" name="user_new_password" onkeyup="checkPassword()" placeholder="Ваш новый пароль" minlength="8" maxlength="16" required>
                                                     <div class="input-group-append" >
                                                 <span class="input-group-text">
                                                     <a href="javascript://" class="text-muted text-decoration-none">
@@ -548,6 +548,9 @@ if($admin_data->data['position']=== "Main") {
             data: $(this).serialize(),
             success: function () {
                 $("#alertErrorUserEditPassword").attr("hidden", "hidden");
+                $('input[name="user_old_password"]').val("");
+                $('input[name="user_new_password"]').val("");
+                $('#btnEditPassword').attr("disabled", "disabled");
                 spinner.attr("hidden", "hidden");
                 checker.removeAttr("hidden");
                 setTimeout(function(){checker.attr("hidden", "hidden"); }, 1100);

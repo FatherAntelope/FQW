@@ -60,7 +60,7 @@ if($getSelected != "patient" &&
         <ul class="nav nav-pills flex-column flex-sm-row mb-2" role="tablist" id="tablist">
             <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
                 <a class="nav-link tab-bg-active font-weight-bold <? if($getSelected == 'patient') echo "active";?>" onclick="window.history.pushState('', '', '/lk/users/add.php?selected=patient');"  data-toggle="tab" href="#patient" role="tab">
-                    <i class="fas fa-user-injured mr-1"></i>Пациент
+                    <i class="fas fa-user-injured mr-2"></i>Пациент
                 </a>
             </li>
             <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
@@ -572,7 +572,6 @@ if($getSelected != "patient" &&
         </div>
     </div>
 </div>
-
 <!--Футер (нижний блок)-->
 <?php require $_SERVER['DOCUMENT_ROOT']."/footer.php"; ?>
 </body>
