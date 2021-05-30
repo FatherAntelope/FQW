@@ -5,14 +5,14 @@ require $_SERVER['DOCUMENT_ROOT'] . '/utils/variables.php';
 require $_SERVER['DOCUMENT_ROOT'] . '/utils/functions.php';
 require $_SERVER['DOCUMENT_ROOT'] . "/utils/User.php";
 $user = new User($_COOKIE['user_token']);
-if ($user->getUserStatusCode() === 400 || $user->getUserStatusCode() === 403) {
+if ($user->getStatusCode() === 400 || $user->getStatusCode() === 403) {
     setcookie('user_token', '', 0, "/");
     header("Location: /error/401.php");
 }
 if (!$user->isUserRole("Patient"))
     header("Location: /error/403.php");
 
-$user_data = $user->getUserData();
+$user_data = $user->getData();
 
 $whose_user = 2;
 if ($_GET['type'] == 'doctor')

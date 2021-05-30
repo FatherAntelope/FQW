@@ -1,14 +1,20 @@
 <?php
+// Если данные пользователя не выгружены или роль пользователя не "Админ",
+// то направляет на страницу ошибки 403 (нет доступа)
 if(!isset($user_data) || $user_data['role'] !== "Admin") {
     header("Location: /error/403.php");
 }
+
 $url = protocol."://".domain_name_api."/api/med/admin";
 $config = [
     "method" => "GET",
     "token" => $_COOKIE['user_token']
 ];
+
+// Получение данных администратора
 $admin_data = utils_call_api($url, $config);
 $admin_position = null;
+// Определение должности для вывода
 if($admin_data->data['position']=== "Main") {
     $admin_position = "Главный администратор";
 } elseif ($admin_data->data['position']=== "Registrar") {
@@ -33,7 +39,7 @@ if($admin_data->data['position']=== "Main") {
     <script src="//cdn.jsdelivr.net/npm/jquery.maskedinput@1.4.1/src/jquery.maskedinput.min.js" type="text/javascript"></script>
     <script src="//cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script defer src="/js/all.js"></script>
-    <title><? echo web_name_header; ?></title>
+    <title><?php echo web_name_header; ?></title>
 </head>
 <body>
 <!--Панель навигации по модулям пользователя-->
@@ -42,6 +48,7 @@ if($admin_data->data['position']=== "Main") {
 <!--Основной контент страницы-->
 <div class="page-content">
     <div class="container pt-3 pb-3" style="min-height: 100vh">
+<!--"Хлебные крошки" для ориентации и навигации по родительским страницам-->
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/lk/" style="color: var(--dark-cyan-color)">Профиль</a></li>
@@ -49,6 +56,7 @@ if($admin_data->data['position']=== "Main") {
             </ol>
         </nav>
         <div class="row">
+<!--Левая колонка с отображением имеющихся персональных данных, отображением фотографии, ее изменения и выхода из профиля-->
             <div class="col-xl-4 col-lg-5">
                 <div class="card">
                     <div class="card-header text-center" style="background-color: var(--cyan-color">
@@ -75,6 +83,7 @@ if($admin_data->data['position']=== "Main") {
                     </div>
                 </div>
             </div>
+<!--Правая колонка с настройками-->
             <div class="col-xl-8 col-lg-7">
                 <ul class="nav nav-pills flex-column flex-sm-row mb-2 mt-3 mt-xl-0 mt-lg-0" role="tablist">
                     <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
@@ -89,6 +98,7 @@ if($admin_data->data['position']=== "Main") {
                     </li>
                 </ul>
                 <div class="tab-content">
+<!--Содержимое редактирования персональных данных-->
                     <div class="tab-pane fade show active" id="user_data_edit" role="tabpanel">
                         <div class="card">
                             <div class="card-body">
@@ -121,7 +131,9 @@ if($admin_data->data['position']=== "Main") {
                                         </div>
                                     </div>
                                     <div class="text-right">
-                                        <button type="submit" class="btn mb-3 text-white" style="background-color: var(--cyan-color)">Изменить<i class="fas fa-user ml-2"></i></button>
+                                        <button type="submit" id="btnEditFullName" class="btn mb-3 text-white" style="background-color: var(--cyan-color)" disabled>
+                                            Изменить<i class="fas fa-user ml-2"></i>
+                                        </button>
                                     </div>
                                 </form>
                                 <form id="queryEditContactDataUser">
@@ -136,24 +148,26 @@ if($admin_data->data['position']=== "Main") {
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label style="color: var(--yellow-color)">Почта</label>
-                                                <input type="email" class="form-control" placeholder="example@mail.ru" name="user_email" value="<?php echo $user_data['email'];?>" required>
+                                                <input type="email" class="form-control" placeholder="example@mail.ru"  name="user_email" onkeyup="checkContactData()" value="<?php echo $user_data['email'];?>" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label style="color: var(--yellow-color)">Номер телефона </label>
-                                                <input type="tel" class="form-control" placeholder="+7 (999) 999-99-99" name="user_phone" value="<?php echo $user_data['phone_number'];?>" required>
+                                                <input type="tel" class="form-control" placeholder="+7 (999) 999-99-99" name="user_phone" onkeyup="checkContactData()" value="<?php echo $user_data['phone_number'];?>" required>
                                             </div>
                                         </div>
                                         <div class="col alert alert-danger alert-dismissible fade show animate slideIn mr-3 ml-3" role="alert" id="alertErrorUserEditContactData" style="font-size: 12px" hidden>
-                                            Аккаунт с указанным адресом электронной почты уже существует. Измените или проверьте введенный адрес электронной почты!
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            Аккаунт с указанным адресом электронной почты уже существует, либо вы его ввели неверно. Измените или проверьте введенный адрес электронной почты!
+                                            <button  type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
                                     </div>
                                     <div class="text-right">
-                                        <button type="submit" class="btn mb-3 text-white" style="background-color: var(--cyan-color)">Изменить<i class="fas fa-address-book ml-2"></i></button>
+                                        <button type="submit" id="btnEditContactDataUser" class="btn mb-3 text-white" style="background-color: var(--cyan-color)"  disabled>
+                                            Изменить<i class="fas fa-address-book ml-2"></i>
+                                        </button>
                                     </div>
                                 </form>
                                 <form id="queryEditPasswordUser">
@@ -169,7 +183,7 @@ if($admin_data->data['position']=== "Main") {
                                             <div class="form-group">
                                                 <label style="color: var(--yellow-color)">Старый пароль</label>
                                                 <div class="input-group" id="show_hide_password">
-                                                    <input type="password" class="form-control" name="user_old_password" placeholder="Ваш старый пароль" required>
+                                                    <input type="password" class="form-control" name="user_old_password" onkeydown="checkPassword()" placeholder="Ваш старый пароль" required>
                                                     <div class="input-group-append">
                                                 <span class="input-group-text">
                                                     <a href="javascript://" class="text-muted text-decoration-none">
@@ -187,7 +201,7 @@ if($admin_data->data['position']=== "Main") {
                                             <div class="form-group">
                                                 <label style="color: var(--yellow-color)">Новый пароль</label>
                                                 <div class="input-group" id="show_hide_password">
-                                                    <input type="password" class="form-control" name="user_new_password" placeholder="Ваш новый пароль" minlength="8" maxlength="16" required>
+                                                    <input type="password" class="form-control" name="user_new_password" onkeydown="checkPassword()" placeholder="Ваш новый пароль" minlength="8" maxlength="16" required>
                                                     <div class="input-group-append" >
                                                 <span class="input-group-text">
                                                     <a href="javascript://" class="text-muted text-decoration-none">
@@ -207,12 +221,15 @@ if($admin_data->data['position']=== "Main") {
                                         </div>
                                     </div>
                                     <div class="text-right">
-                                        <button type="submit" class="btn mb-3 text-white" style="background-color: var(--cyan-color)">Изменить<i class="fas fa-key ml-2"></i></button>
+                                        <button type="submit" class="btn mb-3 text-white" id="btnEditPassword" disabled style="background-color: var(--cyan-color)">
+                                            Изменить<i class="fas fa-key ml-2"></i>
+                                        </button>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
+<!--Содержимое системных настроек-->
                     <div class="tab-pane fade show" id="settings_system" role="tabpanel">
                         <div class="card">
                             <div class="card-body">
@@ -282,6 +299,7 @@ if($admin_data->data['position']=== "Main") {
     </div>
 </div>
 
+<!--Модальное окно восстановления пароля-->
 <div class="modal fade" id="openModalRecoveryPersonAccount" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -318,6 +336,7 @@ if($admin_data->data['position']=== "Main") {
     </div>
 </div>
 
+<!--Модальное окно изменения фотографии-->
 <div class="modal fade" id="openModalReplaceAvatar" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -328,13 +347,18 @@ if($admin_data->data['position']=== "Main") {
                 <div class="alert alert-info" role="alert" style="font-size: 12px">
                     Выбирайте ту фотографию, где строго изображены только вы!
                 </div>
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="customFile" accept="image/*">
-                    <label class="custom-file-label" for="customFile" data-browse="Открыть">Выберите фотографию</label>
+                <form id="queryEditPhotoUser" method="post" action="/queries/editPhotoUser.php" enctype="multipart/form-data">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" name="user_photo" id="customFile" accept="image/png,image/jpeg">
+                        <label class="custom-file-label" for="customFile" data-browse="Открыть">Выберите фотографию</label>
+                    </div>
+                </form>
+                <div class="alert alert-success" role="alert" hidden>
+                    Фотография успешно изменена на новую!
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Изменить</button>
+                <button type="submit" class="btn btn-warning btn-block" form="queryEditPhotoUser" style="color: #fff; background-color: var(--yellow-color)">Изменить</button>
             </div>
         </div>
     </div>
@@ -344,9 +368,55 @@ if($admin_data->data['position']=== "Main") {
 <?php require $_SERVER['DOCUMENT_ROOT'] . "/footer.php"; ?>
 </body>
 <script>
+    /**
+     * Проверяет все поля персональных данных на изменение и дает доступ к отправке запроса на смену этих данных
+     * Также является функцией RegEx на удаление символов, не являющихся кириллицей
+     * @param obj принимает проверяемый DOM елемент
+     */
     function checkInputRu(obj) {
+        if(
+            $('input[name="admin_name"]').val() === "<?php echo $user_data['name']?>" &&
+            $('input[name="admin_surname"]').val() === "<?php echo $user_data['surname']?>"
+        ) {
+            $('#btnEditFullName').attr("disabled", "disabled");
+        } else {
+            $('#btnEditFullName').removeAttr("disabled");
+        }
         obj.value = obj.value.replace(/[^а-яё]/ig,'');
     }
+
+    /**
+     * Проверяет все поля контактных данных на изменение и дает доступ к отправке запроса на смену этих данных
+     */
+    function checkContactData() {
+        if(
+            $('input[name="user_email"]').val() === "<?php echo $user_data['phone_email']?>" &&
+            $('input[name="user_phone"]').val() === "<?php echo $user_data['phone_number']?>"
+        ) {
+            $('#btnEditContactDataUser').attr("disabled", "disabled");
+        } else {
+            $('#btnEditContactDataUser').removeAttr("disabled");
+        }
+    }
+
+    /**
+     * Проверяет старый и новый пароли на изменение и дает доступ к отправке запроса на смену пароля
+     */
+    function checkPassword() {
+        if(
+            $('input[name="user_old_password"]').val() === "" ||
+            $('input[name="user_new_password"]').val() === ""
+        ) {
+            $('#btnEditPassword').attr("disabled", "disabled");
+        } else {
+            $('#btnEditPassword').removeAttr("disabled");
+        }
+    }
+
+    /**
+     * После загрузки всей страницы дает доступ к функции, прослушивающей нажатие на #show_hide_password
+     * Если поле пароля имеет тип text, то после нажатия ПКМ меняется на password, иначе наоборот
+     */
     $(document).ready(function() {
         $("#show_hide_password a").on('click', function() {
             if($(this).parent().parent().prev().attr('type') == "text"){
@@ -361,14 +431,55 @@ if($admin_data->data['position']=== "Main") {
         });
     });
 
+    //Передает путь в placeholder поля к полю загрузки изображения
     $('.custom-file-input').on('change', function() {
         let fileName = $(this).val().split('\\').pop();
         $(this).next('.custom-file-label').addClass("selected").html(fileName);
     });
 
+    // Маска для поля ввода номера телефона
     $('input[name="user_phone"]').mask("+7 (999) 999-99-99");
 </script>
 <script>
+    //Закомментить, если надо посмотреть, как происходит обработка в editPhotoUser.php
+
+    /**
+     * Ожидает отправки формы #queryEditPhotoUser.
+     * Отправляет AJAX (асинхронный) запрос для редактирования фотографии пользователя.
+     * Запрос отправляется в кодировке form-data.
+     * success: скрывает информационное сообщение и форму, показывает сообщение об успехе и
+     * через пару секунд перезагружает страницу
+     * error:
+     */
+    $("#queryEditPhotoUser").submit(function () {
+        $.ajax({
+            url: "/queries/editPhotoUser.php",
+            method: "POST",
+            contentType: false,
+            processData: false,
+            enctype: 'multipart/form-data',
+            data: new FormData(this),
+            success: function () {
+                $("#queryEditPhotoUser").prev().attr("hidden", "hidden");
+                $("#queryEditPhotoUser").attr("hidden", "hidden");
+                $("#queryEditPhotoUser").next().removeAttr("hidden");
+                setTimeout(function(){ location.reload();}, 2000);
+            },
+            error: function () {
+            }
+        });
+        return false;
+    });
+
+
+    /**
+     * Ожидает отправки формы #queryEditFullNameAdmin.
+     * Показывает спиннер загрузки
+     * Отправляет AJAX (асинхронный) запрос для редактирования ФИО администратора.
+     * success: скрывает выведенные ошибки, спиннер загрузки и показывает галочку успеха,
+     * через секунду перезагружает страницу
+     * error: скрывает спиннер загрузки
+     */
     $("#queryEditFullNameAdmin").submit(function () {
         let spinner = $(this).children().find('.spinner-border');
         let checker = $(this).children().find('.fa-check');
@@ -389,6 +500,14 @@ if($admin_data->data['position']=== "Main") {
         return false;
     });
 
+    /**
+     * Ожидает отправки формы #queryEditContactDataUser.
+     * Показывает спиннер загрузки
+     * Отправляет AJAX (асинхронный) запрос для редактирования контактных данных пользователя.
+     * success: скрывает выведенные ошибки, спиннер загрузки и показывает галочку успеха,
+     * через секунду перезагружает страницу
+     * error: показывает ошибку ввода адреса электронной почты и скрывает спиннер загрузки
+     */
     $("#queryEditContactDataUser").submit(function () {
         let spinner = $(this).children().find('.spinner-border');
         let checker = $(this).children().find('.fa-check');
@@ -411,6 +530,14 @@ if($admin_data->data['position']=== "Main") {
         return false;
     });
 
+    /**
+     * Ожидает отправки формы #queryEditPasswordUser.
+     * Показывает спиннер загрузки
+     * Отправляет AJAX (асинхронный) запрос для редактирования пароля
+     * success: скрывает выведенные ошибки, спиннер загрузки и показывает галочку успеха,
+     * через секунду перезагружает страницу
+     * error: показывает ошибку ввода адреса электронной почты и скрывает спиннер загрузки
+     */
     $("#queryEditPasswordUser").submit(function () {
         let spinner = $(this).children().find('.spinner-border');
         let checker = $(this).children().find('.fa-check');
@@ -433,6 +560,12 @@ if($admin_data->data['position']=== "Main") {
         return false;
     });
 
+    /**
+     * Ожидает отправки формы #queryRecoveryPasswordUser.
+     * Отправляет AJAX (асинхронный) запрос для обработки данных формы.
+     * success: почта введена верно, вывод сообщения об успешной отправке сообщения на почту и скрытие формы.
+     * error: отображение ошибки о неверном вводе адреса e-почты.
+     */
     $("#queryRecoveryPasswordUser").submit(function () {
         $.ajax({
             url: "/queries/recoveryPasswordUser.php",
@@ -450,6 +583,14 @@ if($admin_data->data['position']=== "Main") {
         return false;
     });
 
+    /**
+     * Ожидает отправки формы #queryEditNotificationUser.
+     * Показывает спиннер загрузки
+     * Отправляет AJAX (асинхронный) запрос для изменения настроек уведомления.
+     * success: скрывает выведенные ошибки, спиннер загрузки и показывает галочку успеха,
+     * через секунду перезагружает страницу
+     * error: показывает ошибку (необходимо выбрать хотя-бы 1 параметр)
+     */
     $("#queryEditNotificationUser").submit(function () {
         let spinner = $(this).children().find('.spinner-border');
         let checker = $(this).children().find('.fa-check');

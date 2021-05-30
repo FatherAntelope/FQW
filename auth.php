@@ -210,6 +210,7 @@ require $_SERVER['DOCUMENT_ROOT']. '/utils/variables.php';
             success: function () {
                 $("#alertSuccessRecoveryPasswordUser").removeAttr("hidden");
                 $("#alertErrorRecoveryPasswordUser").attr("hidden", "hidden");
+                $("#queryRecoveryPasswordUser").attr("hidden", "hidden");
             },
             error: function () {
                 $("#alertErrorRecoveryPasswordUser").removeAttr("hidden");

@@ -1,4 +1,6 @@
 <?php
+// Если данные пользователя не выгружены или роль пользователя не "Пациент",
+// то направляет на страницу ошибки 403 (нет доступа)
 if(!isset($user_data) || $user_data['role'] !== "Patient") {
     header("Location: /error/403.php");
 }
@@ -8,14 +10,17 @@ $config = [
     "method" => "GET",
     "token" => $_COOKIE['user_token']
 ];
+// Получение данных пациента
 $patient_data = utils_call_api($url, $config);
 $patient_gender = null;
 $patient_category = null;
+// Определение пола пациента для вывода
 if($patient_data->data['gender'] == "Male")
     $patient_gender = "Мужской";
 else
     $patient_gender = "Женский";
 
+// Определение категории пациента для вывода
 if($patient_data->data['type'] == "Treating") {
     $patient_category = "Лечащийся";
 } elseif ($patient_data->data['type'] == "Vacationer") {
@@ -29,6 +34,8 @@ $config = [
     "method" => "GET",
     "token" => $_COOKIE['user_token']
 ];
+
+// Получение паспортных данных пациента
 $passport_data = utils_call_api($url, $config);
 ?>
 <!doctype html>
@@ -59,6 +66,7 @@ $passport_data = utils_call_api($url, $config);
 <!--Основной контент страницы-->
 <div class="page-content">
     <div class="container pt-3 pb-3" style="min-height: 100vh">
+<!--"Хлебные крошки" для ориентации и навигации по родительским страницам-->
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/lk/" style="color: var(--dark-cyan-color)">Профиль</a></li>
@@ -66,10 +74,11 @@ $passport_data = utils_call_api($url, $config);
             </ol>
         </nav>
         <div class="row">
+<!--Левая колонка с отображением имеющихся персональных данных, отображением фотографии, ее изменения и выхода из профиля-->
             <div class="col-xl-4 col-lg-5">
                 <div class="card">
                     <div class="card-header text-center" style="background-color: var(--cyan-color">
-                        <img src="<? echo getUrlUserPhoto($user_data['photo']); ?>" class="rounded-circle img-thumbnail" style="object-fit: cover; height: 12rem;width: 12rem;">
+                        <img src="<?php echo getUrlUserPhoto($user_data['photo']); ?>" class="rounded-circle img-thumbnail" style="object-fit: cover; height: 12rem;width: 12rem;">
                         <h4 class="mb-0 mt-2" style="color: var(--yellow-color)">
                             <?php echo $user_data['surname']." ".$user_data['name']." ".$user_data['patronymic'];?>
                         </h4>
@@ -148,6 +157,7 @@ $passport_data = utils_call_api($url, $config);
                     </div>
                 </div>
             </div>
+<!--Правая колонка с настройками-->
             <div class="col-xl-8 col-lg-7">
                 <ul class="nav nav-pills flex-column flex-sm-row mb-2 mt-3 mt-xl-0 mt-lg-0" role="tablist">
                     <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
@@ -162,6 +172,7 @@ $passport_data = utils_call_api($url, $config);
                     </li>
                 </ul>
                 <div class="tab-content">
+<!--Содержимое редактирования персональных данных-->
                     <div class="tab-pane fade show active" id="user_data_edit" role="tabpanel">
                         <div class="card">
                             <div class="card-body">
@@ -177,24 +188,26 @@ $passport_data = utils_call_api($url, $config);
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label style="color: var(--yellow-color)">Почта</label>
-                                                <input type="email" class="form-control" placeholder="example@mail.ru" name="user_email" value="<?php echo $user_data['email'];?>" required>
+                                                <input type="email" class="form-control" placeholder="example@mail.ru"  name="user_email" onkeyup="checkContactData()" value="<?php echo $user_data['email'];?>" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label style="color: var(--yellow-color)">Номер телефона </label>
-                                                <input type="tel" class="form-control" placeholder="+7 (999) 999-99-99" name="user_phone" value="<?php echo $user_data['phone_number'];?>" required>
+                                                <input type="tel" class="form-control" placeholder="+7 (999) 999-99-99" name="user_phone" onkeyup="checkContactData()" value="<?php echo $user_data['phone_number'];?>" required>
                                             </div>
                                         </div>
                                         <div class="col alert alert-danger alert-dismissible fade show animate slideIn mr-3 ml-3" role="alert" id="alertErrorUserEditContactData" style="font-size: 12px" hidden>
-                                            Аккаунт с указанным адресом электронной почты уже существует. Измените или проверьте введенный адрес электронной почты!
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            Аккаунт с указанным адресом электронной почты уже существует, либо вы его ввели неверно. Измените или проверьте введенный адрес электронной почты!
+                                            <button  type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
                                     </div>
                                     <div class="text-right">
-                                        <button type="submit" class="btn mb-3 text-white" style="background-color: var(--cyan-color)">Изменить<i class="fas fa-address-book ml-2"></i></button>
+                                        <button type="submit" id="btnEditContactDataUser" class="btn mb-3 text-white" style="background-color: var(--cyan-color)"  disabled>
+                                            Изменить<i class="fas fa-address-book ml-2"></i>
+                                        </button>
                                     </div>
                                 </form>
                                 <form id="queryEditPasswordUser">
@@ -210,7 +223,7 @@ $passport_data = utils_call_api($url, $config);
                                             <div class="form-group">
                                                 <label style="color: var(--yellow-color)">Старый пароль</label>
                                                 <div class="input-group" id="show_hide_password">
-                                                    <input type="password" class="form-control" name="user_old_password" placeholder="Ваш старый пароль" minlength="6" required>
+                                                    <input type="password" class="form-control" name="user_old_password" onkeydown="checkPassword()" placeholder="Ваш старый пароль" required>
                                                     <div class="input-group-append">
                                                 <span class="input-group-text">
                                                     <a href="javascript://" class="text-muted text-decoration-none">
@@ -228,7 +241,7 @@ $passport_data = utils_call_api($url, $config);
                                             <div class="form-group">
                                                 <label style="color: var(--yellow-color)">Новый пароль</label>
                                                 <div class="input-group" id="show_hide_password">
-                                                    <input type="password" class="form-control" name="user_new_password" placeholder="Ваш новый пароль" minlength="6" required>
+                                                    <input type="password" class="form-control" name="user_new_password" onkeydown="checkPassword()" placeholder="Ваш новый пароль" minlength="8" maxlength="16" required>
                                                     <div class="input-group-append" >
                                                 <span class="input-group-text">
                                                     <a href="javascript://" class="text-muted text-decoration-none">
@@ -248,12 +261,15 @@ $passport_data = utils_call_api($url, $config);
                                         </div>
                                     </div>
                                     <div class="text-right">
-                                        <button type="submit" class="btn mb-3 text-white" style="background-color: var(--cyan-color)">Изменить<i class="fas fa-key ml-2"></i></button>
+                                        <button type="submit" class="btn mb-3 text-white" id="btnEditPassword" disabled style="background-color: var(--cyan-color)">
+                                            Изменить<i class="fas fa-key ml-2"></i>
+                                        </button>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
+<!--Содержимое системных настроек-->
                     <div class="tab-pane fade show" id="settings_system" role="tabpanel">
                         <div class="card">
                             <div class="card-body">
@@ -334,7 +350,7 @@ $passport_data = utils_call_api($url, $config);
 </div>
 
 
-
+<!--Модальное окно восстановления пароля-->
 <div class="modal fade" id="openModalRecoveryPersonAccount" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -371,6 +387,7 @@ $passport_data = utils_call_api($url, $config);
     </div>
 </div>
 
+<!--Модальное окно изменения фотографии-->
 <div class="modal fade" id="openModalReplaceAvatar" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -381,13 +398,18 @@ $passport_data = utils_call_api($url, $config);
                 <div class="alert alert-info" role="alert" style="font-size: 12px">
                     Выбирайте ту фотографию, где строго изображены только вы!
                 </div>
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="customFile" accept="image/*">
-                    <label class="custom-file-label" for="customFile" data-browse="Открыть">Выберите фотографию</label>
+                <form id="queryEditPhotoUser" method="post" action="/queries/editPhotoUser.php" enctype="multipart/form-data">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" name="user_photo" id="customFile" accept="image/png,image/jpeg">
+                        <label class="custom-file-label" for="customFile" data-browse="Открыть">Выберите фотографию</label>
+                    </div>
+                </form>
+                <div class="alert alert-success" role="alert" hidden>
+                    Фотография успешно изменена на новую!
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Изменить</button>
+                <button type="submit" class="btn btn-warning btn-block" form="queryEditPhotoUser" style="color: #fff; background-color: var(--yellow-color)">Изменить</button>
             </div>
         </div>
     </div>
@@ -397,6 +419,38 @@ $passport_data = utils_call_api($url, $config);
 <?php require $_SERVER['DOCUMENT_ROOT'] . "/footer.php"; ?>
 </body>
 <script>
+    /**
+     * Проверяет все поля контактных данных на изменение и дает доступ к отправке запроса на смену этих данных
+     */
+    function checkContactData() {
+        if(
+            $('input[name="user_email"]').val() === "<?php echo $user_data['phone_email']?>" &&
+            $('input[name="user_phone"]').val() === "<?php echo $user_data['phone_number']?>"
+        ) {
+            $('#btnEditContactDataUser').attr("disabled", "disabled");
+        } else {
+            $('#btnEditContactDataUser').removeAttr("disabled");
+        }
+    }
+
+    /**
+     * Проверяет старый и новый пароли на изменение и дает доступ к отправке запроса на смену пароля
+     */
+    function checkPassword() {
+        if(
+            $('input[name="user_old_password"]').val() === "" ||
+            $('input[name="user_new_password"]').val() === ""
+        ) {
+            $('#btnEditPassword').attr("disabled", "disabled");
+        } else {
+            $('#btnEditPassword').removeAttr("disabled");
+        }
+    }
+
+    /**
+     * После загрузки всей страницы дает доступ к функции, прослушивающей нажатие на #show_hide_password
+     * Если поле пароля имеет тип text, то после нажатия ПКМ меняется на password, иначе наоборот
+     */
     $(document).ready(function() {
         $("#show_hide_password a").on('click', function() {
             if($(this).parent().parent().prev().attr('type') == "text"){
@@ -411,14 +465,53 @@ $passport_data = utils_call_api($url, $config);
         });
     });
 
+    //Передает путь в placeholder поля к полю загрузки изображения
     $('.custom-file-input').on('change', function() {
         let fileName = $(this).val().split('\\').pop();
         $(this).next('.custom-file-label').addClass("selected").html(fileName);
     });
 
+    // Маска для поля ввода номера телефона
     $('input[name="user_phone"]').mask("+7 (999) 999-99-99");
 </script>
 <script>
+    //Закомментить, если надо посмотреть, как происходит обработка в editPhotoUser.php
+    /**
+     * Ожидает отправки формы #queryEditPhotoUser.
+     * Отправляет AJAX (асинхронный) запрос для редактирования фотографии пользователя.
+     * Запрос отправляется в кодировке form-data.
+     * success: скрывает информационное сообщение и форму, показывает сообщение об успехе и
+     * через пару секунд перезагружает страницу
+     * error:
+     */
+    $("#queryEditPhotoUser").submit(function () {
+        $.ajax({
+            url: "/queries/editPhotoUser.php",
+            method: "POST",
+            contentType: false,
+            processData: false,
+            enctype: 'multipart/form-data',
+            data: new FormData(this),
+            success: function () {
+                $("#queryEditPhotoUser").prev().attr("hidden", "hidden");
+                $("#queryEditPhotoUser").attr("hidden", "hidden");
+                $("#queryEditPhotoUser").next().removeAttr("hidden");
+                setTimeout(function(){ location.reload();}, 2000);
+            },
+            error: function () {
+            }
+        });
+        return false;
+    });
+
+    /**
+     * Ожидает отправки формы #queryEditContactDataUser.
+     * Показывает спиннер загрузки
+     * Отправляет AJAX (асинхронный) запрос для редактирования контактных данных пользователя.
+     * success: скрывает выведенные ошибки, спиннер загрузки и показывает галочку успеха,
+     * через секунду перезагружает страницу
+     * error: показывает ошибку ввода адреса электронной почты и скрывает спиннер загрузки
+     */
     $("#queryEditContactDataUser").submit(function () {
         let spinner = $(this).children().find('.spinner-border');
         let checker = $(this).children().find('.fa-check');
@@ -441,6 +534,14 @@ $passport_data = utils_call_api($url, $config);
         return false;
     });
 
+    /**
+     * Ожидает отправки формы #queryEditPasswordUser.
+     * Показывает спиннер загрузки
+     * Отправляет AJAX (асинхронный) запрос для редактирования пароля
+     * success: скрывает выведенные ошибки, спиннер загрузки и показывает галочку успеха,
+     * через секунду перезагружает страницу
+     * error: показывает ошибку ввода адреса электронной почты и скрывает спиннер загрузки
+     */
     $("#queryEditPasswordUser").submit(function () {
         let spinner = $(this).children().find('.spinner-border');
         let checker = $(this).children().find('.fa-check');
@@ -463,6 +564,12 @@ $passport_data = utils_call_api($url, $config);
         return false;
     });
 
+    /**
+     * Ожидает отправки формы #queryRecoveryPasswordUser.
+     * Отправляет AJAX (асинхронный) запрос для обработки данных формы.
+     * success: почта введена верно, вывод сообщения об успешной отправке сообщения на почту и скрытие формы.
+     * error: отображение ошибки о неверном вводе адреса e-почты.
+     */
     $("#queryRecoveryPasswordUser").submit(function () {
         $.ajax({
             url: "/queries/recoveryPasswordUser.php",
@@ -471,7 +578,7 @@ $passport_data = utils_call_api($url, $config);
             success: function () {
                 $("#alertSuccessRecoveryPasswordUser").removeAttr("hidden");
                 $("#alertErrorRecoveryPasswordUser").attr("hidden", "hidden");
-                $("input[name='user_email']").val("");
+                $("#queryRecoveryPasswordUser").attr("hidden", "hidden");
             },
             error: function () {
                 $("#alertErrorRecoveryPasswordUser").removeAttr("hidden");
@@ -480,6 +587,14 @@ $passport_data = utils_call_api($url, $config);
         return false;
     });
 
+    /**
+     * Ожидает отправки формы #queryEditNotificationUser.
+     * Показывает спиннер загрузки
+     * Отправляет AJAX (асинхронный) запрос для изменения настроек уведомления.
+     * success: скрывает выведенные ошибки, спиннер загрузки и показывает галочку успеха,
+     * через секунду перезагружает страницу
+     * error: показывает ошибку (необходимо выбрать хотя-бы 1 параметр)
+     */
     $("#queryEditNotificationUser").submit(function () {
         let spinner = $(this).children().find('.spinner-border');
         let checker = $(this).children().find('.fa-check');

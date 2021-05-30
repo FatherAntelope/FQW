@@ -48,14 +48,14 @@ class User {
     /**
      * @return array получение данных пользователя
      */
-    public function getUserData() : array {
+    public function getData() : array {
         return $this->user_data->data['user'];
     }
 
     /**
      * @return int HTTP код (статус) обработки запроса, например 200 - успех, 400 - неверный запрос и так далее
      */
-    public function getUserStatusCode() : int {
+    public function getStatusCode() : int {
         return $this->user_data->status_code;
     }
 }

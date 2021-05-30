@@ -13,8 +13,7 @@ $url = protocol.'://'.domain_name_api.'/api/med/user';
 
 $data = [
     'user' => [
-        'email' => $_POST['user_email'],
-        'phone_number' => $_POST['user_phone']
+        "photo" => ($_FILES['user_photo']['tmp_name'] !== "") ? base64_encode(file_get_contents($_FILES['user_photo']['tmp_name'])) : ""
     ]
 ];
 $config = [
@@ -24,8 +23,10 @@ $config = [
 ];
 
 $response = utils_call_api($url, $config);
-if($response->status_code === 400 || $response->status_code === 403) {
-    die(header("HTTP/1.0 400 Bad Request"));
-    exit;
-}
+print_r($_FILES);
+print_r($response);
+//if($response->status_code === 400 || $response->status_code === 403) {
+//    die(header("HTTP/1.0 400 Bad Request"));
+//    exit;
+//}
 ?>
