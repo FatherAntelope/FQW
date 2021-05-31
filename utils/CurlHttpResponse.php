@@ -75,6 +75,12 @@ function utils_call_api($url, $config = false): CurlHttpResponse {
                 curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
             }
             break;
+        case 'DELETE':
+            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'DELETE');
+            if ($data) {
+                curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
+            }
+            break;
         // GET, DELETE методы
         default:
             if ($data) {

@@ -126,7 +126,7 @@ if(array_keys($_GET)[0] === "admin") {
                                     / Отсутствует
                                 </h5>
                                 <h5 class="text-muted">Дата поступления: <?php echo date("d.m.Y", strtotime($user_group_info->data['receipt_date']));?></h5>
-                                <?php if(count($user_group_info->data['group']) > 0) {?>
+                                <?php if(isset($user_group_info->data['group'])) {?>
                                 <div class="row">
                                     <div class="col-lg-3">
                                         <h5 class="text-muted">Группа пациента:</h5>
