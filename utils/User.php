@@ -7,13 +7,13 @@ require $_SERVER['DOCUMENT_ROOT'] . "/utils/CurlHttpResponse.php";
  */
 class User {
     /**
-     * @var $user_data array хранит полученные данные с сервера БД
-     * @var $user_role string хранит роль пользователя
-     * @var $user_token string хранит токен пользователя
+     * @var $api object хранит полученные данные с сервера БД
+     * @var $role string хранит роль пользователя
+     * @var $token string хранит токен пользователя
      */
-    private $user_data = null;
-    private $user_role = null;
-    private $user_token = null;
+    private $json = null;
+    private $role = null;
+    private $token = null;
 
     /**
      * User constructor.
@@ -23,18 +23,18 @@ class User {
      * @example Ошибка может произойти из-за истечения срока действия токена, то есть токен уже недействителен - неверный.
      */
     public function __construct(string $user_token) {
-        $this->user_token = $user_token;
+        $this->token = $user_token;
         $url = protocol."://".domain_name_api."/api/med/user";
         $config = [
             "method" => "GET",
-            "token" => $this->user_token
+            "token" => $this->token
         ];
         /**
          * @var CurlHttpResponse используется для вызова функции
          * Принимает данные API
          */
-        $this->user_data = utils_call_api($url, $config);
-        $this->user_role = $this->user_data->data['user']['role'];
+        $this->json = utils_call_api($url, $config);
+        $this->role = $this->json->data['user']['role'];
     }
 
     /**
@@ -42,21 +42,21 @@ class User {
      * @return boolean
      */
     public function isUserRole(string $check_name_role) : bool {
-        return $this->user_role === $check_name_role;
+        return $this->role === $check_name_role;
     }
 
     /**
      * @return array получение данных пользователя
      */
     public function getData() : array {
-        return $this->user_data->data['user'];
+        return $this->json->data['user'];
     }
 
     /**
      * @return int HTTP код (статус) обработки запроса, например 200 - успех, 400 - неверный запрос и так далее
      */
     public function getStatusCode() : int {
-        return $this->user_data->status_code;
+        return $this->json->status_code;
     }
 }
 

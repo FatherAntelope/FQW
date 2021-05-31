@@ -128,7 +128,10 @@ $whose_user = 1;
                                         <?php } ?>
                                         <li><a href="/lk/users/profile.php?patient=<?php echo $patient['id']; ?>" type="button" class="btn mt-1 btn-sm text-white" style="background-color: var(--cyan-color)">Профиль</a></li>
                                         <li><button type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)">Редактирование</button></li>
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-danger" data-toggle="modal" data-target="#openModalRemoveUser">Удаление</button></li>
+                                        <li>
+                                            <input type="hidden" value="<?php echo getItitialsFullName($patient_user->data['user']['surname'], $patient_user->data['user']['name'], $patient_user->data['user']['patronymic'])?>">
+                                            <button type="button" class="btn mt-1 btn-sm btn-danger" value="<?php echo $patient_user->data['user']['id']?>" name="btn_delete_user">Удаление</button>
+                                        </li>
                                     </ul>
                                 </td>
                             </tr>
@@ -202,7 +205,9 @@ $whose_user = 1;
                                         <li><button type="button" class="btn mt-1 btn-sm btn-secondary text-white" data-toggle="modal" data-target="#openModalRecoveryPasswordUser">Восстановить пароль</button></li>
                                         <li><button type="button" class="btn mt-1 btn-sm text-white" style="background-color: var(--cyan-color)">Профиль</button></li>
                                         <li><button type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)">Редактирование</button></li>
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-danger" data-toggle="modal" data-target="#openModalRemoveUser">Удаление</button></li>
+                                        <li>
+                                            <button type="button" class="btn mt-1 btn-sm btn-danger" data-toggle="modal" data-target="#openModalRemoveUser">Удаление</button>
+                                        </li>
                                     </ul>
                                 </td>
                             </tr>
@@ -264,7 +269,10 @@ $whose_user = 1;
                                         <li><button type="button" class="btn mt-1 btn-sm btn-secondary text-white" data-toggle="modal" data-target="#openModalRecoveryPasswordUser">Восстановить пароль</button></li>
                                         <li><a href="/lk/users/profile.php?admin=<?php echo $admin['id']; ?>" type="button" class="btn mt-1 btn-sm text-white" style="background-color: var(--cyan-color)">Профиль</a></li>
                                         <li><button type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)">Редактирование</button></li>
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-danger" data-toggle="modal" data-target="#openModalRemoveUser">Удаление</button></li>
+                                        <li>
+                                            <input type="hidden" value="<?php echo getItitialsFullName($admin_user->data['user']['surname'], $admin_user->data['user']['name'], $admin_user->data['user']['patronymic'])?>">
+                                            <button type="button" class="btn mt-1 btn-sm btn-danger" value="<?php echo $admin_user->data['user']['id']?>" name="btn_delete_user">Удаление</button>
+                                        </li>
                                     </ul>
                                 </td>
                             </tr>
@@ -294,14 +302,16 @@ $whose_user = 1;
         <div class="modal-content">
             <div class="modal-body">
                 <div class="alert alert-danger" role="alert">
-                    Вы уверены, что хотите удалить данного пользователя?
+                    Вы уверены, что хотите удалить пользователя <b><span id="spanFullNameDeleteUser"></span></b>?
+                </div>
+                <div class="alert alert-success" role="alert" id="alertSuccessDeleteUser" hidden>
+                    Пользователь успешно удален
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Нет</button>
-                <form id="queryDeleteUserProfile">
-                    <input type="hidden">
-                    <button type="submit" class="btn btn-success" name="user_email" value="mail@mail.ru">Да</button>
+                <form id="queryDeleteUserProfile" method="post" action="/queries/admin/deleteUserProfile.php">
+                    <button type="submit" class="btn btn-success" value="" name="delete_user_id">Да</button>
                 </form>
             </div>
         </div>
@@ -415,20 +425,31 @@ $whose_user = 1;
     });
 </script>
 <script>
-    $("#queryDeleteUserProfile").submit(function () {
-        $.ajax({
-            url: "/queries/admin/deleteUserProfile.php",
-            method: "POST",
-            data: $(this).serialize(),
-            success: function () {
-                $("#openModalRemoveUser").modal('hide');
-            },
-            error: function () {
-
-            }
-        });
-        return false;
+    $("button[name='btn_delete_user']").click(function () {
+        $("button[name='delete_user_id']").val($(this).val());
+        $("#spanFullNameDeleteUser").text(
+            $(this).prev().val()
+        );
+        $('#openModalRemoveUser').modal('show');
     });
+
+    // $("#queryDeleteUserProfile").submit(function () {
+    //     $.ajax({
+    //         url: "/queries/admin/deleteUserProfile.php",
+    //         method: "POST",
+    //         data: $(this).serialize(),
+    //         success: function () {
+    //             $("#queryDeleteUserProfile").parent().attr("hidden", "hidden");
+    //             $("#alertSuccessDeleteUser").removeAttr("hidden");
+    //             $("#alertSuccessDeleteUser").prev().attr("hidden", "hidden");
+    //             setTimeout(function(){ location.reload()}, 1100);
+    //         },
+    //         error: function () {
+    //
+    //         }
+    //     });
+    //     return false;
+    // });
 
     $("#queryRecoveryPasswordUser").submit(function () {
         $.ajax({
@@ -436,7 +457,8 @@ $whose_user = 1;
             method: "POST",
             data: $(this).serialize(),
             success: function () {
-                $("#openModalRecoveryPasswordUser").modal('hide');
+
+                setTimeout(function(){ $("#openModalRecoveryPasswordUser").modal('hide');}, 3000);
             },
             error: function () {
 

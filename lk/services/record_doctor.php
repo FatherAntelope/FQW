@@ -25,7 +25,7 @@ $count_records = 10; //количество
     <script src="//cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/js/chosen.js"></script>
     <script defer src="/js/all.js"></script>
-    <title><? echo web_name_header; ?></title>
+    <title><?php echo web_name_header; ?></title>
 </head>
 <style>
     @media (max-width: 992px) {

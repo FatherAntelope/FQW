@@ -18,9 +18,9 @@ $data = [
     "user" => [
         "email" => $_POST['user_email'],
         "password" => $password_generate,
-        "name" => $_POST['user_name'],
-        "surname" => $_POST['user_surname'],
-        "patronymic" => $_POST['user_patronymic'],
+        "name" => ucfirst(strtolower($_POST['user_name'])),
+        "surname" => ucfirst(strtolower($_POST['user_surname'])),
+        "patronymic" => ucfirst(strtolower($_POST['user_patronymic'])),
         "phone_number" => $_POST['user_phone'],
         "role" => $_POST['user_role'],
         "photo" => ($_FILES['user_photo']['tmp_name'] !== "") ? base64_encode(file_get_contents($_FILES['user_photo']['tmp_name'])) : ""
@@ -66,7 +66,7 @@ if ($_POST['user_role'] === "Patient") {
             "birth_date" => $_POST['patient_date_birth'],
             "gender" => $_POST['patient_gender'],
             "region" => $_POST['patient_region'],
-            "city" => $_POST['patient_locality'],
+            "city" => ucfirst(strtolower($_POST['patient_locality'])),
             "type" => $_POST['patient_category'],
             "complaints" => $_POST['patient_subjective_complaint']
         ]
