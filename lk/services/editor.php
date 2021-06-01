@@ -383,27 +383,30 @@ if($getSelected != "specializations" &&
                 <div class="alert alert-info" role="alert" style="font-size: 12px">
                     Внимательно создавайте процедуры. Проверяйте заполненные поля перед созданием процедуры
                 </div>
-                <form id="queryAddServiceProcedure">
+                <form id="queryAddServiceProcedure" enctype="multipart/form-data">
                     <input type="hidden" name="service_type" value="procedure">
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-lg-5">
+                            <div class="col-xl-4 col-lg-6">
                                 <label style="color: var(--yellow-color)">Название процедуры <strong style="color: var(--red--color)">*</strong></label>
                                 <input type="text" name="service_name" maxlength="30" class="form-control" required>
-
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-xl-3 col-lg-6">
                                 <label style="color: var(--yellow-color)">Стоимость услуги (руб.) <strong style="color: var(--red--color)">*</strong></label>
                                 <input type="number" min="0" max="100000" name="service_cost" class="form-control" placeholder="Введите стоимость" required>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-xl-2 col-lg-6">
+                                <label style="color: var(--yellow-color)">Расположение <strong style="color: var(--red--color)">*</strong></label>
+                                <input type="text" name="service_placement" maxlength="20" class="form-control" placeholder="Зал или кабинет" required>
+                            </div>
+                            <div class="col-xl-3 col-lg-6">
                                 <div class="form-group">
                                     <label style="color: var(--yellow-color)">Фото <strong style="color: var(--red--color)">*</strong></label>
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="customFile" name="procedure_photo" accept="image/*">
+                                        <input type="file" class="custom-file-input" id="customFile" name="service_photo" accept="image/*" required>
                                         <label class="custom-file-label" for="customFile" data-browse="Открыть">Выберите фото</label>
-                                        <small class="text-muted form-text">До 2 Мб</small>
                                     </div>
+                                    <small class="text-muted form-text">До 2 Мб</small>
                                 </div>
                             </div>
                         </div>
@@ -411,7 +414,7 @@ if($getSelected != "specializations" &&
                             <div class="col">
                                 <div class="form-group">
                                     <label style="color: var(--yellow-color)">Описание процедуры <strong style="color: var(--red--color)">*</strong></label>
-                                    <textarea class="form-control" minlength="20" maxlength="5000" placeholder="Назначение процедуры, ее описание и т.п." name="procedure_description" required></textarea>
+                                    <textarea class="form-control" minlength="20" maxlength="5000" name="service_description" placeholder="Назначение процедуры, ее описание и т.п."  required></textarea>
                                     <small class="text-muted form-text">От 20 до 5000 символов</small>
                                 </div>
                             </div>
@@ -478,26 +481,30 @@ if($getSelected != "specializations" &&
                 <div class="alert alert-info" role="alert" style="font-size: 12px">
                     Внимательно создавайте обследования. Проверяйте заполненные поля перед созданием обследования
                 </div>
-                <form id="queryAddServiceExamination">
+                <form id="queryAddServiceExamination" enctype="multipart/form-data">
                     <input type="hidden" name="service_type" value="examination">
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-lg-5">
+                            <div class="col-xl-4 col-lg-6">
                                 <label style="color: var(--yellow-color)">Название обследования <strong style="color: var(--red--color)">*</strong></label>
-                                <input type="text" name="service_name" class="form-control" required>
+                                <input type="text" name="service_name" maxlength="30" class="form-control" required>
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-xl-3 col-lg-6">
                                 <label style="color: var(--yellow-color)">Стоимость услуги (руб.) <strong style="color: var(--red--color)">*</strong></label>
-                                <input type="number" min="0" name="service_cost" class="form-control" placeholder="Введите стоимость" required>
+                                <input type="number" min="0" max="100000" name="service_cost" class="form-control" placeholder="Введите стоимость" required>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-xl-2 col-lg-6">
+                                <label style="color: var(--yellow-color)">Расположение <strong style="color: var(--red--color)">*</strong></label>
+                                <input type="text" name="service_placement" maxlength="20" class="form-control" placeholder="Зал или кабинет" required>
+                            </div>
+                            <div class="col-xl-3 col-lg-6">
                                 <div class="form-group">
                                     <label style="color: var(--yellow-color)">Фото <strong style="color: var(--red--color)">*</strong></label>
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="customFile" name="examination_photo" accept="image/*">
+                                        <input type="file" class="custom-file-input" id="customFile" name="service_photo" accept="image/*" required>
                                         <label class="custom-file-label" for="customFile" data-browse="Открыть">Выберите фото</label>
-                                        <small class="text-muted form-text">До 2 Мб</small>
                                     </div>
+                                    <small class="text-muted form-text">До 2 Мб</small>
                                 </div>
                             </div>
                         </div>
@@ -505,7 +512,7 @@ if($getSelected != "specializations" &&
                             <div class="col">
                                 <div class="form-group">
                                     <label style="color: var(--yellow-color)">Описание обследования <strong style="color: var(--red--color)">*</strong></label>
-                                    <textarea class="form-control" name="examination_description" minlength="20" maxlength="5000" placeholder="Назначение обследование, ее описание и т.п." required></textarea>
+                                    <textarea class="form-control" name="service_description" minlength="20" maxlength="5000" placeholder="Назначение обследование, ее описание и т.п." required></textarea>
                                     <small class="text-muted form-text">От 20 до 5000 символов</small>
                                 </div>
                             </div>
@@ -559,26 +566,30 @@ if($getSelected != "specializations" &&
                 <div class="alert alert-info" role="alert" style="font-size: 12px">
                     Внимательно создавайте мероприятия. Проверяйте заполненные поля перед созданием мероприятия
                 </div>
-                <form id="queryAddServiceEvent">
+                <form id="queryAddServiceEvent" enctype="multipart/form-data">
                     <input type="hidden" name="service_type" value="event">
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-lg-5">
-                                <label style="color: var(--yellow-color)">Название мероприятия<strong style="color: var(--red--color)">*</strong></label>
-                                <input type="text" name="service_name" class="form-control required">
+                            <div class="col-xl-4 col-lg-6">
+                                <label style="color: var(--yellow-color)">Название мероприятия <strong style="color: var(--red--color)">*</strong></label>
+                                <input type="text" name="service_name" maxlength="30" class="form-control" required>
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-xl-3 col-lg-6">
                                 <label style="color: var(--yellow-color)">Стоимость услуги (руб.) <strong style="color: var(--red--color)">*</strong></label>
-                                <input type="number" min="0" name="service_cost" class="form-control" placeholder="Введите стоимость" required>
+                                <input type="number" min="0" max="100000" name="service_cost" class="form-control" placeholder="Введите стоимость" required>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-xl-2 col-lg-6">
+                                <label style="color: var(--yellow-color)">Расположение <strong style="color: var(--red--color)">*</strong></label>
+                                <input type="text" name="service_placement" maxlength="20" class="form-control" placeholder="Зал или кабинет" required>
+                            </div>
+                            <div class="col-xl-3 col-lg-6">
                                 <div class="form-group">
                                     <label style="color: var(--yellow-color)">Фото <strong style="color: var(--red--color)">*</strong></label>
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="customFile" name="examination_photo" accept="image/*">
+                                        <input type="file" class="custom-file-input" id="customFile" name="service_photo" accept="image/*" required>
                                         <label class="custom-file-label" for="customFile" data-browse="Открыть">Выберите фото</label>
-                                        <small class="text-muted form-text">До 2 Мб</small>
                                     </div>
+                                    <small class="text-muted form-text">До 2 Мб</small>
                                 </div>
                             </div>
                         </div>
@@ -586,7 +597,7 @@ if($getSelected != "specializations" &&
                             <div class="col">
                                 <div class="form-group">
                                     <label style="color: var(--yellow-color)">Описание мероприятия <strong style="color: var(--red--color)">*</strong></label>
-                                    <textarea class="form-control" name="event_description" minlength="20" maxlength="5000" placeholder="Назначение мероприятия, ее описание и т.п." required></textarea>
+                                    <textarea class="form-control" name="service_description" minlength="20" maxlength="5000" placeholder="Назначение мероприятия, ее описание и т.п." required></textarea>
                                     <small class="text-muted form-text">От 20 до 5000 символов</small>
                                 </div>
                             </div>
@@ -677,6 +688,22 @@ if($getSelected != "specializations" &&
     $('.custom-file-input').on('change', function() {
         let fileName = $(this).val().split('\\').pop();
         $(this).next('.custom-file-label').addClass("selected").html(fileName);
+    });
+
+    $('[name="service_photo"]').on('change', function () {
+        if($(this).val !== "") {
+            if (this.files[0].size > 2097152) {
+                $(this).addClass('is-invalid');
+                $(this).val("");
+                $(this).parent().next().removeClass('text-muted');
+                $(this).parent().next().addClass('text-danger');
+            } else {
+                $(this).removeClass('is-invalid');
+                $(this).attr("placeholder", "Выберите фото");
+                $(this).parent().next().removeClass('text-danger');
+                $(this).parent().next().addClass('text-muted');
+            }
+        }
     });
 
     /**
@@ -808,7 +835,10 @@ if($getSelected != "specializations" &&
         $.ajax({
             url: "/queries/admin/addService.php",
             method: "POST",
-            data: $(this).serialize(),
+            contentType: false,
+            processData: false,
+            enctype: 'multipart/form-data',
+            data: new FormData(this),
             success: function () {
                 $("#alertErrorAddServiceProcedure").attr("hidden", "hidden");
                 $("#queryAddServiceProcedure").attr("hidden", "hidden");
@@ -837,7 +867,10 @@ if($getSelected != "specializations" &&
         $.ajax({
             url: "/queries/admin/addService.php",
             method: "POST",
-            data: $(this).serialize(),
+            contentType: false,
+            processData: false,
+            enctype: 'multipart/form-data',
+            data: new FormData(this),
             success: function () {
                 $("#alertErrorAddServiceExamination").attr("hidden", "hidden");
                 $("#queryAddServiceExamination").attr("hidden", "hidden");
@@ -866,7 +899,10 @@ if($getSelected != "specializations" &&
         $.ajax({
             url: "/queries/admin/addService.php",
             method: "POST",
-            data: $(this).serialize(),
+            contentType: false,
+            processData: false,
+            enctype: 'multipart/form-data',
+            data: new FormData(this),
             success: function () {
                 $("#alertErrorAddServiceEvent").attr("hidden", "hidden");
                 $("#queryAddServiceEvent").attr("hidden", "hidden");

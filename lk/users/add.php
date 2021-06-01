@@ -22,6 +22,27 @@ if($getSelected != "patient" &&
     header("Location: /lk/users/");
     exit;
 }
+
+$url = protocol."://".domain_name_api."/api/med/speciality";
+$config = [
+    "method" => "GET",
+    "token" => $_COOKIE['user_token']
+];
+$specialities = utils_call_api($url, $config);
+
+$url = protocol."://".domain_name_api."/api/med/procedure";
+$config = [
+    "method" => "GET",
+    "token" => $_COOKIE['user_token']
+];
+$procedures = utils_call_api($url, $config);
+
+$url = protocol."://".domain_name_api."/api/med/survey";
+$config = [
+    "method" => "GET",
+    "token" => $_COOKIE['user_token']
+];
+$examinations = utils_call_api($url, $config);
 ?>
 <!doctype html>
 <html lang="ru">
@@ -59,23 +80,23 @@ if($getSelected != "patient" &&
         </nav>
         <ul class="nav nav-pills flex-column flex-sm-row mb-2" role="tablist" id="tablist">
             <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
-                <a class="nav-link tab-bg-active font-weight-bold <? if($getSelected == 'patient') echo "active";?>" onclick="window.history.pushState('', '', '/lk/users/add.php?selected=patient');"  data-toggle="tab" href="#patient" role="tab">
+                <a class="nav-link tab-bg-active font-weight-bold <?php if($getSelected == 'patient') echo "active";?>" onclick="window.history.pushState('', '', '/lk/users/add.php?selected=patient');"  data-toggle="tab" href="#patient" role="tab">
                     <i class="fas fa-user-injured mr-2"></i>Пациент
                 </a>
             </li>
             <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
-                <a class="nav-link tab-bg-active font-weight-bold <? if($getSelected == 'doctor') echo "active";?>" onclick="window.history.pushState('', '', '/lk/users/add.php?selected=doctor');" data-toggle="tab" href="#doctor" role="tab">
+                <a class="nav-link tab-bg-active font-weight-bold <?php if($getSelected == 'doctor') echo "active";?>" onclick="window.history.pushState('', '', '/lk/users/add.php?selected=doctor');" data-toggle="tab" href="#doctor" role="tab">
                     <i class="fas fa-user-md mr-1"></i> Медицинский персонал
                 </a>
             </li>
             <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
-                <a class="nav-link tab-bg-active font-weight-bold <? if($getSelected == 'administrator') echo "active";?>" onclick="window.history.pushState('', '', '/lk/users/add.php?selected=administrator');" data-toggle="tab" href="#admin" role="tab">
+                <a class="nav-link tab-bg-active font-weight-bold <?php if($getSelected == 'administrator') echo "active";?>" onclick="window.history.pushState('', '', '/lk/users/add.php?selected=administrator');" data-toggle="tab" href="#admin" role="tab">
                     <i class="fas fa-user-cog mr-1"></i> Администрация
                 </a>
             </li>
         </ul>
         <div class="tab-content">
-            <div class="tab-pane fade show <? if($getSelected == 'patient') echo "active";?>" id="patient" role="tabpanel">
+            <div class="tab-pane fade show <?php if($getSelected == 'patient') echo "active";?>" id="patient" role="tabpanel">
                 <div class="card">
                     <div class="card-body">
                         <div class="row justify-content-center animate slideIn" hidden>
@@ -324,7 +345,7 @@ if($getSelected != "patient" &&
                     </div>
                 </div>
             </div>
-            <div class="tab-pane fade show <? if($getSelected == 'doctor') echo "active";?>" id="doctor" role="tabpanel">
+            <div class="tab-pane fade show <?php if($getSelected == 'doctor') echo "active";?>" id="doctor" role="tabpanel">
                 <div class="card">
                     <div class="card-body">
                         <div class="row justify-content-center animate slideIn" hidden>
@@ -461,7 +482,7 @@ if($getSelected != "patient" &&
                     </div>
                 </div>
             </div>
-            <div class="tab-pane fade show <? if($getSelected == 'administrator') echo "active";?>" id="admin" role="tabpanel">
+            <div class="tab-pane fade show <?php if($getSelected == 'administrator') echo "active";?>" id="admin" role="tabpanel">
                 <div class="card">
                     <div class="card-body">
                         <div class="row justify-content-center animate slideIn" hidden>
@@ -602,16 +623,16 @@ if($getSelected != "patient" &&
         }
     });
 
+
+
     $(document).on('change', '#chosen_required_post', function () {
         let index = this.options.selectedIndex;
         if(index === 1) {
             $('#chosen_med').append(
                 '<div class="form-group">' +
                     '<label style="color: var(--yellow-color)">Специальность <strong style="color: var(--red--color)">*</strong></label>' +
-                    '<select multiple  id="chosen_required_profession" name="doctor_profession[]" class="form-control form-control-chosen-required" data-placeholder="Выберите специальность" required>' +
+                    '<select multiple id="chosen_required_profession" name="doctor_profession[]" class="form-control form-control-chosen-required" data-placeholder="Выберите специальность" required>' +
                         '<option></option>' +
-                        '<option value="profession1"> Специальность 1</option>' +
-                        '<option value="profession2"> Специальность 2</option>' +
                     '</select>' +
                 '</div>' +
                 '<div class="form-group">' +
@@ -619,6 +640,22 @@ if($getSelected != "patient" &&
                     '<input type="text" class="form-control" placeholder="Номер кабинета или зала" maxlength="30" name="doctor_profession_location" required>'+
                 '</div>'
             );
+            <?php
+            foreach ($specialities->data as $speciality) {
+            $url = protocol."://".domain_name_api."/api/med/service/".$speciality['service'];
+            $config = [
+                "method" => "GET",
+                "token" => $_COOKIE['user_token']
+            ];
+            $service_speciality = utils_call_api($url, $config);
+            ?>
+            $('#chosen_required_profession').append($('<option>', {
+                value: <?php echo $service_speciality->data['id']?>,
+                text: "<?php echo $service_speciality->data['name']?>"
+            }));
+            <?php } ?>
+
+
             $('#chosen_required_profession').chosen();
             $('#chosen_required_procedure').closest('div').remove();
             $('#chosen_required_examination').parent().next().closest('div').remove();
@@ -630,22 +667,48 @@ if($getSelected != "patient" &&
                     '<label style="color: var(--yellow-color)">Процедура</label>' +
                     '<select multiple id="chosen_required_procedure" name="doctor_procedure[]" class="form-control form-control-chosen-required" data-placeholder="Выберите процедуру">' +
                         '<option></option>' +
-                        '<option value="procedure1"> Процедура 1</option>' +
-                        '<option value="procedure2"> Процедура 2</option>' +
                     '</select>' +
                 '</div>' +
                 '<div class="form-group">' +
                     '<label style="color: var(--yellow-color)">Обследование</label>' +
                     '<select multiple id="chosen_required_examination" name="doctor_examination[]" class="form-control form-control-chosen-required" data-placeholder="Выберите обследование">' +
                         '<option></option>' +
-                        '<option value="examination1"> Обследование 1</option>' +
-                        '<option value="examination2"> Обследование 2</option>' +
                     '</select>' +
                 '</div>' +
                 '<div class="alert alert-info" role="alert" style="font-size: 12px">'
                     + 'Необходимо назначить хотя-бы одну процедуру или обследование' +
                 '</div>'
             );
+
+            <?php
+            foreach ($procedures->data as $procedure) {
+            $url = protocol."://".domain_name_api."/api/med/service/".$procedure['service'];
+            $config = [
+                "method" => "GET",
+                "token" => $_COOKIE['user_token']
+            ];
+            $service_procedure = utils_call_api($url, $config);
+            ?>
+            $('#chosen_required_procedure').append($('<option>', {
+                value: <?php echo $service_procedure->data['id']?>,
+                text: "<?php echo $service_procedure->data['name']?>"
+            }));
+            <?php } ?>
+
+            <?php
+            foreach ($examinations->data as $examination) {
+            $url = protocol."://".domain_name_api."/api/med/service/".$examination['service'];
+            $config = [
+                "method" => "GET",
+                "token" => $_COOKIE['user_token']
+            ];
+            $service_examination = utils_call_api($url, $config);
+            ?>
+            $('#chosen_required_examination').append($('<option>', {
+                value: <?php echo $service_examination->data['id']?>,
+                text: "<?php echo $service_examination->data['name']?>"
+            }));
+            <?php } ?>
 
             $('#chosen_required_profession').parent().next().closest('div').remove();
             $('#chosen_required_profession').closest('div').remove();
