@@ -77,11 +77,11 @@ function utils_call_api($url, $config = false): CurlHttpResponse {
             break;
         case 'DELETE':
             curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'DELETE');
-            if ($data) {
-                curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
-            }
+//            if ($data) {
+//                curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
+//            }
             break;
-        // GET, DELETE методы
+        // GET метод
         default:
             if ($data) {
                 $url = sprintf("%s?%s", $url, http_build_query($data));
