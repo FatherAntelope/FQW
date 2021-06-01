@@ -26,7 +26,6 @@ if($service->status_code === 400 || $service->status_code === 403) {
     exit;
 }
 
-print_r($_POST);
 // Создание специальности от услуги
 if($_POST['service_type'] === "speciality") {
     $url = protocol."://".domain_name_api."/api/med/speciality";
@@ -41,6 +40,7 @@ if($_POST['service_type'] === "speciality") {
     $speciality = utils_call_api($url, $config);
 }
 
+// Создание процедуры от услуги
 if($_POST['service_type'] === "procedure") {
     $url = protocol."://".domain_name_api."/api/med/procedure";
     $data = [
@@ -60,6 +60,7 @@ if($_POST['service_type'] === "procedure") {
     $procedure = utils_call_api($url, $config);
 }
 
+// Создание обследования от услуги
 if($_POST['service_type'] === "examination") {
     $url = protocol."://".domain_name_api."/api/med/survey";
     $data = [
@@ -77,6 +78,7 @@ if($_POST['service_type'] === "examination") {
     $examination = utils_call_api($url, $config);
 }
 
+// Создание мероприятия от услуги
 if($_POST['service_type'] === "event") {
     $url = protocol."://".domain_name_api."/api/med/event";
     $data = [

@@ -605,11 +605,11 @@ if($getSelected != "specializations" &&
                         <div class="row">
                             <div class="col-lg-5">
                                 <label style="color: var(--yellow-color)">Дата начала мероприятия<strong style="color: var(--red--color)">*</strong></label>
-                                <input type="date" name="event_date_start" class="form-control" required>
+                                <input type="date" name="event_date_start" min="<?php echo date("Y-m-d")?>" class="form-control" required>
                             </div>
                             <div class="col-lg-5">
                                 <label style="color: var(--yellow-color)">Дата окончания мероприятия</label>
-                                <input type="date" name="event_date_end" class="form-control">
+                                <input type="date" name="event_date_end" class="form-control" disabled>
                                 <small class="form-text text-muted">
                                     Оставьте поле пустым, если мероприятие непрерывно
                                 </small>
@@ -679,6 +679,12 @@ if($getSelected != "specializations" &&
 <?php require $_SERVER['DOCUMENT_ROOT']."/footer.php"; ?>
 </body>
 <script>
+    $('input[name="event_date_start"]').on('input', function () {
+        $('input[name="event_date_end"]').val("");
+        $('input[name="event_date_end"]').removeAttr("disabled", "disabled");
+        $('input[name="event_date_end"]').attr("min", $(this).val());
+    });
+
     $('#notificationToast').toast('show');
     function checkInputRu(obj) {
         obj.value = obj.value.replace(/[^а-яё ]/ig,'');
@@ -690,7 +696,7 @@ if($getSelected != "specializations" &&
         $(this).next('.custom-file-label').addClass("selected").html(fileName);
     });
 
-    $('[name="service_photo"]').on('change', function () {
+    $('input[name="service_photo"]').on('change', function () {
         if($(this).val !== "") {
             if (this.files[0].size > 2097152) {
                 $(this).addClass('is-invalid');
