@@ -7,7 +7,7 @@
  */
 require $_SERVER['DOCUMENT_ROOT'] . "/utils/CurlHttpResponse.php";
 require $_SERVER['DOCUMENT_ROOT'] . "/utils/variables.php";
-require $_SERVER['DOCUMENT_ROOT']. "/utils/functions.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/utils/functions.php";
 
 $url = protocol."://".domain_name_api."/api/med/registration";
 // Получение сгенерированного пароля в переменную
@@ -35,7 +35,6 @@ $config = [
 
 // Получение данных после запроса к точке API - авторизации пользователя
 $user = utils_call_api($url, $config);
-print_r($user);
 
 // Если HTTP-код 400 (неверный запрос) или 403 (нет доступа доступа) после обращения к API сервера БД,
 // то завершаем выполнение скрипта

@@ -336,11 +336,12 @@ if($getSelected != "specializations" &&
                     Внимательно создавайте специальности. Проверяйте заполненные поля перед созданием специальности
                 </div>
                 <form id="queryAddServiceSpecialization">
+                    <input type="hidden" name="service_type" value="speciality">
                     <div class="form-group">
                         <div class="row">
                             <div class="col-lg-7">
                                 <label style="color: var(--yellow-color)">Название специальности <strong style="color: var(--red--color)">*</strong></label>
-                                <input type="text" name="service_name" class="form-control" maxlength="30" required>
+                                <input type="text" name="service_name" class="form-control" onkeyup="checkInputRu(this)" maxlength="30" required>
                                 <small class="text-muted form-text">Кириллица</small>
                             </div>
                             <div class="col-lg-5">
@@ -383,6 +384,7 @@ if($getSelected != "specializations" &&
                     Внимательно создавайте процедуры. Проверяйте заполненные поля перед созданием процедуры
                 </div>
                 <form id="queryAddServiceProcedure">
+                    <input type="hidden" name="service_type" value="procedure">
                     <div class="form-group">
                         <div class="row">
                             <div class="col-lg-5">
@@ -477,6 +479,7 @@ if($getSelected != "specializations" &&
                     Внимательно создавайте обследования. Проверяйте заполненные поля перед созданием обследования
                 </div>
                 <form id="queryAddServiceExamination">
+                    <input type="hidden" name="service_type" value="examination">
                     <div class="form-group">
                         <div class="row">
                             <div class="col-lg-5">
@@ -557,6 +560,7 @@ if($getSelected != "specializations" &&
                     Внимательно создавайте мероприятия. Проверяйте заполненные поля перед созданием мероприятия
                 </div>
                 <form id="queryAddServiceEvent">
+                    <input type="hidden" name="service_type" value="event">
                     <div class="form-group">
                         <div class="row">
                             <div class="col-lg-5">
@@ -665,6 +669,9 @@ if($getSelected != "specializations" &&
 </body>
 <script>
     $('#notificationToast').toast('show');
+    function checkInputRu(obj) {
+        obj.value = obj.value.replace(/[^а-яё ]/ig,'');
+    }
 
     //Передает путь в placeholder поля к полю загрузки изображения
     $('.custom-file-input').on('change', function() {
