@@ -1,4 +1,3 @@
-<!--Страница (модуль) новостей санатория-->
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/utils/variables.php';
 require $_SERVER['DOCUMENT_ROOT'] . '/utils/functions.php';
@@ -24,6 +23,7 @@ if(isset($_COOKIE['user_token'])) {
     $whose_user = 0;
 }
 ?>
+<!--Страница (модуль) новостей санатория-->
 <!doctype html>
 <html lang="ru">
 <head>

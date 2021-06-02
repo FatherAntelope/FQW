@@ -15,7 +15,7 @@ if($user->getStatusCode() === 400 || $user->getStatusCode() === 403) {
     header("Location: /error/401.php");
 }
 // Если роль пользователя не "Доктор", то направляет на страницу ошибки 403
-if(!$user->isUserRole("Doctor"))
+if(!$user->isUserRole("Admin"))
     header("Location: /error/403.php");
 
 // Выгружает данные пользователя
@@ -38,6 +38,7 @@ $whose_user = 3;
     <script src="//cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script type="text/javascript" src="/js/jquery.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/jquery.maskedinput@1.4.1/src/jquery.maskedinput.min.js" type="text/javascript"></script>
     <script type="text/javascript" charset="utf8" src="/js/datatables.js"></script>
     <script src="/js/chosen.js"></script>
     <script defer src="/js/all.js"></script>
@@ -87,11 +88,11 @@ $whose_user = 3;
                     </h5>
                     <div class="form-group">
                         <label style="color: var(--yellow-color)">Жалобы  <strong style="color: var(--red--color)">*</strong></label>
-                        <textarea class="form-control" placeholder="Напишите все жалобы пациента, если их нет то напишите 'отсутствуют'"></textarea>
+                        <textarea class="form-control" placeholder="Напишите все жалобы пациента, если их нет то напишите 'отсутствуют'" minlength="11" maxlength="5000"></textarea>
                     </div>
                     <div class="form-group">
                         <label style="color: var(--yellow-color)">Анамнез  <strong style="color: var(--red--color)">*</strong></label>
-                        <textarea class="form-control" placeholder="Напишите полученные сведения от пациента"></textarea>
+                        <textarea class="form-control" placeholder="Напишите полученные сведения от пациента" minlength="11" maxlength="7000"></textarea>
                     </div>
 
                     <h5 class="mb-3 text-muted text-uppercase bg-light p-2">
@@ -204,26 +205,27 @@ $whose_user = 3;
     $(document).on('click', '.plus-disease', function(){
         $(this).closest('.information_json_plus').before(
             '<tr>' +
-            '<td class="pl-0">' +
-            '<select name="disease_type_json_val[]" class="form-control form-control-chosen-required" data-placeholder="Тип" required>' +
+            '<td style="min-width: 15rem !important;" class="pl-0">' +
+            '<select name="disease_type[]" class="form-control form-control-chosen-required" data-placeholder="Тип" required>' +
             '<option></option>' +
             '<option value="0">Основной</option>' +
             '<option value="1">Сопутствующий</option>' +
             '</select>' +
             '</td>' +
-            '<td class="pl-0" style="max-width: 4em"><input type="text" class="form-control" name=disease_mkb_json_val[]" placeholder="МКБ" required></td>' +
-            '<td class="pl-0"><input type="text" class="form-control" name=disease_description_json_val[]" placeholder="Описание" required></td>' +
+            '<td class="pl-0"><input type="text" class="form-control disease-mkb" name=disease_mkb" placeholder="МКБ" required></td>' +
+            '<td class="pl-0"><input type="text" class="form-control" name=disease_description[]" minlength="20" maxlength="500" placeholder="Описание" required></td>' +
             '<td class="pl-0"><span class="btn btn-sm btn-danger rounded-circle minus mt-1"><i class="fas fa-minus"></i></span></td>' +
             '</tr>'
         );
-        $('select[name="disease_type_json_val[]"]').chosen();
+        $('select[name="disease_type[]"]').chosen();
+        $('.disease-mkb').mask('***-***');
     });
 
     $(document).on('click', '.plus-pills', function(){
         $(this).closest('.information_json_plus').before(
             '<tr>' +
-            '<td class="pl-0"><input type="text" class="form-control" name="pill_name_json_val[]" placeholder="Название" required></td>' +
-            '<td class="pl-0"><input type="text" class="form-control" name="pill_name_json_val[]" placeholder="Доза" required></td>' +
+            '<td class="pl-0"><input type="text" class="form-control" name="pill_name_json_val[]" minlength="2" maxlength="30" placeholder="Название" required></td>' +
+            '<td class="pl-0"><input type="text" class="form-control" name="pill_name_json_val[]" minlength="2" maxlength="30" placeholder="Доза" required></td>' +
             '<td class="pl-0">' +
             '<select name="pill_rule_take_json_val[]" class="form-control form-control-chosen-required" data-placeholder="Правило приема" required>' +
             '<option></option>' +
@@ -232,8 +234,9 @@ $whose_user = 3;
             '<option value="2">После еды</option>' +
             '<option value="3">Натощак</option>' +
             '</select>' +
+            '<td class="pl-0"><input type="number" min="1" max="1000" class="form-control" name="pill_name_json_val[]" placeholder="Повторы" required></td>' +
             '</td>' +
-            '<td class="pl-0"><input type="number" min="1" class="form-control" name="pill_period_json_val[]" placeholder="Период" required></td>' +
+            '<td class="pl-0"><input type="number" min="1" max="1000" class="form-control" name="pill_period_json_val[]" placeholder="Период" required></td>' +
             '<td class="pl-0"><span class="btn btn-sm btn-danger rounded-circle minus mt-1"><i class="fas fa-minus"></i></span></td>' +
             '</tr>'
         );
@@ -257,7 +260,7 @@ $whose_user = 3;
             '<option value="1">Дополнительно</option>' +
             '</select>' +
             '</td>' +
-            '<td class="pl-0" style="max-width: 3.5em"><input type="number" min="-1" class="form-control" name="procedure_recommendations_period_json_val[]" placeholder="Период" required></td>' +
+            '<td class="pl-0" style="max-width: 3.5em"><input type="number" min="-1" max="1000" class="form-control" name="procedure_recommendations_period_json_val[]" placeholder="Период" required></td>' +
             '<td class="pl-0"><span class="btn btn-sm btn-danger rounded-circle minus mt-1"><i class="fas fa-minus"></i></span></td>' +
             '</tr>'
         );
@@ -282,7 +285,7 @@ $whose_user = 3;
             '<option value="1">Дополнительно</option>' +
             '</select>' +
             '</td>' +
-            '<td class="pl-0" style="max-width: 3.5em"><input type="number" min="-1" class="form-control" name="self_control_recommendations_period_json_val[]" placeholder="Период" required></td>' +
+            '<td class="pl-0" style="max-width: 3.5em"><input type="number" min="-1" max="1000" class="form-control" name="self_control_recommendations_period_json_val[]" placeholder="Период" required></td>' +
             '<td class="pl-0"><span class="btn btn-sm btn-danger rounded-circle minus mt-1"><i class="fas fa-minus"></i></span></td>' +
             '</tr>'
         );
@@ -293,7 +296,7 @@ $whose_user = 3;
     $(document).on('click', '.plus-other-recommendations', function(){
         $(this).closest('.information_json_plus').before(
             '<tr>' +
-            '<td class="pl-0"><input type="text" class="form-control" name="other_recommendations_name_json_val[]" placeholder="Прочая рекомендация" required></td>' +
+            '<td class="pl-0"><input type="text" class="form-control" name="other_recommendations_name_json_val[]" minlength="20" maxlength="200" placeholder="Прочая рекомендация" required></td>' +
             '<td class="pl-0">' +
             '<select name="other_recommendations_type_json_val[]" class="form-control form-control-chosen-required" data-placeholder="Тип" required>' +
             '<option></option>' +
@@ -301,7 +304,7 @@ $whose_user = 3;
             '<option value="1">Дополнительно</option>' +
             '</select>' +
             '</td>' +
-            '<td class="pl-0" style="max-width: 3.5em"><input type="number" min="-1" class="form-control" name="other_recommendations_period_json_val[]" placeholder="Период" required></td>' +
+            '<td class="pl-0" style="max-width: 3.5em"><input type="number" min="-1" max="1000" class="form-control" name="other_recommendations_period_json_val[]" placeholder="Период" required></td>' +
             '<td class="pl-0"><span class="btn btn-sm btn-danger rounded-circle minus mt-1"><i class="fas fa-minus"></i></span></td>' +
             '</tr>'
         );
