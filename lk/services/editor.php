@@ -512,7 +512,7 @@ if($getSelected != "specializations" &&
                             <div class="col">
                                 <div class="form-group">
                                     <label style="color: var(--yellow-color)">Описание обследования <strong style="color: var(--red--color)">*</strong></label>
-                                    <textarea class="form-control" name="service_description" minlength="20" maxlength="5000" placeholder="Назначение обследование, ее описание и т.п." required></textarea>
+                                    <textarea class="form-control" name="service_description" minlength="20" maxlength="5000" placeholder="Назначение обследования, ее описание и т.п." required></textarea>
                                     <small class="text-muted form-text">От 20 до 5000 символов</small>
                                 </div>
                             </div>

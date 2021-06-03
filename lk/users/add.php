@@ -121,18 +121,21 @@ $examinations = utils_call_api($url, $config);
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Фамилия <strong style="color: var(--red--color)">*</strong></label>
                                         <input type="text" class="form-control" name="user_surname" minlength="2" maxlength="30" onkeyup="checkInputRu(this)" required>
+                                    <small class="form-text text-muted">Кириллица</small>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Имя <strong style="color: var(--red--color)">*</strong></label>
                                         <input type="text" class="form-control" name="user_name" minlength="2" maxlength="30" onkeyup="checkInputRu(this)" required>
+                                    <small class="form-text text-muted">Кириллица</small>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Отчество</label>
                                         <input type="text" class="form-control" name="user_patronymic" maxlength="30" onkeyup="checkInputRu(this)">
+                                    <small class="form-text text-muted">Кириллица</small>
                                     </div>
                                 </div>
                             </div>
@@ -330,8 +333,8 @@ $examinations = utils_call_api($url, $config);
                                 <div class="col">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Субъективные жалобы <strong style="color: var(--red--color)">*</strong></label>
-                                        <textarea class="form-control" name="patient_subjective_complaint" minlength="20" maxlength="500" placeholder="Кратко о том, зачем приехал пациент" required></textarea>
-                                        <small class="text-muted form-text">Минимум 20 символов</small>
+                                        <textarea class="form-control" name="patient_subjective_complaint" minlength="3" maxlength="500" placeholder="Кратко о том, зачем приехал пациент. Если жалоб нет, то укажите 'Жалоб нет'" required></textarea>
+                                        <small class="text-muted form-text">Минимум 3 символа</small>
                                     </div>
                                 </div>
                             </div>
@@ -360,7 +363,21 @@ $examinations = utils_call_api($url, $config);
                                 </div>
                             </div>
                         </div>
-                        <form id="queryRegistrationDoctor">
+                        <?php if(count($procedures->data) == 0 && count($specialities->data) == 0 && count($examinations->data) == 0) {?>
+                        <div class="row justify-content-center animate slideIn">
+                            <div class="col-md-12">
+                                <div class="text-center mt-2">
+                                    <img src="/images/403.svg" alt="" height="170">
+                                    <h3 class="mt-4" style="color: var(--red--color)"><b>Нет услуг!</b></h3>
+                                    <p class="text-muted">Необходимо создать услугу, чтобы получить доступ к регистрации медицинского персонала</p>
+                                    <a href="/lk/services/editor.php?selected=specializations" class="btn mt-2 text-white" style="background-color: var(--dark-cyan-color)">
+                                        <i class="fas fa-plus-circle mr-2"></i>Создать услугу
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <?php } else { ?>
+                        <form id="queryRegistrationDoctor" enctype="multipart/form-data">
                             <h5 class="mb-3 text-muted text-uppercase bg-light p-2">
                                 <i class="fas fa-user mr-1"></i>
                                 Персональные данные
@@ -370,18 +387,21 @@ $examinations = utils_call_api($url, $config);
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Фамилия <strong style="color: var(--red--color)">*</strong></label>
                                         <input type="text" class="form-control" name="user_surname" minlength="2" maxlength="30" onkeyup="checkInputRu(this)" required>
+                                    <small class="form-text text-muted">Кириллица</small>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Имя <strong style="color: var(--red--color)">*</strong></label>
                                         <input type="text" class="form-control" name="user_name" minlength="2" maxlength="30" onkeyup="checkInputRu(this)" required>
+                                    <small class="form-text text-muted">Кириллица</small>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Отчество</label>
                                         <input type="text" class="form-control" name="user_patronymic" maxlength="30" onkeyup="checkInputRu(this)">
+                                    <small class="form-text text-muted">Кириллица</small>
                                     </div>
                                 </div>
                             </div>
@@ -440,8 +460,11 @@ $examinations = utils_call_api($url, $config);
                                         <label style="color: var(--yellow-color)">Должность <strong style="color: var(--red--color)">*</strong></label>
                                         <select id="chosen_required_post" name="doctor_med_post" class="form-control form-control-chosen-required" data-placeholder="Выберите должность" required>
                                             <option></option>
-                                            <option value="doctor"> Врач</option>
-                                            <option value="specialist"> Специалист по услугам</option>
+                                            <?php if (count($specialities->data) > 0) { ?>
+                                            <option value="Doctor"> Врач</option>
+                                            <?php } if (count($examinations->data) > 0 || count($procedures->data) > 0) { ?>
+                                            <option value="Specialist"> Специалист по услугам</option>
+                                            <?php } ?>
                                         </select>
                                     </div>
                                 </div>
@@ -477,8 +500,8 @@ $examinations = utils_call_api($url, $config);
                                     <i class="fas fa-user-md mr-2"></i>Зарегистрировать
                                 </button>
                             </div>
-
                         </form>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
@@ -507,18 +530,21 @@ $examinations = utils_call_api($url, $config);
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Фамилия <strong style="color: var(--red--color)">*</strong></label>
                                         <input type="text" class="form-control" name="user_surname" minlength="2" maxlength="30" onkeyup="checkInputRu(this)" required>
+                                    <small class="form-text text-muted">Кириллица</small>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Имя <strong style="color: var(--red--color)">*</strong></label>
                                         <input type="text" class="form-control" name="user_name" minlength="2" maxlength="30" onkeyup="checkInputRu(this)" required>
+                                    <small class="form-text text-muted">Кириллица</small>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Отчество</label>
                                         <input type="text" class="form-control" name="user_patronymic" maxlength="30" onkeyup="checkInputRu(this)">
+                                    <small class="form-text text-muted">Кириллица</small>
                                     </div>
                                 </div>
                             </div>
@@ -626,8 +652,8 @@ $examinations = utils_call_api($url, $config);
 
 
     $(document).on('change', '#chosen_required_post', function () {
-        let index = this.options.selectedIndex;
-        if(index === 1) {
+
+        if($('#chosen_required_post').val() === "Doctor") {
             $('#chosen_med').append(
                 '<div class="form-group">' +
                     '<label style="color: var(--yellow-color)">Специальность <strong style="color: var(--red--color)">*</strong></label>' +
@@ -661,7 +687,7 @@ $examinations = utils_call_api($url, $config);
             $('#chosen_required_examination').parent().next().closest('div').remove();
             $('#chosen_required_examination').closest('div').remove();
         }
-        if(index === 2) {
+        if($('#chosen_required_post').val() === "Specialist") {
             $('#chosen_med').append(
                 '<div class="form-group">' +
                     '<label style="color: var(--yellow-color)">Процедура</label>' +
@@ -678,6 +704,7 @@ $examinations = utils_call_api($url, $config);
                 '<div class="alert alert-info" role="alert" style="font-size: 12px">'
                     + 'Необходимо назначить хотя-бы одну процедуру или обследование' +
                 '</div>'
+
             );
 
             <?php

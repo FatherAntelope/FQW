@@ -107,4 +107,12 @@ function getAdminPositionRu(string $admin_position_en) : string {
         return"Управляющий услугами";
     return "Данная должность не найдена";
 }
+
+function getDoctorPositionRu(string $doctor_position_en) : string {
+    if($doctor_position_en == "Specialist")
+        return "Специалист по услугам";
+    if ($doctor_position_en == "Doctor")
+        return "Врач";
+    return "Данная должность не найдена";
+}
 ?>

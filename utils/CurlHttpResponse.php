@@ -107,8 +107,9 @@ function utils_call_api($url, $config = false): CurlHttpResponse {
     // curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 
     $result = curl_exec($curl);
-    if (!$result) {
-        header('Location: /errors/502.html');
+    $status_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+    if ( ($status_code - 200) < 0 or ($status_code - 200) >= 100) {
+        header('Location: /errors/502.php');
         // die("cURL: Connection Failure");
     }
 
@@ -120,7 +121,6 @@ function utils_call_api($url, $config = false): CurlHttpResponse {
         }
     }
 
-    $status_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
     curl_close($curl);
     return new CurlHttpResponse($result, $status_code);
 }

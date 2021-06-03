@@ -47,8 +47,8 @@ if($_POST['service_type'] === "procedure") {
         "service" => $service->data['id'],
         "photo" => base64_encode(file_get_contents($_FILES['service_photo']['tmp_name'])),
         "description" => $_POST['service_description'],
-        "contraindications" => $_POST['procedure_contraindications'],
-        "purposes" => $_POST['procedure_destinations'],
+        "contraindications" => $_POST['procedure_contraindications'] ?? [],
+        "purposes" => $_POST['procedure_destinations'] ?? [],
         "placement" => $_POST['service_placement']
 
     ];
@@ -67,7 +67,7 @@ if($_POST['service_type'] === "examination") {
         "service" => $service->data['id'],
         "photo" => base64_encode(file_get_contents($_FILES['service_photo']['tmp_name'])),
         "description" => $_POST['service_description'],
-        "purposes" => $_POST['examination_destinations'],
+        "purposes" => $_POST['examination_destinations'] ?? [],
         "placement" => $_POST['service_placement']
     ];
     $config = [

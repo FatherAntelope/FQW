@@ -169,54 +169,53 @@ $whose_user = 1;
                             </tr>
                             </thead>
                             <tbody>
+                            <?php
+                            $url = protocol.'://'.domain_name_api.'/api/med/medics';
+                            $config = [
+                                'token' => $_COOKIE['user_token'],
+                                'method' => 'GET'
+                            ];
+                            $doctors_data = utils_call_api($url, $config);
+                            foreach ($doctors_data->data as $doctor) {
+                            $url = protocol.'://'.domain_name_api.'/api/med/users/'.$doctor['user'];
+                            $doctor_user = utils_call_api($url, $config);
+                            ?>
                             <tr>
-                                <td class="text-muted" data-label="Медп.-на:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
-                                <td class="text-muted" data-label="Долж.-ть:">Врач</td>
+                                <td class="text-muted" data-label="Медп.-на:">
+                                    <img src="<?php echo getUrlUserPhoto($doctor_user->data['user']['photo']); ?>" height="30" class="rounded-circle mr-1" style="height: 25px; width: 25px; object-fit: cover">
+                                    <?php echo getItitialsFullName($doctor_user->data['user']['surname'], $doctor_user->data['user']['name'], $doctor_user->data['user']['patronymic']); ?>
+                                <td class="text-muted" data-label="Долж.-ть:">
+                                    <?php echo getDoctorPositionRu($doctor['position']);?>
+                                </td>
                                 <td class="text-muted" data-label="Напр.-ие:">
                                     <ul class="list-unstyled">
+                                        <?php
+                                        ?>
                                         <li><span class="badge badge-pill badge-secondary">Терапевт</span></li>
                                         <li><span class="badge badge-pill badge-secondary">Невролог</span></li>
                                     </ul>
                                 </td>
-                                <td class="text-muted" data-label="Почта:">info@mail.ru</td>
-                                <td class="text-muted" data-label="Телефон:">+7 (999) 999-99-99</td>
+                                <td class="text-muted" data-label="Почта:"><?php echo $doctor_user->data['user']['email']; ?></td>
+                                <td class="text-muted" data-label="Телефон:"><?php echo $doctor_user->data['user']['phone_number']; ?></td>
                                 <td>
                                     <ul class="list-unstyled">
                                         <li><button type="button" class="btn mt-1 btn-sm btn-secondary text-white" data-toggle="modal" data-target="#openModalRecoveryPasswordUser">Восстановить пароль</button></li>
-                                        <li><button type="button" class="btn mt-1 btn-sm text-white" style="background-color: var(--cyan-color)">Профиль</button></li>
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)">Редактирование</button></li>
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-danger" data-toggle="modal" data-target="#openModalRemoveUser">Удаление</button></li>
-                                    </ul>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-muted" data-label="Спец.-т:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
-                                <td class="text-muted" data-label="Долж.-ть:">Специалист по процедурам</td>
-                                <td class="text-muted" data-label="Напр.-ие:">
-                                    <ul class="list-unstyled">
-                                        <li><span class="badge badge-pill badge-secondary">Бассейн</span></li>
-                                        <li><span class="badge badge-pill badge-secondary">Йога</span></li>
-                                    </ul>
-                                </td>
-                                <td class="text-muted" data-label="Почта:">info@mail.ru</td>
-                                <td class="text-muted" data-label="Телефон:">+7 (999) 999-99-99</td>
-                                <td>
-                                    <ul class="list-unstyled">
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-secondary text-white" data-toggle="modal" data-target="#openModalRecoveryPasswordUser">Восстановить пароль</button></li>
-                                        <li><button type="button" class="btn mt-1 btn-sm text-white" style="background-color: var(--cyan-color)">Профиль</button></li>
+                                        <li><a href="/lk/users/profile.php?doctor=<?php echo $doctor['id']; ?>" class="btn mt-1 btn-sm text-white" style="background-color: var(--cyan-color)">Профиль</a></li>
                                         <li><button type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)">Редактирование</button></li>
                                         <li>
-                                            <button type="button" class="btn mt-1 btn-sm btn-danger" data-toggle="modal" data-target="#openModalRemoveUser">Удаление</button>
+                                            <input type="hidden" value="<?php echo getItitialsFullName($doctor_user->data['user']['surname'], $doctor_user->data['user']['name'], $doctor_user->data['user']['patronymic'])?>">
+                                            <button type="button" class="btn mt-1 btn-sm btn-danger" value="<?php echo $doctor_user->data['user']['id']?>" name="btn_delete_user">Удаление</button>
                                         </li>
                                     </ul>
                                 </td>
                             </tr>
+                            <?php } ?>
                             </tbody>
                             <tfoot class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
                                 <th>Медперсона</th>
                                 <th>Должность</th>
-                                <th>Тип</th>
+                                <th>Направление</th>
                                 <th>Почта</th>
                                 <th>Телефон</th>
                                 <th>Действие</th>
@@ -307,12 +306,13 @@ $whose_user = 1;
                 <div class="alert alert-success" role="alert" id="alertSuccessDeleteUser" hidden>
                     Пользователь успешно удален
                 </div>
+                <form id="queryDeleteUserProfile">
+                    <input type="hidden" value="" name="delete_user_id">
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Нет</button>
-                <form id="queryDeleteUserProfile" method="post" action="/queries/admin/deleteUserProfile.php">
-                    <button type="submit" class="btn btn-success" value="" name="delete_user_id">Да</button>
-                </form>
+                <button type="submit" class="btn btn-success" form="queryDeleteUserProfile">Да</button>
             </div>
         </div>
     </div>
@@ -405,7 +405,7 @@ $whose_user = 1;
             "zeroRecords": "<span class='text-muted'>Совпадения отсутствуют</span>",
             "search": "<span class='text-muted' style='margin-right: 0.5rem; font-size: 1.3rem'>Поиск:</span>",
             "info": "<span class='text-muted'>Показан диапазон от _START_ до _END_ элементов</span>",
-            "infoEmpty": "<span class='text-muted'>Услуги отсутствуют</span>",
+            "infoEmpty": "<span class='text-muted'>Пользователи отсутствуют</span>",
             "infoFiltered": "<span class='text-muted'>(отфильтровано общих элементов - _MAX_)</span>",
             "lengthMenu": '<span class="text-muted" style="margin-right: 0.5rem; font-size: 1rem">Отобразить элементов: <\span>' +
                 '<select class="form-control-sm">'+
@@ -426,30 +426,30 @@ $whose_user = 1;
 </script>
 <script>
     $("button[name='btn_delete_user']").click(function () {
-        $("button[name='delete_user_id']").val($(this).val());
+        $("input[name='delete_user_id']").val($(this).val());
         $("#spanFullNameDeleteUser").text(
             $(this).prev().val()
         );
         $('#openModalRemoveUser').modal('show');
     });
 
-    // $("#queryDeleteUserProfile").submit(function () {
-    //     $.ajax({
-    //         url: "/queries/admin/deleteUserProfile.php",
-    //         method: "POST",
-    //         data: $(this).serialize(),
-    //         success: function () {
-    //             $("#queryDeleteUserProfile").parent().attr("hidden", "hidden");
-    //             $("#alertSuccessDeleteUser").removeAttr("hidden");
-    //             $("#alertSuccessDeleteUser").prev().attr("hidden", "hidden");
-    //             setTimeout(function(){ location.reload()}, 1100);
-    //         },
-    //         error: function () {
-    //
-    //         }
-    //     });
-    //     return false;
-    // });
+    $("#queryDeleteUserProfile").submit(function () {
+        $.ajax({
+            url: "/queries/admin/deleteUserProfile.php",
+            method: "POST",
+            data: $(this).serialize(),
+            success: function () {
+                $("#queryDeleteUserProfile").parent().next().attr("hidden", "hidden");
+                $("#alertSuccessDeleteUser").removeAttr("hidden");
+                $("#alertSuccessDeleteUser").prev().attr("hidden", "hidden");
+                setTimeout(function(){ location.reload()}, 1100);
+            },
+            error: function () {
+
+            }
+        });
+        return false;
+    });
 
     $("#queryRecoveryPasswordUser").submit(function () {
         $.ajax({

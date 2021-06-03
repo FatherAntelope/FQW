@@ -11,5 +11,4 @@ $config = [
     'method' => 'DELETE'
 ];
 $user = utils_call_api($url, $config);
-print_r($user);
 ?>

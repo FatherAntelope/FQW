@@ -98,7 +98,98 @@ if ($_POST['user_role'] === "Patient") {
 
 // Регистрация медперсонала
 if ($_POST['user_role'] === "Doctor") {
+    $url = protocol."://".domain_name_api."/api/med/medpersona";
+    $data = [
+        "medpersona" => [
+            "birth_date" => $_POST['doctor_date_birth'],
+            "position" => $_POST['doctor_med_post'],
+            "qualification" => $_POST['doctor_med_category'],
+            "experience" => $_POST['doctor_job_stage'],
+            "education" => [],
+            "specialization" => "",
+            "location" => $_POST['doctor_profession_location'] ?? null
+        ]
+    ];
+    $config = [
+        "method" => "POST",
+        "token" => $user->data['user']['token'],
+        "data" => $data
+    ];
+    $doctor = utils_call_api($url, $config);
+    print_r($doctor);
 
+
+    // Связка медперсонала с услугой
+    $url = protocol."://".domain_name_api."/api/med/servicemedper";
+
+    if(isset($_POST['doctor_profession'])) {
+        foreach ($_POST['doctor_profession'] as $profession) {
+            $data = [
+                "service" => $profession,
+                "medpersona" => $doctor->data['id'],
+                "type" => "Specialty"
+            ];
+            $config = [
+                "method" => "POST",
+                "token" => $_COOKIE['user_token'],
+                "data" => $data
+            ];
+            $speciality = utils_call_api($url, $config);
+            print_r($speciality);
+        }
+
+    }
+
+    if(isset($_POST['doctor_profession'])) {
+        foreach ($_POST['doctor_profession'] as $doctor_profession) {
+            $data = [
+                "service" => $doctor_profession,
+                "medpersona" => $doctor->data['id'],
+                "type" => "Specialty"
+            ];
+            $config = [
+                "method" => "POST",
+                "token" => $_COOKIE['user_token'],
+                "data" => $data
+            ];
+            $speciality = utils_call_api($url, $config);
+            print_r($speciality);
+        }
+    }
+
+    if(isset($_POST['doctor_procedure'])) {
+        foreach ($_POST['doctor_procedure'] as $doctor_procedure) {
+            $data = [
+                "service" => $doctor_procedure,
+                "medpersona" => $doctor->data['id'],
+                "type" => "Procedure"
+            ];
+            $config = [
+                "method" => "POST",
+                "token" => $_COOKIE['user_token'],
+                "data" => $data
+            ];
+            $procedure = utils_call_api($url, $config);
+            print_r($procedure);
+        }
+    }
+
+    if(isset($_POST['doctor_examination'])) {
+        foreach ($_POST['doctor_procedure'] as $doctor_examination) {
+            $data = [
+                "service" => $doctor_examination,
+                "medpersona" => $doctor->data['id'],
+                "type" => "Survey"
+            ];
+            $config = [
+                "method" => "POST",
+                "token" => $_COOKIE['user_token'],
+                "data" => $data
+            ];
+            $examination = utils_call_api($url, $config);
+            print_r($examination);
+        }
+    }
 }
 
 
