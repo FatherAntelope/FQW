@@ -68,7 +68,8 @@ if ($_POST['user_role'] === "Patient") {
             "region" => $_POST['patient_region'],
             "city" => ucfirst(strtolower($_POST['patient_locality'])),
             "type" => $_POST['patient_category'],
-            "complaints" => $_POST['patient_subjective_complaint']
+            "complaints" => $_POST['patient_subjective_complaint'],
+            "group" => []
         ]
     ];
     $config = [
@@ -94,6 +95,17 @@ if ($_POST['user_role'] === "Patient") {
         "data" => $data
     ];
     $passport = utils_call_api($url, $config);
+
+    $url = protocol.'://'.domain_name_api.'/api/med/users/patients/'.$patient->data['id'].'/medcard';
+    $data = [
+        'complaints' => $_POST['patient_subjective_complaint']
+    ];
+    $config = [
+        'method' => 'POST',
+        'token' => $user->data['user']['token'],
+        'data' => $data
+    ];
+    $medcard = utils_call_api($url, $config);
 }
 
 // Регистрация медперсонала
