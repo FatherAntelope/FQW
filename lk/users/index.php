@@ -93,13 +93,18 @@ $whose_user = 1;
                             foreach ($patients_data->data as $patient) {
                                 $url = protocol.'://'.domain_name_api.'/api/med/users/'.$patient['user'];
                                 $patient_user = utils_call_api($url, $config);
+
+                                $url = protocol."://".domain_name_api."/api/med/users/patients/".$patient['id']."/medcard";
+                                $patient_medcard = utils_call_api($url, $config);
                             ?>
                             <tr>
                                 <td class="text-muted" data-label="Пац.-т:">
                                     <img src="<?php echo getUrlUserPhoto($patient_user->data['user']['photo']); ?>" height="30" class="rounded-circle mr-1" style="height: 25px; width: 25px; object-fit: cover">
                                     <?php echo getItitialsFullName($patient_user->data['user']['surname'], $patient_user->data['user']['name'], $patient_user->data['user']['patronymic']); ?>
                                 </td>
-                                <td class="text-muted" data-label="ID карты:">123456789</td>
+                                <td class="text-muted" style="min-width: 6rem" data-label="ID карты:">
+                                    <?php echo $patient_medcard->data['id']; ?>
+                                </td>
                                 <td class="text-muted" data-label="Тип:">
                                     <?php if($patient['type'] == "Treating") { ?>
                                         <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">
@@ -119,7 +124,7 @@ $whose_user = 1;
                                 </td>
                                 <td class="text-muted" data-label="Почта:"><?php echo $patient_user->data['user']['email']; ?></td>
                                 <td class="text-muted" data-label="Телефон:"><?php echo $patient_user->data['user']['phone_number']; ?></td>
-                                <td>
+                                <td style="min-width: 11rem">
                                     <ul class="list-unstyled">
                                         <?php if ($patient['type'] == "Discharged") { ?>
                                             <li><button type="button" class="btn mt-1 btn-sm btn-secondary text-white" data-toggle="modal" data-target="#openModalRecoveryAccessPatient">Восстановить доступ</button></li>
@@ -197,7 +202,7 @@ $whose_user = 1;
                                 </td>
                                 <td class="text-muted" data-label="Почта:"><?php echo $doctor_user->data['user']['email']; ?></td>
                                 <td class="text-muted" data-label="Телефон:"><?php echo $doctor_user->data['user']['phone_number']; ?></td>
-                                <td>
+                                <td style="min-width: 11rem">
                                     <ul class="list-unstyled">
                                         <li><button type="button" class="btn mt-1 btn-sm btn-secondary text-white" data-toggle="modal" data-target="#openModalRecoveryPasswordUser">Восстановить пароль</button></li>
                                         <li><a href="/lk/users/profile.php?doctor=<?php echo $doctor['id']; ?>" class="btn mt-1 btn-sm text-white" style="background-color: var(--cyan-color)">Профиль</a></li>
@@ -263,7 +268,7 @@ $whose_user = 1;
                                 </td>
                                 <td class="text-muted" data-label="Почта:"><?php echo $admin_user->data['user']['email']; ?></td>
                                 <td class="text-muted" data-label="Телефон:"><?php echo $admin_user->data['user']['phone_number']; ?></td>
-                                <td>
+                                <td style="min-width: 11rem">
                                     <ul class="list-unstyled">
                                         <li><button type="button" class="btn mt-1 btn-sm btn-secondary text-white" data-toggle="modal" data-target="#openModalRecoveryPasswordUser">Восстановить пароль</button></li>
                                         <li><a href="/lk/users/profile.php?admin=<?php echo $admin['id']; ?>" type="button" class="btn mt-1 btn-sm text-white" style="background-color: var(--cyan-color)">Профиль</a></li>

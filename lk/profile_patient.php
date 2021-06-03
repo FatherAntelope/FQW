@@ -11,6 +11,13 @@ $config = [
 $patient_data = utils_call_api($url, $config);
 $patient_gender = getPatientGenderRu($patient_data->data['gender']);
 $patient_category = getPatientCategoryRu($patient_data->data['type']);
+
+$url = protocol."://".domain_name_api."/api/med/users/patients/".$patient_data->data['id']."/medcard";
+$config = [
+    "method" => "GET",
+    "token" => $_COOKIE['user_token']
+];
+$patient_medcard = utils_call_api($url, $config);
 ?>
 <!doctype html>
 <html lang="ru">
@@ -62,11 +69,11 @@ $patient_category = getPatientCategoryRu($patient_data->data['type']);
                                     (<?php echo date("d.m.Y", strtotime($patient_data->data['birth_date']));?>)
                                 </h5>
                                 <h5 class="text-muted">Пол: Мужской</h5>
-                                <h5 class="text-muted">Рост: 170 cм. </h5>
+<!--                                <h5 class="text-muted">Рост: 170 cм. </h5>-->
                                 <h5 class="text-muted">Категория: <?php echo $patient_category; ?> </h5>
                             </div>
                             <div class="col-lg-7">
-                                <h5 class="text-muted">ID карты: 123456789</h5>
+                                <h5 class="text-muted">ID карты: <?php echo $patient_medcard->data['id']; ?></h5>
                                 <h5 class="text-muted">Ваш терапевт: <a href="#" style="color: var(--dark-cyan-color); text-decoration: none">Иванов И.И.</a> </h5>
                                 <h5 class="text-muted">Дата поступления: <?php echo date("d.m.Y", strtotime($patient_data->data['receipt_date']));?></h5>
                             </div>

@@ -16,7 +16,6 @@ if(!$user->isUserRole("Admin")) {
     header("Location: /error/403.php");
     exit();
 }
-
 $user_data = $user->getData();
 $whose_user = 1;
 
@@ -39,6 +38,7 @@ if(array_keys($_GET)[0] === "patient") {
     $url = protocol.'://'.domain_name_api.'/api/med/users/'.$user_group_info->data['user'];
     $user_info = utils_call_api($url, $config);
 }
+
 if(array_keys($_GET)[0] === "admin") {
     $url = protocol . '://' . domain_name_api . '/api/med/admins/' . $_GET['admin'];
     $config = [
@@ -52,6 +52,22 @@ if(array_keys($_GET)[0] === "admin") {
     }
     $url = protocol.'://'.domain_name_api.'/api/med/users/'.$user_group_info->data['user'];
     $user_info = utils_call_api($url, $config);
+}
+
+if(array_keys($_GET)[0] === "doctor") {
+    $url = protocol . '://' . domain_name_api . '/api/med/medics/'.$_GET['doctor'];
+    $config = [
+        'token' => $_COOKIE['user_token'],
+        'method' => 'GET'
+    ];
+    $user_group_info = utils_call_api($url, $config);
+    print_r($user_group_info);
+    if ($user_group_info->status_code == 404) {
+        header("Location: /lk/users/");
+        exit();
+    }
+    $url = protocol.'://'.domain_name_api.'/api/med/users/'.$user_group_info->data['user'];
+    //$user_info = utils_call_api($url, $config);
 }
 ?>
 <!doctype html>
@@ -90,9 +106,7 @@ if(array_keys($_GET)[0] === "admin") {
 
         <!--Карточка с основной информацией пациента-->
         <?php
-        if(array_keys($_GET)[0] === "patient") {
-
-            ?>
+        if(array_keys($_GET)[0] === "patient") { ?>
         <div class="card">
             <div class="card-body">
                 <div class="row">

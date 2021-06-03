@@ -23,6 +23,13 @@ $config = [
 
 // Получение паспортных данных пациента
 $passport_data = utils_call_api($url, $config);
+
+$url = protocol."://".domain_name_api."/api/med/users/patients/".$patient_data->data['id']."/medcard";
+$config = [
+    "method" => "GET",
+    "token" => $_COOKIE['user_token']
+];
+$patient_medcard = utils_call_api($url, $config);
 ?>
 <!doctype html>
 <html lang="ru">
@@ -111,7 +118,7 @@ $passport_data = utils_call_api($url, $config);
                             <p class="text-muted mb-1">
                                 <strong>ID карты:</strong>
                                 <span class="ml-2">
-                                    <?php echo "123456"; ?>
+                                    <?php echo $patient_medcard->data['id']; ?>
                                 </span>
                             </p>
                             <h6 class="mt-3 text-muted text-uppercase bg-light p-2"><i class="fas fa-address-book mr-1"></i>Паспортные данные данные</h6>

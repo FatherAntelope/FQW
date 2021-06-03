@@ -32,6 +32,33 @@ if($getSelected != "doctors" &&
     header("Location: /lk/services/");
     exit;
 }
+$url = protocol . '://' . domain_name_api . '/api/med/speciality';
+$config = [
+    'token' => $_COOKIE['user_token'],
+    'method' => 'GET'
+];
+$specialities = utils_call_api($url, $config);
+
+$url = protocol . '://' . domain_name_api . '/api/med/procedure';
+$config = [
+    'token' => $_COOKIE['user_token'],
+    'method' => 'GET'
+];
+$procedures = utils_call_api($url, $config);
+
+$url = protocol . '://' . domain_name_api . '/api/med/survey';
+$config = [
+    'token' => $_COOKIE['user_token'],
+    'method' => 'GET'
+];
+$examinations = utils_call_api($url, $config);
+
+$url = protocol . '://' . domain_name_api . '/api/med/event';
+$config = [
+    'token' => $_COOKIE['user_token'],
+    'method' => 'GET'
+];
+$events = utils_call_api($url, $config);
 ?>
 <!--
 Страница выбора услуги на запись у пациента
@@ -127,24 +154,29 @@ if($getSelected != "doctors" &&
                             </tr>
                             </thead>
                             <tbody>
+                            <?php
+                            foreach ($specialities->data as $speciality) {
+                                $url = protocol . '://' . domain_name_api . '/api/med/service/'.$speciality['service'];
+                                $config = [
+                                    'token' => $_COOKIE['user_token'],
+                                    'method' => 'GET'
+                                ];
+                                $service_speciality = utils_call_api($url, $config);
+                            ?>
                             <tr>
                                 <td class="text-muted" data-label="Врач:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
                                 <td class="text-muted" data-label="Спец.-ть:">
-                                    Терапевт
+                                    <?php echo $service_speciality->data['name']; ?>
                                 </td>
-                                <td class="text-muted" data-label="Расп.-ие:">505 каб.</td>
-                                <td class="text-muted" data-label="Стоимость, р.:">500</td>
+                                <td class="text-muted" data-label="Расп.-ие:">
+                                    <?php echo "доставать от медперсоны"?>
+                                </td>
+                                <td class="text-muted" data-label="Стоимость, р.:">
+                                    <?php echo $service_speciality->data['cost']; ?>
+                                </td>
                                 <td><button type="button" class="btn btn-sm btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Запись</button></td>
                             </tr>
-                            <tr>
-                                <td class="text-muted" data-label="Врач:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Николаев И. И.</td>
-                                <td class="text-muted" data-label="Спец.-ть:">
-                                    Оториноларинголог
-                                </td>
-                                <td class="text-muted" data-label="Расп.-ие:">302 каб.</td>
-                                <td class="text-muted" data-label="Стоимость, р.:">700</td>
-                                <td><button type="button" class="btn btn-sm btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Запись</button></td>
-                            </tr>
+                            <?php } ?>
                             </tbody>
                             <tfoot class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
@@ -161,7 +193,7 @@ if($getSelected != "doctors" &&
             </div>
 
 <!--Содержимое таблиста процедур-->
-            <div class="tab-pane fade show <? if($getSelected == 'procedures') echo "active";?>" id="tab-procedures" role="tabpanel">
+            <div class="tab-pane fade show <?php if($getSelected == 'procedures') echo "active";?>" id="tab-procedures" role="tabpanel">
                 <div class="card">
                     <div class="card-body">
                         <table id="table_procedures" class="table table-striped table-hover">
@@ -177,24 +209,35 @@ if($getSelected != "doctors" &&
                             </tr>
                             </thead>
                             <tbody>
+                            <?php
+                            foreach ($procedures->data as $procedure) {
+                            $url = protocol . '://' . domain_name_api . '/api/med/service/'.$procedure['service'];
+                            $config = [
+                                'token' => $_COOKIE['user_token'],
+                                'method' => 'GET'
+                            ];
+                            $service_procedure = utils_call_api($url, $config);
+                            ?>
                             <tr>
-                                <td class="text-muted" data-label="Спец.-ть:">Бассейн</td>
-                                <td class="text-muted" data-label="Сп.-ист:">Николаев И. И., Иванов И. И.</td>
-                                <td class="text-muted" data-label="Расп.-ие:">105 каб.</td>
-                                <td class="text-muted" data-label="Раз.-ие:"><span class="badge badge-pill badge-success">Дополнительно</span></td>
-                                <td class="text-muted" data-label="Стоимость, р.:">550</td>
-                                <td class="text-muted" data-label="Повторов:">–</td>
+                                <td class="text-muted" data-label="Название:">
+                                    <?php echo $service_procedure->data['name']; ?>
+                                </td>
+                                <td class="text-muted" data-label="Сп.-ист:"><></td>
+                                <td class="text-muted" data-label="Расп.-ие:">
+                                    <?php echo $procedure['placement']?>
+                                </td>
+                                <td class="text-muted" data-label="Раз.-ие:">
+                                    <span class="badge badge-pill badge-success">Дополнительно</span> /
+                                    <span class="badge badge-pill badge-danger">Обязательно</span>
+                                </td>
+
+                                <td class="text-muted" data-label="Стоимость, р.:">
+                                    <?php echo $service_procedure->data['cost']; ?>
+                                </td>
+                                <td class="text-muted" data-label="Повторов:">–/N</td>
                                 <td><a href="#" type="button" class="btn btn-sm btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Запись</a></td>
                             </tr>
-                            <tr>
-                                <td class="text-muted" data-label="Спец.-ть:">Мануальная терапия</td>
-                                <td class="text-muted" data-label="Сп.-ист:">Николаев И. И., Иванов И. И.</td>
-                                <td class="text-muted" data-label="Расп.-ие:">108 каб.</td>
-                                <td class="text-muted" data-label="Раз.-ие:"><span class="badge badge-pill badge-danger">Обязательно</span></td>
-                                <td class="text-muted" data-label="Стоимость, р.:">750</td>
-                                <td class="text-muted" data-label="Повторов:">10</td>
-                                <td><a href="#" type="button" class="btn btn-sm btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Запись</a></td>
-                            </tr>
+                            <?php } ?>
                             </tbody>
                             <tfoot class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
@@ -213,7 +256,7 @@ if($getSelected != "doctors" &&
             </div>
 
 <!--Содержимое таблиста обследования-->
-            <div class="tab-pane fade show <? if($getSelected == 'examinations') echo "active";?>" id="tab-examinations" role="tabpanel">
+            <div class="tab-pane fade show <?php if($getSelected == 'examinations') echo "active";?>" id="tab-examinations" role="tabpanel">
                 <div class="card">
                     <div class="card-body">
                         <table id="table_examinations" class="table table-striped table-hover">
@@ -227,20 +270,31 @@ if($getSelected != "doctors" &&
                             </tr>
                             </thead>
                             <tbody>
+                            <?php
+                            foreach ($examinations->data as $examination) {
+                                $url = protocol . '://' . domain_name_api . '/api/med/service/'.$examination['service'];
+                                $config = [
+                                    'token' => $_COOKIE['user_token'],
+                                    'method' => 'GET'
+                                ];
+                                $service_examination = utils_call_api($url, $config);
+                            ?>
                             <tr>
-                                <td class="text-muted" data-label="Спец.-ть:">ОАК</td>
-                                <td class="text-muted" data-label="Сп.-ист:">Николаев И. И., Иванов И. И.</td>
-                                <td class="text-muted" data-label="Расп.-ие:">105 каб.</td>
-                                <td class="text-muted" data-label="Стоимость, р.:">550</td>
+                                <td class="text-muted" data-label="Название:">
+                                    <?php echo $service_examination->data['name']; ?>
+                                </td>
+                                <td class="text-muted" data-label="Сп.-ист:">
+                                    <>
+                                </td>
+                                <td class="text-muted" data-label="Расп.-ие:">
+                                    <?php echo $examination['placement']?>
+                                </td>
+                                <td class="text-muted" data-label="Стоимость, р.:">
+                                    <?php echo $service_examination->data['cost']; ?>
+                                </td>
                                 <td><a href="#" type="button" class="btn btn-sm btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Запись</a></td>
                             </tr>
-                            <tr>
-                                <td class="text-muted" data-label="Спец.-ть:">ОАМ</td>
-                                <td class="text-muted" data-label="Сп.-ист:">Николаев И. И., Иванов И. И.</td>
-                                <td class="text-muted" data-label="Расп.-ие:">108 каб.</td>
-                                <td class="text-muted" data-label="Стоимость, р.:">750</td>
-                                <td><a href="#" type="button" class="btn btn-sm btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Запись</a></td>
-                            </tr>
+                            <?php } ?>
                             </tbody>
                             <tfoot class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
@@ -257,7 +311,7 @@ if($getSelected != "doctors" &&
             </div>
 
 <!--Содержимое таблиста мероприятий-->
-            <div class="tab-pane fade show <? if($getSelected == 'events') echo "active";?>" id="tab-events" role="tabpanel">
+            <div class="tab-pane fade show <?php if($getSelected == 'events') echo "active";?>" id="tab-events" role="tabpanel">
                 <div class="card">
                     <div class="card-body">
                         <table id="table_events" class="table table-striped table-hover">
@@ -272,22 +326,34 @@ if($getSelected != "doctors" &&
                             </tr>
                             </thead>
                             <tbody>
+                            <?php
+                            foreach ($events->data as $event) {
+                            $url = protocol . '://' . domain_name_api . '/api/med/service/'.$event['service'];
+                            $config = [
+                                'token' => $_COOKIE['user_token'],
+                                'method' => 'GET'
+                            ];
+                            $service_event = utils_call_api($url, $config);
+                            ?>
                             <tr>
-                                <td class="text-muted" data-label="Спец.-ть:">Зоопарк</td>
-                                <td class="text-muted" data-label="Сп.-ист:">Николаев И. И., Иванов И. И.</td>
-                                <td class="text-muted" data-label="Даты:">Бессрочно</td>
-                                <td class="text-muted" data-label="Расп.-ие:">Главный вход</td>
-                                <td class="text-muted" data-label="Стоимость, р.:">550</td>
+                                <td class="text-muted" data-label="Название:">
+                                    <?php echo $service_event->data['name']; ?>
+                                </td>
+                                <td class="text-muted" data-label="Сп.-ист:">
+                                    <>
+                                </td>
+                                <td class="text-muted" data-label="Даты:">
+                                    <?php echo ($event['end_data'] !== null) ? date("d.m.Y", strtotime($event['begin_data']))." - ".date("d.m.Y", strtotime($event['end_data'])): "Бессрочно"; ?>
+                                </td>
+                                <td class="text-muted" data-label="Расп.-ие:">
+                                    <?php echo $event['placement']; ?>
+                                </td>
+                                <td class="text-muted" data-label="Стоимость, р.:">
+                                    <?php echo $service_event->data['cost']; ?>
+                                </td>
                                 <td><a href="#" type="button" class="btn btn-sm btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Запись</a></td>
                             </tr>
-                            <tr>
-                                <td class="text-muted" data-label="Спец.-ть:">Экскурсия по водохранилищу</td>
-                                <td class="text-muted" data-label="Сп.-ист:">Николаев И. И., Иванов И. И.</td>
-                                <td class="text-muted" data-label="Даты:">10.05.2021 - 21.05.2021</td>
-                                <td class="text-muted" data-label="Расп.-ие:">Главный вход</td>
-                                <td class="text-muted" data-label="Стоимость, р.:">300</td>
-                                <td><a href="#" type="button" class="btn btn-sm btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Запись</a></td>
-                            </tr>
+                            <?php } ?>
                             </tbody>
                             <tfoot class="text-white" style="background-color: var(--cyan-color);">
                             <tr>

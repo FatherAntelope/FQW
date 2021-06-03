@@ -15,7 +15,7 @@
     <script src="//code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script defer src="/js/all.js"></script>
-    <title>404</title>
+    <title>502</title>
 </head>
 <style>
     .btn-go-home {
