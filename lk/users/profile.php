@@ -88,14 +88,10 @@ if(array_keys($_GET)[0] === "doctor") {
     $user_info = utils_call_api($url, $config);
 
 
-    $url = protocol . '://' . domain_name_api . '/api/med/servicemedper';
-    $data = [
-      "medpersona" => $_GET['doctor']
-    ];
+    $url = protocol . '://' . domain_name_api . '/api/med/medics/'.$user_group_info->data['id'].'/servicemedper';
     $config = [
         'token' => $_COOKIE['user_token'],
-        'method' => 'GET',
-        'data' => $data
+        'method' => 'GET'
     ];
     $services_medperson = utils_call_api($url, $config);
 }
@@ -175,8 +171,7 @@ if(array_keys($_GET)[0] === "doctor") {
                                     </div>
                                     <div class="col">
                                         <ul class="list-unstyled">
-                                            <?php
-                                            foreach ($user_group_info->data['group'] as $group) { ?>
+                                            <?php foreach ($user_group_info->data['group'] as $group) { ?>
                                             <li>
                                                 <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)"><?php echo $group?></span>
                                             </li>

@@ -184,14 +184,10 @@ $whose_user = 1;
                             foreach ($doctors_data->data as $doctor) {
                                 $url = protocol.'://'.domain_name_api.'/api/med/users/'.$doctor['user'];
                                 $doctor_user = utils_call_api($url, $config);
-                                $url = protocol . '://' . domain_name_api . '/api/med/servicemedper/';
-                                $data = [
-                                    "medpersona" => $doctor['id']
-                                ];
+                                $url = protocol . '://' . domain_name_api . '/api/med/medics/'.$doctor['id'].'/servicemedper';
                                 $config = [
                                     'token' => $_COOKIE['user_token'],
-                                    'method' => 'POST',
-                                    'data' => $data
+                                    'method' => 'GET'
                                 ];
                                 $services_medperson = utils_call_api($url, $config);
                             ?>

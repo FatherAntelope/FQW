@@ -21,6 +21,15 @@ if(!$user->isUserRole("Doctor"))
 // Выгружает данные пользователя
 $user_data = $user->getData();
 $whose_user = 3;
+
+
+$url = protocol.'://'.domain_name_api.'/api/med/patients';
+$config = [
+    'token' => $_COOKIE['user_token'],
+    'method' => 'GET'
+];
+$patients_all = utils_call_api($url, $config);
+
 ?>
 <!doctype html>
 <html lang="ru">
@@ -149,15 +158,45 @@ $whose_user = 3;
                             </tr>
                             </thead>
                             <tbody>
+                            <?php
+                            foreach ($patients_all->data as $patient) {
+                                // Выводит только активных пациентов
+                                if($patient['type'] == "Discharged")
+                                    continue;
+                            $url = protocol.'://'.domain_name_api.'/api/med/users/'.$patient['user'];
+                            $patient_user = utils_call_api($url, $config);
+
+                            $url = protocol."://".domain_name_api."/api/med/users/patients/".$patient['id']."/medcard";
+                            $patient_medcard = utils_call_api($url, $config);
+                            ?>
                             <tr>
-                                <td class="text-muted" data-label="Пац.-т:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
-                                <td class="text-muted" data-label="ID карты:">123456789</td>
-                                <td class="text-muted" data-label="Категория:"><span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">Лечащийся</span></td>
+                                <td class="text-muted" data-label="Пац.-т:">
+                                    <img src="<?php echo getUrlUserPhoto($patient_user->data['user']['photo']); ?>" height="30" class="rounded-circle mr-1" style="height: 25px; width: 25px; object-fit: cover">
+                                    <?php echo getItitialsFullName($patient_user->data['user']['surname'], $patient_user->data['user']['name'], $patient_user->data['user']['patronymic']); ?>
+                                </td>
+                                <td class="text-muted" data-label="ID карты:"><?php echo $patient_medcard->data['id']; ?></td>
+                                <td class="text-muted" data-label="Категория:">
+                                    <?php if($patient['type'] == "Treating") { ?>
+                                    <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">
+                                            <?php echo getPatientCategoryRu($patient['type']); ?>
+                                        </span>
+                                    <?php }
+                                    if ($patient['type'] == "Vacationer") { ?>
+                                    <span class="badge badge-pill text-muted" style="background-color: var(--yellow-color)">
+                                            <?php echo getPatientCategoryRu($patient['type']); ?>
+                                        </span>
+                                    <?php } ?>
+                                </td>
                                 <td class="text-muted" data-label="Группа:">
+                                    <?php if(count($patient['group'])> 0) {?>
                                     <ul class="list-unstyled">
-                                        <li><span class="badge badge-pill text-white bg-secondary">Диабет</span></li>
-                                        <li><span class="badge badge-pill text-white bg-secondary">Ковид</span></li>
+                                        <?php foreach ($patient['group'] as $group) { ?>
+                                            <li><span class="badge badge-pill text-white bg-secondary"><?php echo $group; ?></span></li>
+                                        <?php } ?>
                                     </ul>
+                                    <?php } else { ?>
+                                        Отсутствует
+                                    <?php } ?>
                                 </td>
                                 <td class="text-muted" data-label="Участковый:">-</td>
                                 <td>
@@ -168,24 +207,7 @@ $whose_user = 3;
                                     </ul>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="text-muted" data-label="Пац.-т:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
-                                <td class="text-muted" data-label="ID карты:">123456789</td>
-                                <td class="text-muted" data-label="Категория:"><span class="badge badge-pill text-secondary" style="background-color: var(--yellow-color)">Отдыхающий</span></td>
-                                <td class="text-muted" data-label="Группа:">
-                                    <ul class="list-unstyled">
-                                        <li><span class="badge badge-pill text-white bg-secondary">Пенсионер</span></li>
-                                    </ul>
-                                </td>
-                                <td class="text-muted" data-label="Участковый:">Иванов И. И.</td>
-                                <td>
-                                    <ul class="list-unstyled">
-                                        <li><button type="button" class="btn mt-1 btn-sm text-white" style="background-color: var(--cyan-color)">Профиль</button></li>
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-secondary text-white">Медкарта</button></li>
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)">Дневник</button></li>
-                                    </ul>
-                                </td>
-                            </tr>
+                            <?php } ?>
                             </tbody>
                             <tfoot class="text-white" style="background-color: var(--cyan-color);">
                             <tr>

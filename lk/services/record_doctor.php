@@ -1,6 +1,4 @@
 <?php
-require $_SERVER['DOCUMENT_ROOT'] . '/utils/variables.php';
-require $_SERVER['DOCUMENT_ROOT'] . '/utils/functions.php';
 $weeks = [ "Mon"=> "Пн" , "Tue" => "Вт" , "Wed" => "Ср" , "Thu" => "Чт" , "Fri" => "Пт" , "Sat" => "Сб",  "Sun" =>"Вс"];
 $days_num = 7; //количество
 $time_start = "8:00"; //время старта

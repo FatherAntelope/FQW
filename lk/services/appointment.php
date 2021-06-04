@@ -174,7 +174,7 @@ $events = utils_call_api($url, $config);
                                 <td class="text-muted" data-label="Стоимость, р.:">
                                     <?php echo $service_speciality->data['cost']; ?>
                                 </td>
-                                <td><button type="button" class="btn btn-sm btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Запись</button></td>
+                                <td><a href="/lk/services/record.php?type=doctor&id=<?php echo 1?>";" type="button" class="btn btn-sm btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Запись</a></td>
                             </tr>
                             <?php } ?>
                             </tbody>

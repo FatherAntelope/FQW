@@ -14,14 +14,10 @@ $config = [
 $doctor_data = utils_call_api($url, $config);
 
 // Получение данных об услугах медперсонала
-$url = protocol . '://' . domain_name_api . '/api/med/servicemedper/';
-$data = [
-    "medpersona" => $doctor_data->data['id']
-];
+$url = protocol . '://' . domain_name_api . '/api/med/medics/'.$doctor_data->data['id'].'/servicemedper';
 $config = [
     'token' => $_COOKIE['user_token'],
-    'method' => 'POST',
-    'data' => $data
+    'method' => 'GET'
 ];
 $services_medperson = utils_call_api($url, $config);
 ?>
