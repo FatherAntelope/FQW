@@ -5,6 +5,13 @@ $time_start = "8:00"; //время старта
 $time_span = 15; //минуты
 $count_records = 10; //количество
 
+$url = protocol."://".domain_name_api."/api/med/patient";
+$config = [
+    "method" => "GET",
+    "token" => $_COOKIE['user_token']
+];
+$patient_data = utils_call_api($url, $config);
+
 // Достает данные врача по ID
 $url = protocol."://".domain_name_api."/api/med/medics/".$_GET['id'];
 $config = [
@@ -227,6 +234,7 @@ $min_cost = min(array_column($services, 'cost'));
                 <form id="queryRecordOnServiceConfirm">
                     <input type="hidden" name="record_time">
                     <input type="hidden" name="record_id_service">
+                    <input type="hidden" value="<?php echo $patient_data->data['id'];?>" name="record_id_patient">
                     <div class="custom-checkbox custom-control">
                         <input class="custom-control-input" id="record_confirm" name="record_confirm" type="checkbox" required>
                         <label class="custom-control-label text-muted" for="record_confirm" style="text-decoration-line: none">Соглашаюсь с правилом и даю согласие на запись</label>
