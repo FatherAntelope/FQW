@@ -13,9 +13,9 @@ if (!$user->isUserRole("Patient"))
     header("Location: /error/403.php");
 
 $user_data = $user->getData();
-
 $whose_user = 2;
-if ($_GET['type'] == 'doctor')
+
+if ($_GET['type'] == 'doctor' && isset($_GET['id']))
     require $_SERVER['DOCUMENT_ROOT']."/lk/services/record_doctor.php";
 elseif ($_GET['type'] == 'procedure')
     require $_SERVER['DOCUMENT_ROOT']."/lk/services/record_procedure.php";

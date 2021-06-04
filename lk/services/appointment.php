@@ -32,12 +32,12 @@ if($getSelected != "doctors" &&
     header("Location: /lk/services/");
     exit;
 }
-$url = protocol . '://' . domain_name_api . '/api/med/speciality';
+$url = protocol . '://' . domain_name_api . '/api/med/medics';
 $config = [
     'token' => $_COOKIE['user_token'],
     'method' => 'GET'
 ];
-$specialities = utils_call_api($url, $config);
+$doctors = utils_call_api($url, $config);
 
 $url = protocol . '://' . domain_name_api . '/api/med/procedure';
 $config = [
@@ -149,32 +149,52 @@ $events = utils_call_api($url, $config);
                                 <th>Врач</th>
                                 <th>Специальность</th>
                                 <th>Расположение</th>
-                                <th>Стоимость, руб.</th>
                                 <th>Действие</th>
                             </tr>
                             </thead>
                             <tbody>
                             <?php
-                            foreach ($specialities->data as $speciality) {
-                                $url = protocol . '://' . domain_name_api . '/api/med/service/'.$speciality['service'];
-                                $config = [
-                                    'token' => $_COOKIE['user_token'],
-                                    'method' => 'GET'
-                                ];
-                                $service_speciality = utils_call_api($url, $config);
+                            /** Потом придумать, что делать с этим велосипедом, а пока работает **/
+                            foreach ($doctors->data as $doctor) {
+                                // Достает все услуги текущего врача
+                                $url =  protocol . '://' . domain_name_api . '/api/med/medics/'.$doctor['id'].'/servicemedper';
+                                $service_medpersons_speciality = utils_call_api($url, $config);
+
+                                // Проверяет, является ли первая связанная услуга медперсоны типа "Специальность"
+                                // Если нет, то он не врач, а значит пропускаем вывод
+                                if ($service_medpersons_speciality->data[0]['type'] !== "Specialty")
+                                    continue;
+
+                                // Достает основные данные врача
+                                $url = protocol . '://' . domain_name_api . '/api/med/users/'.$doctor['user'];
+                                $doctor_user = utils_call_api($url, $config);
                             ?>
                             <tr>
-                                <td class="text-muted" data-label="Врач:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
+                                <td class="text-muted" data-label="Врач:">
+                                    <img src="<?php echo getUrlUserPhoto($doctor_user->data['user']['photo']); ?>" height="30" class="rounded-circle mr-1" style="height: 25px; width: 25px; object-fit: cover">
+                                    <?php echo getItitialsFullName($doctor_user->data['user']['surname'], $doctor_user->data['user']['name'], $doctor_user->data['user']['patronymic']); ?>
+                                </td>
                                 <td class="text-muted" data-label="Спец.-ть:">
-                                    <?php echo $service_speciality->data['name']; ?>
+                                    <ul class="list-unstyled">
+                                    <?php
+                                    // Проходится по всем специальностям врача и отображает их
+                                    foreach ($service_medpersons_speciality->data as  $medperson_service) {
+                                        $url = protocol . '://' . domain_name_api . '/api/med/service/'. $medperson_service['service'];
+
+                                        $config = [
+                                            'token' => $_COOKIE['user_token'],
+                                            'method' => 'GET'
+                                        ];
+                                        $service_main = utils_call_api($url, $config);
+                                        ?>
+                                        <li><span class="badge badge-pill badge-secondary"><?php echo $service_main->data['name']." - ".$service_main->data['cost']."₽";?></span></li>
+                                    <?php } ?>
+                                    </ul>
                                 </td>
                                 <td class="text-muted" data-label="Расп.-ие:">
-                                    <?php echo "доставать от медперсоны"?>
+                                    <?php echo $doctor['location']; ?>
                                 </td>
-                                <td class="text-muted" data-label="Стоимость, р.:">
-                                    <?php echo $service_speciality->data['cost']; ?>
-                                </td>
-                                <td><a href="/lk/services/record.php?type=doctor&id=<?php echo 1?>";" type="button" class="btn btn-sm btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Запись</a></td>
+                                <td><a href="/lk/services/record.php?type=doctor&id=<?php echo $doctor['id']; ?>" type="button" class="btn btn-sm btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Запись</a></td>
                             </tr>
                             <?php } ?>
                             </tbody>
@@ -183,7 +203,6 @@ $events = utils_call_api($url, $config);
                                 <th>Врач</th>
                                 <th>Специальность</th>
                                 <th>Расположение</th>
-                                <th>Стоимость, руб.</th>
                                 <th>Действие</th>
                             </tr>
                             </tfoot>
@@ -230,12 +249,11 @@ $events = utils_call_api($url, $config);
                                     <span class="badge badge-pill badge-success">Дополнительно</span> /
                                     <span class="badge badge-pill badge-danger">Обязательно</span>
                                 </td>
-
                                 <td class="text-muted" data-label="Стоимость, р.:">
                                     <?php echo $service_procedure->data['cost']; ?>
                                 </td>
                                 <td class="text-muted" data-label="Повторов:">–/N</td>
-                                <td><a href="#" type="button" class="btn btn-sm btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Запись</a></td>
+                                <td><a href="/lk/services/record.php?type=procedure&id=<?php echo $procedure['id']; ?>" type="button" class="btn btn-sm btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Запись</a></td>
                             </tr>
                             <?php } ?>
                             </tbody>

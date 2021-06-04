@@ -133,7 +133,6 @@ if ($_POST['user_role'] === "Doctor") {
 
     // Связка медперсонала с услугой
     $url = protocol."://".domain_name_api."/api/med/servicemedper";
-
     if(isset($_POST['doctor_profession'])) {
         foreach ($_POST['doctor_profession'] as $profession) {
             $data = [
@@ -147,25 +146,6 @@ if ($_POST['user_role'] === "Doctor") {
                 "data" => $data
             ];
             $speciality = utils_call_api($url, $config);
-            print_r($speciality);
-        }
-
-    }
-
-    if(isset($_POST['doctor_profession'])) {
-        foreach ($_POST['doctor_profession'] as $doctor_profession) {
-            $data = [
-                "service" => $doctor_profession,
-                "medpersona" => $doctor->data['id'],
-                "type" => "Specialty"
-            ];
-            $config = [
-                "method" => "POST",
-                "token" => $_COOKIE['user_token'],
-                "data" => $data
-            ];
-            $speciality = utils_call_api($url, $config);
-            print_r($speciality);
         }
     }
 

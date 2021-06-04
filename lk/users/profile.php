@@ -213,10 +213,10 @@ if(array_keys($_GET)[0] === "doctor") {
                 <hr style="border-top: 3px solid var(--yellow-color);">
                 <div class="row">
                     <div class="col-lg-12 d-flex justify-content-around flex-xl-row flex-md-row flex-sm-column flex-column">
-                        <a href="tel:+7 (999) 999-99-99" aria-haspopup="true" style="text-decoration: none; color: var(--yellow-color)">
+                        <a href="tel:<?php echo $user_info->data['user']['phone_number']?>" aria-haspopup="true" style="text-decoration: none; color: var(--yellow-color)">
                             <h5 class="font-weight-bold"><i class="fas fa-phone mr-1"></i> <?php echo $user_info->data['user']['phone_number']?></h5>
                         </a>
-                        <a href="mailto:mail@mail.ru" aria-haspopup="true" style="text-decoration: none; color: var(--yellow-color)">
+                        <a href="mailto:<?php echo $user_info->data['user']['email']?>" aria-haspopup="true" style="text-decoration: none; color: var(--yellow-color)">
                             <h5 class="font-weight-bold"><i class="fas fa-envelope-open-text mr-1"></i><?php echo $user_info->data['user']['email']?></h5>
                         </a>
                         <h5 class="font-weight-bold" style="color: var(--yellow-color)">
@@ -296,10 +296,10 @@ if(array_keys($_GET)[0] === "doctor") {
                 <hr style="border-top: 3px solid var(--yellow-color);">
                 <div class="row">
                     <div class="col-lg-12 d-flex justify-content-around flex-xl-row flex-md-row flex-sm-column flex-column">
-                        <a href="tel:+7 (999) 999-99-99" aria-haspopup="true" style="text-decoration: none; color: var(--yellow-color)">
+                        <a href="tel:<?php echo $user_info->data['user']['phone_number']?>" aria-haspopup="true" style="text-decoration: none; color: var(--yellow-color)">
                             <h5 class="font-weight-bold"><i class="fas fa-phone mr-1"></i> <?php echo $user_info->data['user']['phone_number']?></h5>
                         </a>
-                        <a href="mailto:mail@mail.ru" aria-haspopup="true" style="text-decoration: none; color: var(--yellow-color)">
+                        <a href="mailto:<?php echo $user_info->data['user']['email']?>" aria-haspopup="true" style="text-decoration: none; color: var(--yellow-color)">
                             <h5 class="font-weight-bold"><i class="fas fa-envelope-open-text mr-1"></i><?php echo $user_info->data['user']['email']?></h5>
                         </a>
                     </div>
@@ -336,10 +336,10 @@ if(array_keys($_GET)[0] === "doctor") {
                 <hr style="border-top: 3px solid var(--yellow-color);">
                 <div class="row">
                     <div class="col-lg-12 d-flex justify-content-around flex-xl-row flex-md-row flex-sm-column flex-column">
-                        <a href="tel:+7 (999) 999-99-99" aria-haspopup="true" style="text-decoration: none; color: var(--yellow-color)">
+                        <a href="tel:<?php echo $user_info->data['user']['phone_number']?>" aria-haspopup="true" style="text-decoration: none; color: var(--yellow-color)">
                             <h5 class="font-weight-bold"><i class="fas fa-phone mr-1"></i><?php echo $user_info->data['user']['phone_number']?></h5>
                         </a>
-                        <a href="mailto:mail@mail.ru" aria-haspopup="true" style="text-decoration: none; color: var(--yellow-color)">
+                        <a href="mailto:<?php echo $user_info->data['user']['email']?>" aria-haspopup="true" style="text-decoration: none; color: var(--yellow-color)">
                             <h5 class="font-weight-bold"><i class="fas fa-envelope-open-text mr-1"></i><?php echo $user_info->data['user']['email']?></h5>
                         </a>
                     </div>

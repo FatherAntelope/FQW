@@ -4,6 +4,28 @@ $days_num = 7; //количество
 $time_start = "8:00"; //время старта
 $time_span = 15; //минуты
 $count_records = 10; //количество
+
+// Достает данные врача по ID
+$url = protocol."://".domain_name_api."/api/med/medics/".$_GET['id'];
+$config = [
+    "method" => "GET",
+    "token" => $_COOKIE['user_token']
+];
+$doctor = utils_call_api($url, $config);
+
+// Достает основные данные врача по ID
+$url = protocol."://".domain_name_api."/api/med/users/".$doctor->data['user'];
+$doctor_user = utils_call_api($url, $config);
+
+// Достает связки с услугами у данного врача
+$url = protocol."://".domain_name_api."/api/med/medics/".$doctor->data['id']."/servicemedper";
+$services_doctor = utils_call_api($url, $config);
+$services = [];
+foreach ($services_doctor->data as $service_doctor) {
+    $url = protocol."://".domain_name_api."/api/med/service/".$service_doctor['service'];
+    $services[] = utils_call_api($url, $config)->data;
+}
+$min_cost = min(array_column($services, 'cost'));
 ?>
 <!doctype html>
 <html lang="ru">
@@ -54,29 +76,35 @@ $count_records = 10; //количество
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-2 text-center">
-                        <img src="/images/user.png" class="img-thumbnail rounded-circle mb-2" width="120" alt="">
+                        <img src="<?php echo getUrlUserPhoto($doctor_user->data['user']['photo'])?>" class="rounded-circle img-thumbnail mb-2" style="height: 8rem;width: 8rem; object-fit: cover">
                         <br>
                         <button type="button" disabled class="btn mt-1 btn-sm text-white" style="background-color: var(--cyan-color)"><i class="fas fa-comments"></i></button>
                     </div>
                     <div class="col-lg-10">
                         <div class="row">
                             <div class="col-md">
-                                <h4 class="font-weight-bold" style="color: var(--dark-cyan-color)">Иванова Екатерина Ивановна</h4>
+                                <h4 class="font-weight-bold" style="color: var(--dark-cyan-color)">
+                                    <?php echo $doctor_user->data['user']['surname']." ".$doctor_user->data['user']['name']." ". $doctor_user->data['user']['patronymic']; ?>
+                                </h4>
                             </div>
                             <div class="col-md">
                                 <h3>
-                                    <span class="badge text-secondary float-md-right" style="background-color: var(--yellow-color)">От 500₽</span>
-                                    <span class="badge badge-info float-md-right mr-2">506 каб.</span>
+                                    <span class="badge text-secondary float-md-right" style="background-color: var(--yellow-color)">От <?php echo $min_cost; ?>₽</span>
+                                    <span class="badge badge-info float-md-right mr-2"><?php echo $doctor->data['location']; ?></span>
                                 </h3>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <h5 class="text-muted">Квалификационная категория: Без категории / Первая / Вторая / Высшая</h5>
-                                <h5 class="text-muted">Стаж: 14 лет</h5>
+                                <h5 class="text-muted">Квалификационная категория:
+                                    <?php echo getDoctorQualificationRu($doctor->data['qualification'])?>
+                                </h5>
+                                <h5 class="text-muted">Стаж: <?php echo $doctor->data['experience']." ".getTextYear($doctor->data['experience'])?></h5>
                                 <h5 class="text-muted" style="display:inline">Специальность:</h5>
-                                <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">Терапевт 500₽</span>
-                                <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">Стоматолог 700₽</span>
+                                <br>
+                                <?php foreach ($services as $service) { ?>
+                                <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)"><?php echo $service['name']." - ".$service['cost']?>₽</span>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>
@@ -85,31 +113,30 @@ $count_records = 10; //количество
                 <div class="row">
                     <div class="col">
                         <h5 class="text-muted">Специализация:</h5>
-                        <h6 class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda natus nemo quis sequi. Aut debitis deleniti id in possimus quidem, quo tempore tenetur! A cupiditate dicta dolore doloremque eius ex impedit laborum, libero, mollitia nam nemo optio praesentium qui quo reprehenderit similique totam. Ab delectus labore nihil. Deserunt, enim, vel!</h6>
+                        <h6 class="text-muted">
+                            <?php echo $doctor->data['specialization']; ?>
+                        </h6>
                     </div>
                     <div class="col">
                         <h5 class="text-muted">Образование:</h5>
                         <ul class="text-muted">
-                            <li>
-                                1998 г. Медицинский колледж при БГМУ по специальности зубной врач
-                            </li>
-                            <li>
-                                2003-2008 гг. Башкирский государственный медицинский университет
-                            </li>
-                            <li>
-                                2008-2009 гг. Прохождение интернатуры по специальности «Терапевтическая стоматология»
-                            </li>
+                            <?php
+                            foreach($doctor->data['education'] as $education) {?>
+                                <li>
+                                    <?php echo $education; ?>
+                                </li>
+                            <?php } ?>
                         </ul>
                     </div>
                 </div>
                 <hr style="border-top: 3px solid var(--yellow-color);">
                 <div class="row">
                     <div class="col-lg-12 d-flex justify-content-around flex-xl-row flex-md-row flex-sm-column flex-column">
-                        <a href="tel:+7 (999) 999-99-99" aria-haspopup="true" style="text-decoration: none; color: var(--yellow-color)">
-                            <h5 class="font-weight-bold"><i class="fas fa-phone mr-1"></i> +7 (999) 999-99-99</h5>
+                        <a href="tel:<?php echo $doctor_user->data['user']['phone_number']?>" aria-haspopup="true" style="text-decoration: none; color: var(--yellow-color)">
+                            <h5 class="font-weight-bold"><i class="fas fa-phone mr-1"></i> <?php echo $doctor_user->data['user']['phone_number']?></h5>
                         </a>
-                        <a href="mailto:mail@mail.ru" aria-haspopup="true" style="text-decoration: none; color: var(--yellow-color)">
-                            <h5 class="font-weight-bold"><i class="fas fa-envelope-open-text mr-1"></i>mail@mail.ru</h5>
+                        <a href="mailto:<?php echo $doctor_user->data['user']['email']?>" aria-haspopup="true" style="text-decoration: none; color: var(--yellow-color)">
+                            <h5 class="font-weight-bold"><i class="fas fa-envelope-open-text mr-1"></i><?php echo $doctor_user->data['user']['email']?></h5>
                         </a>
                     </div>
                 </div>
@@ -118,11 +145,19 @@ $count_records = 10; //количество
         <!--Карточка выбора даты и времени записи на слугу-->
         <div class="card mt-3">
             <div class="card-body">
-                <h3 class="text-muted font-weight-bold">Выберите свободную запись</h3>
-                <select id="chosen_select_specialization" name="record_select_specialization" class="form-control form-control-chosen-required" data-placeholder="Выберите должность" required>
-                    <option value="main" selected>Терапевт</option>
-                    <option value="registrar">Стоматолог</option>
-                </select>
+                <h3 class="text-muted font-weight-bold">
+                    Выберите запись на свободное время
+                </h3>
+                <div class="form-group">
+                    <label style="color: var(--yellow-color)">Выберите специальность <strong style="color: var(--red--color)">*</strong></label>
+                    <select id="chosen_select_specialization" name="record_select_specialization" class="form-control form-control-chosen-required" data-placeholder="Выберите должность" required>
+                        <option></option>
+                        <?php foreach ($services as $service) { ?>
+                            <option value="<?php echo $service['id'].";".$service['cost']?>"><?php echo $service['name']?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+
                 <div class="card-body__table" id="card-body__table">
 
                 </div>
@@ -165,26 +200,33 @@ $count_records = 10; //количество
                 </button>
             </div>
             <div class="modal-body">
-                <p class="text-muted">Специальность:
-                    <span style="color: var(--cyan-color)" id="span_service_name"></span>
-                </p>
-                <p class="text-muted">Врач:
-                    <span style="color: var(--cyan-color)" id="span_service_doctor"></span>
-                </p>
-                <p class="text-muted">Расположение:
-                    <span style="color: var(--cyan-color)" id="span_service_location"></span>
-                </p>
-                <p class="text-muted">Дата и время:
-                    <span style="color: var(--cyan-color)" id="span_service_datetime"></span>
-                </p>
-                <p class="text-muted">Стоимость услуги:
-                    <span style="color: var(--cyan-color)" id="span_service_cost"></span>
-                </p>
-                <div class="alert alert-secondary" style="font-size: 12px">
-                    Правило: <br>
-                    Если не сможете посетить услугу в выбранное время, пожалуйста, отмените прием
+                <div class="alert alert-success mt-3" role="alert" style="font-size: 12px" id="alertSuccessRecordOnServiceConfirm" hidden>
+                    Вы успешно записались на услугу!
                 </div>
-                <form id="queryRecordConfirm">
+                <div>
+                    <p class="text-muted">Специальность:
+                        <span style="color: var(--cyan-color)" id="span_service_name"></span>
+                    </p>
+                    <p class="text-muted">Врач:
+                        <span style="color: var(--cyan-color)" id="span_service_doctor"></span>
+                    </p>
+                    <p class="text-muted">Расположение:
+                        <span style="color: var(--cyan-color)" id="span_service_location"></span>
+                    </p>
+                    <p class="text-muted">Дата и время:
+                        <span style="color: var(--cyan-color)" id="span_service_datetime"></span>
+                    </p>
+                    <p class="text-muted">Стоимость услуги:
+                        <span style="color: var(--cyan-color)" id="span_service_cost"></span>
+                    </p>
+                    <div class="alert alert-secondary" style="font-size: 12px">
+                        Правило: <br>
+                        Если не сможете посетить услугу в выбранное время, пожалуйста, отмените прием
+                    </div>
+                </div>
+                <form id="queryRecordOnServiceConfirm">
+                    <input type="hidden" name="record_time">
+                    <input type="hidden" name="record_id_service">
                     <div class="custom-checkbox custom-control">
                         <input class="custom-control-input" id="record_confirm" name="record_confirm" type="checkbox" required>
                         <label class="custom-control-label text-muted" for="record_confirm" style="text-decoration-line: none">Соглашаюсь с правилом и даю согласие на запись</label>
@@ -192,7 +234,7 @@ $count_records = 10; //количество
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-info text-white mr-1" style="background-color: var(--cyan-color)" form="queryRecordConfirm">
+                <button type="submit" class="btn btn-info text-white mr-1" style="background-color: var(--cyan-color)" form="queryRecordOnServiceConfirm">
                     <i class="fas fa-edit mr-1"></i> Подтвердить
                 </button>
             </div>
@@ -208,24 +250,28 @@ $count_records = 10; //количество
     $('#chosen_select_specialization').chosen();
 </script>
 <script>
-    $(document).ready( () => {
-        const timeMap = {
-            <?php for($i = 0; $i < $days_num; $i++) {?>
-            '<?php echo date("d.m", time() + 86400 * $i)." ".$weeks[date("D", time() + 86400 * ($i))]; ?> ' : [
-                <?php
-                //past, busy, empty
-                for($j = 0; $j < $count_records; $j++) { ?>
-                {
-                    time: '<?php echo date("H:i", strtotime('+'.$time_span * $j.' min', strtotime($time_start))); ?>',
-                    flag: '',
-                    id: '<?php echo "datetime_".$i."_".$j?>',
-                },
-                <?php } ?>
-            ],
+
+    const timeMap = {
+        <?php for($i = 0; $i < $days_num; $i++) {?>
+        '<?php echo date("d.m", time() + 86400 * $i)." ".$weeks[date("D", time() + 86400 * ($i))]; ?> ' : [
+            <?php
+            //past, busy, empty
+            for($j = 0; $j < $count_records; $j++) { ?>
+            {
+                time: '<?php echo date("H:i", strtotime('+'.$time_span * $j.' min', strtotime($time_start))); ?>',
+                flag: '',
+                id: '<?php echo "datetime_".$i."_".$j?>',
+            },
             <?php } ?>
-        }
+        ],
+        <?php } ?>
+    }
+
+    //$(document).ready( () => {
+    $(document).on('change', '#chosen_select_specialization', function () {
+        $(".card-body__row").remove();
         for(let key in timeMap){
-            const timeTable = $('#card-body__table');
+            const timeTable = $('#card-body__table  ');
             if(timeMap.hasOwnProperty(key)){
                 //создаем элемент столбца
                 let row = document.createElement('div');
@@ -263,17 +309,37 @@ $count_records = 10; //количество
 
 
         $(".card-body__ceil").click(function(){
-            $('#span_service_name').text('Терапевт');
-            $('#span_service_doctor').text('Иванова Екатерина Ивановна');
-            $('#span_service_location').text('505 кабинет');
-            $('#span_service_datetime').text($(this).siblings(".head").text() + " " +$(this).text());
-            $('#span_service_cost').text('500₽');
+            $('input[name="record_time"]').val($(this).text());
+            $('input[name="record_id_service"]').val(($('select[name="record_select_specialization"] option:selected').val()).split(";")[0]);
 
+            $('#span_service_name').text($('select[name="record_select_specialization"] option:selected').text());
+            $('#span_service_doctor').text('<?php echo $doctor_user->data['user']['surname']." ".$doctor_user->data['user']['name']." ". $doctor_user->data['user']['patronymic']; ?>');
+            $('#span_service_location').text('<?php echo $doctor->data['location']; ?>');
+            $('#span_service_datetime').text($(this).siblings(".head").text() + " " +$(this).text());
+            $('#span_service_cost').text(($('select[name="record_select_specialization"] option:selected').val()).split(";")[1] + "₽");
             $('#openModalRecordConfirm').modal('show');
         });
-
     });
 
+</script>
+<script>
+    $("#queryRecordOnServiceConfirm").submit(function () {
+        $.ajax({
+            url: "/queries/patient/queryRecordOnServiceConfirm.php",
+            method: "POST",
+            data: $(this).serialize(),
+            success: function () {
+                $("#alertSuccessRecordOnServiceConfirm").removeAttr("hidden");
+                $("#queryRecordOnServiceConfirm").prev().attr("hidden", "hidden");
+                $("#queryRecordOnServiceConfirm").parent().next().attr("hidden", "hidden");
+                $("#queryRecordOnServiceConfirm").attr("hidden", "hidden");
+                setTimeout(function(){ location.reload()}, 1100);
+            },
+            error: function () {
 
+            }
+        });
+        return false;
+    });
 </script>
 </html>
