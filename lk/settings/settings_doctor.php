@@ -5,14 +5,25 @@ if(!isset($user_data) || $user_data['role'] !== "Doctor") {
     header("Location: /error/403.php");
 }
 
+// Получение данных медперсонала
 $url = protocol."://".domain_name_api."/api/med/medpersona";
 $config = [
     "method" => "GET",
     "token" => $_COOKIE['user_token']
 ];
-
-// Получение данных медперсонала
 $doctor_data = utils_call_api($url, $config);
+
+// Получение данных об услугах медперсонала
+$url = protocol . '://' . domain_name_api . '/api/med/servicemedper/';
+$data = [
+    "medpersona" => $doctor_data->data['id']
+];
+$config = [
+    'token' => $_COOKIE['user_token'],
+    'method' => 'POST',
+    'data' => $data
+];
+$services_medperson = utils_call_api($url, $config);
 ?>
 <!doctype html>
 <html lang="ru">
@@ -30,7 +41,7 @@ $doctor_data = utils_call_api($url, $config);
     <script src="//cdn.jsdelivr.net/npm/jquery.maskedinput@1.4.1/src/jquery.maskedinput.min.js" type="text/javascript"></script>
     <script src="//cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script defer src="/js/all.js"></script>
-    <title><? echo web_name_header; ?></title>
+    <title><?php echo web_name_header; ?></title>
 </head>
 <style>
 
@@ -70,26 +81,34 @@ $doctor_data = utils_call_api($url, $config);
                             <p class="text-muted mb-1">
                                 <strong>Возраст:</strong>
                                 <span class="ml-2">
-                                    <?php echo floor( (time() - strtotime("1976-10-01")) /(60 * 60 * 24 * 365.25));?>
-                                    (<?php echo date("d.m.Y", strtotime("1976-10-01"));?>)
+                                    <?php echo floor( (time() - strtotime($doctor_data->data['birth_date'])) /(60 * 60 * 24 * 365.25));?>
+                                    (<?php echo date("d.m.Y", strtotime($doctor_data->data['birth_date']));?>)
                                 </span>
                             </p>
                             <p class="text-muted mb-1">
                                 <strong>Должность:</strong>
-                                <span class="ml-2"><?php echo "Врач"; ?></span>
+                                <span class="ml-2"><?php echo getDoctorPositionRu($doctor_data->data['position'])?></span>
                             </p>
                             <p class="text-muted mb-1">
                                 <strong>Кв. категория:</strong>
-                                <span class="ml-2"><?php echo "Высшая"; ?></span>
+                                <span class="ml-2"><?php echo getDoctorQualificationRu($doctor_data->data['qualification'])?></span>
                             </p>
                             <p class="text-muted mb-1">
-                                <strong>Специальность:</strong>
-                                <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">Терапевт</span>
-                                <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">Хирург</span>
+                                <strong>Направление:</strong>
+                                <?php foreach ($services_medperson->data as  $service_medperson) {
+                                    $url = protocol . '://' . domain_name_api . '/api/med/service/'. $service_medperson['service'];
+                                    $config = [
+                                        'token' => $_COOKIE['user_token'],
+                                        'method' => 'GET',
+                                    ];
+                                    $service_main = utils_call_api($url, $config);
+                                    ?>
+                                    <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)"><?php echo $service_main->data['name'];?></span>
+                                <?php } ?>
                             </p>
                             <p class="text-muted mb-1">
                                 <strong>Стаж:</strong>
-                                <span class="ml-2"><?php echo "14 лет"; ?></span>
+                                <span class="ml-2"><?php echo $doctor_data->data['experience']." ".getTextYear($doctor_data->data['experience'])?></span>
                             </p>
                         </div>
                     </div>
@@ -214,8 +233,8 @@ $doctor_data = utils_call_api($url, $config);
                                     </h6>
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Специализация</label>
-                                        <textarea class="form-control" name="doctor_biography" placeholder="Чем владеете, чем занимаетесь и т.п." minlength="500" maxlength="5000" required></textarea>
-                                        <small class="text-muted form-text">Минимум 500 символов</small>
+                                        <textarea rows="5" class="form-control" name="doctor_specialization" placeholder="Чем владеете, чем занимаетесь и т.п." minlength="300" maxlength="5000" required><?php echo $doctor_data->data['specialization']; ?></textarea>
+                                        <small class="text-muted form-text">Минимум 300 символов</small>
                                     </div>
                                     <div class="row">
                                         <div class="col" id="list_education">
@@ -223,6 +242,20 @@ $doctor_data = utils_call_api($url, $config);
                                             <div class="alert alert-info">Сначала укажите даты, затем опишите где вы учились или чего достигли.
                                                 <br> Например: <b>2003-2008 гг. Башкирский государственный медицинский университет </b></div>
                                             <table class="table table-sm table-borderless information_json">
+                                                <?php
+                                                foreach($doctor_data->data['education'] as $education) {?>
+                                                        <tr class="animate slideIn">
+                                                            <td class="pl-0">
+                                                                <input type="text" class="form-control" name=doctor_education_json[]" value="<?php echo $education; ?>" minlength="5" maxlength="100" placeholder="Дата. Описание" required></td>
+                                                            <td class="pl-0">
+                                                        <span class="btn btn-sm btn-danger rounded-circle minus mt-1">
+                                                            <i class="fas fa-minus"></i>
+                                                        </span>
+                                                            </td>
+                                                        </tr>
+                                                <?php } ?>
+
+
                                                 <tr class="information_json_plus">
                                                     <td class="pl-0">
                                                 <span class="btn btn-sm btn-success rounded-circle plus-education">

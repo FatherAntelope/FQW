@@ -9,6 +9,17 @@ $config = [
 ];
 $doctor_data = utils_call_api($url, $config);
 
+$url = protocol . '://' . domain_name_api . '/api/med/servicemedper/';
+$data = [
+    "medpersona" => $doctor_data->data['id']
+];
+$config = [
+    'token' => $_COOKIE['user_token'],
+    'method' => 'POST',
+    'data' => $data
+];
+$services_medperson = utils_call_api($url, $config);
+
 ?>
 <!doctype html>
 <html lang="ru">
@@ -54,18 +65,26 @@ $doctor_data = utils_call_api($url, $config);
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
-                                <h5 class="text-muted">Возраст: 45</h5>
-                                <h5 class="text-muted">Должность: Врач / Специалист по услугам</h5>
-                                <h5 class="text-muted">Квалификационная категория: Без категории / Первая / Вторая / Высшая</h5>
+                                <h5 class="text-muted">Возраст:
+                                    <?php echo floor( (time() - strtotime($doctor_data->data['birth_date'])) /(60 * 60 * 24 * 365.25));?>
+                                    (<?php echo date("d.m.Y", strtotime($doctor_data->data['birth_date']));?>)
+                                </h5>
+                                <h5 class="text-muted">Должность: <?php echo getDoctorPositionRu($doctor_data->data['position'])?></h5>
+                                <h5 class="text-muted">Квалификационная категория: <?php echo getDoctorQualificationRu($doctor_data->data['qualification'])?></h5>
                             </div>
                             <div class="col-lg-6">
-                                <h5 class="text-muted">Стаж: 14 лет</h5>
-                                <h5 class="text-muted">Специальность:</h5>
-                                <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">Стоматолог</span>
-                                <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">Терапевт</span>
-                                <h5 class="text-muted">Услуги:</h5>
-                                <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">Бассейн</span>
-                                <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">ОАК</span>
+                                <h5 class="text-muted">Стаж: <?php echo $doctor_data->data['experience']." ".getTextYear($doctor_data->data['experience'])?></h5>
+                                <h5 class="text-muted">Направление:</h5>
+                                <?php foreach ($services_medperson->data as  $service_medperson) {
+                                    $url = protocol . '://' . domain_name_api . '/api/med/service/'. $service_medperson['service'];
+                                    $config = [
+                                        'token' => $_COOKIE['user_token'],
+                                        'method' => 'GET',
+                                    ];
+                                    $service_main = utils_call_api($url, $config);
+                                    ?>
+                                    <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)"><?php echo $service_main->data['name'];?></span>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>
@@ -74,20 +93,19 @@ $doctor_data = utils_call_api($url, $config);
                 <div class="row">
                     <div class="col">
                         <h5 class="text-muted">Специализация:</h5>
-                        <h6 class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda natus nemo quis sequi. Aut debitis deleniti id in possimus quidem, quo tempore tenetur! A cupiditate dicta dolore doloremque eius ex impedit laborum, libero, mollitia nam nemo optio praesentium qui quo reprehenderit similique totam. Ab delectus labore nihil. Deserunt, enim, vel!</h6>
+                        <h6 class="text-muted">
+                            <?php echo $doctor_data->data['specialization']?>
+                        </h6>
                     </div>
                     <div class="col">
                         <h5 class="text-muted">Образование:</h5>
                         <ul class="text-muted">
-                            <li>
-                                1998 г. Медицинский колледж при БГМУ по специальности зубной врач
-                            </li>
-                            <li>
-                                2003-2008 гг. Башкирский государственный медицинский университет
-                            </li>
-                            <li>
-                                2008-2009 гг. Прохождение интернатуры по специальности «Терапевтическая стоматология»
-                            </li>
+                            <?php
+                            foreach($doctor_data->data['education'] as $education) {?>
+                                <li>
+                                    <?php echo $education; ?>
+                                </li>
+                            <?php } ?>
                         </ul>
                     </div>
                 </div>

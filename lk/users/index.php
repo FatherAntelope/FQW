@@ -124,7 +124,7 @@ $whose_user = 1;
                                 </td>
                                 <td class="text-muted" data-label="Почта:"><?php echo $patient_user->data['user']['email']; ?></td>
                                 <td class="text-muted" data-label="Телефон:"><?php echo $patient_user->data['user']['phone_number']; ?></td>
-                                <td style="min-width: 11rem">
+                                <td style="min-width: 12rem">
                                     <ul class="list-unstyled">
                                         <?php if ($patient['type'] == "Discharged") { ?>
                                             <li><button type="button" class="btn mt-1 btn-sm btn-secondary text-white" data-toggle="modal" data-target="#openModalRecoveryAccessPatient">Восстановить доступ</button></li>
@@ -182,8 +182,18 @@ $whose_user = 1;
                             ];
                             $doctors_data = utils_call_api($url, $config);
                             foreach ($doctors_data->data as $doctor) {
-                            $url = protocol.'://'.domain_name_api.'/api/med/users/'.$doctor['user'];
-                            $doctor_user = utils_call_api($url, $config);
+                                $url = protocol.'://'.domain_name_api.'/api/med/users/'.$doctor['user'];
+                                $doctor_user = utils_call_api($url, $config);
+                                $url = protocol . '://' . domain_name_api . '/api/med/servicemedper/';
+                                $data = [
+                                    "medpersona" => $doctor['id']
+                                ];
+                                $config = [
+                                    'token' => $_COOKIE['user_token'],
+                                    'method' => 'POST',
+                                    'data' => $data
+                                ];
+                                $services_medperson = utils_call_api($url, $config);
                             ?>
                             <tr>
                                 <td class="text-muted" data-label="Медп.-на:">
@@ -194,15 +204,21 @@ $whose_user = 1;
                                 </td>
                                 <td class="text-muted" data-label="Напр.-ие:">
                                     <ul class="list-unstyled">
-                                        <?php
-                                        ?>
-                                        <li><span class="badge badge-pill badge-secondary">Терапевт</span></li>
-                                        <li><span class="badge badge-pill badge-secondary">Невролог</span></li>
+                                        <?php foreach ($services_medperson->data as  $service_medperson) {
+                                            $url = protocol . '://' . domain_name_api . '/api/med/service/'. $service_medperson['service'];
+                                            $config = [
+                                                'token' => $_COOKIE['user_token'],
+                                                'method' => 'GET'
+                                            ];
+                                            $service_main = utils_call_api($url, $config);
+                                            ?>
+                                            <li><span class="badge badge-pill badge-secondary"><?php echo $service_main->data['name'];?></span></li>
+                                        <?php } ?>
                                     </ul>
                                 </td>
                                 <td class="text-muted" data-label="Почта:"><?php echo $doctor_user->data['user']['email']; ?></td>
                                 <td class="text-muted" data-label="Телефон:"><?php echo $doctor_user->data['user']['phone_number']; ?></td>
-                                <td style="min-width: 11rem">
+                                <td style="min-width: 12rem">
                                     <ul class="list-unstyled">
                                         <li><button type="button" class="btn mt-1 btn-sm btn-secondary text-white" data-toggle="modal" data-target="#openModalRecoveryPasswordUser">Восстановить пароль</button></li>
                                         <li><a href="/lk/users/profile.php?doctor=<?php echo $doctor['id']; ?>" class="btn mt-1 btn-sm text-white" style="background-color: var(--cyan-color)">Профиль</a></li>
@@ -268,7 +284,7 @@ $whose_user = 1;
                                 </td>
                                 <td class="text-muted" data-label="Почта:"><?php echo $admin_user->data['user']['email']; ?></td>
                                 <td class="text-muted" data-label="Телефон:"><?php echo $admin_user->data['user']['phone_number']; ?></td>
-                                <td style="min-width: 11rem">
+                                <td style="min-width: 12rem">
                                     <ul class="list-unstyled">
                                         <li><button type="button" class="btn mt-1 btn-sm btn-secondary text-white" data-toggle="modal" data-target="#openModalRecoveryPasswordUser">Восстановить пароль</button></li>
                                         <li><a href="/lk/users/profile.php?admin=<?php echo $admin['id']; ?>" type="button" class="btn mt-1 btn-sm text-white" style="background-color: var(--cyan-color)">Профиль</a></li>

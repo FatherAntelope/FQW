@@ -25,6 +25,7 @@ if(!isset($_GET['admin']) && !isset($_GET['patient']) && !isset($_GET['doctor'])
 $config = null; $user_group_info = null; $user_info = null;
 
 if(array_keys($_GET)[0] === "patient") {
+    // Достает все данные пациента
     $url = protocol . '://' . domain_name_api . '/api/med/patients/' . $_GET['patient'];
     $config = [
         'token' => $_COOKIE['user_token'],
@@ -35,8 +36,26 @@ if(array_keys($_GET)[0] === "patient") {
         header("Location: /lk/users/");
         exit();
     }
+
+    // Достает все данные пользователя
     $url = protocol.'://'.domain_name_api.'/api/med/users/'.$user_group_info->data['user'];
     $user_info = utils_call_api($url, $config);
+
+    // Достает данные медицинской карты пользователя
+    $url = protocol."://".domain_name_api."/api/med/users/patients/".$_GET['patient']."/medcard";
+    $config = [
+        "method" => "GET",
+        "token" => $_COOKIE['user_token']
+    ];
+    $patient_medcard = utils_call_api($url, $config);
+
+    // Достает паспортные данные пациента
+    $url = protocol."://".domain_name_api."/api/med/users/".$user_info->data['user']['id']."/passport";
+    $config = [
+        "method" => "GET",
+        "token" => $_COOKIE['user_token']
+    ];
+    $passport_data = utils_call_api($url, $config);
 }
 
 if(array_keys($_GET)[0] === "admin") {
@@ -61,13 +80,24 @@ if(array_keys($_GET)[0] === "doctor") {
         'method' => 'GET'
     ];
     $user_group_info = utils_call_api($url, $config);
-    print_r($user_group_info);
     if ($user_group_info->status_code == 404) {
         header("Location: /lk/users/");
         exit();
     }
     $url = protocol.'://'.domain_name_api.'/api/med/users/'.$user_group_info->data['user'];
-    //$user_info = utils_call_api($url, $config);
+    $user_info = utils_call_api($url, $config);
+
+
+    $url = protocol . '://' . domain_name_api . '/api/med/servicemedper';
+    $data = [
+      "medpersona" => $_GET['doctor']
+    ];
+    $config = [
+        'token' => $_COOKIE['user_token'],
+        'method' => 'GET',
+        'data' => $data
+    ];
+    $services_medperson = utils_call_api($url, $config);
 }
 ?>
 <!doctype html>
@@ -103,10 +133,8 @@ if(array_keys($_GET)[0] === "doctor") {
                 </li>
             </ol>
         </nav>
-
         <!--Карточка с основной информацией пациента-->
-        <?php
-        if(array_keys($_GET)[0] === "patient") { ?>
+        <?php if(array_keys($_GET)[0] === "patient") { ?>
         <div class="card">
             <div class="card-body">
                 <div class="row">
@@ -130,17 +158,17 @@ if(array_keys($_GET)[0] === "doctor") {
                                     (<?php echo date("d.m.Y", strtotime($user_group_info->data['birth_date']));?>)
                                 </h5>
                                 <h5 class="text-muted">Пол: <?php echo getPatientGenderRu($user_group_info->data['gender']); ?></h5>
-                                <h5 class="text-muted">Рост: 170 cм. </h5>
+<!--                                <h5 class="text-muted">Рост: 170 cм. </h5>-->
                                 <h5 class="text-muted">Категория: <?php echo getPatientCategoryRu($user_group_info->data['type']); ?> </h5>
                             </div>
                             <div class="col-lg-7">
-                                <h5 class="text-muted">ID карты: 123456789</h5>
+                                <h5 class="text-muted">ID карты: <?php echo $patient_medcard->data['id']; ?></h5>
                                 <h5 class="text-muted">Терапевт:
                                     <a href="#" style="color: var(--dark-cyan-color); text-decoration: none">Иванов И.И.</a>
                                     / Отсутствует
                                 </h5>
                                 <h5 class="text-muted">Дата поступления: <?php echo date("d.m.Y", strtotime($user_group_info->data['receipt_date']));?></h5>
-                                <?php if(isset($user_group_info->data['group'])) {?>
+                                <?php if(count($user_group_info->data['group']) > 0) {?>
                                 <div class="row">
                                     <div class="col-lg-3">
                                         <h5 class="text-muted">Группа пациента:</h5>
@@ -167,19 +195,19 @@ if(array_keys($_GET)[0] === "doctor") {
                         <h5 class="text-muted">Паспортные данные:</h5>
                         <p class="text-muted mb-1">
                             <strong>Серия и номер:</strong>
-                            <span class="ml-2">99 99 999999</span>
+                            <span class="ml-2"><?php echo $passport_data->data['series_number'];?></span>
                         </p>
                         <p class="text-muted mb-1">
                             <strong>Код подразделения:</strong>
-                            <span class="ml-2">111-111</span>
+                            <span class="ml-2"><?php echo $passport_data->data['code'];?></span>
                         </p>
                         <p class="text-muted mb-1">
                             <strong>Дата выдачи:</strong>
-                            <span class="ml-2">01.01.2020</span>
+                            <span class="ml-2"><?php echo date("d.m.Y", strtotime($passport_data->data['series_number']));?></span>
                         </p>
                         <p class="text-muted mb-1">
                             <strong>Кем выдан:</strong>
-                            <span class="ml-2">Отделом МВД по РБ в г.Уфа</span>
+                            <span class="ml-2"><?php echo $passport_data->data['by_whom'];?></span>
                         </p>
                     </div>
                     <div class="col-lg-8">
@@ -207,38 +235,45 @@ if(array_keys($_GET)[0] === "doctor") {
         <?php } ?>
 
         <!--Карточка основной информации врача-->
-        <?php
-        if(array_keys($_GET)[0] === "doctor") {
-
-            ?>
+        <?php if(array_keys($_GET)[0] === "doctor") { ?>
         <div class="card">
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-2 text-center">
-                        <img src="/images/user.png" class="img-thumbnail rounded-circle mb-2" width="120" alt="">
+                        <img src="<?php echo getUrlUserPhoto($user_info->data['user']['photo'])?>" class="rounded-circle img-thumbnail mb-2" style="height: 8rem;width: 8rem; object-fit: cover">
                         <br>
                         <button type="button" disabled class="btn mt-1 btn-sm text-white" style="background-color: var(--cyan-color)"><i class="fas fa-comments"></i></button>
                     </div>
                     <div class="col-lg-10">
                         <div class="row">
                             <div class="col">
-                                <h4 class="font-weight-bold" style="color: var(--dark-cyan-color)">Иванова Екатерина Ивановна</h4>
+                                <h4 class="font-weight-bold" style="color: var(--dark-cyan-color)">
+                                    <?php echo $user_info->data['user']['surname']." ".$user_info->data['user']['name']." ". $user_info->data['user']['patronymic']; ?>
+                                </h4>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
-                                <h5 class="text-muted">Возраст: 45</h5>
-                                <h5 class="text-muted">Должность: Врач / Специалист по услугам </h5>
-                                <h5 class="text-muted">Квалификационная категория: Без категории / Первая / Вторая / Высшая</h5>
+                                <h5 class="text-muted">Возраст:
+                                    <?php echo floor( (time() - strtotime($user_group_info->data['birth_date'])) /(60 * 60 * 24 * 365.25));?>
+                                    (<?php echo date("d.m.Y", strtotime($user_group_info->data['birth_date']));?>)
+                                </h5>
+                                <h5 class="text-muted">Должность: <?php echo getDoctorPositionRu($user_group_info->data['position'])?></h5>
+                                <h5 class="text-muted">Квалификационная категория: <?php echo getDoctorQualificationRu($user_group_info->data['qualification'])?></h5>
                             </div>
                             <div class="col-lg-6">
-                                <h5 class="text-muted">Стаж: 14 лет</h5>
-                                <h5 class="text-muted">Специальность:</h5>
-                                <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">Стоматолог</span>
-                                <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">Терапевт</span>
-                                <h5 class="text-muted">Услуги:</h5>
-                                <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">Бассейн</span>
-                                <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">ОАК</span>
+                                <h5 class="text-muted">Стаж: <?php echo $user_group_info->data['experience']." ".getTextYear($user_group_info->data['experience'])?> </h5>
+                                <h5 class="text-muted">Направление:</h5>
+                                <?php foreach ($services_medperson->data as  $service_medperson) {
+                                    $url = protocol . '://' . domain_name_api . '/api/med/service/'. $service_medperson['service'];
+                                    $config = [
+                                        'token' => $_COOKIE['user_token'],
+                                        'method' => 'GET',
+                                    ];
+                                    $service_main = utils_call_api($url, $config);
+                                    ?>
+                                    <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)"><?php echo $service_main->data['name'];?></span>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>
@@ -247,20 +282,19 @@ if(array_keys($_GET)[0] === "doctor") {
                 <div class="row">
                     <div class="col">
                         <h5 class="text-muted">Специализация:</h5>
-                        <h6 class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda natus nemo quis sequi. Aut debitis deleniti id in possimus quidem, quo tempore tenetur! A cupiditate dicta dolore doloremque eius ex impedit laborum, libero, mollitia nam nemo optio praesentium qui quo reprehenderit similique totam. Ab delectus labore nihil. Deserunt, enim, vel!</h6>
+                        <h6 class="text-muted">
+                            <?php echo $user_group_info->data['specialization']?>
+                        </h6>
                     </div>
                     <div class="col">
                         <h5 class="text-muted">Образование:</h5>
                         <ul class="text-muted">
+                            <?php
+                            foreach($user_group_info->data['education'] as $education) {?>
                             <li>
-                                1998 г. Медицинский колледж при БГМУ по специальности зубной врач
+                                <?php echo $education; ?>
                             </li>
-                            <li>
-                                2003-2008 гг. Башкирский государственный медицинский университет
-                            </li>
-                            <li>
-                                2008-2009 гг. Прохождение интернатуры по специальности «Терапевтическая стоматология»
-                            </li>
+                            <?php } ?>
                         </ul>
                     </div>
                 </div>
@@ -268,10 +302,10 @@ if(array_keys($_GET)[0] === "doctor") {
                 <div class="row">
                     <div class="col-lg-12 d-flex justify-content-around flex-xl-row flex-md-row flex-sm-column flex-column">
                         <a href="tel:+7 (999) 999-99-99" aria-haspopup="true" style="text-decoration: none; color: var(--yellow-color)">
-                            <h5 class="font-weight-bold"><i class="fas fa-phone mr-1"></i> +7 (999) 999-99-99</h5>
+                            <h5 class="font-weight-bold"><i class="fas fa-phone mr-1"></i> <?php echo $user_info->data['user']['phone_number']?></h5>
                         </a>
                         <a href="mailto:mail@mail.ru" aria-haspopup="true" style="text-decoration: none; color: var(--yellow-color)">
-                            <h5 class="font-weight-bold"><i class="fas fa-envelope-open-text mr-1"></i>mail@mail.ru</h5>
+                            <h5 class="font-weight-bold"><i class="fas fa-envelope-open-text mr-1"></i><?php echo $user_info->data['user']['email']?></h5>
                         </a>
                     </div>
                 </div>
@@ -280,10 +314,7 @@ if(array_keys($_GET)[0] === "doctor") {
         <?php } ?>
 
         <!--Карточка основной информации администратора-->
-        <?php
-        if(array_keys($_GET)[0] === "admin") {
-
-            ?>
+        <?php if(array_keys($_GET)[0] === "admin") { ?>
         <div class="card">
             <div class="card-body">
                 <div class="row">

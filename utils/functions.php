@@ -115,4 +115,23 @@ function getDoctorPositionRu(string $doctor_position_en) : string {
         return "Врач";
     return "Данная должность не найдена";
 }
+
+function getDoctorQualificationRu(int $doctor_qualification_med) : string {
+    if($doctor_qualification_med == 0)
+        return "Без категории";
+    if ($doctor_qualification_med == 1)
+        return "Первая";
+    if($doctor_qualification_med == 2)
+        return "Вторая";
+    if ($doctor_qualification_med == 3)
+        return "Высшая";
+    return "Данная категория не найдена";
+}
+
+function getTextYear($year) {
+    $year = abs($year);
+    $t1 = $year % 10;
+    $t2 = $year % 100;
+    return ($t1 == 1 && $t2 != 11 ? "год" : ($t1 >= 2 && $t1 <= 4 && ($t2 < 10 || $t2 >= 20) ? "года" : "лет"));
+}
 ?>

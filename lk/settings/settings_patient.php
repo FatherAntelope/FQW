@@ -4,24 +4,22 @@
 if(!isset($user_data) || $user_data['role'] !== "Patient") {
     header("Location: /error/403.php");
 }
-
+// Получение данных пациента
 $url = protocol."://".domain_name_api."/api/med/patient";
 $config = [
     "method" => "GET",
     "token" => $_COOKIE['user_token']
 ];
-// Получение данных пациента
 $patient_data = utils_call_api($url, $config);
 $patient_gender = getPatientGenderRu($patient_data->data['gender']);
 $patient_category = getPatientCategoryRu($patient_data->data['type']);
 
+// Получение паспортных данных пациента
 $url = protocol."://".domain_name_api."/api/med/passport";
 $config = [
     "method" => "GET",
     "token" => $_COOKIE['user_token']
 ];
-
-// Получение паспортных данных пациента
 $passport_data = utils_call_api($url, $config);
 
 $url = protocol."://".domain_name_api."/api/med/users/patients/".$patient_data->data['id']."/medcard";
