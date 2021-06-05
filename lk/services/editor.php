@@ -175,9 +175,9 @@ $events = utils_call_api($url, $config);
                                                 $speciality_medpersona_user = utils_call_api($url, $config);
                                                 ?>
                                                 <li>
-                                                <span class="badge badge-pill badge-secondary">
+                                                <a href="/lk/users/profile.php?doctor=<?php echo $speciality_medpersona->data['id']?>" class="badge badge-pill badge-secondary text-decoration-none">
                                                     <?php echo getItitialsFullName($speciality_medpersona_user->data['user']['surname'], $speciality_medpersona_user->data['user']['name'], $speciality_medpersona_user->data['user']['patronymic']);  ?>
-                                                </span>
+                                                </a>
                                                 </li>
                                             <?php } ?>
                                         </ul>
@@ -252,9 +252,9 @@ $events = utils_call_api($url, $config);
                                             $procedure_medpersona_user = utils_call_api($url, $config);
                                             ?>
                                             <li>
-                                                <span class="badge badge-pill badge-secondary">
+                                                <a href="/lk/users/profile.php?doctor=<?php echo $procedure_medpersona->data['id']?>" class="badge badge-pill badge-secondary">
                                                     <?php echo getItitialsFullName($procedure_medpersona_user->data['user']['surname'], $procedure_medpersona_user->data['user']['name'], $procedure_medpersona_user->data['user']['patronymic']);  ?>
-                                                </span>
+                                                </a>
                                             </li>
                                         <?php } ?>
                                     </ul>
@@ -346,12 +346,11 @@ $events = utils_call_api($url, $config);
 
                                                 $url = protocol . '://' . domain_name_api . '/api/med/users/' . $procedure_medpersona->data['user'];
                                                 $procedure_medpersona_user = utils_call_api($url, $config);
-
                                                 ?>
                                                 <li>
-                                                    <span class="badge badge-pill badge-secondary">
+                                                    <a href="/lk/users/profile.php?doctor=<?php echo $procedure_medpersona->data['id']?>" class="badge badge-pill badge-secondary">
                                                         <?php echo getItitialsFullName($procedure_medpersona_user->data['user']['surname'], $procedure_medpersona_user->data['user']['name'], $procedure_medpersona_user->data['user']['patronymic']);  ?>
-                                                    </span>
+                                                    </a>
                                                 </li>
 
                                             <?php } ?>
