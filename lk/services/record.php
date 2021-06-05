@@ -9,11 +9,14 @@ if ($user->getStatusCode() === 400 || $user->getStatusCode() === 403) {
     setcookie('user_token', '', 0, "/");
     header("Location: /error/401.php");
 }
-if (!$user->isUserRole("Patient"))
+if ($user->isUserRole("Patient"))
+    $whose_user = 2;
+elseif ($user->isUserRole("Admin"))
+    $whose_user = 1;
+else
     header("Location: /error/403.php");
 
 $user_data = $user->getData();
-$whose_user = 2;
 
 if ($_GET['type'] == 'doctor' && isset($_GET['id']))
     require $_SERVER['DOCUMENT_ROOT']."/lk/services/record_doctor.php";

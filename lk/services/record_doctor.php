@@ -1,16 +1,21 @@
 <?php
+if(!isset($user_data))
+    header("Location: /error/403.php");
 $weeks = [ "Mon"=> "Пн" , "Tue" => "Вт" , "Wed" => "Ср" , "Thu" => "Чт" , "Fri" => "Пт" , "Sat" => "Сб",  "Sun" =>"Вс"];
 $days_num = 7; //количество
 $time_start = "8:00"; //время старта
 $time_span = 15; //минуты
 $count_records = 10; //количество
 
-$url = protocol."://".domain_name_api."/api/med/patient";
-$config = [
-    "method" => "GET",
-    "token" => $_COOKIE['user_token']
-];
-$patient_data = utils_call_api($url, $config);
+if($user_data['role'] == "Patient") {
+    $url = protocol."://".domain_name_api."/api/med/patient";
+    $config = [
+        "method" => "GET",
+        "token" => $_COOKIE['user_token']
+    ];
+    $patient_data = utils_call_api($url, $config);
+}
+
 
 // Достает данные врача по ID
 $url = protocol."://".domain_name_api."/api/med/medics/".$_GET['id'];
@@ -70,12 +75,21 @@ $min_cost = min(array_column($services, 'cost'));
     <div class="container pt-3 pb-3">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/lk/" style="color: var(--dark-cyan-color)">Профиль</a></li>
-                <li class="breadcrumb-item"><a href="/lk/services/" style="color: var(--dark-cyan-color)">Услуги</a></li>
-                <li class="breadcrumb-item"><a href="/lk/services/appointment.php?selected=doctors" style="color: var(--dark-cyan-color)">Врачи</a></li>
-                <li class="breadcrumb-item active" aria-current="page">
-                    Запись к врачу
-                </li>
+                <?php if($user_data['role'] == "Patient") {?>
+                    <li class="breadcrumb-item"><a href="/lk/" style="color: var(--dark-cyan-color)">Профиль</a></li>
+                    <li class="breadcrumb-item"><a href="/lk/services/" style="color: var(--dark-cyan-color)">Услуги</a></li>
+                    <li class="breadcrumb-item"><a href="/lk/services/appointment.php?selected=doctors" style="color: var(--dark-cyan-color)">Врачи</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                        Запись на мероприятие
+                    </li>
+                <?php } ?>
+                <?php if($user_data['role'] == "Admin") {?>
+                    <li class="breadcrumb-item"><a href="/lk/" style="color: var(--dark-cyan-color)">Профиль</a></li>
+                    <li class="breadcrumb-item"><a href="/lk/services/editor.php?selected=doctors" style="color: var(--dark-cyan-color)">Управление услугами</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                        Просмотр врача
+                    </li>
+                <?php } ?>
             </ol>
         </nav>
         <!--Карточка основной информации врача-->
@@ -150,6 +164,7 @@ $min_cost = min(array_column($services, 'cost'));
             </div>
         </div>
         <!--Карточка выбора даты и времени записи на слугу-->
+        <?php if($user_data['role'] == "Patient") { ?>
         <div class="card mt-3">
             <div class="card-body">
                 <h3 class="text-muted font-weight-bold">
@@ -170,6 +185,7 @@ $min_cost = min(array_column($services, 'cost'));
                 </div>
             </div>
         </div>
+        <?php } ?>
     </div>
 
 </div>
