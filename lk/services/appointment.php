@@ -230,18 +230,43 @@ $events = utils_call_api($url, $config);
                             <tbody>
                             <?php
                             foreach ($procedures->data as $procedure) {
-                            $url = protocol . '://' . domain_name_api . '/api/med/service/'.$procedure['service'];
-                            $config = [
-                                'token' => $_COOKIE['user_token'],
-                                'method' => 'GET'
-                            ];
-                            $service_procedure = utils_call_api($url, $config);
+                                $url = protocol . '://' . domain_name_api . '/api/med/service/'.$procedure['service'];
+                                $config = [
+                                    'token' => $_COOKIE['user_token'],
+                                    'method' => 'GET'
+                                ];
+                                $service_procedure = utils_call_api($url, $config);
+
+                                $url = protocol . '://' . domain_name_api . '/api/med/service/'.$service_procedure->data['id'].'/servicemedper';
+                                $service_medpers_procedure = utils_call_api($url, $config);
+
+                                if(count($service_medpers_procedure->data) == 0)
+                                    continue;
                             ?>
                             <tr>
                                 <td class="text-muted" data-label="Название:">
                                     <?php echo $service_procedure->data['name']; ?>
                                 </td>
-                                <td class="text-muted" data-label="Сп.-ист:"><></td>
+                                <td class="text-muted" data-label="Сп.-исты:">
+                                    <ul class="list-unstyled">
+                                        <?php foreach ($service_medpers_procedure->data as $service_medper_procedure) {
+                                            $url = protocol . '://' . domain_name_api . '/api/med/medics/' . $service_medper_procedure['medpersona'];
+                                            $procedure_medpersona = utils_call_api($url, $config);
+
+                                            $url = protocol . '://' . domain_name_api . '/api/med/users/' . $procedure_medpersona->data['user'];
+                                            $procedure_medpersona_user = utils_call_api($url, $config);
+
+                                            ?>
+                                                <li>
+                                                    <span class="badge badge-pill badge-secondary">
+                                                        <?php echo getItitialsFullName($procedure_medpersona_user->data['user']['surname'], $procedure_medpersona_user->data['user']['name'], $procedure_medpersona_user->data['user']['patronymic']);  ?>
+                                                    </span>
+                                                </li>
+
+                                        <?php } ?>
+                                    </ul>
+
+                                </td>
                                 <td class="text-muted" data-label="Расп.-ие:">
                                     <?php echo $procedure['placement']?>
                                 </td>
@@ -296,13 +321,36 @@ $events = utils_call_api($url, $config);
                                     'method' => 'GET'
                                 ];
                                 $service_examination = utils_call_api($url, $config);
+
+                                $url = protocol . '://' . domain_name_api . '/api/med/service/'.$service_examination->data['id'].'/servicemedper';
+                                $service_medpers_examination = utils_call_api($url, $config);
+
+                                if(count($service_medpers_examination->data) == 0)
+                                    continue;
                             ?>
                             <tr>
                                 <td class="text-muted" data-label="Название:">
                                     <?php echo $service_examination->data['name']; ?>
                                 </td>
-                                <td class="text-muted" data-label="Сп.-ист:">
-                                    <>
+                                <td class="text-muted" data-label="Сп.-исты:">
+                                    <ul class="list-unstyled">
+                                        <?php
+                                        foreach ($service_medpers_examination->data as $service_medper_examination) {
+                                            $url = protocol . '://' . domain_name_api . '/api/med/medics/' . $service_medper_procedure['medpersona'];
+                                            $procedure_medpersona = utils_call_api($url, $config);
+
+                                            $url = protocol . '://' . domain_name_api . '/api/med/users/' . $procedure_medpersona->data['user'];
+                                            $procedure_medpersona_user = utils_call_api($url, $config);
+
+                                            ?>
+                                            <li>
+                                                    <span class="badge badge-pill badge-secondary">
+                                                        <?php echo getItitialsFullName($procedure_medpersona_user->data['user']['surname'], $procedure_medpersona_user->data['user']['name'], $procedure_medpersona_user->data['user']['patronymic']);  ?>
+                                                    </span>
+                                            </li>
+
+                                        <?php } ?>
+                                    </ul>
                                 </td>
                                 <td class="text-muted" data-label="Расп.-ие:">
                                     <?php echo $examination['placement']?>
@@ -310,7 +358,7 @@ $events = utils_call_api($url, $config);
                                 <td class="text-muted" data-label="Стоимость, р.:">
                                     <?php echo $service_examination->data['cost']; ?>
                                 </td>
-                                <td><a href="#" type="button" class="btn btn-sm btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Запись</a></td>
+                                <td><a href="/lk/services/record.php?type=examination&id=<?php echo $examination['id']; ?>" type="button" class="btn btn-sm btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Запись</a></td>
                             </tr>
                             <?php } ?>
                             </tbody>
@@ -336,9 +384,8 @@ $events = utils_call_api($url, $config);
                             <thead class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
                                 <th>Название</th>
-                                <th>Специалисты</th>
                                 <th>Даты проведения</th>
-                                <th>Расположение</th>
+                                <th>Место встречи</th>
                                 <th>Стоимость, руб.</th>
                                 <th>Действие</th>
                             </tr>
@@ -357,28 +404,24 @@ $events = utils_call_api($url, $config);
                                 <td class="text-muted" data-label="Название:">
                                     <?php echo $service_event->data['name']; ?>
                                 </td>
-                                <td class="text-muted" data-label="Сп.-ист:">
-                                    <>
-                                </td>
                                 <td class="text-muted" data-label="Даты:">
                                     <?php echo ($event['end_data'] !== null) ? date("d.m.Y", strtotime($event['begin_data']))." - ".date("d.m.Y", strtotime($event['end_data'])): "Бессрочно"; ?>
                                 </td>
-                                <td class="text-muted" data-label="Расп.-ие:">
+                                <td class="text-muted" data-label="Мест. встречи:">
                                     <?php echo $event['placement']; ?>
                                 </td>
                                 <td class="text-muted" data-label="Стоимость, р.:">
                                     <?php echo $service_event->data['cost']; ?>
                                 </td>
-                                <td><a href="#" type="button" class="btn btn-sm btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Запись</a></td>
+                                <td><a href="/lk/services/record.php?type=event&id=<?php echo $event['id']; ?>" type="button" class="btn btn-sm btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Запись</a></td>
                             </tr>
                             <?php } ?>
                             </tbody>
                             <tfoot class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
                                 <th>Обследование</th>
-                                <th>Специалисты</th>
                                 <th>Даты проведения</th>
-                                <th>Расположение</th>
+                                <th>Место встречи</th>
                                 <th>Стоимость, руб.</th>
                                 <th>Действие</th>
                             </tr>

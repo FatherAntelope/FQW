@@ -208,7 +208,7 @@ $min_cost = min(array_column($services, 'cost'));
             </div>
             <div class="modal-body">
                 <div class="alert alert-success mt-3" role="alert" style="font-size: 12px" id="alertSuccessRecordOnServiceConfirm" hidden>
-                    Вы успешно записались на услугу!
+                    Вы успешно записались к врачу!
                 </div>
                 <div>
                     <p class="text-muted">Специальность:

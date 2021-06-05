@@ -57,7 +57,17 @@ $whose_user = 2;
         </nav>
         <div class="card">
             <div class="card-body">
-                <!--Контент-->
+                <div class="row justify-content-center">
+                    <div class="col-md-12">
+                        <div class="text-center mt-2">
+                            <h3 class="mb-4 text-muted font-weight-bold">
+                                Данная страница находится на этапе разработки. <br>
+                                Скоро она будет доступна!
+                            </h3>
+                            <img src="/images/build_module.svg" class="img-fluid" alt="" style="max-height: 55vh">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
