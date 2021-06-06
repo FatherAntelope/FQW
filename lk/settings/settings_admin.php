@@ -107,18 +107,21 @@ $admin_position = getAdminPositionRu($admin_data->data['position']);
                                             <div class="form-group">
                                                 <label style="color: var(--yellow-color)">Фамилия</label>
                                                 <input type="text" class="form-control" name="admin_name" value="<?php echo $user_data['surname']; ?>" placeholder="Ваша фамилия" minlength="2" maxlength="30" onkeyup="checkInputRu(this)" required>
+                                                <small class="form-text text-muted">Кириллица</small>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label style="color: var(--yellow-color)">Имя</label>
                                                 <input type="text" class="form-control" name="admin_surname" value="<?php echo $user_data['name']?>" placeholder="Ваше имя" minlength="2" maxlength="30" onkeyup="checkInputRu(this)" required>
+                                                <small class="form-text text-muted">Кириллица</small>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label style="color: var(--yellow-color)">Отчество</label>
                                                 <input type="text" class="form-control" name="admin_patronymic" value="<?php echo $user_data['patronymic'];?>" placeholder="Ваше отчество" minlength="2" maxlength="30" onkeyup="checkInputRu(this)" required>
+                                                <small class="form-text text-muted">Кириллица</small>
                                             </div>
                                         </div>
                                     </div>
@@ -140,7 +143,7 @@ $admin_position = getAdminPositionRu($admin_data->data['position']);
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label style="color: var(--yellow-color)">Почта</label>
-                                                <input type="email" class="form-control" placeholder="example@mail.ru"  name="user_email" onkeyup="checkContactData()" value="<?php echo $user_data['email'];?>" required>
+                                                <input type="email" class="form-control" placeholder="example@mail.ru" maxlength="254" name="user_email" onkeyup="checkContactData()" value="<?php echo $user_data['email'];?>" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -341,9 +344,10 @@ $admin_position = getAdminPositionRu($admin_data->data['position']);
                 </div>
                 <form id="queryEditPhotoUser" method="post" action="/queries/editPhotoUser.php" enctype="multipart/form-data">
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" name="user_photo" id="customFile" accept="image/png,image/jpeg">
+                        <input type="file" class="custom-file-input" name="user_photo" id="customFile" accept="image/png,image/jpeg" required>
                         <label class="custom-file-label" for="customFile" data-browse="Открыть">Выберите фотографию</label>
                     </div>
+                    <small class="form-text text-muted">До 2мб</small>
                 </form>
                 <div class="alert alert-success" role="alert" hidden>
                     Фотография успешно изменена на новую!
@@ -360,6 +364,23 @@ $admin_position = getAdminPositionRu($admin_data->data['position']);
 <?php require $_SERVER['DOCUMENT_ROOT'] . "/footer.php"; ?>
 </body>
 <script>
+    $('[name="user_photo"]').on('change', function () {
+        if($(this).val !== "") {
+            if (this.files[0].size > 2097152) {
+                $(this).addClass('is-invalid');
+                $(this).val("");
+                $(this).parent().next().removeClass('text-muted');
+                $(this).parent().next().addClass('text-danger');
+            } else {
+                $(this).removeClass('is-invalid');
+                $(this).attr("placeholder", "Выберите фото");
+                $(this).parent().next().removeClass('text-danger');
+                $(this).parent().next().addClass('text-muted');
+            }
+        }
+    });
+
+
     /**
      * Проверяет все поля персональных данных на изменение и дает доступ к отправке запроса на смену этих данных
      * Также является функцией RegEx на удаление символов, не являющихся кириллицей

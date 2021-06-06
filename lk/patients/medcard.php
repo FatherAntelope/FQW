@@ -6,6 +6,9 @@ require $_SERVER['DOCUMENT_ROOT'] . '/utils/variables.php';
 require $_SERVER['DOCUMENT_ROOT'] . '/utils/functions.php';
 require $_SERVER['DOCUMENT_ROOT'] . "/utils/User.php";
 
+if(!isset($_GET['patient']) || $_GET['patient'] == null)
+    header("Location: /lk/patients/");
+
 // Выгрузка данных пользователя
 $user = new User($_COOKIE['user_token']);
 
@@ -21,6 +24,30 @@ if(!$user->isUserRole("Doctor"))
 // Выгружает данные пользователя
 $user_data = $user->getData();
 $whose_user = 3;
+
+// Достает все данные пациента
+$url = protocol . '://' . domain_name_api . '/api/med/patients/' . $_GET['patient'];
+$config = [
+    'token' => $_COOKIE['user_token'],
+    'method' => 'GET'
+];
+$patient = utils_call_api($url, $config);
+if ($patient->status_code == 404) {
+    header("Location: /lk/patients/");
+    exit();
+}
+
+// Достает все данные пациента
+$url = protocol.'://'.domain_name_api.'/api/med/users/'.$patient->data['user'];
+$patient_user = utils_call_api($url, $config);
+
+// Достает данные медицинской карты пользователя
+$url = protocol."://".domain_name_api."/api/med/users/patients/".$_GET['id']."/medcard";
+$config = [
+    "method" => "GET",
+    "token" => $_COOKIE['user_token']
+];
+$patient_medcard = utils_call_api($url, $config);
 ?>
 <!doctype html>
 <html lang="ru">
@@ -40,7 +67,7 @@ $whose_user = 3;
     <script src="//cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="text/javascript" charset="utf8" src="/js/datatables.js"></script>
     <script defer src="/js/all.js"></script>
-    <title><? echo web_name_header; ?></title>
+    <title><?php echo web_name_header; ?></title>
 </head>
 <body>
 <!--Панель навигации по модулям пользователя-->
@@ -53,7 +80,7 @@ $whose_user = 3;
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/lk/" style="color: var(--dark-cyan-color)">Профиль</a></li>
                 <li class="breadcrumb-item"><a href="/lk/patients/" style="color: var(--dark-cyan-color)">Пациенты</a></li>
-                <li class="breadcrumb-item"><a href="#" style="color: var(--dark-cyan-color)">Иванов И. И. (1234)</a></li>
+                <li class="breadcrumb-item"><a href="/lk/patients/profile.php?id=<?php echo $patient->data['id']?>" style="color: var(--dark-cyan-color)"><?php echo getItitialsFullName($patient_user->data['user']['surname'], $patient_user->data['user']['name'], $patient_user->data['user']['patronymic']); ?></a></li>
                 <li class="breadcrumb-item active" aria-current="page">Медкарта</li>
             </ol>
         </nav>
@@ -83,13 +110,12 @@ $whose_user = 3;
                     <i class="fas fa-clipboard mr-1"></i> Рекомендации
                 </a>
             </li>
-
         </ul>
         <div class="tab-content">
             <div class="tab-pane fade show active" id="tab_epicrisis" role="tabpanel">
                 <div class="card">
                     <div class="card-body">
-                        <a href="/lk/patients/add_epicrisis.php" class="btn btn-sm btn-success float-right text-white mb-2">
+                        <a href="/lk/patients/add_epicrisis.php?patient=<?php echo $patient->data['id']?>" class="btn btn-sm btn-success float-right text-white mb-2">
                             <i class="fas fa-plus-circle mr-2"></i>Добавить эпикриз
                         </a>
                         <table id="table_epicrisis" class="table table-striped table-hover">

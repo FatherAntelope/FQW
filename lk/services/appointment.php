@@ -194,7 +194,7 @@ $events = utils_call_api($url, $config);
                                 <td class="text-muted" data-label="Расп.-ие:">
                                     <?php echo $doctor['location']; ?>
                                 </td>
-                                <td><a href="/lk/services/record.php?type=doctor&id=<?php echo $doctor['id']; ?>" type="button" class="btn btn-sm btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Запись</a></td>
+                                <td><a href="/lk/services/record.php?type=doctor&id=<?php echo $doctor['id']; ?>" type="button" class="btn btn-sm btn-warning btn-block text-muted" style="background-color: var(--yellow-color)">Запись</a></td>
                             </tr>
                             <?php } ?>
                             </tbody>
@@ -278,7 +278,7 @@ $events = utils_call_api($url, $config);
                                     <?php echo $service_procedure->data['cost']; ?>
                                 </td>
                                 <td class="text-muted" data-label="Повторов:">–/N</td>
-                                <td><a href="/lk/services/record.php?type=procedure&id=<?php echo $procedure['id']; ?>" type="button" class="btn btn-sm btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Запись</a></td>
+                                <td><a href="/lk/services/record.php?type=procedure&id=<?php echo $procedure['id']; ?>" type="button" class="btn btn-sm btn-warning btn-block text-muted" style="background-color: var(--yellow-color)">Запись</a></td>
                             </tr>
                             <?php } ?>
                             </tbody>
@@ -358,7 +358,7 @@ $events = utils_call_api($url, $config);
                                 <td class="text-muted" data-label="Стоимость, р.:">
                                     <?php echo $service_examination->data['cost']; ?>
                                 </td>
-                                <td><a href="/lk/services/record.php?type=examination&id=<?php echo $examination['id']; ?>" type="button" class="btn btn-sm btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Запись</a></td>
+                                <td><a href="/lk/services/record.php?type=examination&id=<?php echo $examination['id']; ?>" type="button" class="btn btn-sm btn-warning btn-block text-muted" style="background-color: var(--yellow-color)">Запись</a></td>
                             </tr>
                             <?php } ?>
                             </tbody>
@@ -413,7 +413,7 @@ $events = utils_call_api($url, $config);
                                 <td class="text-muted" data-label="Стоимость, р.:">
                                     <?php echo $service_event->data['cost']; ?>
                                 </td>
-                                <td><a href="/lk/services/record.php?type=event&id=<?php echo $event['id']; ?>" type="button" class="btn btn-sm btn-warning btn-block" style="color: #fff; background-color: var(--yellow-color)">Запись</a></td>
+                                <td><a href="/lk/services/record.php?type=event&id=<?php echo $event['id']; ?>" type="button" class="btn btn-sm btn-warning btn-block text-muted" style="background-color: var(--yellow-color)">Запись</a></td>
                             </tr>
                             <?php } ?>
                             </tbody>

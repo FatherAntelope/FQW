@@ -2,6 +2,10 @@
 // Если токен авторизованного пользователя не существует, то направляет на страницу ошибки 401 (нет авторизации)
 if(!isset($_COOKIE['user_token']))
     header("Location: /error/401.php");
+
+if(!isset($_GET['id']) || $_GET['id'] == null)
+    header("Location: /lk/patients/");
+
 require $_SERVER['DOCUMENT_ROOT'] . '/utils/variables.php';
 require $_SERVER['DOCUMENT_ROOT'] . '/utils/functions.php';
 require $_SERVER['DOCUMENT_ROOT'] . "/utils/User.php";
@@ -21,6 +25,31 @@ if(!$user->isUserRole("Doctor"))
 // Выгружает данные пользователя
 $user_data = $user->getData();
 $whose_user = 3;
+
+// Достает все данные пациента
+$url = protocol . '://' . domain_name_api . '/api/med/patients/' . $_GET['id'];
+$config = [
+    'token' => $_COOKIE['user_token'],
+    'method' => 'GET'
+];
+$patient = utils_call_api($url, $config);
+if ($patient->status_code == 404) {
+    header("Location: /lk/patients/");
+    exit();
+}
+
+// Достает все данные пациента
+$url = protocol.'://'.domain_name_api.'/api/med/users/'.$patient->data['user'];
+$patient_user = utils_call_api($url, $config);
+
+// Достает данные медицинской карты пользователя
+$url = protocol."://".domain_name_api."/api/med/users/patients/".$_GET['id']."/medcard";
+$config = [
+    "method" => "GET",
+    "token" => $_COOKIE['user_token']
+];
+$patient_medcard = utils_call_api($url, $config);
+
 ?>
 <!doctype html>
 <html lang="ru">
@@ -39,7 +68,7 @@ $whose_user = 3;
     <script src="//cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" charset="utf8" src="/js/datatables.js"></script>
     <script defer src="/js/all.js"></script>
-    <title><? echo web_name_header; ?></title>
+    <title><?php echo web_name_header; ?></title>
 </head>
 <body>
 <!--Панель навигации по модулям пользователя-->
@@ -52,7 +81,7 @@ $whose_user = 3;
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/lk/" style="color: var(--dark-cyan-color)">Профиль</a></li>
                 <li class="breadcrumb-item"><a href="/lk/patients/" style="color: var(--dark-cyan-color)">Пациенты</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Иванов И. И.</li>
+                <li class="breadcrumb-item active" aria-current="page"><?php echo getItitialsFullName($patient_user->data['user']['surname'], $patient_user->data['user']['name'], $patient_user->data['user']['patronymic']); ?></li>
             </ol>
         </nav>
         <!--Карточка с основной информацией пациента-->
@@ -60,49 +89,54 @@ $whose_user = 3;
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-2 text-center">
-                        <img src="/images/user.png" class="img-thumbnail rounded-circle mb-2" width="120" alt="">
+                        <img src="<?php echo getUrlUserPhoto($patient_user->data['user']['photo'])?>" class="rounded-circle img-thumbnail mb-2" style="height: 8rem;width: 8rem; object-fit: cover">
                         <br>
                         <button type="button" disabled class="btn mt-1 btn-sm text-white" style="background-color: var(--cyan-color)"><i class="fas fa-comments"></i></button>
-                        <button type="button" class="btn mt-1 btn-sm btn-secondary text-white"><i class="fas fa-book-medical"></i></button>
+                        <a href="/lk/patients/medcard.php?patient=<?php echo $patient->data['id']?>" class="btn mt-1 btn-sm btn-secondary text-white"><i class="fas fa-book-medical"></i></a>
                         <button type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)"><i class="fas fa-heartbeat"></i></button>
                     </div>
                     <div class="col-lg-10">
                         <div class="row">
                             <div class="col">
-                                <h4 class="font-weight-bold" style="color: var(--dark-cyan-color)">Иванов Иван Иванович</h4>
+                                <h4 class="font-weight-bold" style="color: var(--dark-cyan-color)">
+                                    <?php echo $patient_user->data['user']['surname']." ".$patient_user->data['user']['name']." ". $patient_user->data['user']['patronymic']; ?>
+                                </h4>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-5">
-                                <h5 class="text-muted">Возраст: 22 (01.01.1999)</h5>
-                                <h5 class="text-muted">Пол: Мужской</h5>
-                                <h5 class="text-muted">Рост: 170 cм. </h5>
-                                <h5 class="text-muted">Категория: Лечащийся </h5>
+                                <h5 class="text-muted">
+                                    <?php echo floor( (time() - strtotime($patient->data['birth_date'])) /(60 * 60 * 24 * 365.25));?>
+                                    (<?php echo date("d.m.Y", strtotime($patient->data['birth_date']));?>)
+                                </h5>
+                                <h5 class="text-muted">Пол: <?php echo getPatientGenderRu($patient->data['gender']); ?></h5>
+                                <h5 class="text-muted">Категория: <?php echo getPatientCategoryRu($patient->data['type']); ?> </h5>
                             </div>
                             <div class="col-lg-7">
-                                <h5 class="text-muted">ID карты: 123456789</h5>
+                                <h5 class="text-muted">ID карты: <?php echo $patient_medcard->data['id']; ?></h5>
                                 <h5 class="text-muted">Терапевт:
                                     <a href="#" style="color: var(--dark-cyan-color); text-decoration: none">Иванов И.И.</a>
                                     / <a href="#" data-toggle="modal" data-target="#openModalDetachingPatient" style="color: var(--red); text-decoration: none">Открепить</a>
                                     / Отсутствует
                                     <a href="#" data-toggle="modal" data-target="#openModalSecuringPatient" style="color: var(--red); text-decoration: none">Закрепить к себе</a>
                                 </h5>
-                                <h5 class="text-muted">Дата поступления: 01.01.1999</h5>
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <h5 class="text-muted">Группа пациента:</h5>
+                                <h5 class="text-muted">Дата поступления: <?php echo date("d.m.Y", strtotime($patient->data['receipt_date']));?></h5>
+                                <?php if(count($patient->data['group']) > 0) {?>
+                                    <div class="row">
+                                        <div class="col-lg-3">
+                                            <h5 class="text-muted">Группа пациента:</h5>
+                                        </div>
+                                        <div class="col">
+                                            <ul class="list-unstyled">
+                                                <?php foreach ($patient->data['group'] as $group) { ?>
+                                                    <li>
+                                                        <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)"><?php echo $group?></span>
+                                                    </li>
+                                                <?php } ?>
+                                            </ul>
+                                        </div>
                                     </div>
-                                    <div class="col">
-                                        <ul class="list-unstyled">
-                                            <li>
-                                                <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">С сахарным диабетом</span>
-                                            </li>
-                                            <li>
-                                                <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">После Ковид</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                <?php }?>
                             </div>
                         </div>
                     </div>
@@ -112,22 +146,22 @@ $whose_user = 3;
                 <div class="row">
                     <div class="col">
                         <h5 class="text-muted">Субъективные жалобы:</h5>
-                        <h6 class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda natus nemo quis sequi. Aut debitis deleniti id in possimus quidem, quo tempore tenetur! A cupiditate dicta dolore doloremque eius ex impedit laborum, libero, mollitia nam nemo optio praesentium qui quo reprehenderit similique totam. Ab delectus labore nihil. Deserunt, enim, vel!</h6>
+                        <h6 class="text-muted"><?php echo $patient->data['complaints']?></h6>
                     </div>
                 </div>
 
                 <hr style="border-top: 3px solid var(--yellow-color);">
                 <div class="row">
                     <div class="col-lg-12 d-flex justify-content-around flex-xl-row flex-md-row flex-sm-column flex-column">
-                        <a href="tel:+7 (999) 999-99-99" aria-haspopup="true" style="text-decoration: none; color: var(--yellow-color)">
-                            <h5 class="font-weight-bold"><i class="fas fa-phone mr-1"></i> +7 (999) 999-99-99</h5>
+                        <a href="tel:<?php echo $patient_user->data['user']['phone_number']?>" aria-haspopup="true" style="text-decoration: none; color: var(--yellow-color)">
+                            <h5 class="font-weight-bold"><i class="fas fa-phone mr-1"></i> <?php echo $patient_user->data['user']['phone_number']?></h5>
                         </a>
-                        <a href="mailto:mail@mail.ru" aria-haspopup="true" style="text-decoration: none; color: var(--yellow-color)">
-                            <h5 class="font-weight-bold"><i class="fas fa-envelope-open-text mr-1"></i>mail@mail.ru</h5>
+                        <a href="mailto:<?php echo $patient_user->data['user']['email']?>" aria-haspopup="true" style="text-decoration: none; color: var(--yellow-color)">
+                            <h5 class="font-weight-bold"><i class="fas fa-envelope-open-text mr-1"></i><?php echo $patient_user->data['user']['email']?></h5>
                         </a>
                         <h5 class="font-weight-bold" style="color: var(--yellow-color)">
                             <i class="fas fa-map-marked-alt mr-1"></i>
-                            Республика Башкортостан
+                            <?php echo $patient->data['region']?>
                         </h5>
                     </div>
                 </div>
@@ -216,7 +250,6 @@ $whose_user = 3;
                         </tfoot>
                     </table>
                 </div>
-
             </div>
         </div>
     </div>

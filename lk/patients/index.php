@@ -201,8 +201,8 @@ $patients_all = utils_call_api($url, $config);
                                 <td class="text-muted" data-label="Участковый:">-</td>
                                 <td>
                                     <ul class="list-unstyled">
-                                        <li><button type="button" class="btn mt-1 btn-sm text-white" style="background-color: var(--cyan-color)">Профиль</button></li>
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-secondary text-white">Медкарта</button></li>
+                                        <li><a href="/lk/patients/profile.php?id=<?php echo $patient['id']?>" class="btn mt-1 btn-sm text-white" style="background-color: var(--cyan-color)">Профиль</a></li>
+                                        <li><a href="/lk/patients/medcard.php?patient=<?php echo $patient['id']?>" class="btn mt-1 btn-sm btn-secondary text-white">Медкарта</a></li>
                                         <li><button type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)">Дневник</button></li>
                                     </ul>
                                 </td>

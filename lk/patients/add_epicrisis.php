@@ -2,6 +2,10 @@
 // Если токен авторизованного пользователя не существует, то направляет на страницу ошибки 401 (нет авторизации)
 if(!isset($_COOKIE['user_token']))
     header("Location: /error/401.php");
+
+if(!isset($_GET['patient']) || $_GET['patient'] == null)
+    header("Location: /lk/patients/");
+
 require $_SERVER['DOCUMENT_ROOT'] . '/utils/variables.php';
 require $_SERVER['DOCUMENT_ROOT'] . '/utils/functions.php';
 require $_SERVER['DOCUMENT_ROOT'] . "/utils/User.php";
@@ -15,12 +19,44 @@ if($user->getStatusCode() === 400 || $user->getStatusCode() === 403) {
     header("Location: /error/401.php");
 }
 // Если роль пользователя не "Доктор", то направляет на страницу ошибки 403
-if(!$user->isUserRole("Admin"))
+if(!$user->isUserRole("Doctor"))
     header("Location: /error/403.php");
 
 // Выгружает данные пользователя
 $user_data = $user->getData();
 $whose_user = 3;
+
+// Достает все данные пациента
+$url = protocol . '://' . domain_name_api . '/api/med/patients/' . $_GET['patient'];
+$config = [
+    'token' => $_COOKIE['user_token'],
+    'method' => 'GET'
+];
+$patient = utils_call_api($url, $config);
+if ($patient->status_code == 404) {
+    header("Location: /lk/patients/");
+    exit();
+}
+
+// Достает все данные пациента
+$url = protocol.'://'.domain_name_api.'/api/med/users/'.$patient->data['user'];
+$patient_user = utils_call_api($url, $config);
+
+// Достает данные медицинской карты пользователя
+$url = protocol."://".domain_name_api."/api/med/users/patients/".$_GET['id']."/medcard";
+$config = [
+    "method" => "GET",
+    "token" => $_COOKIE['user_token']
+];
+$patient_medcard = utils_call_api($url, $config);
+
+// Достает процедуры
+$url = protocol."://".domain_name_api."/api/med/procedure";
+$config = [
+    "method" => "GET",
+    "token" => $_COOKIE['user_token']
+];
+$procedures = utils_call_api($url, $config);
 ?>
 <!doctype html>
 <html lang="ru">
@@ -42,7 +78,7 @@ $whose_user = 3;
     <script type="text/javascript" charset="utf8" src="/js/datatables.js"></script>
     <script src="/js/chosen.js"></script>
     <script defer src="/js/all.js"></script>
-    <title><? echo web_name_header; ?></title>
+    <title><?php echo web_name_header; ?></title>
 </head>
 <body>
 <!--Панель навигации по модулям пользователя-->
@@ -55,8 +91,8 @@ $whose_user = 3;
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/lk" style="color: var(--dark-cyan-color)">Профиль</a></li>
                 <li class="breadcrumb-item"><a href="/lk/patients" style="color: var(--dark-cyan-color)">Пациенты</a></li>
-                <li class="breadcrumb-item"><a href="#" style="color: var(--dark-cyan-color)">Иванов И. И. (1234)</a></li>
-                <li class="breadcrumb-item"><a href="#" style="color: var(--dark-cyan-color)">Медкарта</a></li>
+                <li class="breadcrumb-item"><a href="/lk/patients/profile.php?id=<?php echo $patient->data['id']?>" style="color: var(--dark-cyan-color)"><?php echo getItitialsFullName($patient_user->data['user']['surname'], $patient_user->data['user']['name'], $patient_user->data['user']['patronymic']); ?></a></li>
+                <li class="breadcrumb-item"><a href="/lk/patients/medcard.php?patient=<?php echo $patient->data['id']?>" style="color: var(--dark-cyan-color)">Медкарта</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Добавление эпикриза</li>
             </ol>
         </nav>
@@ -224,91 +260,110 @@ $whose_user = 3;
     $(document).on('click', '.plus-pills', function(){
         $(this).closest('.information_json_plus').before(
             '<tr>' +
-            '<td class="pl-0"><input type="text" class="form-control" name="pill_name_json_val[]" minlength="2" maxlength="30" placeholder="Название" required></td>' +
-            '<td class="pl-0"><input type="text" class="form-control" name="pill_name_json_val[]" minlength="2" maxlength="30" placeholder="Доза" required></td>' +
+            '<td class="pl-0"><input type="text" class="form-control" name="pills_name[]" minlength="2" maxlength="30" placeholder="Название" required></td>' +
+            '<td class="pl-0"><input type="text" class="form-control" name="pills_dose[]" minlength="2" maxlength="30" placeholder="Доза" required></td>' +
             '<td class="pl-0">' +
-            '<select name="pill_rule_take_json_val[]" class="form-control form-control-chosen-required" data-placeholder="Правило приема" required>' +
+            '<select name="pills_rule_take[]" class="form-control form-control-chosen-required" data-placeholder="Правило приема" required>' +
             '<option></option>' +
             '<option value="0">До еды</option>' +
             '<option value="1">Во время еды</option>' +
             '<option value="2">После еды</option>' +
             '<option value="3">Натощак</option>' +
             '</select>' +
-            '<td class="pl-0"><input type="number" min="1" max="1000" class="form-control" name="pill_name_json_val[]" placeholder="Повторы" required></td>' +
+            '<td class="pl-0"><input type="number" min="1" max="1000" class="form-control" name="pills_repeat[]" placeholder="Повторы" required></td>' +
             '</td>' +
-            '<td class="pl-0"><input type="number" min="1" max="1000" class="form-control" name="pill_period_json_val[]" placeholder="Период" required></td>' +
+            '<td class="pl-0"><input type="number" min="1" max="1000" class="form-control" name="pills_period[]" placeholder="Период" required></td>' +
             '<td class="pl-0"><span class="btn btn-sm btn-danger rounded-circle minus mt-1"><i class="fas fa-minus"></i></span></td>' +
             '</tr>'
         );
-        $('select[name="pill_rule_take_json_val[]"]').chosen();
+        $('select[name="pills_rule_take[]"]').chosen();
     });
 
     $(document).on('click', '.plus-procedure-recommendations', function(){
         $(this).closest('.information_json_plus').before(
             '<tr>' +
             '<td class="pl-0">' +
-            '<select name="procedure_recommendations_name_json_val[]" class="form-control form-control-chosen-required" data-placeholder="Процедура" required>' +
+            '<select name="procedure_recommendations_name[]" id="procedure_recommendations_name" class="form-control form-control-chosen-required" data-placeholder="Процедура" required>' +
             '<option></option>' +
-            '<option value="0">Процедура1</option>' +
-            '<option value="1">Процедура2</option>' +
             '</select>' +
             '</td>' +
             '<td class="pl-0">' +
-            '<select name="procedure_recommendations_type_json_val[]" class="form-control form-control-chosen-required" data-placeholder="Тип" required>' +
+            '<select name="procedure_recommendations_type[]" class="form-control form-control-chosen-required" data-placeholder="Тип" required>' +
             '<option></option>' +
             '<option value="0">Обязательно</option>' +
             '<option value="1">Дополнительно</option>' +
             '</select>' +
             '</td>' +
-            '<td class="pl-0" style="max-width: 3.5em"><input type="number" min="-1" max="1000" class="form-control" name="procedure_recommendations_period_json_val[]" placeholder="Период" required></td>' +
+            '<td class="pl-0" style="max-width: 3.5em"><input type="number" min="-1" max="1000" class="form-control" name="procedure_recommendations_period[]" placeholder="Период" required></td>' +
             '<td class="pl-0"><span class="btn btn-sm btn-danger rounded-circle minus mt-1"><i class="fas fa-minus"></i></span></td>' +
             '</tr>'
         );
-        $('select[name="procedure_recommendations_name_json_val[]"]').chosen();
-        $('select[name="procedure_recommendations_type_json_val[]"]').chosen();
+
+        <?php
+        foreach ($procedures->data as $procedure) {
+        $url = protocol."://".domain_name_api."/api/med/service/".$procedure['service'];
+        $config = [
+            "method" => "GET",
+            "token" => $_COOKIE['user_token']
+        ];
+        $service_procedure = utils_call_api($url, $config);
+
+        $url = protocol."://".domain_name_api."/api/med/service/".$service_procedure->data['id']."/servicemedper";
+        $service_procedure_medperson = utils_call_api($url, $config);
+        if(count($service_procedure_medperson->data) == 0)
+            continue;
+        ?>
+        $('#procedure_recommendations_name').append($('<option>', {
+            value: <?php echo $service_procedure->data['id']?>,
+            text: "<?php echo $service_procedure->data['name']?>"
+        }));
+        <?php } ?>
+
+        $('select[name="procedure_recommendations_name[]"]').chosen();
+        $('select[name="procedure_recommendations_type[]"]').chosen();
     });
 
     $(document).on('click', '.plus-self-control-recommendations', function(){
         $(this).closest('.information_json_plus').before(
             '<tr>' +
             '<td class="pl-0">' +
-            '<select name="self_control_recommendations_name_json_val[]" class="form-control form-control-chosen-required" data-placeholder="Самоконтроль" required>' +
+            '<select name="self_control_recommendations_name[]" class="form-control form-control-chosen-required" data-placeholder="Самоконтроль" required>' +
             '<option></option>' +
             '<option value="0">Шаги 3000</option>' +
             '<option value="1">Прогулка 30 мин.</option>' +
             '</select>' +
             '</td>' +
             '<td class="pl-0">' +
-            '<select name="self_control_recommendations_type_json_val[]" class="form-control form-control-chosen-required" data-placeholder="Тип" required>' +
+            '<select name="self_control_recommendations_type[]" class="form-control form-control-chosen-required" data-placeholder="Тип" required>' +
             '<option></option>' +
             '<option value="0">Обязательно</option>' +
             '<option value="1">Дополнительно</option>' +
             '</select>' +
             '</td>' +
-            '<td class="pl-0" style="max-width: 3.5em"><input type="number" min="-1" max="1000" class="form-control" name="self_control_recommendations_period_json_val[]" placeholder="Период" required></td>' +
+            '<td class="pl-0" style="max-width: 3.5em"><input type="number" min="-1" max="1000" class="form-control" name="self_control_recommendations_period[]" placeholder="Период" required></td>' +
             '<td class="pl-0"><span class="btn btn-sm btn-danger rounded-circle minus mt-1"><i class="fas fa-minus"></i></span></td>' +
             '</tr>'
         );
-        $('select[name="self_control_recommendations_name_json_val[]"]').chosen();
-        $('select[name="self_control_recommendations_type_json_val[]"]').chosen();
+        $('select[name="self_control_recommendations_name[]"]').chosen();
+        $('select[name="self_control_recommendations_type[]"]').chosen();
     });
 
     $(document).on('click', '.plus-other-recommendations', function(){
         $(this).closest('.information_json_plus').before(
             '<tr>' +
-            '<td class="pl-0"><input type="text" class="form-control" name="other_recommendations_name_json_val[]" minlength="20" maxlength="200" placeholder="Прочая рекомендация" required></td>' +
+            '<td class="pl-0"><input type="text" class="form-control" name="other_recommendations_name[]" minlength="20" maxlength="200" placeholder="Прочая рекомендация" required></td>' +
             '<td class="pl-0">' +
-            '<select name="other_recommendations_type_json_val[]" class="form-control form-control-chosen-required" data-placeholder="Тип" required>' +
+            '<select name="other_recommendations_type[]" class="form-control form-control-chosen-required" data-placeholder="Тип" required>' +
             '<option></option>' +
             '<option value="0">Обязательно</option>' +
             '<option value="1">Дополнительно</option>' +
             '</select>' +
             '</td>' +
-            '<td class="pl-0" style="max-width: 3.5em"><input type="number" min="-1" max="1000" class="form-control" name="other_recommendations_period_json_val[]" placeholder="Период" required></td>' +
+            '<td class="pl-0" style="max-width: 3.5em"><input type="number" min="-1" max="1000" class="form-control" name="other_recommendations_period[]" placeholder="Период" required></td>' +
             '<td class="pl-0"><span class="btn btn-sm btn-danger rounded-circle minus mt-1"><i class="fas fa-minus"></i></span></td>' +
             '</tr>'
         );
-        $('select[name="other_recommendations_type_json_val[]"]').chosen();
+        $('select[name="other_recommendations_type[]"]').chosen();
     });
 
     $(document).on('click', '.minus', function(){

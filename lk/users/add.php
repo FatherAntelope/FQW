@@ -175,7 +175,7 @@ $examinations = utils_call_api($url, $config);
                                             <input type="file" class="custom-file-input" accept="image/png,image/jpeg" id="customFile" name="user_photo">
                                             <label class="custom-file-label" for="customFile" data-browse="Открыть">Выберите фото</label>
                                         </div>
-                                        <small class="form-text text-muted">Не выше 2мб</small>
+                                        <small class="form-text text-muted">До 2мб</small>
                                     </div>
                                 </div>
                             </div>
@@ -419,7 +419,7 @@ $examinations = utils_call_api($url, $config);
                                             <input type="file" class="custom-file-input" name="user_photo" id="customFile" accept="image/*">
                                             <label class="custom-file-label" for="customFile" data-browse="Открыть">Выберите фото</label>
                                         </div>
-                                        <small class="form-text text-muted">Не выше 2 Мб</small>
+                                        <small class="form-text text-muted">До 2 Мб</small>
                                     </div>
                                 </div>
                             </div>
@@ -556,7 +556,7 @@ $examinations = utils_call_api($url, $config);
                                             <input type="file" class="custom-file-input" name="user_photo" id="customFile" accept="image/*">
                                             <label class="custom-file-label" for="customFile" data-browse="Открыть">Выберите фото</label>
                                         </div>
-                                        <small class="form-text text-muted">Не выше 2 Мб</small>
+                                        <small class="form-text text-muted">До 2 Мб</small>
                                     </div>
                                 </div>
                             </div>
