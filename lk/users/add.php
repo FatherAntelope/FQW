@@ -175,7 +175,7 @@ $examinations = utils_call_api($url, $config);
                                             <input type="file" class="custom-file-input" accept="image/png,image/jpeg" id="customFile" name="user_photo">
                                             <label class="custom-file-label" for="customFile" data-browse="Открыть">Выберите фото</label>
                                         </div>
-                                        <small class="form-text text-muted">Не выше 2мб</small>
+                                        <small class="form-text text-muted">До 2мб</small>
                                     </div>
                                 </div>
                             </div>
@@ -377,7 +377,7 @@ $examinations = utils_call_api($url, $config);
                             </div>
                         </div>
                         <?php } else { ?>
-                        <form id="queryRegistrationDoctor" enctype="multipart/form-data">
+                        <form id="queryRegistrationDoctor" enctype="multipart/form-data" method="post" action="/queries/admin/registrationUser.php">
                             <h5 class="mb-3 text-muted text-uppercase bg-light p-2">
                                 <i class="fas fa-user mr-1"></i>
                                 Персональные данные
@@ -419,7 +419,7 @@ $examinations = utils_call_api($url, $config);
                                             <input type="file" class="custom-file-input" name="user_photo" id="customFile" accept="image/*">
                                             <label class="custom-file-label" for="customFile" data-browse="Открыть">Выберите фото</label>
                                         </div>
-                                        <small class="form-text text-muted">Не выше 2 Мб</small>
+                                        <small class="form-text text-muted">До 2 Мб</small>
                                     </div>
                                 </div>
                             </div>
@@ -556,7 +556,7 @@ $examinations = utils_call_api($url, $config);
                                             <input type="file" class="custom-file-input" name="user_photo" id="customFile" accept="image/*">
                                             <label class="custom-file-label" for="customFile" data-browse="Открыть">Выберите фото</label>
                                         </div>
-                                        <small class="form-text text-muted">Не выше 2 Мб</small>
+                                        <small class="form-text text-muted">До 2 Мб</small>
                                     </div>
                                 </div>
                             </div>
@@ -674,6 +674,10 @@ $examinations = utils_call_api($url, $config);
                 "token" => $_COOKIE['user_token']
             ];
             $service_speciality = utils_call_api($url, $config);
+
+            $url = protocol."://".domain_name_api."/api/med/service/".$service_speciality->data['id']."/servicemedper";
+            if(count(utils_call_api($url, $config)->data) > 0)
+                continue;
             ?>
             $('#chosen_required_profession').append($('<option>', {
                 value: <?php echo $service_speciality->data['id']?>,

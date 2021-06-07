@@ -128,7 +128,6 @@ if ($_POST['user_role'] === "Doctor") {
         "data" => $data
     ];
     $doctor = utils_call_api($url, $config);
-    print_r($doctor);
 
 
     // Связка медперсонала с услугой
@@ -138,7 +137,7 @@ if ($_POST['user_role'] === "Doctor") {
             $data = [
                 "service" => $profession,
                 "medpersona" => $doctor->data['id'],
-                "type" => "Specialty"
+                "type" => "Speciality"
             ];
             $config = [
                 "method" => "POST",
@@ -162,7 +161,6 @@ if ($_POST['user_role'] === "Doctor") {
                 "data" => $data
             ];
             $procedure = utils_call_api($url, $config);
-            print_r($procedure);
         }
     }
 
@@ -179,7 +177,6 @@ if ($_POST['user_role'] === "Doctor") {
                 "data" => $data
             ];
             $examination = utils_call_api($url, $config);
-            print_r($examination);
         }
     }
 }

@@ -403,9 +403,10 @@ $services_medperson = utils_call_api($url, $config);
                 </div>
                 <form id="queryEditPhotoUser" method="post" action="/queries/editPhotoUser.php" enctype="multipart/form-data">
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" name="user_photo" id="customFile" accept="image/png,image/jpeg">
+                        <input type="file" class="custom-file-input" name="user_photo" id="customFile" accept="image/png,image/jpeg" required>
                         <label class="custom-file-label" for="customFile" data-browse="Открыть">Выберите фотографию</label>
                     </div>
+                    <small class="form-text text-muted">До 2мб</small>
                 </form>
                 <div class="alert alert-success" role="alert" hidden>
                     Фотография успешно изменена на новую!
@@ -422,6 +423,22 @@ $services_medperson = utils_call_api($url, $config);
 <?php require $_SERVER['DOCUMENT_ROOT'] . "/footer.php"; ?>
 </body>
 <script>
+    $('[name="user_photo"]').on('change', function () {
+        if($(this).val !== "") {
+            if (this.files[0].size > 2097152) {
+                $(this).addClass('is-invalid');
+                $(this).val("");
+                $(this).parent().next().removeClass('text-muted');
+                $(this).parent().next().addClass('text-danger');
+            } else {
+                $(this).removeClass('is-invalid');
+                $(this).attr("placeholder", "Выберите фото");
+                $(this).parent().next().removeClass('text-danger');
+                $(this).parent().next().addClass('text-muted');
+            }
+        }
+    });
+
     /**
      * Проверяет все поля контактных данных на изменение и дает доступ к отправке запроса на смену этих данных
      */
@@ -491,6 +508,8 @@ $services_medperson = utils_call_api($url, $config);
     $('input[name="user_phone"]').mask("+7 (999) 999-99-99");
 </script>
 <script>
+
+
     //Закомментить, если надо посмотреть, как происходит обработка в editPhotoUser.php
     /**
      * Ожидает отправки формы #queryEditPhotoUser.

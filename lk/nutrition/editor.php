@@ -47,7 +47,28 @@ $whose_user = 1;
 <!--Основной контент страницы-->
 <div class="page-content">
     <div class="container pt-3 pb-3">
-
+        <!--"Хлебные крошки" для ориентации и навигации по родительским страницам-->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/lk/" style="color: var(--dark-cyan-color)">Профиль</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Управление питанием санатория</li>
+            </ol>
+        </nav>
+        <div class="card">
+            <div class="card-body">
+                <div class="row justify-content-center">
+                    <div class="col-md-12">
+                        <div class="text-center mt-2">
+                            <h3 class="mb-4 text-muted font-weight-bold">
+                                Данная страница находится на этапе разработки. <br>
+                                Скоро она будет доступна!
+                            </h3>
+                            <img src="/images/build_module.svg" class="img-fluid" alt="" style="max-height: 55vh">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

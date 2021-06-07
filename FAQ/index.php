@@ -161,6 +161,7 @@ if(isset($_COOKIE['user_token'])) {
 <?php require $_SERVER['DOCUMENT_ROOT']."/footer.php"; ?>
 </body>
 <script>
-$('#notificationToast').toast('show');
+    // Отображение уведомления
+    $('#notificationToast').toast('show');
 </script>
 </html>

@@ -56,6 +56,18 @@ if(array_keys($_GET)[0] === "patient") {
         "token" => $_COOKIE['user_token']
     ];
     $passport_data = utils_call_api($url, $config);
+
+
+    $url = protocol."://".domain_name_api."/api/med/medicpatient?patient=" . $_GET['patient'];
+    $medicpatient = utils_call_api($url, $config);
+
+    if (count($medicpatient->data) > 0) {
+        $url = protocol."://".domain_name_api."/api/med/medics/".$medicpatient->data[0]['medpersona'];
+        $medicpatient_doctor = utils_call_api($url, $config);
+
+        $url = protocol."://".domain_name_api."/api/med/users/".$medicpatient_doctor->data['user'];
+        $medicpatient_doctor_user = utils_call_api($url, $config);
+    }
 }
 
 if(array_keys($_GET)[0] === "admin") {
@@ -159,9 +171,19 @@ if(array_keys($_GET)[0] === "doctor") {
                             </div>
                             <div class="col-lg-7">
                                 <h5 class="text-muted">ID карты: <?php echo $patient_medcard->data['id']; ?></h5>
-                                <h5 class="text-muted">Терапевт:
-                                    <a href="#" style="color: var(--dark-cyan-color); text-decoration: none">Иванов И.И.</a>
-                                    / Отсутствует
+                                <h5 class="text-muted">Участковый врач:
+                                    <?php
+                                    if(isset($medicpatient_doctor_user)) { ?>
+                                        <a href="#" style="color: var(--dark-cyan-color); text-decoration: none">
+                                            <?php echo getItitialsFullName(
+                                                $medicpatient_doctor_user->data['user']['surname'],
+                                                $medicpatient_doctor_user->data['user']['name'],
+                                                $medicpatient_doctor_user->data['user']['patronymic']
+                                            ); ?>
+                                        </a>
+                                    <?php } else {
+                                        echo "Отсутствует";
+                                    }?>
                                 </h5>
                                 <h5 class="text-muted">Дата поступления: <?php echo date("d.m.Y", strtotime($user_group_info->data['receipt_date']));?></h5>
                                 <?php if(count($user_group_info->data['group']) > 0) {?>

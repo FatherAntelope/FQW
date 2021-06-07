@@ -6,16 +6,10 @@ require $_SERVER['DOCUMENT_ROOT'] . "/utils/CurlHttpResponse.php";
 require $_SERVER['DOCUMENT_ROOT'] . "/utils/variables.php";
 require $_SERVER['DOCUMENT_ROOT']. "/utils/functions.php";
 
-$url = protocol."://".domain_name_api."/api/med/medpersona";
-$data = [
-    "medpersona" => [
-        "education" => $_POST['doctor_education_json'],
-        "specialization" => $_POST['doctor_specialization'],
-    ]
-];
+$url = protocol."://".domain_name_api."/api/med/medicpatient?patient=".$_POST['patient_id'];
 $config = [
-    "method" => "PATCH",
+    "method" => "DELETE",
     "token" => $_COOKIE['user_token'],
-    "data" => $data
 ];
-$doctor = utils_call_api($url, $config);
+$medicpatient = utils_call_api($url, $config);
+?>

@@ -74,7 +74,7 @@ $patient_medcard = utils_call_api($url, $config);
                             </div>
                             <div class="col-lg-7">
                                 <h5 class="text-muted">ID карты: <?php echo $patient_medcard->data['id']; ?></h5>
-                                <h5 class="text-muted">Ваш терапевт: <a href="#" style="color: var(--dark-cyan-color); text-decoration: none">Иванов И.И.</a> </h5>
+                                <h5 class="text-muted">Ваш участковый врач: <a href="#" style="color: var(--dark-cyan-color); text-decoration: none">Иванов И.И.</a> </h5>
                                 <h5 class="text-muted">Дата поступления: <?php echo date("d.m.Y", strtotime($patient_data->data['receipt_date']));?></h5>
                             </div>
                         </div>

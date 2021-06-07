@@ -187,8 +187,13 @@ $events = utils_call_api($url, $config);
                                     <?php echo $service_speciality->data['cost']; ?>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)">Редактирование</button>
-                                    <button type="button" class="btn mt-1 btn-sm btn-danger" data-toggle="modal" data-target="#openModalRemoveService">Удаление</button>
+                                    <ul class="list-unstyled">
+                                        <li style="display: inline"><button type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)">Редактирование</button></li>
+                                        <li style="display: inline">
+                                            <input type="hidden" value="<?php echo $service_speciality->data['name']?>">
+                                            <button type="button" value="<?php echo $service_speciality->data['id']?>" class="btn mt-1 btn-sm btn-danger" name="btn_delete_service">Удаление</button>
+                                        </li>
+                                    </ul>
                                 </td>
                             </tr>
                             <?php } ?>
@@ -281,7 +286,10 @@ $events = utils_call_api($url, $config);
                                     <ul class="list-unstyled">
                                         <li><a href="/lk/services/record.php?type=procedure&id=<?php echo $procedure['id']; ?>" class="btn btn-sm text-white btn-block" style="background-color: var(--cyan-color)">Просмотр</a></li>
                                         <li><button type="button" class="btn mt-1 btn-sm btn-warning text-secondary btn-block" style="background-color: var(--yellow-color)">Редактирование</button></li>
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-danger btn-block" data-toggle="modal" data-target="#openModalRemoveService">Удаление</button></li>
+                                        <li>
+                                            <input type="hidden" value="<?php echo $service_procedure->data['name']?>">
+                                            <button type="button" value="<?php echo $service_procedure->data['id']?>" class="btn mt-1 btn-sm btn-danger btn-block" name="btn_delete_service">Удаление</button>
+                                        </li>
                                     </ul>
                                 </td>
                             </tr>
@@ -371,7 +379,10 @@ $events = utils_call_api($url, $config);
                                     <ul class="list-unstyled">
                                         <li><a href="/lk/services/record.php?type=examination&id=<?php echo $examination['id']; ?>" class="btn btn-sm text-white btn-block" style="background-color: var(--cyan-color)">Просмотр</a></li>
                                         <li><button type="button" class="btn mt-1 btn-sm btn-warning text-secondary btn-block" style="background-color: var(--yellow-color)">Редактирование</button></li>
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-danger btn-block" data-toggle="modal" data-target="#openModalRemoveService">Удаление</button></li>
+                                        <li>
+                                            <input type="hidden" value="<?php echo $service_examination->data['name']?>">
+                                            <button type="button" value="<?php echo $service_examination->data['id']?>" class="btn mt-1 btn-sm btn-danger btn-block btn-block" name="btn_delete_service">Удаление</button>
+                                        </li>
                                     </ul>
                                 </td>
                             </tr>
@@ -431,7 +442,10 @@ $events = utils_call_api($url, $config);
                                     <ul class="list-unstyled">
                                         <li><a href="/lk/services/record.php?type=event&id=<?php echo $event['id']; ?>" class="btn btn-sm text-white btn-block" style="background-color: var(--cyan-color)">Просмотр</a></li>
                                         <li><button type="button" class="btn mt-1 btn-sm btn-warning text-secondary btn-block" style="background-color: var(--yellow-color)">Редактирование</button></li>
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-danger btn-block" data-toggle="modal" data-target="#openModalRemoveService">Удаление</button></li>
+                                        <li>
+                                            <input type="hidden" value="<?php echo $service_event->data['name']?>">
+                                            <button type="button" value="<?php echo $service_event->data['id']?>" class="btn mt-1 btn-sm btn-danger" name="btn_delete_service">Удаление</button>
+                                        </li>
                                     </ul>
                                 </td>
                             </tr>
@@ -773,15 +787,18 @@ $events = utils_call_api($url, $config);
         <div class="modal-content">
             <div class="modal-body">
                 <div class="alert alert-danger" role="alert">
-                    Вы уверены, что хотите удалить специальность/процедуру/обследование/мероприятие?
+                    Вы уверены, что хотите удалить услугу "<b><span id="spanNameService"></span></b>"?
                 </div>
+                <div class="alert alert-success" role="alert" id="alertSuccessDeleteService" hidden>
+                    Пользователь успешно удален
+                </div>
+                <form id="queryDeleteService">
+                    <input type="hidden" name="delete_service_id">
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Нет</button>
-                <form id="queryDeleteService">
-                    <input type="hidden" name="service_id" value="1">
-                    <button type="submit" class="btn btn-success">Да</button>
-                </form>
+                <button type="submit" class="btn btn-success" form="queryDeleteService">Да</button>
             </div>
         </div>
     </div>
@@ -884,7 +901,7 @@ $events = utils_call_api($url, $config);
         );
     });
 
-    // Удаляет, созданные по скриптам выше по нажатию кнопки удаления
+    // Удаляет строки таблицы, созданные по скриптам выше по нажатию кнопки удаления
     $(document).on('click', '.minus', function(){
         $(this).closest('tr').remove();
     });
@@ -914,6 +931,14 @@ $events = utils_call_api($url, $config);
         },
 
     });
+
+    $("button[name='btn_delete_service']").click(function () {
+        $("input[name='delete_service_id']").val($(this).val());
+        $("#spanNameService").text(
+            $(this).prev().val()
+        );
+        $('#openModalRemoveService').modal('show');
+    });
 </script>
 <script>
     /**
@@ -927,7 +952,13 @@ $events = utils_call_api($url, $config);
             method: "POST",
             data: $(this).serialize(),
             success: function () {
-                $("#openModalRemoveService").modal('hide');
+                $("#queryDeleteService").parent().next().attr("hidden", "hidden");
+                $("#alertSuccessDeleteService").removeAttr("hidden");
+                $("#alertSuccessDeleteService").prev().attr("hidden", "hidden");
+                setTimeout(function(){ location.reload()}, 1100);
+            },
+            error: function () {
+
             }
         });
         return false;

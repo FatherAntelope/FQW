@@ -440,8 +440,7 @@ $whose_user = 1;
             }
         },
     });
-</script>
-<script>
+
     $("button[name='btn_delete_user']").click(function () {
         $("input[name='delete_user_id']").val($(this).val());
         $("#spanFullNameDeleteUser").text(
@@ -449,6 +448,9 @@ $whose_user = 1;
         );
         $('#openModalRemoveUser').modal('show');
     });
+</script>
+<script>
+
 
     $("#queryDeleteUserProfile").submit(function () {
         $.ajax({
