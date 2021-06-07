@@ -165,7 +165,7 @@ if ($_POST['user_role'] === "Doctor") {
     }
 
     if(isset($_POST['doctor_examination'])) {
-        foreach ($_POST['doctor_procedure'] as $doctor_examination) {
+        foreach ($_POST['doctor_examination'] as $doctor_examination) {
             $data = [
                 "service" => $doctor_examination,
                 "medpersona" => $doctor->data['id'],

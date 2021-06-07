@@ -18,6 +18,17 @@ $config = [
     "token" => $_COOKIE['user_token']
 ];
 $patient_medcard = utils_call_api($url, $config);
+
+$url = protocol."://".domain_name_api."/api/med/medicpatient?patient=".$patient_data->data['id'];
+$medicpatient = utils_call_api($url, $config);
+
+if (count($medicpatient->data) > 0) {
+    $url = protocol."://".domain_name_api."/api/med/medics/".$medicpatient->data[0]['medpersona'];
+    $medicpatient_doctor = utils_call_api($url, $config);
+
+    $url = protocol."://".domain_name_api."/api/med/users/".$medicpatient_doctor->data['user'];
+    $medicpatient_doctor_user = utils_call_api($url, $config);
+}
 ?>
 <!doctype html>
 <html lang="ru">
@@ -74,7 +85,20 @@ $patient_medcard = utils_call_api($url, $config);
                             </div>
                             <div class="col-lg-7">
                                 <h5 class="text-muted">ID карты: <?php echo $patient_medcard->data['id']; ?></h5>
-                                <h5 class="text-muted">Ваш участковый врач: <a href="#" style="color: var(--dark-cyan-color); text-decoration: none">Иванов И.И.</a> </h5>
+                                <h5 class="text-muted">Ваш участковый врач:
+                                    <?php
+                                    if(isset($medicpatient_doctor_user)) { ?>
+                                        <a href="#" style="color: var(--dark-cyan-color); text-decoration: none">
+                                            <?php echo getItitialsFullName(
+                                                $medicpatient_doctor_user->data['user']['surname'],
+                                                $medicpatient_doctor_user->data['user']['name'],
+                                                $medicpatient_doctor_user->data['user']['patronymic']
+                                            ); ?>
+                                        </a>
+                                    <?php } else {
+                                        echo "Отсутствует";
+                                    }?>
+                                </h5>
                                 <h5 class="text-muted">Дата поступления: <?php echo date("d.m.Y", strtotime($patient_data->data['receipt_date']));?></h5>
                             </div>
                         </div>

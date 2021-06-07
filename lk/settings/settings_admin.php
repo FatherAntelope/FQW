@@ -106,14 +106,14 @@ $admin_position = getAdminPositionRu($admin_data->data['position']);
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label style="color: var(--yellow-color)">Фамилия</label>
-                                                <input type="text" class="form-control" name="admin_name" value="<?php echo $user_data['surname']; ?>" placeholder="Ваша фамилия" minlength="2" maxlength="30" onkeyup="checkInputRu(this)" required>
+                                                <input type="text" class="form-control" name="admin_surname" value="<?php echo $user_data['surname']; ?>" placeholder="Ваша фамилия" minlength="2" maxlength="30" onkeyup="checkInputRu(this)" required>
                                                 <small class="form-text text-muted">Кириллица</small>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label style="color: var(--yellow-color)">Имя</label>
-                                                <input type="text" class="form-control" name="admin_surname" value="<?php echo $user_data['name']?>" placeholder="Ваше имя" minlength="2" maxlength="30" onkeyup="checkInputRu(this)" required>
+                                                <input type="text" class="form-control" name="admin_name" value="<?php echo $user_data['name']?>" placeholder="Ваше имя" minlength="2" maxlength="30" onkeyup="checkInputRu(this)" required>
                                                 <small class="form-text text-muted">Кириллица</small>
                                             </div>
                                         </div>

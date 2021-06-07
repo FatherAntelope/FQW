@@ -165,7 +165,7 @@ $examinations = utils_call_api($url, $config);
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Дата рождения <strong style="color: var(--red--color)">*</strong></label>
-                                        <input type="date" class="form-control" name="patient_date_birth" max="<?php echo date("Y-m-d", mktime(0, 0, 0, date('m'), date('d'), date('Y') - 14))?>" required>
+                                        <input type="date" class="form-control" name="patient_date_birth" min="1940-01-01" max="<?php echo date("Y-m-d", mktime(0, 0, 0, date('m'), date('d'), date('Y') - 14))?>" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
@@ -409,7 +409,7 @@ $examinations = utils_call_api($url, $config);
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Дата рождения <strong style="color: var(--red--color)">*</strong></label>
-                                        <input type="date" class="form-control" name="doctor_date_birth" max="<?php echo date("Y-m-d", mktime(0, 0, 0, date('m'), date('d'), date('Y') - 18))?>" required>
+                                        <input type="date" class="form-control" name="doctor_date_birth" min="1940-01-01" max="<?php echo date("Y-m-d", mktime(0, 0, 0, date('m'), date('d'), date('Y') - 18))?>" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
