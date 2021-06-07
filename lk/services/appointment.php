@@ -143,7 +143,7 @@ $events = utils_call_api($url, $config);
             <div class="tab-pane fade show <?php if($getSelected == 'doctors') echo "active";?>" id="tab-doctors" role="tabpanel">
                 <div class="card">
                     <div class="card-body">
-                        <table id="table_doctors" class="table table-striped table-hover">
+                        <table id="table_doctors" class="table table-striped table-hover column-wrap">
                             <thead class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
                                 <th>Врач</th>
@@ -215,7 +215,7 @@ $events = utils_call_api($url, $config);
             <div class="tab-pane fade show <?php if($getSelected == 'procedures') echo "active";?>" id="tab-procedures" role="tabpanel">
                 <div class="card">
                     <div class="card-body">
-                        <table id="table_procedures" class="table table-striped table-hover">
+                        <table id="table_procedures" class="table table-striped table-hover column-wrap">
                             <thead class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
                                 <th>Название</th>
@@ -302,7 +302,7 @@ $events = utils_call_api($url, $config);
             <div class="tab-pane fade show <?php if($getSelected == 'examinations') echo "active";?>" id="tab-examinations" role="tabpanel">
                 <div class="card">
                     <div class="card-body">
-                        <table id="table_examinations" class="table table-striped table-hover">
+                        <table id="table_examinations" class="table table-striped table-hover column-wrap">
                             <thead class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
                                 <th>Название</th>
@@ -380,7 +380,7 @@ $events = utils_call_api($url, $config);
             <div class="tab-pane fade show <?php if($getSelected == 'events') echo "active";?>" id="tab-events" role="tabpanel">
                 <div class="card">
                     <div class="card-body">
-                        <table id="table_events" class="table table-striped table-hover">
+                        <table id="table_events" class="table table-striped table-hover column-wrap">
                             <thead class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
                                 <th>Название</th>
@@ -482,7 +482,7 @@ $events = utils_call_api($url, $config);
                 "previous": "Назад"
             }
         },
-
+        autoWidth: false
     });
 </script>
 </html>

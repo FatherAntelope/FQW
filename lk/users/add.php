@@ -208,7 +208,7 @@ $examinations = utils_call_api($url, $config);
                                 <div class="col-md">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Почта <strong style="color: var(--red--color)">*</strong></label>
-                                        <input type="email" class="form-control" placeholder="example@mail.ru" name="user_email" required>
+                                        <input type="email" class="form-control" placeholder="example@mail.ru" maxlength="50" name="user_email" required>
                                     </div>
                                 </div>
                                 <div class="col-md">
@@ -416,7 +416,7 @@ $examinations = utils_call_api($url, $config);
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Фото</label>
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" name="user_photo" id="customFile" accept="image/*">
+                                            <input type="file" class="custom-file-input" name="user_photo" id="customFile" accept="image/jpeg, image/png">
                                             <label class="custom-file-label" for="customFile" data-browse="Открыть">Выберите фото</label>
                                         </div>
                                         <small class="form-text text-muted">До 2 Мб</small>
@@ -431,7 +431,7 @@ $examinations = utils_call_api($url, $config);
                                 <div class="col-md">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Почта <strong style="color: var(--red--color)">*</strong></label>
-                                        <input type="email" class="form-control" placeholder="example@mail.ru" name="user_email" required>
+                                        <input type="email" class="form-control" placeholder="example@mail.ru" maxlength="50" name="user_email" required>
                                     </div>
                                 </div>
                                 <div class="col-md">
@@ -553,7 +553,7 @@ $examinations = utils_call_api($url, $config);
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Фото</label>
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" name="user_photo" id="customFile" accept="image/*">
+                                            <input type="file" class="custom-file-input" name="user_photo" id="customFile" accept="image/jpeg, image/png">
                                             <label class="custom-file-label" for="customFile" data-browse="Открыть">Выберите фото</label>
                                         </div>
                                         <small class="form-text text-muted">До 2 Мб</small>
@@ -569,7 +569,7 @@ $examinations = utils_call_api($url, $config);
                                 <div class="col-md">
                                     <div class="form-group">
                                         <label style="color: var(--yellow-color)">Почта <strong style="color: var(--red--color)">*</strong></label>
-                                        <input type="email" class="form-control" placeholder="example@mail.ru" name="user_email" required>
+                                        <input type="email" maxlength="50" class="form-control" placeholder="example@mail.ru" name="user_email" required>
                                     </div>
                                 </div>
                                 <div class="col-md">

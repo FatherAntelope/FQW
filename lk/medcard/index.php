@@ -222,7 +222,7 @@ $whose_user = 2;
                     <i class="fas fa-disease mr-1"></i>
                     Диагнозы
                 </h5>
-                <table class="table table-striped table-hover table-sm">
+                <table class="table table-striped table-hover table-sm column-wrap">
                     <thead class="text-white" style="background-color: var(--cyan-color);">
                     <tr>
                         <th>Тип</th>
@@ -254,7 +254,7 @@ $whose_user = 2;
                     <i class="fas fa-pills mr-1"></i>
                     Лекарства
                 </h5>
-                <table class="table table-striped table-hover table-sm">
+                <table class="table table-striped table-hover table-sm column-wrap column-wrap">
                     <thead class="text-white" style="background-color: var(--cyan-color);">
                     <tr>
                         <th>Название</th>
@@ -325,7 +325,7 @@ $whose_user = 2;
                 </button>
             </div>
             <div class="modal-body">
-                <table class="table table-striped table-hover">
+                <table class="table table-striped table-hover column-wrap">
                     <thead class="text-white" style="background-color: var(--cyan-color);">
                     <tr>
                         <th>Тип</th>
@@ -368,7 +368,7 @@ $whose_user = 2;
                 </button>
             </div>
             <div class="modal-body">
-                <div class="table-responsive">
+                <div class="table-responsive column-wrap">
                     <table class="table table-centered table-striped table-hover mb-0">
                         <tbody>
                         <tr>
@@ -447,7 +447,7 @@ $whose_user = 2;
                 </button>
             </div>
             <div class="modal-body">
-                <table class="table table-striped table-hover">
+                <table class="table table-striped table-hover column-wrap">
                     <thead class="text-white" style="background-color: var(--cyan-color);">
                     <tr>
                         <th>Название</th>

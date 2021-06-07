@@ -143,7 +143,7 @@ $admin_position = getAdminPositionRu($admin_data->data['position']);
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label style="color: var(--yellow-color)">Почта</label>
-                                                <input type="email" class="form-control" placeholder="example@mail.ru" maxlength="254" name="user_email" onkeyup="checkContactData()" value="<?php echo $user_data['email'];?>" required>
+                                                <input type="email" class="form-control" placeholder="example@mail.ru" maxlength="50" name="user_email" onkeyup="checkContactData()" value="<?php echo $user_data['email'];?>" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">

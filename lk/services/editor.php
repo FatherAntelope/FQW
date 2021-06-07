@@ -136,7 +136,7 @@ $events = utils_call_api($url, $config);
                             <i class="fas fa-plus-circle mr-2"></i>Создать специальность
                         </button>
 <!--Таблица с динамическим поиском по ее полям-->
-                        <table id="table_doctors" class="table table-striped table-hover">
+                        <table id="table_doctors" class="table table-striped table-hover column-wrap">
                             <thead class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
                                 <th>Название</th>
@@ -218,7 +218,7 @@ $events = utils_call_api($url, $config);
                         <button type="submit" class="btn btn-sm btn-success float-right text-white mb-2" data-toggle="modal" data-target="#openModalCreateProcedure">
                             <i class="fas fa-plus-circle mr-2"></i>Создать процедуру
                         </button>
-                        <table id="table_procedures" class="table table-striped table-hover">
+                        <table id="table_procedures" class="table table-striped table-hover column-wrap">
                             <thead class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
                                 <th>Название</th>
@@ -317,7 +317,7 @@ $events = utils_call_api($url, $config);
                         <button type="submit" class="btn btn-sm btn-success float-right text-white mb-2" data-toggle="modal" data-target="#openModalCreateExamination">
                             <i class="fas fa-plus-circle mr-2"></i>Создать обследование
                         </button>
-                        <table id="table_examinations" class="table table-striped table-hover">
+                        <table id="table_examinations" class="table table-striped table-hover column-wrap">
                             <thead class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
                                 <th>Название</th>
@@ -409,7 +409,7 @@ $events = utils_call_api($url, $config);
                         <button type="submit" class="btn btn-sm btn-success float-right text-white mb-2" data-toggle="modal" data-target="#openModalCreateEvent">
                             <i class="fas fa-plus-circle mr-2"></i>Создать мероприятие
                         </button>
-                        <table id="table_events" class="table table-striped table-hover">
+                        <table id="table_events" class="table table-striped table-hover column-wrap">
                             <thead class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
                                 <th>Название</th>
@@ -444,7 +444,7 @@ $events = utils_call_api($url, $config);
                                         <li><button type="button" class="btn mt-1 btn-sm btn-warning text-secondary btn-block" style="background-color: var(--yellow-color)">Редактирование</button></li>
                                         <li>
                                             <input type="hidden" value="<?php echo $service_event->data['name']?>">
-                                            <button type="button" value="<?php echo $service_event->data['id']?>" class="btn mt-1 btn-sm btn-danger" name="btn_delete_service">Удаление</button>
+                                            <button type="button" value="<?php echo $service_event->data['id']?>" class="btn mt-1 btn-sm btn-danger btn-block" name="btn_delete_service">Удаление</button>
                                         </li>
                                     </ul>
                                 </td>
@@ -492,7 +492,7 @@ $events = utils_call_api($url, $config);
                             </div>
                             <div class="col-lg-5">
                                 <label style="color: var(--yellow-color)">Стоимость услуги (руб.) <strong style="color: var(--red--color)">*</strong></label>
-                                <input type="number" min="0" max="100000" name="service_cost" class="form-control" placeholder="Введите стоимость" required>
+                                <input type="number" min="0" max="100000" maxlength="6" name="service_cost" class="form-control" placeholder="Введите стоимость" required>
                             </div>
                         </div>
                     </div>
@@ -539,7 +539,7 @@ $events = utils_call_api($url, $config);
                             </div>
                             <div class="col-xl-3 col-lg-6">
                                 <label style="color: var(--yellow-color)">Стоимость услуги (руб.) <strong style="color: var(--red--color)">*</strong></label>
-                                <input type="number" min="0" max="100000" name="service_cost" class="form-control" placeholder="Введите стоимость" required>
+                                <input type="number" min="0" max="100000" maxlength="6" name="service_cost" class="form-control" placeholder="Введите стоимость" required>
                             </div>
                             <div class="col-xl-2 col-lg-6">
                                 <label style="color: var(--yellow-color)">Расположение <strong style="color: var(--red--color)">*</strong></label>
@@ -549,7 +549,7 @@ $events = utils_call_api($url, $config);
                                 <div class="form-group">
                                     <label style="color: var(--yellow-color)">Фото <strong style="color: var(--red--color)">*</strong></label>
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="customFile" name="service_photo" accept="image/*" required>
+                                        <input type="file" class="custom-file-input" id="customFile" name="service_photo" accept="image/jpeg, image/png" required>
                                         <label class="custom-file-label" for="customFile" data-browse="Открыть">Выберите фото</label>
                                     </div>
                                     <small class="text-muted form-text">До 2 Мб</small>
@@ -637,7 +637,7 @@ $events = utils_call_api($url, $config);
                             </div>
                             <div class="col-xl-3 col-lg-6">
                                 <label style="color: var(--yellow-color)">Стоимость услуги (руб.) <strong style="color: var(--red--color)">*</strong></label>
-                                <input type="number" min="0" max="100000" name="service_cost" class="form-control" placeholder="Введите стоимость" required>
+                                <input type="number" min="0" max="100000" maxlength="6" name="service_cost" class="form-control" placeholder="Введите стоимость" required>
                             </div>
                             <div class="col-xl-2 col-lg-6">
                                 <label style="color: var(--yellow-color)">Расположение <strong style="color: var(--red--color)">*</strong></label>
@@ -647,7 +647,7 @@ $events = utils_call_api($url, $config);
                                 <div class="form-group">
                                     <label style="color: var(--yellow-color)">Фото <strong style="color: var(--red--color)">*</strong></label>
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="customFile" name="service_photo" accept="image/*" required>
+                                        <input type="file" class="custom-file-input" id="customFile" name="service_photo" accept="image/jpeg, image/png" required>
                                         <label class="custom-file-label" for="customFile" data-browse="Открыть">Выберите фото</label>
                                     </div>
                                     <small class="text-muted form-text">До 2 Мб</small>
@@ -722,7 +722,7 @@ $events = utils_call_api($url, $config);
                             </div>
                             <div class="col-xl-3 col-lg-6">
                                 <label style="color: var(--yellow-color)">Стоимость услуги (руб.) <strong style="color: var(--red--color)">*</strong></label>
-                                <input type="number" min="0" max="100000" name="service_cost" class="form-control" placeholder="Введите стоимость" required>
+                                <input type="number" min="0" max="100000" maxlength="6" name="service_cost" class="form-control" placeholder="Введите стоимость" required>
                             </div>
                             <div class="col-xl-2 col-lg-6">
                                 <label style="color: var(--yellow-color)">Расположение <strong style="color: var(--red--color)">*</strong></label>
@@ -732,7 +732,7 @@ $events = utils_call_api($url, $config);
                                 <div class="form-group">
                                     <label style="color: var(--yellow-color)">Фото <strong style="color: var(--red--color)">*</strong></label>
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="customFile" name="service_photo" accept="image/*" required>
+                                        <input type="file" class="custom-file-input" id="customFile" name="service_photo" accept="image/jpeg, image/png" required>
                                         <label class="custom-file-label" for="customFile" data-browse="Открыть">Выберите фото</label>
                                     </div>
                                     <small class="text-muted form-text">До 2 Мб</small>
@@ -929,7 +929,7 @@ $events = utils_call_api($url, $config);
                 "previous": "Назад"
             }
         },
-
+        autoWidth: false
     });
 
     $("button[name='btn_delete_service']").click(function () {

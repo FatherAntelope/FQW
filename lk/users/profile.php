@@ -238,10 +238,10 @@ if(array_keys($_GET)[0] === "doctor") {
                         <a href="tel:<?php echo $user_info->data['user']['phone_number']?>" aria-haspopup="true" style="text-decoration: none; color: var(--yellow-color)">
                             <h5 class="font-weight-bold"><i class="fas fa-phone mr-1"></i> <?php echo $user_info->data['user']['phone_number']?></h5>
                         </a>
-                        <a href="mailto:<?php echo $user_info->data['user']['email']?>" aria-haspopup="true" style="text-decoration: none; color: var(--yellow-color)">
+                        <a href="mailto:<?php echo $user_info->data['user']['email']?>" aria-haspopup="true" style="text-decoration: none; color: var(--yellow-color); word-break: break-word;">
                             <h5 class="font-weight-bold"><i class="fas fa-envelope-open-text mr-1"></i><?php echo $user_info->data['user']['email']?></h5>
                         </a>
-                        <h5 class="font-weight-bold" style="color: var(--yellow-color)">
+                        <h5 class="font-weight-bold" style="word-break: break-word; color: var(--yellow-color)">
                             <i class="fas fa-map-marked-alt mr-1"></i>
                             <?php echo $user_group_info->data['region']?>
                         </h5>
@@ -321,7 +321,7 @@ if(array_keys($_GET)[0] === "doctor") {
                         <a href="tel:<?php echo $user_info->data['user']['phone_number']?>" aria-haspopup="true" style="text-decoration: none; color: var(--yellow-color)">
                             <h5 class="font-weight-bold"><i class="fas fa-phone mr-1"></i> <?php echo $user_info->data['user']['phone_number']?></h5>
                         </a>
-                        <a href="mailto:<?php echo $user_info->data['user']['email']?>" aria-haspopup="true" style="text-decoration: none; color: var(--yellow-color)">
+                        <a href="mailto:<?php echo $user_info->data['user']['email']?>" aria-haspopup="true" style="word-break: break-word; text-decoration: none; color: var(--yellow-color)">
                             <h5 class="font-weight-bold"><i class="fas fa-envelope-open-text mr-1"></i><?php echo $user_info->data['user']['email']?></h5>
                         </a>
                     </div>
@@ -361,7 +361,7 @@ if(array_keys($_GET)[0] === "doctor") {
                         <a href="tel:<?php echo $user_info->data['user']['phone_number']?>" aria-haspopup="true" style="text-decoration: none; color: var(--yellow-color)">
                             <h5 class="font-weight-bold"><i class="fas fa-phone mr-1"></i><?php echo $user_info->data['user']['phone_number']?></h5>
                         </a>
-                        <a href="mailto:<?php echo $user_info->data['user']['email']?>" aria-haspopup="true" style="text-decoration: none; color: var(--yellow-color)">
+                        <a href="mailto:<?php echo $user_info->data['user']['email']?>" aria-haspopup="true" style="text-decoration: none; color: var(--yellow-color); word-break: break-word;">
                             <h5 class="font-weight-bold"><i class="fas fa-envelope-open-text mr-1"></i><?php echo $user_info->data['user']['email']?></h5>
                         </a>
                     </div>

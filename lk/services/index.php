@@ -191,7 +191,7 @@ $whose_user = 2;
 
                 <div class="card mt-3">
                     <div class="card-body">
-                        <table id="table_appointment" class="table table-striped table-hover">
+                        <table id="table_appointment" class="table table-striped table-hover column-wrap">
                             <thead class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
                                 <th>Тип услуги</th>
@@ -366,7 +366,7 @@ $whose_user = 2;
 
                 <div class="card mt-3">
                     <div class="card-body">
-                        <table id="table_appointment_history" class="table table-striped table-hover">
+                        <table id="table_appointment_history" class="table table-striped table-hover column-wrap">
                             <thead class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
                                 <th>Тип услуги</th>
@@ -551,7 +551,7 @@ $whose_user = 2;
                 "previous": "Назад"
             }
         },
-
+        autoWidth: false;
     });
 </script>
 </html>

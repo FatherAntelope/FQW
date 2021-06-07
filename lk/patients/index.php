@@ -91,7 +91,7 @@ if($doctor->data['position'] == "Doctor") {
             <div class="tab-pane fade <?php echo ($doctor->data['position'] == "Doctor") ? "show active" : ""?>" id="tab_my_patients" role="tabpanel">
                 <div class="card">
                     <div class="card-body">
-                        <table id="table_patients" class="table table-striped table-hover">
+                        <table id="table_patients" class="table table-striped table-hover column-wrap">
                             <thead class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
                                 <th>Пациент</th>
@@ -173,7 +173,7 @@ if($doctor->data['position'] == "Doctor") {
             <div class="tab-pane fade <?php echo ($doctor->data['position'] == "Specialist") ? "show active" : ""?>" id="tab_all_patients" role="tabpanel">
                 <div class="card">
                     <div class="card-body">
-                        <table id="table_doctors" class="table table-striped table-hover">
+                        <table id="table_doctors" class="table table-striped table-hover column-wrap">
                             <thead class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
                                 <th>Пациент</th>
@@ -322,7 +322,7 @@ if($doctor->data['position'] == "Doctor") {
                 "previous": "Назад"
             }
         },
-
+        autoWidth: false
     });
 </script>
 </html>

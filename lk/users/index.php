@@ -71,7 +71,7 @@ $whose_user = 1;
                         <a href="/lk/users/add.php?selected=patient" class="btn btn-sm btn-success float-right text-white mb-2">
                             <i class="fas fa-plus-circle mr-2"></i>Зарегистрировать пациента
                         </a>
-                        <table id="table_patients" class="table table-striped table-hover">
+                        <table id="table_patients" class="table table-striped table-hover column-wrap">
                             <thead class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
                                 <th>Пациент</th>
@@ -162,7 +162,7 @@ $whose_user = 1;
                         <a href="/lk/users/add.php?selected=doctor" class="btn btn-sm btn-success float-right text-white mb-2">
                             <i class="fas fa-plus-circle mr-2"></i>Зарегистрировать медперсонал
                         </a>
-                        <table id="table_doctors" class="table table-striped table-hover">
+                        <table id="table_doctors" class="table table-striped table-hover column-wrap">
                             <thead class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
                                 <th>Медперсона</th>
@@ -212,7 +212,7 @@ $whose_user = 1;
                                         <?php } ?>
                                     </ul>
                                 </td>
-                                <td class="text-muted" data-label="Почта:"><?php echo $doctor_user->data['user']['email']; ?></td>
+                                <td class="text-muted" data-label="Почта:"> <span style="word-wrap: break-word;"><?php echo $doctor_user->data['user']['email']; ?></span></td>
                                 <td class="text-muted" data-label="Телефон:"><?php echo $doctor_user->data['user']['phone_number']; ?></td>
                                 <td style="min-width: 12rem">
                                     <ul class="list-unstyled">
@@ -248,7 +248,7 @@ $whose_user = 1;
                         <a href="/lk/users/add.php?selected=administrator" class="btn btn-sm btn-success float-right text-white mb-2">
                             <i class="fas fa-plus-circle mr-2"></i>Зарегистрировать администратора
                         </a>
-                        <table id="table_administrators" class="table table-striped table-hover">
+                        <table id="table_administrators" class="table table-striped table-hover column-wrap">
                             <thead class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
                                 <th>Администратор</th>
@@ -439,6 +439,7 @@ $whose_user = 1;
                 "previous": "Назад"
             }
         },
+        autoWidth: false
     });
 
     $("button[name='btn_delete_user']").click(function () {

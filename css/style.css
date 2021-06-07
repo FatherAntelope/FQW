@@ -416,3 +416,7 @@ body {
     border-color: var(--dark-cyan-color) !important;
     background-color: var(--dark-cyan-color) !important;
 }
+
+table.column-wrap tbody td {
+    word-break: break-word;
+}

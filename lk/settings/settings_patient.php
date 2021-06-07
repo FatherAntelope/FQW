@@ -179,7 +179,7 @@ $patient_medcard = utils_call_api($url, $config);
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label style="color: var(--yellow-color)">Почта</label>
-                                                <input type="email" class="form-control" placeholder="example@mail.ru"  name="user_email" onkeyup="checkContactData()" value="<?php echo $user_data['email'];?>" required>
+                                                <input type="email" class="form-control" placeholder="example@mail.ru" maxlength="50" name="user_email" onkeyup="checkContactData()" value="<?php echo $user_data['email'];?>" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">

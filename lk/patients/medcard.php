@@ -118,7 +118,7 @@ $patient_medcard = utils_call_api($url, $config);
                         <a href="/lk/patients/add_epicrisis.php?patient=<?php echo $patient->data['id']?>" class="btn btn-sm btn-success float-right text-white mb-2">
                             <i class="fas fa-plus-circle mr-2"></i>Добавить эпикриз
                         </a>
-                        <table id="table_epicrisis" class="table table-striped table-hover">
+                        <table id="table_epicrisis" class="table table-striped table-hover column-wrap">
                             <thead class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
                                 <th>Дата</th>
@@ -187,7 +187,7 @@ $patient_medcard = utils_call_api($url, $config);
                         <a href="#" class="btn btn-sm btn-success float-right text-white mb-2">
                             <i class="fas fa-plus-circle mr-2"></i>Добавить обследование
                         </a>
-                        <table id="table_examinations" class="table table-striped table-hover">
+                        <table id="table_examinations" class="table table-striped table-hover column-wrap">
                             <thead class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
                                 <th>Дата</th>
@@ -243,7 +243,7 @@ $patient_medcard = utils_call_api($url, $config);
             <div class="tab-pane fade show" id="tab_disease" role="tabpanel">
                 <div class="card">
                     <div class="card-body">
-                        <table id="table_disease" class="table table-striped table-hover">
+                        <table id="table_disease" class="table table-striped table-hover column-wrap">
                             <thead class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
                                 <th>Тип</th>
@@ -296,7 +296,7 @@ $patient_medcard = utils_call_api($url, $config);
             <div class="tab-pane fade show" id="tab_pills" role="tabpanel">
                 <div class="card">
                     <div class="card-body">
-                        <table id="table_pills" class="table table-striped table-hover">
+                        <table id="table_pills" class="table table-striped table-hover column-wrap">
                             <thead class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
                                 <th>Название</th>
@@ -352,7 +352,7 @@ $patient_medcard = utils_call_api($url, $config);
             <div class="tab-pane fade show" id="tab_recommendations" role="tabpanel">
                 <div class="card">
                     <div class="card-body">
-                        <table id="table_recommendations" class="table table-striped table-hover">
+                        <table id="table_recommendations" class="table table-striped table-hover column-wrap">
                             <thead class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
                                 <th>Рекомендация</th>
@@ -429,7 +429,7 @@ $patient_medcard = utils_call_api($url, $config);
                     <i class="fas fa-disease mr-1"></i>
                     Диагнозы
                 </h5>
-                <table class="table table-striped table-hover table-sm">
+                <table class="table table-striped table-hover table-sm column-wrap">
                     <thead class="text-white" style="background-color: var(--cyan-color);">
                     <tr>
                         <th>Тип</th>
@@ -462,7 +462,7 @@ $patient_medcard = utils_call_api($url, $config);
                     <i class="fas fa-pills mr-1"></i>
                     Лекарства
                 </h5>
-                <table class="table table-striped table-hover table-sm">
+                <table class="table table-striped table-hover table-sm column-wrap">
                     <thead class="text-white" style="background-color: var(--cyan-color);">
                     <tr>
                         <th>Название</th>
@@ -588,6 +588,7 @@ $patient_medcard = utils_call_api($url, $config);
                 "previous": "Назад"
             }
         },
+        autoWidth: false
     });
 </script>
 </html>
