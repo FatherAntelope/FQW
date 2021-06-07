@@ -49,6 +49,24 @@ function getUrlUserPhoto ($user_photo) : string {
 }
 
 /**
+ * Формирует полный путь к ресурсу по относительному адресу
+ * @param $relative_address относительный адрес ресурса
+ * @return string полный адрес ресурса
+ */
+function api_point(string $relative_address) : string {
+    return protocol . '://' . domain_name_api . $relative_address;
+}
+
+
+/**
+ * Отправляет заголовок со статусом 400 и закрывает подключение
+ */
+function bad_request() {
+    header('HTTP/1.0 400 Bad Request');
+    die();
+}
+
+/**
  * Формирует и возвращает код роли пользователя
  * @param $user_role string роль пользователя
  * @return int код роли пользователя

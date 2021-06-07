@@ -93,15 +93,17 @@ function utils_call_api($url, $config = false): CurlHttpResponse {
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
 
-    $content_type_str = 'Content-Type: ';
-    for ($i = 0; $i < count($content_type); $i++) {
-        $content_type_str .= $content_type[$i];
-        if ($i != count($content_type) - 1) {
-            $content_type_str .= '; ';
+    if (count($content_type) > 0) {
+        $content_type_str = 'Content-Type: ';
+        for ($i = 0; $i < count($content_type); $i++) {
+            $content_type_str .= $content_type[$i];
+            if ($i != count($content_type) - 1) {
+                $content_type_str .= '; ';
+            }
         }
+        $headers[] = $content_type_str;
     }
 
-    $headers[] = $content_type_str;
     curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
     // авторизация
     // curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);

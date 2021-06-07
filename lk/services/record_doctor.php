@@ -250,7 +250,7 @@ $min_cost = min(array_column($services, 'cost'));
                 <form id="queryRecordOnServiceConfirm">
                     <input type="hidden" name="record_time">
                     <input type="hidden" name="record_id_service">
-                    <input type="hidden" value="<?php echo $patient_data->data['id'];?>" name="record_id_patient">
+                    <input type="hidden" value="<?php echo $doctor->data['id'];?>" name="record_id_doctor">
                     <div class="custom-checkbox custom-control">
                         <input class="custom-control-input" id="record_confirm" name="record_confirm" type="checkbox" required>
                         <label class="custom-control-label text-muted" for="record_confirm" style="text-decoration-line: none">Соглашаюсь с правилом и даю согласие на запись</label>
@@ -333,7 +333,7 @@ $min_cost = min(array_column($services, 'cost'));
 
 
         $(".card-body__ceil").click(function(){
-            $('input[name="record_time"]').val($(this).text());
+            $('input[name="record_time"]').val($(this).siblings(".head").text() + " " + $(this).text());
             $('input[name="record_id_service"]').val(($('select[name="record_select_specialization"] option:selected').val()).split(";")[0]);
 
             $('#span_service_name').text($('select[name="record_select_specialization"] option:selected').text());
