@@ -22,13 +22,22 @@ if(!$user->isUserRole("Doctor"))
 $user_data = $user->getData();
 $whose_user = 3;
 
+$url = protocol."://".domain_name_api."/api/med/medpersona";
+$config = [
+    "method" => "GET",
+    "token" => $_COOKIE['user_token']
+];
+$doctor = utils_call_api($url, $config);
 
 $url = protocol.'://'.domain_name_api.'/api/med/patients';
-$config = [
-    'token' => $_COOKIE['user_token'],
-    'method' => 'GET'
-];
 $patients_all = utils_call_api($url, $config);
+
+
+if($doctor->data['position'] == "Doctor") {
+    $url = protocol."://".domain_name_api."/api/med/medicpatient?medpersona=".$doctor->data['id'];
+    $bind_patients_doctor = utils_call_api($url, $config);
+}
+
 
 ?>
 <!doctype html>
@@ -48,7 +57,7 @@ $patients_all = utils_call_api($url, $config);
     <script src="//cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" charset="utf8" src="/js/datatables.js"></script>
     <script defer src="/js/all.js"></script>
-    <title><? echo web_name_header; ?></title>
+    <title><?php echo web_name_header; ?></title>
 </head>
 <body>
 <!--Панель навигации по модулям пользователя-->
@@ -64,19 +73,22 @@ $patients_all = utils_call_api($url, $config);
             </ol>
         </nav>
         <ul class="nav nav-pills flex-column flex-sm-row mb-2" role="tablist">
+            <?php if($doctor->data['position'] == "Doctor") {?>
             <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
-                <a class="nav-link tab-bg-active font-weight-bold active" data-toggle="tab" href="#tab_my_patients" role="tab">
+                <a class="nav-link tab-bg-active font-weight-bold <?php echo ($doctor->data['position'] == "Doctor") ? "active" : ""?>" data-toggle="tab" href="#tab_my_patients" role="tab">
                     <i class="fas fa-user-injured mr-1"></i>Мои пациенты
                 </a>
             </li>
+            <?php } ?>
             <li class="nav-item flex-sm-fill text-sm-center mr-1 ml-1" role="presentation">
-                <a class="nav-link tab-bg-active font-weight-bold" data-toggle="tab" href="#tab_all_patients" role="tab">
+                <a class="nav-link tab-bg-active font-weight-bold <?php echo ($doctor->data['position'] == "Specialist") ? "active" : ""?>" data-toggle="tab" href="#tab_all_patients" role="tab">
                     <i class="fas fa-user-injured mr-1"></i> Все пациенты
                 </a>
             </li>
         </ul>
         <div class="tab-content">
-            <div class="tab-pane fade show active" id="tab_my_patients" role="tabpanel">
+            <?php if($doctor->data['position'] == "Doctor") {?>
+            <div class="tab-pane fade <?php echo ($doctor->data['position'] == "Doctor") ? "show active" : ""?>" id="tab_my_patients" role="tabpanel">
                 <div class="card">
                     <div class="card-body">
                         <table id="table_patients" class="table table-striped table-hover">
@@ -91,17 +103,48 @@ $patients_all = utils_call_api($url, $config);
                             </tr>
                             </thead>
                             <tbody>
+                            <?php foreach ($bind_patients_doctor->data as $bind_patient) {
+
+                                $url = protocol.'://'.domain_name_api.'/api/med/patients/'.$bind_patient['patient'];
+                                $patient = utils_call_api($url, $config);
+
+                                $url = protocol.'://'.domain_name_api.'/api/med/users/'.$patient->data['user'];
+                                $patient_user = utils_call_api($url, $config);
+
+                                $url = protocol."://".domain_name_api."/api/med/users/patients/".$bind_patient['patient']."/medcard";
+                                $patient_medcard = utils_call_api($url, $config);
+                            ?>
                             <tr>
-                                <td class="text-muted" data-label="Пац.-т:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
-                                <td class="text-muted" data-label="ID карты:">123456789</td>
-                                <td class="text-muted" data-label="Категория:"><span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">Лечащийся</span></td>
-                                <td class="text-muted" data-label="Группа:">
-                                    <ul class="list-unstyled">
-                                        <li><span class="badge badge-pill text-white bg-secondary">Диабет</span></li>
-                                        <li><span class="badge badge-pill text-white bg-secondary">Ковид</span></li>
-                                    </ul>
+                                <td class="text-muted" data-label="Пац.-т:">
+                                    <img src="<?php echo getUrlUserPhoto($patient_user->data['user']['photo']); ?>" height="30" class="rounded-circle mr-1" style="height: 25px; width: 25px; object-fit: cover">
+                                    <?php echo getItitialsFullName($patient_user->data['user']['surname'], $patient_user->data['user']['name'], $patient_user->data['user']['patronymic']); ?>
                                 </td>
-                                <td class="text-muted" data-label="Дневник:"><span class="badge badge-pill bg-success text-white">Проверен</span></td>
+                                <td class="text-muted" data-label="ID карты:"><?php echo $patient_medcard->data['id']; ?></td>
+                                <td class="text-muted" data-label="Категория:">
+                                    <?php if($patient->data['type'] == "Treating") { ?>
+                                        <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">
+                                            <?php echo getPatientCategoryRu($patient->data['type']); ?>
+                                        </span>
+                                    <?php }
+                                    if ($patient->data['type'] == "Vacationer") { ?>
+                                        <span class="badge badge-pill text-muted" style="background-color: var(--yellow-color)">
+                                            <?php echo getPatientCategoryRu($patient->data['type']); ?>
+                                        </span>
+                                    <?php } ?>
+                                </td>
+                                <td class="text-muted" data-label="Группа:">
+                                    <?php if(count($patient->data['group'])> 0) {?>
+                                        <ul class="list-unstyled">
+                                            <?php foreach ($patient->data['group'] as $group) { ?>
+                                                <li><span class="badge badge-pill text-white bg-secondary"><?php echo $group; ?></span></li>
+                                            <?php } ?>
+                                        </ul>
+                                    <?php } else { echo "Отсутствует"; } ?>
+                                </td>
+                                <td class="text-muted" data-label="Дневник:">
+                                    <span class="badge badge-pill bg-success text-white">Проверен</span> /
+                                    <span class="badge badge-pill bg-danger text-white">Не проверен</span>
+                                </td>
                                 <td>
                                     <ul class="list-unstyled">
                                         <li><button type="button" class="btn mt-1 btn-sm text-white" style="background-color: var(--cyan-color)">Профиль</button></li>
@@ -110,24 +153,7 @@ $patients_all = utils_call_api($url, $config);
                                     </ul>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="text-muted" data-label="Пац.-т:"><img src="/images/user.png" height="30" class="rounded-circle" alt="...">  Иванов И. И.</td>
-                                <td class="text-muted" data-label="ID карты:">123456789</td>
-                                <td class="text-muted" data-label="Категория:"><span class="badge badge-pill text-secondary" style="background-color: var(--yellow-color)">Отдыхающий</span></td>
-                                <td class="text-muted" data-label="Группа:">
-                                    <ul class="list-unstyled">
-                                        <li><span class="badge badge-pill text-white bg-secondary">Пенсионер</span></li>
-                                    </ul>
-                                </td>
-                                <td class="text-muted" data-label="Дневник:"><span class="badge badge-pill bg-danger text-white">Не проверен</span></td>
-                                <td>
-                                    <ul class="list-unstyled">
-                                        <li><button type="button" class="btn mt-1 btn-sm text-white" style="background-color: var(--cyan-color)">Профиль</button></li>
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-secondary text-white">Медкарта</button></li>
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-warning text-secondary" style="background-color: var(--yellow-color)">Дневник</button></li>
-                                    </ul>
-                                </td>
-                            </tr>
+                            <?php } ?>
                             </tbody>
                             <tfoot class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
@@ -143,7 +169,8 @@ $patients_all = utils_call_api($url, $config);
                     </div>
                 </div>
             </div>
-            <div class="tab-pane fade" id="tab_all_patients" role="tabpanel">
+            <?php } ?>
+            <div class="tab-pane fade <?php echo ($doctor->data['position'] == "Specialist") ? "show active" : ""?>" id="tab_all_patients" role="tabpanel">
                 <div class="card">
                     <div class="card-body">
                         <table id="table_doctors" class="table table-striped table-hover">
@@ -194,11 +221,30 @@ $patients_all = utils_call_api($url, $config);
                                             <li><span class="badge badge-pill text-white bg-secondary"><?php echo $group; ?></span></li>
                                         <?php } ?>
                                     </ul>
-                                    <?php } else { ?>
-                                        Отсутствует
-                                    <?php } ?>
+                                    <?php } else { echo "Отсутствует"; } ?>
                                 </td>
-                                <td class="text-muted" data-label="Участковый:">-</td>
+                                <td class="text-muted" data-label="Участковый:">
+                                    <?php
+                                    $url = protocol."://".domain_name_api."/api/med/medicpatient?patient=".$patient['id'];
+                                    $medicpatient = utils_call_api($url, $config);
+                                    if (count($medicpatient->data) > 0) {
+                                        $url = protocol."://".domain_name_api."/api/med/medics/".$medicpatient->data[0]['medpersona'];
+                                        $medicpatient_doctor = utils_call_api($url, $config);
+
+                                        $url = protocol."://".domain_name_api."/api/med/users/".$medicpatient_doctor->data['user'];
+                                        $medicpatient_doctor_user = utils_call_api($url, $config);
+                                        ?>
+                                        <a href="#" class="text-decoration-none text-info">
+                                            <?php
+                                            echo getItitialsFullName(
+                                                $medicpatient_doctor_user->data['user']['surname'],
+                                                $medicpatient_doctor_user->data['user']['name'],
+                                                $medicpatient_doctor_user->data['user']['patronymic'],
+                                            );
+                                            ?>
+                                        </a>
+                                    <?php } else { echo "Отсутствует"; } ?>
+                                </td>
                                 <td>
                                     <ul class="list-unstyled">
                                         <li><a href="/lk/patients/profile.php?id=<?php echo $patient['id']?>" class="btn mt-1 btn-sm text-white" style="background-color: var(--cyan-color)">Профиль</a></li>

@@ -377,7 +377,7 @@ $examinations = utils_call_api($url, $config);
                             </div>
                         </div>
                         <?php } else { ?>
-                        <form id="queryRegistrationDoctor" enctype="multipart/form-data">
+                        <form id="queryRegistrationDoctor" enctype="multipart/form-data" method="post" action="/queries/admin/registrationUser.php">
                             <h5 class="mb-3 text-muted text-uppercase bg-light p-2">
                                 <i class="fas fa-user mr-1"></i>
                                 Персональные данные
@@ -674,6 +674,10 @@ $examinations = utils_call_api($url, $config);
                 "token" => $_COOKIE['user_token']
             ];
             $service_speciality = utils_call_api($url, $config);
+
+            $url = protocol."://".domain_name_api."/api/med/service/".$service_speciality->data['id']."/servicemedper";
+            if(count(utils_call_api($url, $config)->data) > 0)
+                continue;
             ?>
             $('#chosen_required_profession').append($('<option>', {
                 value: <?php echo $service_speciality->data['id']?>,

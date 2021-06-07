@@ -137,7 +137,7 @@ if ($_POST['user_role'] === "Doctor") {
             $data = [
                 "service" => $profession,
                 "medpersona" => $doctor->data['id'],
-                "type" => "Specialty"
+                "type" => "Speciality"
             ];
             $config = [
                 "method" => "POST",

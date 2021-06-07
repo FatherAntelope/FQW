@@ -76,7 +76,7 @@ function getUserRoleCode(string $user_role) : int {
  * @return string инициалы
  */
 function getItitialsFullName(string $surname, string $name, $patronymic) : string {
-    return $surname." ".mb_substr($name,0,1,'UTF-8'). ". ".mb_substr($patronymic,0,1,'UTF-8').".";
+    return $surname." ".mb_substr($name,0,1,'UTF-8'). ". ".(($patronymic !== null) ? mb_substr($patronymic,0,1,'UTF-8')."." : "");
 }
 
 /**

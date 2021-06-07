@@ -26,30 +26,39 @@ if(!$user->isUserRole("Doctor"))
 $user_data = $user->getData();
 $whose_user = 3;
 
-// Достает все данные пациента
-$url = protocol . '://' . domain_name_api . '/api/med/patients/' . $_GET['id'];
+$url = protocol."://".domain_name_api."/api/med/medpersona";
 $config = [
-    'token' => $_COOKIE['user_token'],
-    'method' => 'GET'
+    "method" => "GET",
+    "token" => $_COOKIE['user_token']
 ];
+$doctor = utils_call_api($url, $config);
+
+// Достает данные пациента
+$url = protocol . '://' . domain_name_api . '/api/med/patients/' . $_GET['id'];
 $patient = utils_call_api($url, $config);
 if ($patient->status_code == 404) {
     header("Location: /lk/patients/");
     exit();
 }
 
-// Достает все данные пациента
+// Достает основные данные пациента
 $url = protocol.'://'.domain_name_api.'/api/med/users/'.$patient->data['user'];
 $patient_user = utils_call_api($url, $config);
 
 // Достает данные медицинской карты пользователя
 $url = protocol."://".domain_name_api."/api/med/users/patients/".$_GET['id']."/medcard";
-$config = [
-    "method" => "GET",
-    "token" => $_COOKIE['user_token']
-];
 $patient_medcard = utils_call_api($url, $config);
 
+$url = protocol."://".domain_name_api."/api/med/medicpatient?patient=".$_GET['id'];
+$medicpatient = utils_call_api($url, $config);
+
+if (count($medicpatient->data) > 0) {
+    $url = protocol."://".domain_name_api."/api/med/medics/".$medicpatient->data[0]['medpersona'];
+    $medicpatient_doctor = utils_call_api($url, $config);
+
+    $url = protocol."://".domain_name_api."/api/med/users/".$medicpatient_doctor->data['user'];
+    $medicpatient_doctor_user = utils_call_api($url, $config);
+}
 ?>
 <!doctype html>
 <html lang="ru">
@@ -114,11 +123,39 @@ $patient_medcard = utils_call_api($url, $config);
                             </div>
                             <div class="col-lg-7">
                                 <h5 class="text-muted">ID карты: <?php echo $patient_medcard->data['id']; ?></h5>
-                                <h5 class="text-muted">Терапевт:
-                                    <a href="#" style="color: var(--dark-cyan-color); text-decoration: none">Иванов И.И.</a>
-                                    / <a href="#" data-toggle="modal" data-target="#openModalDetachingPatient" style="color: var(--red); text-decoration: none">Открепить</a>
-                                    / Отсутствует
-                                    <a href="#" data-toggle="modal" data-target="#openModalSecuringPatient" style="color: var(--red); text-decoration: none">Закрепить к себе</a>
+                                <h5 class="text-muted">Участковый врач:
+                                    <?php
+                                    if($doctor->data['position'] == 'Specialist') {
+                                        if(isset($medicpatient_doctor_user)) { ?>
+                                            <a href="#" style="color: var(--dark-cyan-color); text-decoration: none">
+                                                <?php echo getItitialsFullName(
+                                                    $medicpatient_doctor_user->data['user']['surname'],
+                                                    $medicpatient_doctor_user->data['user']['name'],
+                                                    $medicpatient_doctor_user->data['user']['patronymic']
+                                                ); ?>
+                                            </a>
+                                        <?php } else {
+                                            echo "Отсутствует";
+                                        }
+                                    }
+
+                                    if($doctor->data['position'] == 'Doctor') {
+                                        if(isset($medicpatient_doctor_user)) {
+                                            if($medicpatient_doctor_user->data['user']['id'] == $user_data['id']) { ?>
+                                                <a href="#" data-toggle="modal" class="text-danger" data-target="#openModalDetachingPatient" style="color: var(--red); text-decoration: none">Открепить</a>
+                                            <?php } else {?>
+                                                <a href="#" style="color: var(--dark-cyan-color); text-decoration: none">
+                                                    <?php echo getItitialsFullName(
+                                                        $medicpatient_doctor_user->data['user']['surname'],
+                                                        $medicpatient_doctor_user->data['user']['name'],
+                                                        $medicpatient_doctor_user->data['user']['patronymic']
+                                                    ); ?>
+                                                </a>
+                                            <?php }
+                                        } else { ?>
+                                            <a href="#" data-toggle="modal" class="text-success" data-target="#openModalBindPatient" style="text-decoration: none">Закрепить к себе</a>
+                                        <?php }
+                                    } ?>
                                 </h5>
                                 <h5 class="text-muted">Дата поступления: <?php echo date("d.m.Y", strtotime($patient->data['receipt_date']));?></h5>
                                 <?php if(count($patient->data['group']) > 0) {?>
@@ -256,17 +293,21 @@ $patient_medcard = utils_call_api($url, $config);
 </div>
 
 <!--Модальное окно закрепления к себе пациента-->
-<div class="modal fade" tabindex="-1" id="openModalSecuringPatient">
+<div class="modal fade" tabindex="-1" id="openModalBindPatient">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content" >
             <div class="modal-body">
                 <div class="alert alert-info" role="alert">
                     Вы уверены, что хотите закрепить пациента к себе?
                 </div>
+                <form id="queryBindPatient">
+                    <input type="hidden" name="patient_id" value="<?php echo $patient->data['id']?>">
+                    <input type="hidden" name="doctor_id" value="<?php echo $doctor->data['id']?>">
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Нет</button>
-                <button type="button" class="btn btn-success">Да</button>
+                <button type="submit" class="btn btn-success" form="queryBindPatient">Да</button>
             </div>
         </div>
     </div>
@@ -280,10 +321,13 @@ $patient_medcard = utils_call_api($url, $config);
                 <div class="alert alert-info" role="alert">
                     Вы уверены, что хотите открепить пациента?
                 </div>
+                <form id="queryDetachingPatient">
+                    <input type="hidden" name="patient_id" value="<?php echo $patient->data['id']?>">
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Нет</button>
-                <button type="button" class="btn btn-success">Да</button>
+                <button type="submit" class="btn btn-success" form="queryDetachingPatient">Да</button>
             </div>
         </div>
     </div>
@@ -338,6 +382,35 @@ $patient_medcard = utils_call_api($url, $config);
                 "previous": "Назад"
             }
         },
+    });
+</script>
+<script>
+    $("#queryBindPatient").submit(function () {
+        $.ajax({
+            url: "/queries/doctor/bindPatient.php",
+            method: "POST",
+            data: $(this).serialize(),
+            success: function () {
+                location.reload();
+            },
+            error: function () {
+            }
+        });
+        return false;
+    });
+
+    $("#queryDetachingPatient").submit(function () {
+        $.ajax({
+            url: "/queries/doctor/detachingPatient.php",
+            method: "POST",
+            data: $(this).serialize(),
+            success: function () {
+                location.reload();
+            },
+            error: function () {
+            }
+        });
+        return false;
     });
 </script>
 </html>
