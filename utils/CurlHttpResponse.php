@@ -111,10 +111,10 @@ function utils_call_api($url, $config = false): CurlHttpResponse {
     $result = curl_exec($curl);
     $status_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
-    if ( ($status_code - 200) < 0 or ($status_code - 200) >= 100) {
-        header('Location: /error/502.php');
-        exit();
-    }
+//    if ( ($status_code - 200) < 0 or ($status_code - 200) >= 100) {
+//        header('Location: /error/502.php');
+//        exit();
+//    }
 
     $content_type = curl_getinfo($curl, CURLINFO_CONTENT_TYPE);
     if ($content_type !== null) {

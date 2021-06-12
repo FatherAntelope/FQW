@@ -24,9 +24,10 @@ $response = utils_call_api($url, $config);
  * Если вернулся HTTP-код 200 и роль у пользователя указана (существует) роль, то создаем кукки с токеном пользователя
  * Иначе вызов ошибки 400 и прекращение выполнения скрипта
  */
-if($response->status_code === 200 && $response->data['user']['role'] !== "") {
+if($response->status_code === 200) {
     setcookie('user_token', $response->data['user']['token'], time()+(60*60*24*30), "/");
 } else {
-    die(header("HTTP/1.0 400 Bad Request"));
+    header("HTTP/1.0 400 Bad Request");
+    exit();
 }
 ?>
