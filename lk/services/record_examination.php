@@ -45,7 +45,7 @@ $service_medpers_examination = utils_call_api($url, $config);
     <link rel="stylesheet" href="/css/record.css">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <script src="//cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="//code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script defer src="/js/all.js"></script>
     <title><?php echo web_name_header; ?></title>
@@ -197,7 +197,8 @@ $service_medpers_examination = utils_call_api($url, $config);
                 <form id="queryRecordOnServiceConfirm">
                     <input type="hidden" name="record_time">
                     <input type="hidden" name="record_id_service">
-                    <input type="hidden" value="<?php echo $patient_data->data['id'];?>" name="record_id_patient">
+                    <input type="hidden" name="record_service_type" value="survey">
+<!--                    <input type="hidden" value="--><?php //echo $patient_data->data['id'];?><!--" name="record_id_patient">-->
                     <div class="custom-checkbox custom-control">
                         <input class="custom-control-input" id="record_confirm" name="record_confirm" type="checkbox" required>
                         <label class="custom-control-label text-muted" for="record_confirm" style="text-decoration-line: none">Соглашаюсь с правилом и даю согласие на запись</label>
@@ -238,9 +239,26 @@ $service_medpers_examination = utils_call_api($url, $config);
 <script>
     $('#notificationToast').toast('show');
 </script>
-
 <script>
-    $(document).ready( () => {
+    let busyDates = [];
+    $(document).ready(function(){
+        $.ajax({
+            url: '/queries/patient/getBusyTimes.php',
+            method: 'POST',
+            data: {
+                'record_id_service': '<?php echo $examination_service->data['id']; ?>'
+            },
+            async: false,
+            dataType: 'json',
+            success: function(data) {
+                busyDates = data;
+            },
+            // error: function() {
+            //     alert('an error occurred while getting busy times!');
+            // }
+        });
+    // });
+    // $(document).ready( () => {
         const timeMap = {
             <?php for($i = 0; $i < $days_num; $i++) {?>
             '<?php echo date("d.m", time() + 86400 * $i)." ".$weeks[date("D", time() + 86400 * ($i))]; ?> ' : [
@@ -276,10 +294,20 @@ $service_medpers_examination = utils_call_api($url, $config);
 
                 //вставляем столбец на страницу
                 timeTable.append(row);
+                let busyTimes = [];
+                Object.keys(busyDates).forEach(element => {
+                    if (key.indexOf(element) !== -1) {
+                        busyTimes = busyDates[element];
+                    }
+                });
 
                 timeMap[key].forEach(element => {
                     let ceil = document.createElement('div');
                     ceil.classList.add('card-body__ceil');
+
+                    if (busyTimes.includes(element.time)) {
+                        element.flag = 'busy';
+                    }
 
                     if(element.flag && element.flag != ''){
                         ceil.classList.add(element.flag);
@@ -297,7 +325,7 @@ $service_medpers_examination = utils_call_api($url, $config);
 
 
         $(".card-body__ceil").click(function(){
-            $('input[name="record_time"]').val($(this).text());
+            $('input[name="record_time"]').val($(this).siblings(".head").text() + " " +$(this).text());
             $('input[name="record_id_service"]').val('<?php echo $examination_service->data['id']; ?>');
 
             $('#span_service_name').text('<?php echo $examination_service->data['name']; ?>');
@@ -307,6 +335,26 @@ $service_medpers_examination = utils_call_api($url, $config);
             $('#span_service_cost').text('<?php echo $examination_service->data['cost']; ?>' + "₽");
             $('#openModalRecordConfirm').modal('show');
         });
+    });
+</script>
+<script>
+    $("#queryRecordOnServiceConfirm").submit(function () {
+        $.ajax({
+            url: "/queries/patient/queryRecordOnServiceConfirm.php",
+            method: "POST",
+            data: $(this).serialize(),
+            success: function () {
+                $("#alertSuccessRecordOnServiceConfirm").removeAttr("hidden");
+                $("#queryRecordOnServiceConfirm").prev().attr("hidden", "hidden");
+                $("#queryRecordOnServiceConfirm").parent().next().attr("hidden", "hidden");
+                $("#queryRecordOnServiceConfirm").attr("hidden", "hidden");
+                setTimeout(function(){ location.reload()}, 1100);
+            },
+            error: function () {
+
+            }
+        });
+        return false;
     });
 </script>
 </html>

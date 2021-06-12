@@ -214,7 +214,8 @@ $service_medpers_procedure = utils_call_api($url, $config);
                 <form id="queryRecordOnServiceConfirm">
                     <input type="hidden" name="record_time">
                     <input type="hidden" name="record_id_service">
-                    <input type="hidden" value="<?php echo $patient_data->data['id'];?>" name="record_id_patient">
+                    <input type="hidden" name="record_service_type" value="procedure">
+<!--                    <input type="hidden" value="--><?php //echo $patient_data->data['id'];?><!--" name="record_id_patient"> -->
                     <div class="custom-checkbox custom-control">
                         <input class="custom-control-input" id="record_confirm" name="record_confirm" type="checkbox" required>
                         <label class="custom-control-label text-muted" for="record_confirm" style="text-decoration-line: none">Соглашаюсь с правилом и даю согласие на запись</label>
@@ -258,9 +259,26 @@ $service_medpers_procedure = utils_call_api($url, $config);
     $('#notificationToast').toast('show');
 </script>
 <script>
-
-
-    $(document).ready( () => {
+    let busyDates = [];
+    $(document).ready(function(){
+        $.ajax({
+            url: '/queries/patient/getBusyTimes.php',
+            method: 'POST',
+            data: {
+                'record_id_service': '<?php echo $procedure_service->data['id']; ?>'
+            },
+            async: false,
+            dataType: 'json',
+            success: function(data) {
+                busyDates = data;
+            },
+            // error: function() {
+            //     alert('an error occurred while getting busy times!');
+            // }
+        });
+    // });
+    //
+    // $(document).ready( () => {
         const timeMap = {
             <?php for($i = 0; $i < $days_num; $i++) {?>
             '<?php echo date("d.m", time() + 86400 * $i)." ".$weeks[date("D", time() + 86400 * ($i))]; ?> ' : [
@@ -297,9 +315,20 @@ $service_medpers_procedure = utils_call_api($url, $config);
                 //вставляем столбец на страницу
                 timeTable.append(row);
 
+                let busyTimes = [];
+                Object.keys(busyDates).forEach(element => {
+                    if (key.indexOf(element) !== -1) {
+                        busyTimes = busyDates[element];
+                    }
+                });
+
                 timeMap[key].forEach(element => {
                     let ceil = document.createElement('div');
                     ceil.classList.add('card-body__ceil');
+
+                    if (busyTimes.includes(element.time)) {
+                        element.flag = 'busy';
+                    }
 
                     if(element.flag && element.flag != ''){
                         ceil.classList.add(element.flag);
@@ -317,7 +346,7 @@ $service_medpers_procedure = utils_call_api($url, $config);
 
 
         $(".card-body__ceil").click(function(){
-            $('input[name="record_time"]').val($(this).text());
+            $('input[name="record_time"]').val($(this).siblings(".head").text() + " " +$(this).text());
             $('input[name="record_id_service"]').val('<?php echo $procedure_service->data['id']; ?>');
 
             $('#span_service_name').text('<?php echo $procedure_service->data['name']; ?>');
@@ -327,6 +356,26 @@ $service_medpers_procedure = utils_call_api($url, $config);
             $('#span_service_cost').text('<?php echo $procedure_service->data['cost']; ?>' + "₽");
             $('#openModalRecordConfirm').modal('show');
         });
+    });
+</script>
+<script>
+    $("#queryRecordOnServiceConfirm").submit(function () {
+        $.ajax({
+            url: "/queries/patient/queryRecordOnServiceConfirm.php",
+            method: "POST",
+            data: $(this).serialize(),
+            success: function () {
+                $("#alertSuccessRecordOnServiceConfirm").removeAttr("hidden");
+                $("#queryRecordOnServiceConfirm").prev().attr("hidden", "hidden");
+                $("#queryRecordOnServiceConfirm").parent().next().attr("hidden", "hidden");
+                $("#queryRecordOnServiceConfirm").attr("hidden", "hidden");
+                setTimeout(function(){ location.reload()}, 1100);
+            },
+            error: function () {
+
+            }
+        });
+        return false;
     });
 </script>
 </html>

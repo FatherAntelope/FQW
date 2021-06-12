@@ -250,7 +250,9 @@ $min_cost = min(array_column($services, 'cost'));
                 <form id="queryRecordOnServiceConfirm">
                     <input type="hidden" name="record_time">
                     <input type="hidden" name="record_id_service">
+                    <input type="hidden" name="record_service_type" value="doctor">
                     <input type="hidden" value="<?php echo $doctor->data['id'];?>" name="record_id_doctor">
+<!--                    <input type="hidden" value="--><?php //echo $patient_data->data['id'];?><!--" name="record_id_patient">-->
                     <div class="custom-checkbox custom-control">
                         <input class="custom-control-input" id="record_confirm" name="record_confirm" type="checkbox" required>
                         <label class="custom-control-label text-muted" for="record_confirm" style="text-decoration-line: none">Соглашаюсь с правилом и даю согласие на запись</label>
@@ -273,8 +275,27 @@ $min_cost = min(array_column($services, 'cost'));
     $('#notificationToast').toast('show');
     $('#chosen_select_specialization').chosen();
 </script>
-<script>
 
+
+<script>
+    let busyDates = [];
+    $(document).ready(function(){
+        $.ajax({
+            url: '/queries/patient/getBusyTimes.php',
+            method: 'POST',
+            data: {
+                'record_id_service': ($('select[name="record_select_specialization"] option:selected').val()).split(";")[0]
+            },
+            async: false,
+            dataType: 'json',
+            success: function(data) {
+                busyDates = data;
+            },
+            // error: function() {
+            //     alert('an error occurred while getting busy times!');
+            // }
+        });
+    });
     const timeMap = {
         <?php for($i = 0; $i < $days_num; $i++) {?>
         '<?php echo date("d.m", time() + 86400 * $i)." ".$weeks[date("D", time() + 86400 * ($i))]; ?> ' : [
@@ -291,7 +312,6 @@ $min_cost = min(array_column($services, 'cost'));
         <?php } ?>
     }
 
-    //$(document).ready( () => {
     $(document).on('change', '#chosen_select_specialization', function () {
         $(".card-body__row").remove();
         for(let key in timeMap){
@@ -313,10 +333,19 @@ $min_cost = min(array_column($services, 'cost'));
                 //вставляем столбец на страницу
                 timeTable.append(row);
 
+                let busyTimes = [];
+                Object.keys(busyDates).forEach(element => {
+                   if (key.indexOf(element) !== -1) {
+                       busyTimes = busyDates[element];
+                   }
+                });
+
                 timeMap[key].forEach(element => {
                     let ceil = document.createElement('div');
                     ceil.classList.add('card-body__ceil');
-
+                    if (busyTimes.includes(element.time)) {
+                        element.flag = 'busy';
+                    }
                     if(element.flag && element.flag != ''){
                         ceil.classList.add(element.flag);
                     }
