@@ -43,8 +43,16 @@ function make_indexed_array(array $collection) : array {
     return $indexed_collection;
 }
 
+function iso_date_sub_hour(string $iso_date_string, int $hours) : string {
+    $date = new DateTime($iso_date_string);
+    $date->sub(new DateInterval('PT'.$hours.'H'));
+    return $date->format('Y-m-d') . 'T' . $date->format('H:i:s') . 'Z';
+}
+
 $date_start = explode('+', $_POST['start'])[0];
 $date_end = explode('+', $_POST['end'])[0];
+
+$time_zone = explode(':', explode('+', $_POST['start'])[1])[0];
 
 $url_filter .= '&date_start__gte=' . $date_start;
 $url_filter .= '&date_end__lte=' . $date_end;
@@ -104,9 +112,9 @@ for ($i = 0; $i < count($records->data); $i++) {
     $record = $indexed_records[$records->data[$i]['id']];
     $event['id'] = $records->data[$i]['id'];
     $event['title'] = $record['name'];
-    $event['start'] = $record['date_start'];
-    $event['end'] = $record['date_end'];
-    $event['date_of_creation'] = $record['date_of_creation'];
+    $event['start'] = iso_date_sub_hour($record['date_start'], intval($time_zone));
+    $event['end'] = iso_date_sub_hour($record['date_end'], intval($time_zone));
+    $event['date_of_creation'] = iso_date_sub_hour($record['date_of_creation'], intval($time_zone));
     $event['editable'] = $record['editable'];
     $event['description'] = $record['description'];
     $event['service_type'] = $service_type;
