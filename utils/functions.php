@@ -67,6 +67,14 @@ function bad_request() {
 }
 
 /**
+ * Отправляет заголовок со статусом 404 и закрывает подключение
+ */
+function not_found() {
+    header('HTTP/1.0 404 Not Found');
+    die();
+}
+
+/**
  * Формирует и возвращает код роли пользователя
  * @param $user_role string роль пользователя
  * @return int код роли пользователя

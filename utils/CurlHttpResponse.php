@@ -6,7 +6,7 @@
  */
 class CurlHttpResponse {
 
-    /** @var $data тело ответа */
+    /** @var array $data ответа */
     public $data;
     /** @var int $status_code код состояния */
     public $status_code;
@@ -21,13 +21,13 @@ class CurlHttpResponse {
  * Отправляет запрос во данному адресу
  * @author https://github.com/akmubi
  * @param string $url адрес, куда отправляется запрос
- * @param $config - конфигурация запроса. Включает в себя такие настройки, как:
+ * @param array|bool $config - конфигурация запроса. Включает в себя такие настройки, как:
  *  + метод (GET, POST, PUT, PATCH, DELETE)
  *  + токен аутентификации (Bearer Token)
  *  + данные (тело) запроса
  * @return CurlHttpResponse полученный ответ
  */
-function utils_call_api($url, $config = false): CurlHttpResponse {
+function utils_call_api(string $url, $config = false): CurlHttpResponse {
     // параметры по умолчанию
     $content_type = [];
     $headers = [];
@@ -127,4 +127,3 @@ function utils_call_api($url, $config = false): CurlHttpResponse {
     curl_close($curl);
     return new CurlHttpResponse($result, $status_code);
 }
-?>

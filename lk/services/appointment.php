@@ -157,12 +157,12 @@ $events = utils_call_api($url, $config);
                             /** Потом придумать, что делать с этим велосипедом, а пока работает **/
                             foreach ($doctors->data as $doctor) {
                                 // Достает все услуги текущего врача
-                                $url =  protocol . '://' . domain_name_api . '/api/med/medics/'.$doctor['id'].'/servicemedper';
+                                $url =  protocol . '://' . domain_name_api . '/api/med/medics/'.$doctor['id'].'/servicemedper?service_type=Speciality';
                                 $service_medpersons_speciality = utils_call_api($url, $config);
 
                                 // Проверяет, является ли первая связанная услуга медперсоны типа "Специальность"
                                 // Если нет, то он не врач, а значит пропускаем вывод
-                                if ($service_medpersons_speciality->data[0]['type'] !== "Specialty")
+                                if (count($service_medpersons_speciality->data) === 0)
                                     continue;
 
                                 // Достает основные данные врача
@@ -171,7 +171,7 @@ $events = utils_call_api($url, $config);
                             ?>
                             <tr>
                                 <td class="text-muted" data-label="Врач:">
-                                    <img src="<?php echo getUrlUserPhoto($doctor_user->data['user']['photo']); ?>" height="30" class="rounded-circle mr-1" style="height: 25px; width: 25px; object-fit: cover">
+                                    <img src="<?php echo getUrlUserPhoto($doctor_user->data['user']['photo']); ?> " alt="Фотография пользователя" height="30" class="rounded-circle mr-1" style="height: 25px; width: 25px; object-fit: cover">
                                     <?php echo getItitialsFullName($doctor_user->data['user']['surname'], $doctor_user->data['user']['name'], $doctor_user->data['user']['patronymic']); ?>
                                 </td>
                                 <td class="text-muted" data-label="Спец.-ть:">

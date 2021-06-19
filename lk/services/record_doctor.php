@@ -59,13 +59,13 @@ $min_cost = min(array_column($services, 'cost'));
     <script defer src="/js/all.js"></script>
     <title><?php echo web_name_header; ?></title>
 </head>
-<style>
-    @media (max-width: 992px) {
-        #cost {
-            display: none;
-        }
-    }
-</style>
+<!--<style>-->
+<!--    @media (max-width: 992px) {-->
+<!--        #cost {-->
+<!--            display: none;-->
+<!--        }-->
+<!--    }-->
+<!--</style>-->
 <body>
 <!--Панель навигации по модулям пользователя-->
 <?php require $_SERVER['DOCUMENT_ROOT']."/header.php"; ?>
@@ -279,23 +279,6 @@ $min_cost = min(array_column($services, 'cost'));
 
 <script>
     let busyDates = [];
-    $(document).ready(function(){
-        $.ajax({
-            url: '/queries/patient/getBusyTimes.php',
-            method: 'POST',
-            data: {
-                'record_id_service': ($('select[name="record_select_specialization"] option:selected').val()).split(";")[0]
-            },
-            async: false,
-            dataType: 'json',
-            success: function(data) {
-                busyDates = data;
-            },
-            // error: function() {
-            //     alert('an error occurred while getting busy times!');
-            // }
-        });
-    });
     const timeMap = {
         <?php for($i = 0; $i < $days_num; $i++) {?>
         '<?php echo date("d.m", time() + 86400 * $i)." ".$weeks[date("D", time() + 86400 * ($i))]; ?> ' : [
@@ -313,25 +296,40 @@ $min_cost = min(array_column($services, 'cost'));
     }
 
     $(document).on('change', '#chosen_select_specialization', function () {
+        $.ajax({
+            url: '/queries/patient/getBusyTimes.php',
+            method: 'POST',
+            data: {
+                'record_id_service': ($('select[name="record_select_specialization"] option:selected').val()).split(";")[0]
+            },
+            async: false,
+            dataType: 'json',
+            success: function(data) {
+                busyDates = data;
+            },
+            // error: function() {
+            //     alert('an error occurred while getting busy times!');
+            // }
+        });
         $(".card-body__row").remove();
         for(let key in timeMap){
             const timeTable = $('#card-body__table  ');
             if(timeMap.hasOwnProperty(key)){
                 //создаем элемент столбца
-                let row = document.createElement('div');
-                row.classList.add('card-body__row');
+                let column = document.createElement('div');
+                column.classList.add('card-body__row');
 
                 //создаем элемент главной ячейки
-                let ceilHead = document.createElement('div');
-                ceilHead.classList.add('card-body__ceil');
-                ceilHead.classList.add('head');
-                ceilHead.innerHTML = key;
+                let column_head = document.createElement('div');
+                column_head.classList.add('card-body__ceil');
+                column_head.classList.add('head');
+                column_head.innerHTML = key;
 
                 //вставляем ячейку в столбец
-                row.append(ceilHead);
+                column.append(column_head);
 
                 //вставляем столбец на страницу
-                timeTable.append(row);
+                timeTable.append(column);
 
                 let busyTimes = [];
                 Object.keys(busyDates).forEach(element => {
@@ -341,42 +339,42 @@ $min_cost = min(array_column($services, 'cost'));
                 });
 
                 timeMap[key].forEach(element => {
-                    let ceil = document.createElement('div');
-                    ceil.classList.add('card-body__ceil');
+                    let cell = document.createElement('div');
+                    cell.classList.add('card-body__ceil');
                     if (busyTimes.includes(element.time)) {
-                        element.flag = 'busy';
+                        cell.classList.add('busy');
+                    } else if(element.flag && element.flag !== ''){
+                        cell.classList.add(element.flag);
                     }
-                    if(element.flag && element.flag != ''){
-                        ceil.classList.add(element.flag);
+                    if(element.time && element.time !== ''){
+                        cell.innerHTML = element.time;
                     }
-                    if(element.time && element.time != ''){
-                        ceil.innerHTML = element.time;
+                    if(element.id && element.id !== ''){
+                        cell.id = element.id;
                     }
-                    if(element.id && element.id != ''){
-                        ceil.id = element.id;
-                    }
-                    row.append(ceil);
+                    column.append(cell);
                 });
             }
         }
+        $(".card-body__ceil").on('click', function(){
+            let specialization = $('select[name="record_select_specialization"] option:selected');
+            let datetime = $(this).siblings(".head").text() + " " + $(this).text();
 
+            $('input[name="record_time"]').val(datetime);
+            $('input[name="record_id_service"]').val(specialization.val().split(";")[0]);
 
-        $(".card-body__ceil").click(function(){
-            $('input[name="record_time"]').val($(this).siblings(".head").text() + " " + $(this).text());
-            $('input[name="record_id_service"]').val(($('select[name="record_select_specialization"] option:selected').val()).split(";")[0]);
-
-            $('#span_service_name').text($('select[name="record_select_specialization"] option:selected').text());
+            $('#span_service_name').text(specialization.text());
             $('#span_service_doctor').text('<?php echo $doctor_user->data['user']['surname']." ".$doctor_user->data['user']['name']." ". $doctor_user->data['user']['patronymic']; ?>');
             $('#span_service_location').text('<?php echo $doctor->data['location']; ?>');
-            $('#span_service_datetime').text($(this).siblings(".head").text() + " " +$(this).text());
-            $('#span_service_cost').text(($('select[name="record_select_specialization"] option:selected').val()).split(";")[1] + "₽");
+            $('#span_service_datetime').text(datetime);
+            $('#span_service_cost').text((specialization.val()).split(";")[1] + "₽");
             $('#openModalRecordConfirm').modal('show');
         });
     });
 
 </script>
 <script>
-    $("#queryRecordOnServiceConfirm").submit(function () {
+    $("#queryRecordOnServiceConfirm").on('submit', function () {
         $.ajax({
             url: "/queries/patient/queryRecordOnServiceConfirm.php",
             method: "POST",

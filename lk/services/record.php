@@ -22,7 +22,7 @@ if ($_GET['type'] == 'doctor' && isset($_GET['id']))
     require $_SERVER['DOCUMENT_ROOT']."/lk/services/record_doctor.php";
 elseif ($_GET['type'] == 'procedure')
     require $_SERVER['DOCUMENT_ROOT']."/lk/services/record_procedure.php";
-elseif ($_GET['type'] == 'examination')
+elseif ($_GET['type'] == 'survey')
     require $_SERVER['DOCUMENT_ROOT']."/lk/services/record_examination.php";
 elseif ($_GET['type'] == 'event')
     require $_SERVER['DOCUMENT_ROOT']."/lk/services/record_event.php";

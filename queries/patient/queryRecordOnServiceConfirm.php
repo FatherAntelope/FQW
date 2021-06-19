@@ -112,22 +112,44 @@ if ($service_record->status_code !== 201) {
 
 switch ($service_type) {
     case 'doctor': {
-        // необходим id врача
-        $doctor_id = $_POST['record_id_doctor'];
-
-        // Создание запись-услуги-медперсоны
-        $url = api_point('/organizer/medpersona_service_records');
-        $config = [
-            'method' => 'POST',
-            'token' => $token,
-            'data' => [
-                'record_service' => $service_record->data['id'],
-                'medpersona' => $doctor_id,
-            ],
-        ];
-        $medpersona_service_record = utils_call_api($url, $config);
-        if ($medpersona_service_record->status_code !== 201) {
+        // сначала нужно убедиться, что данная услуга является
+        // не процедурой, не мероприятием и не обследованием
+        // Это можно сделать с помощью фильтра услуг
+        // (оставить только специальности). Если среди них не будет нашей услуги, \
+        // значит для нее мы не создаем связку запись-услуга-медперсонал
+        $url = api_point('/api/med/service?service_type=Speciality');
+        $specialities = utils_call_api($url, ['token' => $token]);
+        if ($specialities->status_code !== 200) {
             bad_request();
+        }
+
+        $need_creation = false;
+        for ($i = 0; $i < count($specialities->data); $i++) {
+            $speciality = $specialities->data[$i];
+            if ($speciality['id'] == $service_id) {
+                $need_creation = true;
+                break;
+            }
+        }
+
+        if ($need_creation) {
+            // необходим id врача
+            $doctor_id = $_POST['record_id_doctor'];
+
+            // Создание запись-услуги-медперсоны
+            $url = api_point('/organizer/medpersona_service_records');
+            $config = [
+                'method' => 'POST',
+                'token' => $token,
+                'data' => [
+                    'record_service' => $service_record->data['id'],
+                    'medpersona' => $doctor_id,
+                ],
+            ];
+            $medpersona_service_record = utils_call_api($url, $config);
+            if ($medpersona_service_record->status_code !== 201) {
+                bad_request();
+            }
         }
         break;
     }
