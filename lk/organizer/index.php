@@ -54,6 +54,16 @@ $whose_user = 2;
             background-color: #f7f7f7;
             border: 1px solid #f7f7f7;
         }
+
+        .calendar-spinner {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 200px;
+            left: 0;
+            opacity: 0.7;
+            z-index: 99;
+        }
     </style>
 </head>
 <body>
@@ -76,7 +86,7 @@ $whose_user = 2;
                     <div class="card-header">Календарь</div>
                     <div class="card-body">
                         <!-- Значок загрузки календаря -->
-                        <div id="calendar_spinner">
+                        <div class="calendar-spinner" id="calendar_spinner">
                             <div class="d-flex justify-content-center">
                                 <div class="spinner-border text-info m-5" style="width: 10rem; height: 10rem;" role="status"></div>
                             </div>
@@ -665,6 +675,14 @@ $whose_user = 2;
         return time + ' ' + week + ' ' + date;
     }
 
+    function sleep(milliseconds) {
+        const date = Date.now();
+        let currentDate = null;
+        do {
+            currentDate = Date.now();
+        } while (currentDate - date < milliseconds);
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
         const calendarEl = document.getElementById('calendar');
         // конфигурация календаря
@@ -696,12 +714,19 @@ $whose_user = 2;
                 week: 'short',
             },
             loading: function (isLoading) {
+                let calendar = $('#calendar_content');
+                let spinner = $('#calendar_spinner');
+
                 if (isLoading) {
-                    $("#calendar_content").css({"visibility": "hidden"});
-                    $("#calendar_spinner").show();
+                    if (calendar.is(':visible')) {
+                        // calendar.fadeOut(200);
+                        calendar.css('visibility', 'hidden');
+                        spinner.fadeIn(200);
+                    }
                 } else {
-                    $("#calendar_spinner").hide();
-                    $("#calendar_content").css({"visibility": "visible"});
+                    spinner.fadeOut(200);
+                    calendar.css('visibility', 'visible');
+                    // calendar.fadeIn(200);
                 }
             },
             eventClick: function (info) {
