@@ -358,7 +358,7 @@ $events = utils_call_api($url, $config);
                                 <td class="text-muted" data-label="Стоимость, р.:">
                                     <?php echo $service_examination->data['cost']; ?>
                                 </td>
-                                <td><a href="/lk/services/record.php?type=examination&id=<?php echo $examination['id']; ?>" type="button" class="btn btn-sm btn-warning btn-block text-muted" style="background-color: var(--yellow-color)">Запись</a></td>
+                                <td><a href="/lk/services/record.php?type=survey&id=<?php echo $examination['id']; ?>" type="button" class="btn btn-sm btn-warning btn-block text-muted" style="background-color: var(--yellow-color)">Запись</a></td>
                             </tr>
                             <?php } ?>
                             </tbody>
