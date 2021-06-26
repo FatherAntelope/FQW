@@ -56,63 +56,64 @@ function get_doctors_name(int $service_id, string $token) : array {
 $service_type = $_POST['service_type'];
 $service_id = $_POST['service_id'];
 
-$url = api_point('/api/med/service/'.$service_id.'/');
+function get_service_detail(string $service_type, int $service_id, string $token) : array {
+    $url = api_point('/api/med/service/'.$service_id.'/');
 
-$json_response = json_encode([]);
-switch ($service_type) {
-    case 'doctor': {
-        // для услуги специалиста достается специализация и его ФИО
-        $doctor_id = $_POST['doctor_id'];
-        $url = api_point('/api/med/medics/' . $doctor_id);
-        $doctor_info = utils_call_api($url, ['token' => $token]);
-        if ($doctor_info->status_code === 404) {
-            not_found();
-        } elseif ($doctor_info->status_code !== 200) {
-            bad_request();
-        }
-        $response['id'] = $doctor_id;
-        $response['specialization'] = $doctor_info->data['specialization'];
+    $response = [];
+    switch ($service_type) {
+        case 'doctor': {
+            // для услуги специалиста достается специализация и его ФИО
+            $doctor_id = $_POST['doctor_id'];
+            $url = api_point('/api/med/medics/' . $doctor_id);
+            $doctor_info = utils_call_api($url, ['token' => $token]);
+            if ($doctor_info->status_code === 404) {
+                not_found();
+            } elseif ($doctor_info->status_code !== 200) {
+                bad_request();
+            }
+            $response['id'] = $doctor_id;
+            $response['specialization'] = $doctor_info->data['specialization'];
 
-        $url = api_point('/api/med/users/' . $doctor_info->data['user']);
-        $user_info = utils_call_api($url, ['token' => $token]);
-        if ($user_info->status_code !== 200) {
-            bad_request();
-        }
-        $response['doctor']['name'] = $user_info->data['user']['name'];
-        $response['doctor']['surname'] = $user_info->data['user']['surname'];
-        $response['doctor']['patronymic'] = $user_info->data['user']['patronymic'];
+            $url = api_point('/api/med/users/' . $doctor_info->data['user']);
+            $user_info = utils_call_api($url, ['token' => $token]);
+            if ($user_info->status_code !== 200) {
+                bad_request();
+            }
+            $response['doctor']['name'] = $user_info->data['user']['name'];
+            $response['doctor']['surname'] = $user_info->data['user']['surname'];
+            $response['doctor']['patronymic'] = $user_info->data['user']['patronymic'];
 
-        $json_response = json_encode($response);
-        break;
-    }
-    case 'procedure': {
-        // специфичные поля для процедуры
-    }
-    case 'survey':
-    {
-        // достаются ФИО специалистов, предоставляющих данную услугу
-        $response = get_doctors_name($service_id, $token);
-        if ($response['status_code'] === 404) {
-            not_found();
-        } elseif ($response['status_code'] !== 200) {
-            bad_request();
+            break;
+        }
+        case 'procedure': {
+            // специфичные поля для процедуры
+        }
+        case 'survey':
+        {
+            // достаются ФИО специалистов, предоставляющих данную услугу
+            $response = get_doctors_name($service_id, $token);
+            if ($response['status_code'] === 404) {
+                not_found();
+            } elseif ($response['status_code'] !== 200) {
+                bad_request();
+            }
+        }
+        case 'event': {
+            // общее для процедуры, обследования и мероприятия данные
+            $url .= $service_type;
+            $service = utils_call_api($url, ['token' => $token]);
+            if ($service->status_code === 404) {
+                not_found();
+            } elseif ($service->status_code !== 200) {
+                bad_request();
+            }
+            $response['data']['id'] = $service->data['id'];
+            $response['data']['location'] = $service->data['placement'];
+            break;
         }
     }
-    case 'event': {
-        // общее для процедуры, обследования и мероприятия данные
-        $url .= $service_type;
-        $service = utils_call_api($url, ['token' => $token]);
-        if ($service->status_code === 404) {
-            not_found();
-        } elseif ($service->status_code !== 200) {
-            bad_request();
-        }
-        $response['data']['id'] = $service->data['id'];
-        $response['data']['location'] = $service->data['placement'];
-        $json_response = json_encode($response['data']);
-        break;
-    }
+    return $response;
 }
 
-echo $json_response;
+echo json_encode(get_service_detail($service_type, $service_id, $token));
 

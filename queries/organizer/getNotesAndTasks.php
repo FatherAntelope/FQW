@@ -11,18 +11,26 @@ require $_SERVER['DOCUMENT_ROOT'] . "/utils/CurlHttpResponse.php";
 require $_SERVER['DOCUMENT_ROOT'] . "/utils/functions.php";
 require $_SERVER['DOCUMENT_ROOT'] . "/utils/variables.php";
 
+$url_user = api_point('/api/med/user');
+$user = utils_call_api($url_user, ['token' => $token]);
+if ($user->status_code !== 200) {
+    bad_request();
+}
+
 $url = api_point('/organizer/notes');
 $notes = utils_call_api($url, ['token' => $token]);
 if ($notes->status_code !== 200) {
     bad_request();
 }
-$note_count = count($notes->data);
 
 $indexed_notes = [];
-
 // для каждой заметки получаем его задачи
-for ($i = 0; $i < $note_count; $i++) {
+for ($i = 0; $i < count($notes->data); $i++) {
     $note = $notes->data[$i];
+    // если заметка не наша, то проходим мимо
+    if ($note['user'] !== $user->data['user']['id']) {
+        continue;
+    }
     $url = api_point('/organizer/notes/' . $note['id'] . '/tasks');
     $tasks = utils_call_api($url, ['token' => $token]);
 
