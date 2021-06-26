@@ -11,6 +11,11 @@ require $_SERVER['DOCUMENT_ROOT'] . "/utils/CurlHttpResponse.php";
 require $_SERVER['DOCUMENT_ROOT'] . "/utils/functions.php";
 require $_SERVER['DOCUMENT_ROOT'] . "/utils/variables.php";
 
+
+$url = api_point('/organizer/records');
+$response = utils_call_api($url, ['token' => $token]);
+print_r($response->data);
+
 // достаём всех пациентов, если id пациента не был предоставлен
 if (isset($_POST['patient_id'])) {
     $patient_id = $_POST['patient_id'];
@@ -39,18 +44,13 @@ if (isset($_POST['patient_id'])) {
         }
     }
 
-    if ($patient_id === -1) {
-        bad_request();
-    }
+//    if ($patient_id === -1) {
+//        bad_request();
+//    }
 }
 
 // только предопределенные типы услуг
-$service_type = '';
-if (isset($_POST['service_type'])) {
-    $service_type = $_POST['service_type'];
-} else {
-    bad_request();
-}
+$service_type = $_POST['service_type'] ?? '';
 
 // нужно для фильтрации услуг, так как в таблице с записями
 // отсутствует тип услуги. Приходится использовать фильтрацию,
@@ -70,8 +70,6 @@ switch ($service_type) {
     case 'event':
         $url_filter = '?service_type=Event';
         break;
-    default:
-        bad_request();
 }
 
 /**
@@ -115,31 +113,34 @@ function iso_date_add_hour(string $iso_date_string, int $hours) : string {
     return $date->format('Y-m-d') . 'T' . $date->format('H:i:s') . 'Z';
 }
 
+
 // в зависимости от часового пояса, клиент может отправить дату
 // с знаком '+' или '-', означающей добавление или вычитание последующего времени
 $separator = '';
-if (strpos($_POST['start'], '+') !== false and strpos($_POST['end'], '+') !== false) {
-    $separator = '+';
-} elseif (strpos($_POST['start'], '-') !== false and strpos($_POST['end'], '-') !== false) {
-    $separator = '-';
+if (isset($_POST['start']) && isset($_POST['end'])) {
+    if (strpos($_POST['start'], '+') !== false and strpos($_POST['end'], '+') !== false) {
+        $separator = '+';
+    } elseif (strpos($_POST['start'], '-') !== false and strpos($_POST['end'], '-') !== false) {
+        $separator = '-';
+    }
+
+    // по последующему времени определяем часовой пояс, чтобы
+    // при отправке данных обратно клиенту его учитывать
+    if ($separator !== '') {
+        $date_start = explode($separator, $_POST['start'])[0];
+        $date_end = explode($separator, $_POST['end'])[0];
+
+        $time_zone = explode(':', explode($separator, $_POST['start'])[1])[0];
+    } else {
+        $date_start = $_POST['start'];
+        $date_end = $_POST['end'];
+        $time_zone = 0;
+    }
+
+    // выборка записей только из конкретно заданного интервала
+    $url_filter .= '&date_start__gte=' . $date_start;
+    $url_filter .= '&date_end__lte=' . $date_end;
 }
-
-// по последующему времени определяем часовой пояс, чтобы
-// при отправке данных обратно клиенту его учитывать
-if ($separator !== '') {
-    $date_start = explode($separator, $_POST['start'])[0];
-    $date_end = explode($separator, $_POST['end'])[0];
-
-    $time_zone = explode(':', explode($separator, $_POST['start'])[1])[0];
-} else {
-    $date_start = $_POST['start'];
-    $date_end = $_POST['end'];
-    $time_zone = 0;
-}
-
-// выборка записей только из конкретно заданного интервала
-$url_filter .= '&date_start__gte=' . $date_start;
-$url_filter .= '&date_end__lte=' . $date_end;
 
 // Запись
 $url = protocol.'://'.domain_name_api.'/organizer/records' . $url_filter;
@@ -148,16 +149,19 @@ if ($records->status_code !== 200) {
     bad_request();
 }
 
-$filtered_records = [];
-for ($i = 0; $i < count($records->data); $i++) {
-    $record = $records->data[$i];
-    if ($record['patient'] == $patient_id) {
-        $id = $record['id'];
-        unset($record['id']);
-        $filtered_records[$id] = $record;
+if ($patient_id !== '') {
+    $filtered_records = [];
+    for ($i = 0; $i < count($records->data); $i++) {
+        $record = $records->data[$i];
+        if ($record['patient'] == $patient_id) {
+            $id = $record['id'];
+            unset($record['id']);
+            $filtered_records[$id] = $record;
+        }
     }
+} else {
+    $filtered_records = make_indexed_array($records->data);
 }
-
 
 // Запись-Услуга
 $url = protocol.'://'.domain_name_api.'/organizer/service_records' . $url_filter;
@@ -187,7 +191,7 @@ for ($i = 0; $i < count($service_records->data); $i++) {
     $service_record = $service_records->data[$i];
     $record_id = $service_record['record'];
     if (array_key_exists($record_id, $filtered_records)) {
-        $indexed_records[$record_id]['service_record'] = $indexed_service_records[$service_record['id']];
+        $filtered_records[$record_id]['service_record'] = $indexed_service_records[$service_record['id']];
     }
 }
 
@@ -215,7 +219,7 @@ for ($i = 0; $i < count($records->data); $i++) {
         $event['end'] = iso_date_add_hour($record['date_end'], intval($time_zone));
         $event['date_of_creation'] = iso_date_add_hour($record['date_of_creation'], intval($time_zone));
     } else {
-        $event['start'] =$record['date_start'];
+        $event['start'] = $record['date_start'];
         $event['end'] = $record['date_end'];
         $event['date_of_creation'] = $record['date_of_creation'];
     }
