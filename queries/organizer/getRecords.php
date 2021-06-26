@@ -157,9 +157,7 @@ if ($patient_id !== '') {
     for ($i = 0; $i < count($records->data); $i++) {
         $record = $records->data[$i];
         if ($record['patient'] == $patient_id) {
-            $id = $record['id'];
-            unset($record['id']);
-            $filtered_records[$id] = $record;
+            $filtered_records[$record['id']] = $record;
         }
     }
 } else {
@@ -208,10 +206,9 @@ $indexed_services = make_indexed_array($services->data);
 
 header('Content-Type: application/json');
 $json_response = [];
-for ($i = 0; $i < count($records->data); $i++) {
+foreach ($filtered_records as $record_id => $record) {
     $event = [];
-    $record = $filtered_records[$records->data[$i]['id']];
-    $event['id'] = $records->data[$i]['id'];
+    $event['id'] = $record_id;
     $event['title'] = $record['name'];
     if ($separator === '+') {
         $event['start'] = iso_date_sub_hour($record['date_start'], intval($time_zone));
@@ -239,4 +236,4 @@ for ($i = 0; $i < count($records->data); $i++) {
     }
     $json_response[] = $event;
 }
-echo normJsonStr(json_encode($json_response));
+echo json_encode($json_response);

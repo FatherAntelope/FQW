@@ -82,7 +82,7 @@ switch ($service_type) {
         $response['doctor']['surname'] = $user_info->data['user']['surname'];
         $response['doctor']['patronymic'] = $user_info->data['user']['patronymic'];
 
-        $json_response = normJsonStr(json_encode($response));
+        $json_response = json_encode($response);
         break;
     }
     case 'procedure': {
@@ -109,7 +109,7 @@ switch ($service_type) {
         }
         $response['data']['id'] = $service->data['id'];
         $response['data']['location'] = $service->data['placement'];
-        $json_response = normJsonStr(json_encode($response['data']));
+        $json_response = json_encode($response['data']);
         break;
     }
 }
