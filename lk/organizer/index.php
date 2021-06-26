@@ -33,7 +33,7 @@ $whose_user = 2;
     <link rel="shortcut icon" href="/images/logo-mini.png" type="image/x-icon">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/style.css">
-<!--    <link rel="stylesheet" href="/css/font-awesome.css">-->
+    <link rel="stylesheet" href="/css/font-awesome.css">
 <!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">-->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -283,12 +283,12 @@ $whose_user = 2;
                             <input class="form-control title-editable" type="text" placeholder="Заголовок заметки">
                             <div class="input-group-append note-edit-apply" style="display: none">
                                 <button class="btn btn-outline-success note-edit-apply-button" type="button" id="${id}">
-                                    <i class="bi bi-check-lg"></i>
+                                    <i class="fas fa-check"></i>
                                 </button>
                             </div>
                             <div class="input-group-append note-edit-cancel" style="display: none">
                                 <button class="btn btn-outline-danger note-edit-cancel-button" type="button" id="${id}">
-                                    <i class="bi bi-x-lg"></i>
+                                    <i class="fas fa-trash"></i>
                                 </button>
                             </div>
                         </div>
@@ -301,7 +301,7 @@ $whose_user = 2;
                                 <input type="text" class="form-control task-create-input" placeholder="Новое задание" id="${id}">
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-success task-create-button" type="button" id="${id}">
-                                        <i class="bi bi-plus-lg"></i>
+                                        <i class="fas fa-plus"></i>
                                     </button>
                                 </div>
                             </div>
@@ -335,12 +335,12 @@ $whose_user = 2;
                 <input type="text" class="form-control task-content-input" id="${id}">
                 <div class="input-group-append task-edit-apply" style="display: none;">
                     <button class="btn btn-outline-success task-edit-apply-button" type="button" id="${id}">
-                        <i class="bi bi-check-lg"></i>
+                        <i class="fas fa-check"></i>
                     </button>
                 </div>
                 <div class="input-group-append task-edit-cancel" style="display: none;">
                     <button class="btn btn-outline-danger task-edit-cancel-button" type="button" id="${id}">
-                        <i class="bi bi-x-lg"></i>
+                        <i class="fas fa-trash"></i>
                     </button>
                 </div>
             </div>

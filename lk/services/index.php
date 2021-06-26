@@ -23,6 +23,47 @@ if(!$user->isUserRole("Patient"))
 // Выгружает данные пользователя
 $user_data = $user->getData();
 $whose_user = 2;
+
+$url_patient = api_point('/api/med/patients');
+$patients = utils_call_api($url_patient, ['token' => $_COOKIE['user_token']]);
+if ($patients->status_code !== 200) {
+    bad_request();
+}
+
+// достаём информацию о текущем пользователе
+$url_user = api_point('/api/med/user');
+$user = utils_call_api($url_user, ['token' => $_COOKIE['user_token']]);
+if ($user->status_code !== 200) {
+    bad_request();
+}
+
+$user_id = $user->data['user']['id'];
+$patient_id = -1;
+
+// ищем пациента с id пользователя
+for ($i = 0; $i < count($patients->data); $i++) {
+    if ($patients->data[$i]['user'] == $user_id) {
+        $patient_id = $patients->data[$i]['id'];
+        break;
+    }
+}
+if ($patient_id === -1) {
+    bad_request();
+}
+
+$url = api_point('/organizer/records');
+$records = utils_call_api($url, ['token' => $_COOKIE['user_token']]);
+if ($records->status_code !== 200) {
+    bad_request();
+}
+
+$filtered_records = [];
+for ($i = 0; $i < count($records->data); $i++) {
+    $record = $records->data[$i];
+    if ($record['patient'] == $patient_id) {
+        $filtered_records[$record['id']] = $record;
+    }
+}
 ?>
 <!--
 Страница просмотра записей на предстоящие услуги и
