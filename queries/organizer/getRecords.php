@@ -11,11 +11,6 @@ require $_SERVER['DOCUMENT_ROOT'] . "/utils/CurlHttpResponse.php";
 require $_SERVER['DOCUMENT_ROOT'] . "/utils/functions.php";
 require $_SERVER['DOCUMENT_ROOT'] . "/utils/variables.php";
 
-
-$url = api_point('/organizer/records');
-$response = utils_call_api($url, ['token' => $token]);
-print_r($response->data);
-
 // достаём всех пациентов, если id пациента не был предоставлен
 if (isset($_POST['patient_id'])) {
     $patient_id = $_POST['patient_id'];
@@ -92,12 +87,16 @@ function make_indexed_array(array $collection) : array {
  * @param string $iso_date_string строка с датой в формате ISO
  * @param int $hours количество часов, которые необходимо отнять
  * @return string строка с измененной датой в формате ISO, в которой были отняты часы
- * @throws Exception ошибка чтения даты или количества часов
  */
 function iso_date_sub_hour(string $iso_date_string, int $hours) : string {
-    $date = new DateTime($iso_date_string);
-    $date->sub(new DateInterval('PT'.$hours.'H'));
-    return $date->format('Y-m-d') . 'T' . $date->format('H:i:s') . 'Z';
+    try {
+        $date = new DateTime($iso_date_string);
+        $date->sub(new DateInterval('PT'.$hours.'H'));
+        return $date->format('Y-m-d') . 'T' . $date->format('H:i:s') . 'Z';
+
+    } catch (Exception $e) {
+        return $iso_date_string;
+    }
 }
 
 /**
@@ -108,9 +107,13 @@ function iso_date_sub_hour(string $iso_date_string, int $hours) : string {
  * @throws Exception ошибка чтения даты или количества часов
  */
 function iso_date_add_hour(string $iso_date_string, int $hours) : string {
-    $date = new DateTime($iso_date_string);
-    $date->add(new DateInterval('PT'.$hours.'H'));
-    return $date->format('Y-m-d') . 'T' . $date->format('H:i:s') . 'Z';
+    try {
+        $date = new DateTime($iso_date_string);
+        $date->add(new DateInterval('PT'.$hours.'H'));
+        return $date->format('Y-m-d') . 'T' . $date->format('H:i:s') . 'Z';
+    } catch (Exception $e) {
+        return $iso_date_string;
+    }
 }
 
 
