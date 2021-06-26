@@ -78,7 +78,6 @@ body {
     }
 
 }
-
 @media (max-width: 767px) {
     .nav-user {
         padding: 1.5rem 1.55rem 1.85rem 1.55rem !important;
@@ -108,6 +107,7 @@ body {
 
 
 }
+
 
 @media (max-width: 574px) {
     .dropdown-menu {

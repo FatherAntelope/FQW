@@ -97,7 +97,7 @@ $events = utils_call_api($url, $config);
 <!--"Хлебные крошки" для навигации по родительским страницам-->
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#" style="color: var(--dark-cyan-color)">Профиль</a></li>
+                <li class="breadcrumb-item"><a href="/lk/" style="color: var(--dark-cyan-color)">Профиль</a></li>
                 <li class="breadcrumb-item"><a href="/lk/services/" style="color: var(--dark-cyan-color)">Услуги</a></li>
                 <li class="breadcrumb-item active" aria-current="page">
                     <?php

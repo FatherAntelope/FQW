@@ -40,7 +40,7 @@ $whose_user = 2;
     <script src="//cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/js/lightslider.js"></script>
     <script defer src="/js/all.js"></script>
-    <title><? echo web_name_header; ?></title>
+    <title><?php echo web_name_header; ?></title>
 </head>
 
 <body>
@@ -71,7 +71,7 @@ $whose_user = 2;
                 <img src="/images/sanatorium-dining.jpg" class="img-fluid  rounded" alt="..." style="object-fit: cover">
             </div>
         </div>
-        <h4 class="text-muted mt-4"> Основное меню питания на 17.05.2021</h4>
+        <h4 class="text-muted mt-4"> Основное меню питания на <?php echo date("d.m.Y") ?></h4>
 <!--Список основного меню на слайдере-->
         <ul id="sliderItems" class="cs-hidden mt-3">
             <li class="item-a">

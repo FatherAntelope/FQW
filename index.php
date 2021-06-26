@@ -47,6 +47,42 @@ if(isset($_COOKIE['user_token'])) {
     * {
         scroll-behavior: smooth;
     }
+
+    .section-img {
+        background-image: url(/images/main-image.jpg);
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-attachment: fixed;
+        background-size: cover;
+        min-height: <?php if ($whose_user === 0) echo '93vh'; else echo "92vh";?>;
+        filter: brightness(40%);
+        text-align: center;
+    }
+
+    .section-header {
+        position: absolute;
+        top: 10rem;
+        text-align: center;
+    }
+    .section-header h1 {
+        font-size: 5.5rem;
+        color: var(--yellow-color);
+    }
+    .section-header h3 {
+        z-index: 100;
+    }
+
+    @media (max-width: 767px) {
+        .section-header {
+            top: 7.5rem;
+        }
+        .section-header h1 {
+            font-size: 3.5rem
+        }
+        .section-header h3 {
+            font-size: 1.5rem;
+        }
+    }
 </style>
 <body>
 <!--Панель навигации по модулям пользователя-->
@@ -54,21 +90,17 @@ if(isset($_COOKIE['user_token'])) {
 
 <!--Основной контент страницы-->
 <div class="page-content" <?php if ($whose_user === 0) echo 'style="margin-top: 3.5rem !important;"';?>>
-    <div style="
-            background-image: url(/images/main-image.jpg);
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-attachment: fixed;
-            background-size: cover;
-            min-height: <?php if ($whose_user === 0) echo '93vh'; else echo "92vh";?>;
-            filter: brightness(40%)"
-         class="text-center">
-    </div>
+    <div class="section-img"> </div>
 <!--Первая секция с изображением и заголовочным названием приложения-->
-    <div style="position: absolute; top: 10rem; text-align: center">
-        <h1 style=" font-size: 5.5rem; color: var(--yellow-color); " class="font-weight-bold">Сатурн</h1>
-        <h3 style="z-index: 100; color: white">Персонифицированная комплексная медицинская информационная система сопровождения процесса реабилитации пациентов в лечебно-профилактических санаториях или профилакториях</h3>
-        <a href="#info" class="btn btn-info btn-lg mt-3" style="background-color: var(--cyan-color)">Подробнее</a>
+    <div class="section-header">
+        <h1 class="font-weight-bold">
+            Сатурн
+        </h1>
+        <h3 class="text-white">
+            Персонифицированная комплексная медицинская информационная система сопровождения процесса реабилитации
+            пациентов в лечебно-профилактических санаториях или профилакториях
+        </h3>
+        <a href="#info" class="btn btn-info btn mt-3" style="background-color: var(--cyan-color)">Подробнее</a>
     </div>
 <!--Вторая секция с описанием возможностей пациента-->
     <div style="min-height: 100vh" class="d-flex flex-column justify-content-center" id="info">
