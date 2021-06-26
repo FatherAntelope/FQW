@@ -1,4 +1,7 @@
 <?php
+/**
+ * Запрос на возврат деталей услуги для конкретной записи
+ */
 if(!isset($_COOKIE['user_token'])) {
     header("Location: /error/403.php");
 }
@@ -8,6 +11,12 @@ require $_SERVER['DOCUMENT_ROOT'] . "/utils/CurlHttpResponse.php";
 require $_SERVER['DOCUMENT_ROOT'] . "/utils/functions.php";
 require $_SERVER['DOCUMENT_ROOT'] . "/utils/variables.php";
 
+/**
+ * Отправляет запрос на сервер для получения данных специалистов конкретной услуги
+ * @param int $service_id идентификатор услуги
+ * @param string $token токен пользователя
+ * @return array ФИО специалистов услуги в качестве данных и статус ответа
+ */
 function get_doctors_name(int $service_id, string $token) : array {
     $response = [];
     $status_code = 200;
@@ -52,6 +61,7 @@ $url = api_point('/api/med/service/'.$service_id.'/');
 $json_response = json_encode([]);
 switch ($service_type) {
     case 'doctor': {
+        // для услуги специалиста достается специализация и его ФИО
         $doctor_id = $_POST['doctor_id'];
         $url = api_point('/api/med/medics/' . $doctor_id);
         $doctor_info = utils_call_api($url, ['token' => $token]);
@@ -80,7 +90,7 @@ switch ($service_type) {
     }
     case 'survey':
     {
-        // Достаём все связки Услуга-Медперсона для данной услуги
+        // достаются ФИО специалистов, предоставляющих данную услугу
         $response = get_doctors_name($service_id, $token);
         if ($response['status_code'] === 404) {
             not_found();
@@ -89,6 +99,7 @@ switch ($service_type) {
         }
     }
     case 'event': {
+        // общее для процедуры, обследования и мероприятия данные
         $url .= $service_type;
         $service = utils_call_api($url, ['token' => $token]);
         if ($service->status_code === 404) {

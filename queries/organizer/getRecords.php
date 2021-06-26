@@ -1,4 +1,7 @@
 <?php
+/**
+ * Запрос на возврат всех записей пациента
+ */
 if(!isset($_COOKIE['user_token'])) {
     header("Location: /error/403.php");
 }
@@ -8,6 +11,40 @@ require $_SERVER['DOCUMENT_ROOT'] . "/utils/CurlHttpResponse.php";
 require $_SERVER['DOCUMENT_ROOT'] . "/utils/functions.php";
 require $_SERVER['DOCUMENT_ROOT'] . "/utils/variables.php";
 
+// достаём всех пациентов, если id пациента не был предоставлен
+if (isset($_POST['patient_id'])) {
+    $patient_id = $_POST['patient_id'];
+} else {
+    $url_patient = api_point('/api/med/patients');
+    $patients = utils_call_api($url_patient, ['token' => $token]);
+    if ($patients->status_code !== 200) {
+        bad_request();
+    }
+
+    // достаём информацию о текущем пользователе
+    $url_user = api_point('/api/med/user');
+    $user = utils_call_api($url_user, ['token' => $token]);
+    if ($user->status_code !== 200) {
+        bad_request();
+    }
+
+    $user_id = $user->data['user']['id'];
+    $patient_id = -1;
+
+    // ищем пациента с id пользователя
+    for ($i = 0; $i < count($patients->data); $i++) {
+        if ($patients->data[$i]['user'] == $user_id) {
+            $patient_id = $patients->data[$i]['id'];
+            break;
+        }
+    }
+
+    if ($patient_id === -1) {
+        bad_request();
+    }
+}
+
+// только предопределенные типы услуг
 $service_type = '';
 if (isset($_POST['service_type'])) {
     $service_type = $_POST['service_type'];
@@ -15,6 +52,10 @@ if (isset($_POST['service_type'])) {
     bad_request();
 }
 
+// нужно для фильтрации услуг, так как в таблице с записями
+// отсутствует тип услуги. Приходится использовать фильтрацию,
+// чтобы не было пересечения с другими записями и однозначной
+// идентификации типа услуги
 $url_filter = '';
 switch ($service_type) {
     case 'procedure':
@@ -33,6 +74,11 @@ switch ($service_type) {
         bad_request();
 }
 
+/**
+ * Перестраивает массив так, чтобы в качестве ключей стояли идентификаторы
+ * @param array $collection массив данных с одним из полей id, нужных для перестройки
+ * @return array перестроенный массив
+ */
 function make_indexed_array(array $collection) : array {
     $indexed_collection = [];
     for ($i = 0; $i < count($collection); $i++) {
@@ -43,17 +89,34 @@ function make_indexed_array(array $collection) : array {
     return $indexed_collection;
 }
 
+/**
+ * Отнимает часы из даты в формате ISO
+ * @param string $iso_date_string строка с датой в формате ISO
+ * @param int $hours количество часов, которые необходимо отнять
+ * @return string строка с измененной датой в формате ISO, в которой были отняты часы
+ * @throws Exception ошибка чтения даты или количества часов
+ */
 function iso_date_sub_hour(string $iso_date_string, int $hours) : string {
     $date = new DateTime($iso_date_string);
     $date->sub(new DateInterval('PT'.$hours.'H'));
     return $date->format('Y-m-d') . 'T' . $date->format('H:i:s') . 'Z';
 }
+
+/**
+ * Добавляет часы в дату в формате ISO
+ * @param string $iso_date_string строка с датой в формате ISO
+ * @param int $hours количество часов, которые необходимо прибавить
+ * @return string строка с измененной датой в формате ISO, в которой были прибавлены часы
+ * @throws Exception ошибка чтения даты или количества часов
+ */
 function iso_date_add_hour(string $iso_date_string, int $hours) : string {
     $date = new DateTime($iso_date_string);
     $date->add(new DateInterval('PT'.$hours.'H'));
     return $date->format('Y-m-d') . 'T' . $date->format('H:i:s') . 'Z';
 }
 
+// в зависимости от часового пояса, клиент может отправить дату
+// с знаком '+' или '-', означающей добавление или вычитание последующего времени
 $separator = '';
 if (strpos($_POST['start'], '+') !== false and strpos($_POST['end'], '+') !== false) {
     $separator = '+';
@@ -61,6 +124,8 @@ if (strpos($_POST['start'], '+') !== false and strpos($_POST['end'], '+') !== fa
     $separator = '-';
 }
 
+// по последующему времени определяем часовой пояс, чтобы
+// при отправке данных обратно клиенту его учитывать
 if ($separator !== '') {
     $date_start = explode($separator, $_POST['start'])[0];
     $date_end = explode($separator, $_POST['end'])[0];
@@ -72,6 +137,7 @@ if ($separator !== '') {
     $time_zone = 0;
 }
 
+// выборка записей только из конкретно заданного интервала
 $url_filter .= '&date_start__gte=' . $date_start;
 $url_filter .= '&date_end__lte=' . $date_end;
 
@@ -81,7 +147,17 @@ $records = utils_call_api($url, ['token' => $token]);
 if ($records->status_code !== 200) {
     bad_request();
 }
-$indexed_records = make_indexed_array($records->data);
+
+$filtered_records = [];
+for ($i = 0; $i < count($records->data); $i++) {
+    $record = $records->data[$i];
+    if ($record['patient'] == $patient_id) {
+        $id = $record['id'];
+        unset($record['id']);
+        $filtered_records[$id] = $record;
+    }
+}
+
 
 // Запись-Услуга
 $url = protocol.'://'.domain_name_api.'/organizer/service_records' . $url_filter;
@@ -110,7 +186,7 @@ if ($service_type === 'doctor') {
 for ($i = 0; $i < count($service_records->data); $i++) {
     $service_record = $service_records->data[$i];
     $record_id = $service_record['record'];
-    if (array_key_exists($record_id, $indexed_records)) {
+    if (array_key_exists($record_id, $filtered_records)) {
         $indexed_records[$record_id]['service_record'] = $indexed_service_records[$service_record['id']];
     }
 }
@@ -127,7 +203,7 @@ header('Content-Type: application/json');
 $json_response = [];
 for ($i = 0; $i < count($records->data); $i++) {
     $event = [];
-    $record = $indexed_records[$records->data[$i]['id']];
+    $record = $filtered_records[$records->data[$i]['id']];
     $event['id'] = $records->data[$i]['id'];
     $event['title'] = $record['name'];
     if ($separator === '+') {

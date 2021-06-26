@@ -1,4 +1,7 @@
 <?php
+/**
+ * Зарос на удаление заметки или задачи
+ */
 if(!isset($_COOKIE['user_token'])) {
     header("Location: /error/403.php");
 }

@@ -33,12 +33,12 @@ $whose_user = 2;
     <link rel="shortcut icon" href="/images/logo-mini.png" type="image/x-icon">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/organizer/style.css">
 <!--    <link rel="stylesheet" href="/css/font-awesome.css">-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 <!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">-->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+    <script src="/js/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script defer src="/js/all.js"></script>
 
@@ -46,15 +46,21 @@ $whose_user = 2;
     <script src='/js/fullcalendar/main.js'></script>
     <title>СанКонтроль</title>
     <style>
+        /*
+            чтобы курсор менял вид при
+            наведении на событие
+        */
         .fc-event{
             cursor: pointer;
         }
 
+        /* для полей ввода */
         .title-editable {
             background-color: #f7f7f7;
             border: 1px solid #f7f7f7;
         }
 
+        /* стиль значка загрузки календаря */
         .calendar-spinner {
             position: absolute;
             width: 100%;
@@ -181,9 +187,6 @@ $whose_user = 2;
 
             <!-- Тело -->
             <div id="event_modal_body" class="modal-body" style="display: none">
-                <!--                <div class="alert alert-success mt-3" role="alert" style="font-size: 12px" id="alertSuccessRecordOnServiceConfirm" hidden>-->
-                <!--                    Вы успешно записались к врачу!-->
-                <!--                </div>-->
                 <div>
                     <!-- Уникальные поля для процедуры -->
                     <div class="optional_info record_field" id="event_procedure" hidden>
@@ -237,10 +240,6 @@ $whose_user = 2;
                     <p class="text-muted record_field" id="event_cost">Стоимость услуги:
                     <span style="color: var(--cyan-color)" id="event_cost_value"></span>
                     </p>
-                    <!--                    <div class="alert alert-secondary" style="font-size: 12px">-->
-                    <!--                        Правило: <br>-->
-                    <!--                        Если не сможете посетить услугу в выбранное время, пожалуйста, отмените прием-->
-                    <!--                    </div>-->
                 </div>
                 <div class="alert alert-danger optional_info" id="event_error_message" style="font-size: 12px" hidden>
                     Что-то пошло не так. Обратитесь в службу поддержки
@@ -262,10 +261,19 @@ $whose_user = 2;
 </body>
 
 <script>
+    /*
+         Создание элемента контейнера заметки (строки) из шаблона
+         @return элемент jQuery
+     */
     function create_row_from_template() {
         return $('<div class="row note-row mt-5"></div>');
     }
 
+    /*
+        Создание элемента заметки (столбца) из шаблона
+        @param id идентификатор заметки
+        @return элемент jQuery
+     */
     function create_col_from_template(id) {
         return $(`
             <div class="note-col col-6" style="display: none" id="${id}">
@@ -305,6 +313,13 @@ $whose_user = 2;
         `);
     }
 
+    /*
+        Создание элемента задачи (группы ввода) из шаблона
+        @param status статус задачи
+        @param description описание задачи
+        @param id идентификатор задачи
+        @return элемент jQuery
+     */
     function create_task_from_template(status, description, id) {
         return $(`
             <div class="input-group mb-2 task-content" style="display: none" id="${id}">
@@ -332,7 +347,11 @@ $whose_user = 2;
         `);
     }
 
-
+    /*
+        Отправка запроса с измененными данными заметки
+        @param note_id идентфикатор заметки
+        @param title измененный заголовок заметки
+     */
     function change_note(note_id, title) {
         $.ajax({
             url: '/queries/organizer/changeNoteOrTask.php',
@@ -341,6 +360,12 @@ $whose_user = 2;
             data: {
                 note_id: note_id,
                 note_title: title
+            },
+            done: function(data) {
+
+            },
+            fail: function(jq_xhr, text_status) {
+
             },
             // success: function(data) {
             //     // add_note(data['title'], data['id']);
@@ -351,6 +376,10 @@ $whose_user = 2;
         });
     }
 
+    /*
+        Отправка запроса для удаления заметки
+        @param note_id идентфикатор заметки
+     */
     function delete_note(note_id) {
         $.ajax({
             url: '/queries/organizer/deleteNoteOrTask.php',
@@ -359,6 +388,8 @@ $whose_user = 2;
             data: {
                 note_id: note_id
             },
+            // удаление элемента заметки и его контейнера,
+            // если оно становится пустым
             success: function(data) {
                 let note_to_remove = $('#' + note_id + '.note-col');
                 let current_row = note_to_remove.parent();
@@ -374,9 +405,13 @@ $whose_user = 2;
         });
     }
 
-
-
-    function change_task(note_id, task_id, description, status) {
+    /*
+        Отправка запроса с измененным статусом задачи
+        @param note_id идентфикатор заметки задачи
+        @param task_id идентфикатор задачи
+        @param status измененный статус задачи
+     */
+    function change_task_status(note_id, task_id, status) {
         $.ajax({
             url: '/queries/organizer/changeNoteOrTask.php',
             method: 'POST',
@@ -384,21 +419,35 @@ $whose_user = 2;
             data: {
                 note_id: note_id,
                 task_id: task_id,
-                task_status: status,
-                task_description: description
+                task_status: status
             },
-            // success: function(data) {
-            //     // add_task(data['status'], data['description'], data['id'], note_id);
-            // },
-            // error: function(xhr, text, third) {
-            //     alert('error while changing note');
-            //     console.log(xhr);
-            //     console.log(text);
-            //     console.log(third);
-            // }
         });
     }
 
+    /*
+        Отправка запроса с измененным описанием задачи
+        @param note_id идентфикатор заметки задачи
+        @param task_id идентфикатор задачи
+        @param status измененное описание задачи
+     */
+    function change_task_description(note_id, task_id, description) {
+        $.ajax({
+            url: '/queries/organizer/changeNoteOrTask.php',
+            method: 'POST',
+            dataType: 'json',
+            data: {
+                note_id: note_id,
+                task_id: task_id,
+                task_description: description
+            },
+        });
+    }
+
+    /*
+        Отправка запроса для удаления адачи
+        @param note_id идентфикатор заметки задачи
+        @param task_id идентфикатор задачи
+     */
     function delete_task(note_id, task_id) {
         $.ajax({
             url: '/queries/organizer/deleteNoteOrTask.php',
@@ -408,20 +457,27 @@ $whose_user = 2;
                 note_id: note_id,
                 task_id: task_id
             },
+            // удаление элемента задачи из документа
             success: function(data) {
                 $('#'+ task_id + '.task-content').remove();
             },
-            // error: function() {
-            //     alert('error while deleting note');
-            // }
         });
     }
-
+    /*
+        Создание новой заметки из шаблона и вставка его в контейнер
+        @param row контейнер для вставки
+        @param note_id идентификатор новой заметки
+     */
     function insert_col(row, note_id) {
         let new_col = create_col_from_template(note_id);
         row.append(new_col);
     }
 
+    /*
+        Добавление новой заметки на страницу
+        @param title заголовок заметки
+        @param note_id идентификатор новой заметки
+     */
     function add_note(title, note_id) {
         let note_rows = $('.note-row');
         let row_count = note_rows.length;
@@ -449,11 +505,14 @@ $whose_user = 2;
             first_row.insertAfter($('.note-creation-row'));
             insert_col(first_row, note_id);
         }
-        $('#' + note_id + '.note-col').fadeIn(500);
-        let title_input = $('#' + note_id + '.note-col').find('.title-editable');
+        let note_col = $('#' + note_id + '.note-col');
+        note_col.fadeIn(500);
+        let title_input = note_col.find('.title-editable');
         title_input.val(title);
 
-        var old_title = title_input.val();
+        let old_title = title_input.val();
+        // появление и скрытие кнопкок применения и отмены изменения
+        // заголовка заметки при фокусировании
         title_input.focusin(function() {
             $('#' + note_id + '.note-edit-apply-button').parent().fadeIn(200);
             $('#' + note_id + '.note-edit-cancel-button').parent().fadeIn(200);
@@ -464,12 +523,15 @@ $whose_user = 2;
             $('#' + note_id + '.note-edit-cancel-button').parent().fadeOut(200);
         });
 
+        // выделение поля ввода заголовка заметки при наведении
         title_input.hover(function() {
             $(this).css('border-color', '#00AC94');
         }, function() {
             $(this).css('border-color', '#f7f7f7');
         });
 
+        // если измененный заголовок заметки - пуст, то удаляем его
+        // иначе отправляем изменный заголовок
         $('#' + note_id + '.note-edit-apply-button').on('click', function() {
             let note_title = title_input.val();
             if (note_title === '') {
@@ -478,12 +540,29 @@ $whose_user = 2;
                 change_note(note_id, note_title);
             }
         });
+        // замена заголовка заметки на старое значение при нажатии на кнопку отмены
         $('#' + note_id + '.note-edit-cancel-button').on('click', function() {
-            // change_note(note_id, note_title);
             title_input.val(old_title);
+        });
+
+
+        $('#' + note_id + '.task-create-button').on('click', function() {
+            let task_description = $('#' + note_id + '.task-create-input');
+            if (task_description.val() !== '') {
+                create_task(note_id, task_description.val());
+                task_description.val('');
+                $('#task-empty-alert').hide();
+            } else {
+                $('#task-empty-alert').show();
+                $('#task-empty-alert').delay(5000).fadeOut(1000);
+            }
         });
     }
 
+    /*
+        Отправка запроса для создания новой заметки
+        @param title заголовок новой заметки
+     */
     function create_note(title) {
         $.ajax({
             url: '/queries/organizer/addNoteOrTask.php',
@@ -492,6 +571,7 @@ $whose_user = 2;
             data: {
                 note_title: title
             },
+            // добавление новой заметки на страницу
             success: function(data) {
                 add_note(data['title'], data['id']);
             },
@@ -501,6 +581,13 @@ $whose_user = 2;
         });
     }
 
+    /*
+        Добавление новой задачи в заметке
+        @param status статус новой задачи
+        @param description описание новой задачи
+        @param task_id идентификатор новой задачи
+        @param note_id идентификатор заметки, к которому принадлежит задача
+     */
     function add_task(status, description, task_id, note_id) {
         let new_task = create_task_from_template(status, description, task_id);
         let node_col = $('#' + note_id + '.note-col');
@@ -511,15 +598,16 @@ $whose_user = 2;
         task_content.val(description);
         let task_checkbox = $('#checkbox-' + task_id + '.task-status');
 
-        var old_description = task_content.val();
-        var old_status = task_checkbox.is(':checked') ? 'Done' : 'Not done';
+        let old_description = task_content.val();
+        // var old_status = task_checkbox.is(':checked') ? 'Done' : 'Not done';
 
-        // $('#' + task_id + '.task-edit-apply-button')
+        // при переключении флажка отправляем изменения на сервер (очень плохо)
+        task_checkbox.on('click', function() {
+            let task_status = task_checkbox.is(':checked') ? 'Done' : 'Not done';
+            change_task_status(note_id, task_id, task_status);
+        });
 
-        // task_checkbox.on('click', function() {
-        //     old_status = task_checkbox.is(':checked') ? 'Done' : 'Not done';
-        // });
-
+        // такая схема, как и с заметками (см. add_note)
         task_content.focusin(function() {
             $('#' + task_id + '.task-edit-apply-button').parent().fadeIn(200);
             $('#' + task_id + '.task-edit-cancel-button').parent().fadeIn(200);;
@@ -540,21 +628,25 @@ $whose_user = 2;
 
         $('#' + task_id + '.task-edit-apply-button').on('click', function() {
             let task_description = task_content.val();
-            let task_status = task_checkbox.is(':checked') ? 'Done' : 'Not done';
             if (task_description === '') {
                 delete_task(note_id, task_id);
             } else {
-                change_task(note_id, task_id, task_description, task_status);
+                change_task_description(note_id, task_id, task_description);
             }
         });
 
         $('#' + task_id + '.task-edit-cancel-button').on('click', function() {
-            // change_note(note_id, note_title);
             task_content.val(old_description);
-            task_checkbox.attr('checked', old_status === 'Done');
+            // task_checkbox.attr('checked', old_status === 'Done');
         });
     }
 
+    /*
+        Отправка запроса для создания нового задания
+        @param note_id идентификатор заметки, к которому
+        должна принадлежать новая задача
+        @param description описание новой задачи
+     */
     function create_task(note_id, description) {
         $.ajax({
             url: '/queries/organizer/addNoteOrTask.php',
@@ -564,6 +656,7 @@ $whose_user = 2;
                 note_id: note_id,
                 task_description: description
             },
+            // добавление задачи в заметку
             success: function(data) {
                 add_task(data['status'], data['description'], data['id'], note_id);
             },
@@ -573,7 +666,7 @@ $whose_user = 2;
         });
     }
 
-
+    // отправка запроса на возврат всех заметок и задач пользователя
     $(document).ready(function() {
         $.ajax({
             url: '/queries/organizer/getNotesAndTasks.php',
@@ -586,33 +679,17 @@ $whose_user = 2;
                         add_task(task_detail['status'], task_detail['description'], task_id, note_id);
                     });
 
-                    $('#' + note_id + '.task-create-button').on('click', function() {
-                        let task_description = $('#' + note_id + '.task-create-input');
-                        if (task_description.val() !== '') {
-                            create_task(note_id, task_description.val());
-                            task_description.val('');
-                            $('#task-empty-alert').hide();
-                        } else {
-                            $('#task-empty-alert').show();
-                            $('#task-empty-alert').delay(5000).fadeOut(1000);
-                        }
-                    });
                 });
 
+                // после загрузки всех заметок и задач скрываем значок загрузки
+                // и показывам заметки с задачами
                 $('.notes-and-tasks-spinner').fadeOut(500);
                 $('.notes-and-tasks-content').delay(500).fadeIn(500);
-
-                // $('.note-title').tooltip();
-                // $('.task-content').tooltip();
-
-                // ('.task-delete-button').on('click', function() {
-                //    let task_id = $(this).attr('id');
-                //    $('#' + task_id + '.task-content').remove();
-                // );
             },
         });
     });
 
+    // создание новой заметки при нажатии на кнопку
     $('#note-create-button').on('click', function() {
         // запрос с созданием
         let note_title = $('#note-title-input');
@@ -628,6 +705,7 @@ $whose_user = 2;
 
     $('#notificationToast').toast('show');
 
+    // показ содержимого модального окна и скрытие значка загрузки
     $('#event_detail_modal').on('shown.bs.modal', function () {
         $("#event_modal_body").delay(500).fadeIn(500);
         $("#event_modal_footer").delay(500).fadeIn(500);
@@ -643,21 +721,28 @@ $whose_user = 2;
         $("#event_modal_footer").hide();
     })
 
+    // скрытие необязательных полей
     function event_hide_optional() {
         $('.optional_info').attr('hidden', true);
     }
 
+    // скрытие всех полей
     function event_hide_all() {
         $('#event_modal_footer').attr('hidden', true);
         $('.record_field').attr('hidden', true);
     }
 
+    // показ всех полей
     function event_show_all() {
         $('#event_modal_footer').attr('hidden', false);
         $('.record_field').attr('hidden', false);
     }
 
-    // преобразование строки даты в ISO формате в формат dd.mm w hh:mm
+    /*
+        Преобразование строки даты в ISO формате в формат dd.mm w hh:mm
+        @param iso_date_string строковая дата в ISO формате
+        @return строковая дата в формате dd.mm w hh:mm
+     */
     function convert_iso_date_string(iso_date_string) {
         let locale_date_string = new Date(iso_date_string).toLocaleString('ru', {
             year: 'numeric',
@@ -675,36 +760,16 @@ $whose_user = 2;
         return time + ' ' + week + ' ' + date;
     }
 
-    function sleep(milliseconds) {
-        const date = Date.now();
-        let currentDate = null;
-        do {
-            currentDate = Date.now();
-        } while (currentDate - date < milliseconds);
-    }
-
     document.addEventListener('DOMContentLoaded', function() {
         const calendarEl = document.getElementById('calendar');
         // конфигурация календаря
         const calendar = new FullCalendar.Calendar(calendarEl, {
             locale: 'ru',
-            // themeSystem:'bootstrap',
             firstDay: 1,
             navLinks: true,
-            // navLinkDayClick: function(date, jsEvent) {
-            //  console.log('day', date.toISOString());
-            //  console.log('coords', jsEvent.pageX, jsEvent.pageY);
-            // },
             contentHeight: 600,
             expandRows: true,
-            // selectable: true,
-            // editable: true,
             allDaySlot: false,
-            // businessHours: {
-            //     daysOfWeek: [1, 2, 3, 4, 5, 6],
-            //     startTime: '08:00',
-            //     endTime: '10:30',
-            // },
             eventDisplay: 'block',
             eventMinHeight: 25,
             weekNumbers: true,
@@ -713,20 +778,19 @@ $whose_user = 2;
             weekNumberFormat: {
                 week: 'short',
             },
+            // для значка загрузки
             loading: function (isLoading) {
                 let calendar = $('#calendar_content');
                 let spinner = $('#calendar_spinner');
 
                 if (isLoading) {
                     if (calendar.is(':visible')) {
-                        // calendar.fadeOut(200);
                         calendar.css('visibility', 'hidden');
                         spinner.fadeIn(200);
                     }
                 } else {
                     spinner.fadeOut(200);
                     calendar.css('visibility', 'visible');
-                    // calendar.fadeIn(200);
                 }
             },
             eventClick: function (info) {
@@ -913,7 +977,6 @@ $whose_user = 2;
                         service_type: 'procedure',
                     },
                     color: '#f80018',
-                    // textColor: '#FFFAFA'
                 },
                 // Записи на мероприятия
                 {
@@ -923,7 +986,6 @@ $whose_user = 2;
                         service_type: 'event',
                     },
                     color: '#ffa400',
-                    // textColor: '#FFFAFA'
                 },
                 // Записи на обследования
                 {
@@ -933,7 +995,6 @@ $whose_user = 2;
                         service_type: 'survey',
                     },
                     color: '#3432b3',
-                    // textColor: '#FFFAFA'
                 },
                 // Записи на специалистов
                 {
@@ -943,7 +1004,6 @@ $whose_user = 2;
                         service_type: 'doctor',
                     },
                     color: '#00AC94',
-                    // textColor: '#FFFAFA'
                 }
             ],
             eventDidMount: function (info) {
