@@ -24,15 +24,16 @@ if(!$user->isUserRole("Patient"))
 $user_data = $user->getData();
 $whose_user = 2;
 
+$token = $_COOKIE['user_token'];
 $url_patient = api_point('/api/med/patients');
-$patients = utils_call_api($url_patient, ['token' => $_COOKIE['user_token']]);
+$patients = utils_call_api($url_patient, ['token' => $token]);
 if ($patients->status_code !== 200) {
     bad_request();
 }
 
 // достаём информацию о текущем пользователе
 $url_user = api_point('/api/med/user');
-$user = utils_call_api($url_user, ['token' => $_COOKIE['user_token']]);
+$user = utils_call_api($url_user, ['token' => $token]);
 if ($user->status_code !== 200) {
     bad_request();
 }
@@ -47,12 +48,14 @@ for ($i = 0; $i < count($patients->data); $i++) {
         break;
     }
 }
+
 if ($patient_id === -1) {
     bad_request();
 }
 
+
 $url = api_point('/organizer/records');
-$records = utils_call_api($url, ['token' => $_COOKIE['user_token']]);
+$records = utils_call_api($url, ['token' => $token]);
 if ($records->status_code !== 200) {
     bad_request();
 }
@@ -64,6 +67,148 @@ for ($i = 0; $i < count($records->data); $i++) {
         $filtered_records[$record['id']] = $record;
     }
 }
+
+function get_doctors_name(int $service_id, string $token) : array {
+    $response = [];
+    $status_code = 200;
+
+    $url = api_point('/api/med/service/' . $service_id . '/servicemedper');
+    $service_doctor = utils_call_api($url, ['token' => $token]);
+    if ($service_doctor->status_code !== 200) {
+        $status_code = $service_doctor->status_code;
+    }
+    // Сохраняем идентификаторы всех докторов
+    for ($i = 0; $i < count($service_doctor->data); $i++) {
+        // Достаем идентификаторы пользователей для докторов
+        $doctor_id = $service_doctor->data[$i]['medpersona'];
+        $url = api_point('/api/med/medics/' . $doctor_id);
+        $doctor_info = utils_call_api($url, ['token' => $token]);
+        if ($doctor_info->status_code !== 200) {
+            continue;
+        }
+        $user_id = $doctor_info->data['user'];
+
+        // Достаем ФИО пользователя
+        $url = api_point('/api/med/users/' . $user_id);
+        $user_info = utils_call_api($url, ['token'=> $token]);
+        if ($user_info->status_code !== 200) {
+            continue;
+        }
+        $response['doctors'][$doctor_id]['name'] = $user_info->data['user']['name'];
+        $response['doctors'][$doctor_id]['surname'] = $user_info->data['user']['surname'];
+        $response['doctors'][$doctor_id]['patronymic'] = $user_info->data['user']['patronymic'];
+    }
+    return [
+        'data' => $response,
+        'status_code' => $status_code,
+    ];
+}
+//
+//$service_type = $_POST['service_type'];
+//$service_id = $_POST['service_id'];
+
+function get_service_detail(string $service_type, int $service_id, string $token) : array {
+$url = api_point('/api/med/service/'.$service_id.'/');
+
+$response = [];
+switch ($service_type) {
+case 'doctor': {
+// для услуги специалиста достается специализация и его ФИО
+$doctor_id = $_POST['doctor_id'];
+$url = api_point('/api/med/medics/' . $doctor_id);
+$doctor_info = utils_call_api($url, ['token' => $token]);
+if ($doctor_info->status_code === 404) {
+    not_found();
+} elseif ($doctor_info->status_code !== 200) {
+    bad_request();
+}
+$response['id'] = $doctor_id;
+$response['specialization'] = $doctor_info->data['specialization'];
+
+$url = api_point('/api/med/users/' . $doctor_info->data['user']);
+$user_info = utils_call_api($url, ['token' => $token]);
+if ($user_info->status_code !== 200) {
+    bad_request();
+}
+$response['doctor']['name'] = $user_info->data['user']['name'];
+$response['doctor']['surname'] = $user_info->data['user']['surname'];
+$response['doctor']['patronymic'] = $user_info->data['user']['patronymic'];
+
+    break;
+}
+    case 'procedure': {
+        // специфичные поля для процедуры
+    }
+    case 'survey':
+    {
+        // достаются ФИО специалистов, предоставляющих данную услугу
+        $response = get_doctors_name($service_id, $token);
+        if ($response['status_code'] === 404) {
+            not_found();
+        } elseif ($response['status_code'] !== 200) {
+            bad_request();
+        }
+    }
+    case 'event': {
+        // общее для процедуры, обследования и мероприятия данные
+        $url .= $service_type;
+        $service = utils_call_api($url, ['token' => $token]);
+        if ($service->status_code === 404) {
+            not_found();
+        } elseif ($service->status_code !== 200) {
+            bad_request();
+        }
+        $response['data']['id'] = $service->data['id'];
+        $response['data']['location'] = $service->data['placement'];
+        break;
+    }
+}
+    return $response;
+}
+
+function make_indexed_array(array $collection) : array {
+    $indexed_collection = [];
+    for ($i = 0; $i < count($collection); $i++) {
+        $id = $collection[$i]['id'];
+        unset($collection[$i]['id']);
+        $indexed_collection[$id] = $collection[$i];
+    }
+    return $indexed_collection;
+}
+
+// Запись-Услуга
+$url = api_point('/organizer/service_records');
+$service_records = utils_call_api($url, ['token' => $token]);
+if ($service_records->status_code !== 200) {
+    bad_request();
+}
+$indexed_service_records = make_indexed_array($service_records->data);
+
+// Запись-Услуга-Медперсона
+if ($service_type === 'doctor') {
+    $url = api_point('/organizer/medpersona_service_records');
+    $medpersona_service_records = utils_call_api($url, ['token' => $token]);
+    if ($medpersona_service_records->status_code !== 200) {
+        bad_request();
+    }
+    for ($i = 0; $i < count($medpersona_service_records->data); $i++) {
+        $medpersona_service_record = $medpersona_service_records->data[$i];
+        $record_service_id = $medpersona_service_record['record_service'];
+        if (array_key_exists($record_service_id, $indexed_service_records)) {
+            $indexed_service_records[$record_service_id]['medpersona_service_record'] = $medpersona_service_record;
+        }
+    }
+}
+
+for ($i = 0; $i < count($service_records->data); $i++) {
+    $service_record = $service_records->data[$i];
+    $record_id = $service_record['record'];
+    if (array_key_exists($record_id, $filtered_records)) {
+        $filtered_records[$record_id]['service_record'] = $indexed_service_records[$service_record['id']];
+    }
+}
+
+print_r($filtered_records);
 ?>
 <!--
 Страница просмотра записей на предстоящие услуги и
