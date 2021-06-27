@@ -15,33 +15,13 @@ require $_SERVER['DOCUMENT_ROOT'] . "/utils/variables.php";
 if (isset($_POST['patient_id'])) {
     $patient_id = $_POST['patient_id'];
 } else {
-    $url_patient = api_point('/api/med/patients');
-    $patients = utils_call_api($url_patient, ['token' => $token]);
-    if ($patients->status_code !== 200) {
+    $url_patient = api_point('/api/med/patient');
+    $patient = utils_call_api($url_patient, ['token' => $token]);
+    if ($patient->status_code !== 200) {
         bad_request();
     }
 
-    // достаём информацию о текущем пользователе
-    $url_user = api_point('/api/med/user');
-    $user = utils_call_api($url_user, ['token' => $token]);
-    if ($user->status_code !== 200) {
-        bad_request();
-    }
-
-    $user_id = $user->data['user']['id'];
-    $patient_id = -1;
-
-    // ищем пациента с id пользователя
-    for ($i = 0; $i < count($patients->data); $i++) {
-        if ($patients->data[$i]['user'] == $user_id) {
-            $patient_id = $patients->data[$i]['id'];
-            break;
-        }
-    }
-
-//    if ($patient_id === -1) {
-//        bad_request();
-//    }
+    $patient_id = $patient->data['id'];
 }
 
 // только предопределенные типы услуг
@@ -152,16 +132,12 @@ if ($records->status_code !== 200) {
     bad_request();
 }
 
-if ($patient_id !== '') {
-    $filtered_records = [];
-    for ($i = 0; $i < count($records->data); $i++) {
-        $record = $records->data[$i];
-        if ($record['patient'] == $patient_id) {
-            $filtered_records[$record['id']] = $record;
-        }
+$filtered_records = [];
+for ($i = 0; $i < count($records->data); $i++) {
+    $record = $records->data[$i];
+    if ($record['patient'] == $patient_id) {
+        $filtered_records[$record['id']] = $record;
     }
-} else {
-    $filtered_records = make_indexed_array($records->data);
 }
 
 // Запись-Услуга
@@ -237,3 +213,5 @@ foreach ($filtered_records as $record_id => $record) {
     $json_response[] = $event;
 }
 echo json_encode($json_response);
+
+
