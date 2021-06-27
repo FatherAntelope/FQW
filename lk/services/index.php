@@ -24,35 +24,16 @@ if(!$user->isUserRole("Patient"))
 $user_data = $user->getData();
 $whose_user = 2;
 
+
+$url = protocol."://".domain_name_api."/api/med/patient";
+$config = [
+    "method" => "GET",
+    "token" => $_COOKIE['user_token']
+];
+$patient_data = utils_call_api($url, $config);
+$patient_id = $patient_data->data['id'];
+
 $token = $_COOKIE['user_token'];
-$url_patient = api_point('/api/med/patients');
-$patients = utils_call_api($url_patient, ['token' => $token]);
-if ($patients->status_code !== 200) {
-    bad_request();
-}
-
-// достаём информацию о текущем пользователе
-$url_user = api_point('/api/med/user');
-$user = utils_call_api($url_user, ['token' => $token]);
-if ($user->status_code !== 200) {
-    bad_request();
-}
-
-$user_id = $user->data['user']['id'];
-$patient_id = -1;
-
-// ищем пациента с id пользователя
-for ($i = 0; $i < count($patients->data); $i++) {
-    if ($patients->data[$i]['user'] == $user_id) {
-        $patient_id = $patients->data[$i]['id'];
-        break;
-    }
-}
-
-if ($patient_id === -1) {
-    bad_request();
-}
-
 
 $url = api_point('/organizer/records');
 $records = utils_call_api($url, ['token' => $token]);
@@ -107,65 +88,6 @@ function get_doctors_name(int $service_id, string $token) : array {
 //$service_type = $_POST['service_type'];
 //$service_id = $_POST['service_id'];
 
-function get_service_detail(string $service_type, int $service_id, string $token) : array {
-$url = api_point('/api/med/service/'.$service_id.'/');
-
-$response = [];
-switch ($service_type) {
-case 'doctor': {
-// для услуги специалиста достается специализация и его ФИО
-$doctor_id = $_POST['doctor_id'];
-$url = api_point('/api/med/medics/' . $doctor_id);
-$doctor_info = utils_call_api($url, ['token' => $token]);
-if ($doctor_info->status_code === 404) {
-    not_found();
-} elseif ($doctor_info->status_code !== 200) {
-    bad_request();
-}
-$response['id'] = $doctor_id;
-$response['specialization'] = $doctor_info->data['specialization'];
-
-$url = api_point('/api/med/users/' . $doctor_info->data['user']);
-$user_info = utils_call_api($url, ['token' => $token]);
-if ($user_info->status_code !== 200) {
-    bad_request();
-}
-$response['doctor']['name'] = $user_info->data['user']['name'];
-$response['doctor']['surname'] = $user_info->data['user']['surname'];
-$response['doctor']['patronymic'] = $user_info->data['user']['patronymic'];
-
-    break;
-}
-    case 'procedure': {
-        // специфичные поля для процедуры
-    }
-    case 'survey':
-    {
-        // достаются ФИО специалистов, предоставляющих данную услугу
-        $response = get_doctors_name($service_id, $token);
-        if ($response['status_code'] === 404) {
-            not_found();
-        } elseif ($response['status_code'] !== 200) {
-            bad_request();
-        }
-    }
-    case 'event': {
-        // общее для процедуры, обследования и мероприятия данные
-        $url .= $service_type;
-        $service = utils_call_api($url, ['token' => $token]);
-        if ($service->status_code === 404) {
-            not_found();
-        } elseif ($service->status_code !== 200) {
-            bad_request();
-        }
-        $response['data']['id'] = $service->data['id'];
-        $response['data']['location'] = $service->data['placement'];
-        break;
-    }
-}
-    return $response;
-}
-
 function make_indexed_array(array $collection) : array {
     $indexed_collection = [];
     for ($i = 0; $i < count($collection); $i++) {
@@ -184,31 +106,23 @@ if ($service_records->status_code !== 200) {
 }
 $indexed_service_records = make_indexed_array($service_records->data);
 
-// Запись-Услуга-Медперсона
-if ($service_type === 'doctor') {
-    $url = api_point('/organizer/medpersona_service_records');
-    $medpersona_service_records = utils_call_api($url, ['token' => $token]);
-    if ($medpersona_service_records->status_code !== 200) {
-        bad_request();
-    }
-    for ($i = 0; $i < count($medpersona_service_records->data); $i++) {
-        $medpersona_service_record = $medpersona_service_records->data[$i];
-        $record_service_id = $medpersona_service_record['record_service'];
-        if (array_key_exists($record_service_id, $indexed_service_records)) {
-            $indexed_service_records[$record_service_id]['medpersona_service_record'] = $medpersona_service_record;
-        }
-    }
-}
-
 for ($i = 0; $i < count($service_records->data); $i++) {
     $service_record = $service_records->data[$i];
     $record_id = $service_record['record'];
     if (array_key_exists($record_id, $filtered_records)) {
         $filtered_records[$record_id]['service_record'] = $indexed_service_records[$service_record['id']];
+
+        $url = api_point('/api/med/service/'. $service_record['service'] . '/servicemedper');
+        $service_medper = utils_call_api($url, ['token' => $token]);
+        if ($service_medper->status_code !== 200) {
+            continue;
+        }
+        foreach ($service_medper->data as $id => $data) {
+            $filtered_records[$record_id]['doctors'][] = $data['medpersona'];
+        }
+        $filtered_records[$record_id]['service_type'] = $service_medper->data[0]['type'];
     }
 }
-
-print_r($filtered_records);
 ?>
 <!--
 Страница просмотра записей на предстоящие услуги и
@@ -323,7 +237,9 @@ print_r($filtered_records);
                 </div>
             </div>
 <!--Содержимое таблиста просмота предстоящих записей на услуги-->
+
             <div class="tab-pane fade" id="tab-my-services" role="tabpanel">
+                <?php if(count($filtered_records)  <= 0) {?>
                 <div class="card mt-3">
                     <div class="row justify-content-center">
                         <div class="col-md-12">
@@ -374,37 +290,44 @@ print_r($filtered_records);
                         </div>
                     </div>
                 </div>
-
+                <?php } else { ?>
                 <div class="card mt-3">
                     <div class="card-body">
                         <table id="table_appointment" class="table table-striped table-hover column-wrap">
                             <thead class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
-                                <th>Тип услуги</th>
+                                <th>Дата и время</th>
                                 <th>Название услуги</th>
                                 <th>Специалист</th>
-                                <th>Расположение</th>
-                                <th>Дата</th>
                                 <th>Действие</th>
                             </tr>
                             </thead>
                             <tbody>
+                            <?php
+                            foreach ($filtered_records as $filtered_record) {
+                            ?>
                             <tr>
-                                <td class="text-muted" data-label="Тип усл.:">
-                                    <h5>
-                                        <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">
-                                            <i class="fas fa-user-md mr-2"></i>Врач
-                                        </span>
-                                    </h5>
+                                <td class="text-muted" data-label="Дат. и вр.:">
+                                    <?php echo date("d.m.Y H:i", strtotime($filtered_record['date_start'].' -3 hours'));?>
                                 </td>
                                 <td class="text-muted" data-label="Наз.-е усл.:">
-                                    Терапевт
+                                    <?php echo $filtered_record['name']; ?>
                                 </td>
                                 <td class="text-muted" data-label="Спец.-ст:">
-                                    <img src="/images/user.png" height="30" class="rounded-circle" alt="...">Николаев И. И.
+                                    <ul class="list-unstyled">
+                                    <?php foreach (
+                                            get_doctors_name($filtered_record['service_record']['service'], $token)['data']['doctors'] as $doctor
+                                    ) { ?>
+                                        <li>
+                                            <span class="badge badge-pill badge-secondary">
+                                                <?php echo getItitialsFullName($doctor['surname'], $doctor['name'], $doctor['patronymic']); ?>
+                                            <span>
+
+                                        </li>
+
+                                    <?php } ?>
+                                    </ul>
                                 </td>
-                                <td class="text-muted" data-label="Распо-ие:">500 каб.</td>
-                                <td class="text-muted" data-label="Распо-ие:">10.12.21 13:10</td>
                                 <td>
                                     <ul class="list-unstyled">
                                         <li><button type="button" class="btn btn-sm text-secondary btn-block" style="background-color: var(--yellow-color)">Просмотр</button></li>
@@ -412,89 +335,21 @@ print_r($filtered_records);
                                     </ul>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="text-muted" data-label="Тип усл.:">
-                                    <h5>
-                                        <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">
-                                            <i class="fas fa-diagnoses mr-2"></i>Процедура
-                                        </span>
-                                    </h5>
-                                </td>
-                                <td class="text-muted" data-label="Наз.-е усл.:">
-                                    Бассейн
-                                </td>
-                                <td class="text-muted" data-label="Спец.-ст:">
-                                    <img src="/images/user.png" height="30" class="rounded-circle" alt="...">Иванов И. И.
-                                </td>
-                                <td class="text-muted" data-label="Распо-ие:">Зал 2</td>
-                                <td class="text-muted" data-label="Распо-ие:">11.12.21 12:10</td>
-                                <td>
-                                    <ul class="list-unstyled">
-                                        <li><button type="button" class="btn btn-sm text-secondary btn-block" style="background-color: var(--yellow-color)">Просмотр</button></li>
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-danger btn-block" data-toggle="modal" data-target="#openModalRemoveAppointment">Отмена</button></li>
-                                    </ul>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-muted" data-label="Тип усл.:">
-                                    <h5>
-                                        <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">
-                                            <i class="fas fa-microscope mr-2"></i>Обследование
-                                        </span>
-                                    </h5>
-                                </td>
-                                <td class="text-muted" data-label="Наз.-е усл.:">
-                                    ОАК
-                                </td>
-                                <td class="text-muted" data-label="Спец.-ст:">
-                                    <img src="/images/user.png" height="30" class="rounded-circle" alt="...">Кузнецова И. И.
-                                </td>
-                                <td class="text-muted" data-label="Распо-ие:">101 каб.</td>
-                                <td class="text-muted" data-label="Распо-ие:">11.12.21 12:10</td>
-                                <td>
-                                    <ul class="list-unstyled">
-                                        <li><button type="button" class="btn btn-sm text-secondary btn-block" style="background-color: var(--yellow-color)">Просмотр</button></li>
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-danger btn-block" data-toggle="modal" data-target="#openModalRemoveAppointment">Отмена</button></li>
-                                    </ul>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-muted" data-label="Тип усл.:">
-                                    <h5>
-                                        <span class="badge badge-pill text-white" style="background-color: var(--dark-cyan-color)">
-                                            <i class="fas fa-walking mr-2"></i>Мероприятие
-                                        </span>
-                                    </h5>
-                                </td>
-                                <td class="text-muted" data-label="Наз.-е усл.:">
-                                    Экскурсия по зоопарку
-                                </td>
-                                <td class="text-muted" data-label="Спец.-ст:">
-                                    -
-                                </td>
-                                <td class="text-muted" data-label="Распо-ие:">Главный вход</td>
-                                <td class="text-muted" data-label="Распо-ие:">11.12.21 12:10</td>
-                                <td>
-                                    <ul class="list-unstyled">
-                                        <li><button type="button" class="btn btn-sm text-secondary btn-block" style="background-color: var(--yellow-color)">Просмотр</button></li>
-                                        <li><button type="button" class="btn mt-1 btn-sm btn-danger btn-block" data-toggle="modal" data-target="#openModalRemoveAppointment">Отмена</button></li>
-                                    </ul>
-                                </td>
-                            </tr>
+                            <?php } ?>
+
                             </tbody>
                             <tfoot class="text-white" style="background-color: var(--cyan-color);">
                             <tr>
-                                <th>Тип услуги</th>
+                                <th>Дата и время</th>
                                 <th>Название услуги</th>
                                 <th>Специалист</th>
-                                <th>Расположение</th>
-                                <th>Дата</th>
                                 <th>Действие</th>
                             </tr>
                             </tfoot>
                         </table>
                     </div>
                 </div>
+                <?php } ?>
             </div>
 
 <!--Содержимое таблиста просмотра истории посещения услуг-->
