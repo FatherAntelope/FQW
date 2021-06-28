@@ -315,9 +315,10 @@ for ($i = 0; $i < count($service_records->data); $i++) {
                                 </td>
                                 <td class="text-muted" data-label="Спец.-ст:">
                                     <ul class="list-unstyled">
-                                    <?php foreach (
-                                            get_doctors_name($filtered_record['service_record']['service'], $token)['data']['doctors'] as $doctor
-                                    ) { ?>
+                                    <?php
+                                    $arrayDoctor = get_doctors_name($filtered_record['service_record']['service'], $token)['data']['doctors'];
+                                    if (count($arrayDoctor) !== 0) {
+                                    foreach ($arrayDoctor as $doctor) { ?>
                                         <li>
                                             <span class="badge badge-pill badge-secondary">
                                                 <?php echo getItitialsFullName($doctor['surname'], $doctor['name'], $doctor['patronymic']); ?>
@@ -325,7 +326,9 @@ for ($i = 0; $i < count($service_records->data); $i++) {
 
                                         </li>
 
-                                    <?php } ?>
+                                    <?php }
+                                    }
+                                    ?>
                                     </ul>
                                 </td>
                                 <td>
