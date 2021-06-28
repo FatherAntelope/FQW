@@ -97,6 +97,7 @@ function get_service_detail(string $service_type, int $service_id, string $token
             } elseif ($response['status_code'] !== 200) {
                 bad_request();
             }
+            $response = $response['data'];
         }
         case 'event': {
             // общее для процедуры, обследования и мероприятия данные
@@ -107,13 +108,13 @@ function get_service_detail(string $service_type, int $service_id, string $token
             } elseif ($service->status_code !== 200) {
                 bad_request();
             }
-            $response['data']['id'] = $service->data['id'];
-            $response['data']['location'] = $service->data['placement'];
+            $response['id'] = $service->data['id'];
+            $response['location'] = $service->data['placement'];
             break;
         }
     }
     return $response;
 }
 
-echo json_encode(get_service_detail($service_type, $service_id, $token));
+echo normJsonStr(json_encode(get_service_detail($service_type, $service_id, $token)));
 
