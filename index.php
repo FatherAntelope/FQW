@@ -322,6 +322,6 @@ if(isset($_COOKIE['user_token'])) {
 </body>
 <script>
     //Вызов отображения уведомления с указанным ID
-    $('#notificationToast').toast('show');
+    //$('#notificationToast').toast('show');
 </script>
 </html>
